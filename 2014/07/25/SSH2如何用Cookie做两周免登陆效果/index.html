@@ -1,0 +1,872 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JAVA," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="简介今天将会做一个Cookie的Demo，也是我今天在写项目时刚刚学的小技术，这里将会展示最简单的实现Cookie的方法，以及JAVAEE中Cookie的使用。
+Demo需要注意的时，这里贴出的源码是我项目中的一部分，不需要大家具体理解其中一些变量的意思，只需要关注Cookie部分。
+流程点击页面中登录，链接到登录action登录时选中“两周免登陆”选框，输入用户名密码，点击登录存入Cookie下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH2如何用Cookie做两周免登陆效果">
+<meta property="og:url" content="http://zhoulingyu.com/2014/07/25/SSH2如何用Cookie做两周免登陆效果/index.html">
+<meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:description" content="简介今天将会做一个Cookie的Demo，也是我今天在写项目时刚刚学的小技术，这里将会展示最简单的实现Cookie的方法，以及JAVAEE中Cookie的使用。
+Demo需要注意的时，这里贴出的源码是我项目中的一部分，不需要大家具体理解其中一些变量的意思，只需要关注Cookie部分。
+流程点击页面中登录，链接到登录action登录时选中“两周免登陆”选框，输入用户名密码，点击登录存入Cookie下">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
+<meta property="og:updated_time" content="2016-08-03T08:06:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSH2如何用Cookie做两周免登陆效果">
+<meta name="twitter:description" content="简介今天将会做一个Cookie的Demo，也是我今天在写项目时刚刚学的小技术，这里将会展示最简单的实现Cookie的方法，以及JAVAEE中Cookie的使用。
+Demo需要注意的时，这里贴出的源码是我项目中的一部分，不需要大家具体理解其中一些变量的意思，只需要关注Cookie部分。
+流程点击页面中登录，链接到登录action登录时选中“两周免登陆”选框，输入用户名密码，点击登录存入Cookie下">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151013163134872">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhoulingyu.com/2014/07/25/SSH2如何用Cookie做两周免登陆效果/"/>
+
+  <title> SSH2如何用Cookie做两周免登陆效果 | 小鱼周凌宇のCODE_HOME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小鱼周凌宇のCODE_HOME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术宅 iOS开发 JAVA开发 萌妹子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SSH2如何用Cookie做两周免登陆效果
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-07-25T20:00:00+08:00" content="2014-07-25">
+              2014-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/" class="leancloud_visitors" data-flag-title="SSH2如何用Cookie做两周免登陆效果">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>今天将会做一个Cookie的Demo，也是我今天在写项目时刚刚学的小技术，这里将会展示最简单的实现Cookie的方法，以及JAVAEE中Cookie的使用。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>需要注意的时，这里贴出的源码是我项目中的一部分，不需要大家具体理解其中一些变量的意思，只需要关注Cookie部分。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>点击页面中登录，链接到登录action<br>登录时选中“两周免登陆”选框，输入用户名密码，点击登录<br>存入Cookie<br>下次无需登录</p>
+<h2 id="登录页面表单"><a href="#登录页面表单" class="headerlink" title="登录页面表单"></a>登录页面表单</h2><pre style="margin-top:15px; margin-bottom:15px; padding:6px 10px; border:1px solid rgb(204,204,204); font-size:13px; font-family:Consolas,'Liberation Mono',Courier,monospace; background-color:rgb(248,248,248); line-height:19px; overflow:auto"><code style="margin:0px; padding:0px; font-size:12px; font-family:Consolas,'Liberation Mono',Courier,monospace; background-color:transparent">&lt;form class=&quot;registed&quot; action=&quot;User_login&quot; method=&quot;post&quot;&gt;
+&lt;h2&gt;登陆&lt;/h2&gt;
+&lt;div class=&quot;email&quot;&gt;
+    &lt;strong&gt;用户名&lt;/strong&gt;&lt;sup class=&quot;surely&quot;&gt;*&lt;/sup&gt;&lt;br /&gt;
+&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;password&quot;&gt;
+    &lt;strong&gt;密码&lt;/strong&gt;&lt;sup class=&quot;surely&quot;&gt;*&lt;/sup&gt;&lt;br /&gt;
+&lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; /&gt;
+    &lt;a class=&quot;forgot&quot; href=&quot;#&quot;&gt;忘记密码?&lt;/a&gt;
+&lt;/div&gt;
+&lt;!-- .password --&gt;
+&lt;div class=&quot;remember&quot;&gt;
+&lt;input class=&quot;niceCheck&quot; type=&quot;checkbox&quot; name=&quot;useCookie&quot;  value=&quot;true&quot;/&gt;
+    &lt;span class=&quot;rem&quot;&gt;两周免登陆&lt;/span&gt;
+&lt;/div&gt;
+&lt;!-- .remember --&gt;
+
+&lt;div class=&quot;submit&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot; /&gt;
+&lt;/div&gt;
+    &lt;!-- .submit --&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>注意action为User_login</p>
+<h2 id="action代码"><a href="#action代码" class="headerlink" title="action代码"></a>action代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 用户登陆</div><div class="line"> * </div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public String login() &#123;</div><div class="line">    /**</div><div class="line">     * 获取response</div><div class="line">     */</div><div class="line">    HttpServletResponse response = ServletActionContext.getResponse();</div><div class="line">    //如果查询为空</div><div class="line">    if (userDao.login(username, password) == null) &#123;</div><div class="line">        return ERROR;</div><div class="line">    &#125;</div><div class="line">    //如果用户存在 </div><div class="line">    else &#123;</div><div class="line">        //将用户放到session中</div><div class="line">        session.put(&quot;user&quot;, userDao.login(username, password));</div><div class="line">        //如果useCookie不为空</div><div class="line">        if(useCookie != null)&#123;</div><div class="line">            //新建一个Cookie，存放用户名和密码，用&amp;做分隔符</div><div class="line">            Cookie cookie = new Cookie(&quot;userCookie&quot;, username+&quot;&amp;&quot;+password);</div><div class="line">            //设置Cookie的存活时间（这里是两周）</div><div class="line">            cookie.setMaxAge(2*7*24*60*60);</div><div class="line">            //添加Cookie</div><div class="line">            response.addCookie(cookie);</div><div class="line">        &#125;</div><div class="line">        return SUCCESS;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意这里useCookie是一个字符串，就是从页面表单中接收的单选框的value。 这里做的就是如果勾了选框，则保存Cookie，不选中就不保存。</p>
+<p>相应的struts.xml中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;action name=&quot;User_login&quot; class=&quot;com.webstore.action.UserAction&quot;</div><div class="line">        method=&quot;login&quot;&gt;</div><div class="line">    &lt;result name=&quot;success&quot;&gt;/index.jsp&lt;/result&gt;</div><div class="line">    &lt;result name=&quot;error&quot;&gt;/login.jsp&lt;/result&gt;</div><div class="line">&lt;/action&gt;</div></pre></td></tr></table></figure>
+<p>这里附加一个方法，用于在点击登录连接时进行Cookie检测</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 登录前检查cookie</div><div class="line"> * </div><div class="line"> * @return</div><div class="line"> */</div><div class="line">public String cookieDetection() &#123;</div><div class="line">    if (session.get(&quot;user&quot;) != null) &#123;</div><div class="line">        return SUCCESS;</div><div class="line">    &#125; else &#123;</div><div class="line">        return LOGIN;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>相应的struts.xml中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;action name=&quot;User_cookieDetection&quot; class=&quot;com.webstore.action.UserAction&quot;</div><div class="line">        method=&quot;cookieDetection&quot;&gt;</div><div class="line">    &lt;result name=&quot;success&quot;&gt;/index.jsp&lt;/result&gt;</div><div class="line">    &lt;result name=&quot;login&quot;&gt;/login.jsp&lt;/result&gt;</div><div class="line">&lt;/action&gt;</div></pre></td></tr></table></figure>
+<h2 id="首页过滤器"><a href="#首页过滤器" class="headerlink" title="首页过滤器"></a>首页过滤器</h2><p>Cookie在什么时候检查呢，正常的设想是，在首页时就检查好是否有用户已经“两周免登陆”，那么需要有一个东西能够做到这一点，一般能想到的两个机制，过滤器和监听器。 监听器智能监听相应的动作，然后同时进行操作，而过滤器可以直接对request和response进行过滤，在Cookie的使用中会用到response和request，所以最好选择过滤器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">import java.io.IOException;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">import javax.servlet.Filter;</div><div class="line">import javax.servlet.FilterChain;</div><div class="line">import javax.servlet.FilterConfig;</div><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.ServletRequest;</div><div class="line">import javax.servlet.ServletResponse;</div><div class="line">import javax.servlet.http.Cookie;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line">import org.apache.struts2.ServletActionContext;</div><div class="line"></div><div class="line">import com.webstore.dao.IUserDao;</div><div class="line">import com.webstore.imp.UserImp;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 作者：周凌宇 时间：2014-7-4 描述：Cookie过滤器</div><div class="line"> */</div><div class="line">public class CookieFilter implements Filter &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 配置对象</div><div class="line">     */</div><div class="line">    protected FilterConfig config;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化过滤器</div><div class="line">     */</div><div class="line">    public void init(FilterConfig config) &#123;</div><div class="line">        this.config = config;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 重写doFilter方法，过滤所有请求和回复，加入或取出Cookie</div><div class="line">     */</div><div class="line">    public void doFilter(ServletRequest req, ServletResponse resp,</div><div class="line">            FilterChain chain) throws IOException, ServletException &#123;</div><div class="line"></div><div class="line">        HttpServletRequest request = (HttpServletRequest) req;</div><div class="line">        HttpServletResponse response = (HttpServletResponse) resp;</div><div class="line">        Cookie[] cookies = request.getCookies();</div><div class="line">        IUserDao userDao = new UserImp();</div><div class="line">        String[] info = null;</div><div class="line">        if (cookies != null) &#123;</div><div class="line">            for (Cookie c : cookies) &#123;</div><div class="line">                info = c.getValue().split(&quot;&amp;&quot;);</div><div class="line">                if (info.length == 2) &#123;</div><div class="line">                    String username = info[0];</div><div class="line">                    String password = info[1];</div><div class="line">                    request.getSession().setAttribute(&quot;user&quot;, userDao.login(username, password));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        chain.doFilter(request, response);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 销毁过滤器</div><div class="line">     */</div><div class="line">    public void destroy() &#123;</div><div class="line">        this.config = null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="过滤器配置"><a href="#过滤器配置" class="headerlink" title="过滤器配置"></a>过滤器配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">    &lt;filter-name&gt;CookieFilter&lt;/filter-name&gt;</div><div class="line">    &lt;filter-class&gt;com.webstore.util.CookieFilter&lt;/filter-class&gt;</div><div class="line">&lt;/filter&gt;</div><div class="line">&lt;filter-mapping&gt;</div><div class="line">    &lt;filter-name&gt;CookieFilter&lt;/filter-name&gt;</div><div class="line">    &lt;url-pattern&gt;/index.jsp&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
+<p>注意这里配置了只对首页过滤</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#102;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#111;&#100;&#101;&#114;&#102;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼周凌宇的微博"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag">#JAVA</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/06/15/关于初学者markdown一些问题回答/" rel="next" title="关于初学者markdown一些问题回答">
+                <i class="fa fa-chevron-left"></i> 关于初学者markdown一些问题回答
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" rel="prev" title="深入浅出，Struts1对比Struts2的缺点和比较">
+                深入浅出，Struts1对比Struts2的缺点和比较 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+
+
+
+      
+        <span id="/"class="leancloud_visitors" data-flag-title="">
+          阅读次数
+        </span>
+      
+
+
+
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小鱼周凌宇" />
+          <p class="site-author-name" itemprop="name">小鱼周凌宇</p>
+          <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">2.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流程"><span class="nav-number">2.1.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录页面表单"><span class="nav-number">2.2.</span> <span class="nav-text">登录页面表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#action代码"><span class="nav-number">2.3.</span> <span class="nav-text">action代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页过滤器"><span class="nav-number">2.4.</span> <span class="nav-text">首页过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器配置"><span class="nav-number">2.5.</span> <span class="nav-text">过滤器配置</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鱼周凌宇</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+</body>
+</html>

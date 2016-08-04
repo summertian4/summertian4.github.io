@@ -1,0 +1,879 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="iOS中的事件有哪几种iOS的事件机制一共三种分别是
+
+addTarget方式
+delegate代理方式
+Notification通知机制
+
+
+通知机制的原理
+iOS的通知分为通知发布者和通知监听者，通知将会放在NSNotificationCenter中。
+通知发布者发布带有信息（或者不带有信息）的通知，放置到NSNotificationCenter中。
+通知监听者可以选择需要监听的对象。
+要注意">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS学习——Notification通知机制">
+<meta property="og:url" content="http://zhoulingyu.com/2015/09/25/iOS学习——Notification通知机制/index.html">
+<meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:description" content="iOS中的事件有哪几种iOS的事件机制一共三种分别是
+
+addTarget方式
+delegate代理方式
+Notification通知机制
+
+
+通知机制的原理
+iOS的通知分为通知发布者和通知监听者，通知将会放在NSNotificationCenter中。
+通知发布者发布带有信息（或者不带有信息）的通知，放置到NSNotificationCenter中。
+通知监听者可以选择需要监听的对象。
+要注意">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
+<meta property="og:updated_time" content="2016-08-03T08:06:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS学习——Notification通知机制">
+<meta name="twitter:description" content="iOS中的事件有哪几种iOS的事件机制一共三种分别是
+
+addTarget方式
+delegate代理方式
+Notification通知机制
+
+
+通知机制的原理
+iOS的通知分为通知发布者和通知监听者，通知将会放在NSNotificationCenter中。
+通知发布者发布带有信息（或者不带有信息）的通知，放置到NSNotificationCenter中。
+通知监听者可以选择需要监听的对象。
+要注意">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151013163134872">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhoulingyu.com/2015/09/25/iOS学习——Notification通知机制/"/>
+
+  <title> iOS学习——Notification通知机制 | 小鱼周凌宇のCODE_HOME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小鱼周凌宇のCODE_HOME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术宅 iOS开发 JAVA开发 萌妹子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS学习——Notification通知机制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-25T20:37:00+08:00" content="2015-09-25">
+              2015-09-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/09/25/iOS学习——Notification通知机制/" class="leancloud_visitors" data-flag-title="iOS学习——Notification通知机制">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="iOS中的事件有哪几种"><a href="#iOS中的事件有哪几种" class="headerlink" title="iOS中的事件有哪几种"></a><strong>iOS中的事件有哪几种</strong></h2><p>iOS的事件机制一共三种分别是</p>
+<ol>
+<li>addTarget方式</li>
+<li>delegate代理方式</li>
+<li>Notification通知机制</li>
+</ol>
+<hr>
+<h2 id="通知机制的原理"><a href="#通知机制的原理" class="headerlink" title="通知机制的原理"></a><strong>通知机制的原理</strong></h2><ol>
+<li>iOS的通知分为通知发布者和通知监听者，通知将会放在<strong><code>NSNotificationCenter</code></strong>中。</li>
+<li>通知发布者发布带有信息（或者不带有信息）的通知，放置到<strong><code>NSNotificationCenter</code></strong>中。</li>
+<li>通知监听者可以选择需要监听的对象。</li>
+<li>要注意的是，在编码中是先放置监听者，再放置通知发布者。保证通知发布时已经有监听者在监听。</li>
+</ol>
+<hr>
+<h2 id="通知机制的实现"><a href="#通知机制的实现" class="headerlink" title="通知机制的实现"></a><strong>通知机制的实现</strong></h2><p>相信你看了下面的代码一定能理解，博主把能打上的注释全部打上了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  main.m</div><div class="line">//  day34_通知</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/9/3.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;NotificationListener.h&quot;</div><div class="line">#import &quot;NotificationSender.h&quot;</div><div class="line"></div><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        // 实例化一个通知发布者</div><div class="line">        NotificationSender *sender1 = [[NotificationSender alloc] init];</div><div class="line">        // 实例化一个通知监听者</div><div class="line">        NotificationListener *listener1 = [[NotificationListener alloc] init];</div><div class="line">        </div><div class="line">        // 1.获取NSnotificationCenter对象</div><div class="line">        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];</div><div class="line">        </div><div class="line">        // 2.先监听</div><div class="line">        // 参数1：要监听通知的对象</div><div class="line">        // 参数2：该对象的哪个方法监听</div><div class="line">        // 参数3：被监听的通知的名称</div><div class="line">        // 参数4：发布通知的对象</div><div class="line">        // 如果参数3为nil，表示参数4指定的对象发布的所有通知都会被参数2指定的方法监听</div><div class="line">        // 如果参数4为nil，表示无论哪个给对象，只要发布的通知名称与参数3相同，都会被监听</div><div class="line">        // 如果参数3、4都为nil 那么所有对象发布的所有通知都会被监听</div><div class="line">        [notificationCenter addObserver:listener1 selector:@selector(listen:) name:@&quot;通知1&quot; object:sender1];</div><div class="line">        </div><div class="line">        // 3.向通知中心发布通知</div><div class="line">        [notificationCenter postNotificationName:@&quot;通知1&quot; object:sender1 userInfo:@&#123;@&quot;title&quot; : @&quot;阅兵&quot;, @&quot;content&quot; : @&quot;阅兵将在9点开始&quot;&#125;];</div><div class="line">        </div><div class="line">        // 4.移除通知，在监听者的dealloc中移除</div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  NotificationSender.h</div><div class="line">//  day34_通知</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/9/3.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  通知发布者</div><div class="line"> */</div><div class="line">@interface NotificationSender : NSObject</div><div class="line"></div><div class="line">/**</div><div class="line"> *  通知发布者名称</div><div class="line"> */</div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  NotificationSender.m</div><div class="line">//  day34_通知</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/9/3.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;NotificationSender.h&quot;</div><div class="line"></div><div class="line">@implementation NotificationSender</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  NotificationListener.h</div><div class="line">//  day34_通知</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/9/3.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  通知监听者</div><div class="line"> */</div><div class="line">@interface NotificationListener : NSObject</div><div class="line"></div><div class="line">/**</div><div class="line"> *  通知监听者名称</div><div class="line"> */</div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  监听方法</div><div class="line"> */</div><div class="line">- (void)listen:(NSNotification *)noteInfo;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  NotificationListener.m</div><div class="line">//  day34_通知</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/9/3.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;NotificationListener.h&quot;</div><div class="line"></div><div class="line">@implementation NotificationListener</div><div class="line"></div><div class="line">- (void)listen:(NSNotification *)noteInfo &#123;</div><div class="line">    NSLog(@&quot;监听到&quot;);</div><div class="line">    NSLog(@&quot;%@&quot;,noteInfo);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">    // 移除监听</div><div class="line">    // 在dealloc中移除可以确保监听者被销毁时能够移除监听</div><div class="line">    [[NSNotificationCenter defaultCenter] removeObserver:self];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a><strong>源码</strong></h2><p>博主也上传了一份源码<a href="http://download.csdn.net/detail/u010127917/9139983" target="_blank" rel="external">http://download.csdn.net/detail/u010127917/9139983</a><br>希望同样在学习的同学能和小鱼一起进步~</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#x40;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#x40;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼周凌宇的微博"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/24/iOS学习——ScrollView图片轮播和同类控件优先级问题/" rel="next" title="iOS学习——ScrollView图片轮播和同类控件优先级问题">
+                <i class="fa fa-chevron-left"></i> iOS学习——ScrollView图片轮播和同类控件优先级问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/13/文档生成器 Xcode与Appledoc/" rel="prev" title="文档生成器 Xcode与Appledoc">
+                文档生成器 Xcode与Appledoc <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+
+
+
+      
+        <span id="/"class="leancloud_visitors" data-flag-title="">
+          阅读次数
+        </span>
+      
+
+
+
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小鱼周凌宇" />
+          <p class="site-author-name" itemprop="name">小鱼周凌宇</p>
+          <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS中的事件有哪几种"><span class="nav-number">1.</span> <span class="nav-text">iOS中的事件有哪几种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通知机制的原理"><span class="nav-number">2.</span> <span class="nav-text">通知机制的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通知机制的实现"><span class="nav-number">3.</span> <span class="nav-text">通知机制的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">4.</span> <span class="nav-text">源码</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鱼周凌宇</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+</body>
+</html>

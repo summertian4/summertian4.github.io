@@ -1,0 +1,888 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="简介iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。
+你需要一部越狱手机首先要做的事，找一部越狱后的iPhone，攻防方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS攻防——（一）ssh登陆与交叉编译">
+<meta property="og:url" content="http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/index.html">
+<meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:description" content="简介iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。
+你需要一部越狱手机首先要做的事，找一部越狱后的iPhone，攻防方">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-02.PNG-w375">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-03.PNG-w375">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-05.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-06.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-07.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
+<meta property="og:updated_time" content="2016-08-03T08:04:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS攻防——（一）ssh登陆与交叉编译">
+<meta name="twitter:description" content="简介iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。
+你需要一部越狱手机首先要做的事，找一部越狱后的iPhone，攻防方">
+<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/"/>
+
+  <title> iOS攻防——（一）ssh登陆与交叉编译 | 小鱼周凌宇のCODE_HOME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小鱼周凌宇のCODE_HOME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术宅 iOS开发 JAVA开发 萌妹子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS攻防——（一）ssh登陆与交叉编译
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-11T20:49:11+08:00" content="2016-07-11">
+              2016-07-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/" class="leancloud_visitors" data-flag-title="iOS攻防——（一）ssh登陆与交叉编译">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。<br>所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。</p>
+<h1 id="你需要一部越狱手机"><a href="#你需要一部越狱手机" class="headerlink" title="你需要一部越狱手机"></a>你需要一部越狱手机</h1><p>首先要做的事，找一部越狱后的iPhone，攻防方面的探索很多需要借助越狱手机的帮助。作为平常的消遣和研究你也应该有一部越狱手机，我的越狱手机是iPhone4，比较古老，但是研究够用了。</p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>首先是手机（前面说过了）。其次，越狱手机大家都知道一个app——Cydia，在上面可以下载所有的越狱APP，相当于越狱后的app store。对于iOS攻防，首先需要以下软件：</p>
+<ol>
+<li>openSSH</li>
+<li>LLVM+Clang</li>
+</ol>
+<p>可能还需要的软件：</p>
+<ol>
+<li>Cydia Translations</li>
+<li>Cydia Substrate</li>
+<li>Cydia Installer</li>
+</ol>
+<p>这些软件都可以在Cydia下载到，如果你搜索不到，那么你需要添加一些源<br>在Cydia的软件源中点击『编辑』-&gt;『添加』，依次添加以下源</p>
+<blockquote>
+<ol>
+<li><a href="http://yuan.duowan.com" target="_blank" rel="external">http://yuan.duowan.com</a> - 多玩源</li>
+<li><a href="http://apt.thebigboss.org/repofiles/cydia/" target="_blank" rel="external">http://apt.thebigboss.org/repofiles/cydia/</a></li>
+</ol>
+</blockquote>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375" alt=""><br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-02.PNG-w375" alt=""><br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-03.PNG-w375" alt=""></p>
+<h1 id="hacking"><a href="#hacking" class="headerlink" title="hacking"></a>hacking</h1><h2 id="1-ssh登陆手机"><a href="#1-ssh登陆手机" class="headerlink" title="1. ssh登陆手机"></a>1. ssh登陆手机</h2><p>ssh登陆，大家应该不算陌生，如果你第一次听说，你可以简单理解成『远程登录』，可以通过一台设备远程登陆另一台设备。</p>
+<ol>
+<li>保证你的Mac和iPhone在同一网段</li>
+<li>确定iPhone的IP</li>
+<li>远程登陆</li>
+</ol>
+<p>在你mac的Terminal输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@xxx.xxx.xxx.xxx</div></pre></td></tr></table></figure>
+<p>接着会提醒你是否连接，输入yes继续，输入密码，初始密码是<code>alpine</code>。<br>建议你将改密码改掉，因为这样很不安全，在默认密码的情况下，任何人都可以尝试登陆你的设备。<br>在登录之后，你可以更改你的密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd root</div></pre></td></tr></table></figure>
+<p>ssh登陆后，可以试着看看手机的目录结构<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-05.png" alt=""></p>
+<h2 id="2-交叉编译"><a href="#2-交叉编译" class="headerlink" title="2. 交叉编译"></a>2. 交叉编译</h2><p>首先解释一下什么是交叉编译。交叉编译指在一个平台上生成另一个平台上的可执行代码。<br>我们将会在MAC上写代码，但要生成的可执行文件需要在iPhone上运行。<br>编译是由编译器完成的，所以我们首先要找到合适的编译器。</p>
+<p>我们本次的任务就是写一个简单的C程序，能在iPhone上跑的C程序。</p>
+<p>念茜所提到的arm-apple-darwin10-llvm-gcc-4.2我是没有找到的，因为这东西好像是在Xcode5的时候才有。</p>
+<p>我用的是Clang，所以我们需要下载一下Clang。Clang是一个C语言、C++、Objective-C、C++语言的轻量级编译器。<a href="http://clang.llvm.org/get_started.html" target="_blank" rel="external">这里是传送门</a></p>
+<h3 id="1-写经典HelloWorld"><a href="#1-写经典HelloWorld" class="headerlink" title="1. 写经典HelloWorld"></a>1. 写经典HelloWorld</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span>                                                                                               </span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;   </div><div class="line">       <span class="built_in">printf</span>(<span class="string">"Hello world !!!\n"</span>);   </div><div class="line">       <span class="keyword">return</span> <span class="number">0</span>;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-编译"><a href="#2-编译" class="headerlink" title="2. 编译"></a>2. 编译</h3><p>命令台编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">touch helloworld.c</div><div class="line">open helloworld.c</div><div class="line">...（写一下代码）</div><div class="line">xcrun -sdk iphoneos clang -arch armv7 -o helloworld helloworld.c</div></pre></td></tr></table></figure>
+<p>用过自动打包ipa的同学都对xcrun和xcodebuild很熟悉。这与打包过程类似。</p>
+<p>格式：<code>xcrun -sdk iphoneos clang -arch armv7 -o [目标文件名] [源文件名]</code></p>
+<p>生成可在iPhone平台运行的二进制可执行文件</p>
+<h3 id="3-放到iPhone中"><a href="#3-放到iPhone中" class="headerlink" title="3. 放到iPhone中"></a>3. 放到iPhone中</h3><p>通过ssh文件传输将helloworld传到iPhone中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp helloworld root@192.168.31.152:helloworld</div></pre></td></tr></table></figure>
+<p>再看一下iPhone文件目录，是不是已经有了helloworld<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-06.png" alt=""></p>
+<p>运行一下：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-07.png" alt=""></p>
+<p>Bingo！</p>
+<p>如果你继续玩，你会发现其实你的iPhone就是一个类Linux系统（本来就是Unix~~），你可以随便玩。</p>
+<h1 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h1><h2 id="1-重置ssh登陆密码"><a href="#1-重置ssh登陆密码" class="headerlink" title="1. 重置ssh登陆密码"></a>1. 重置ssh登陆密码</h2><p>如果你不幸忘记了ssh密码，可以在Cydia中下载ifile软件，通过ifile找到/private/etc/master.password文件，文件中会有以下一段：</p>
+<blockquote>
+<p>root:xxxxxxxxxxxxx:0:0::0:0:System<br>Administrator:/var/root:/bin/sh<br>mobile:xxxxxxxxxxxxx:501:501::0:0:Mobile<br>User:/var/mobile:/bin/sh</p>
+</blockquote>
+<p>将root:及mobile:后面的13个x字符处修改成<code>/smx7MYTQIi2M</code>，修改后保存此文件，你iphone的ssh密码就重新回到默认的alpine</p>
+<h1 id="下期内容"><a href="#下期内容" class="headerlink" title="下期内容"></a>下期内容</h1><p>只是写个HelloWorld是不是很无聊，下一期内容将会教你如何<strong>非法窃取iTunesstore信息</strong>以及<strong>Cycript修改运行时</strong>。</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#x63;&#x6f;&#100;&#101;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#100;&#101;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼周凌宇的微博"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/20/iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP/" rel="next" title="iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP">
+                <i class="fa fa-chevron-left"></i> iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/" rel="prev" title="iOS攻防——（二）如何窃取用户的通讯录信息">
+                iOS攻防——（二）如何窃取用户的通讯录信息 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+
+
+
+      
+        <span id="/"class="leancloud_visitors" data-flag-title="">
+          阅读次数
+        </span>
+      
+
+
+
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小鱼周凌宇" />
+          <p class="site-author-name" itemprop="name">小鱼周凌宇</p>
+          <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#你需要一部越狱手机"><span class="nav-number">2.</span> <span class="nav-text">你需要一部越狱手机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hacking"><span class="nav-number">4.</span> <span class="nav-text">hacking</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ssh登陆手机"><span class="nav-number">4.1.</span> <span class="nav-text">1. ssh登陆手机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-交叉编译"><span class="nav-number">4.2.</span> <span class="nav-text">2. 交叉编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-写经典HelloWorld"><span class="nav-number">4.2.1.</span> <span class="nav-text">1. 写经典HelloWorld</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-编译"><span class="nav-number">4.2.2.</span> <span class="nav-text">2. 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-放到iPhone中"><span class="nav-number">4.2.3.</span> <span class="nav-text">3. 放到iPhone中</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充知识"><span class="nav-number">5.</span> <span class="nav-text">补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-重置ssh登陆密码"><span class="nav-number">5.1.</span> <span class="nav-text">1. 重置ssh登陆密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下期内容"><span class="nav-number">6.</span> <span class="nav-text">下期内容</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鱼周凌宇</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+</body>
+</html>

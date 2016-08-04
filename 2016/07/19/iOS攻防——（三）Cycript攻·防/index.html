@@ -1,0 +1,885 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="简介
+Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。
+
+能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。
+对于一个特定的类，例如V">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS攻防——（三）Cycript攻·防">
+<meta property="og:url" content="http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/index.html">
+<meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:description" content="简介
+Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。
+
+能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。
+对于一个特定的类，例如V">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-04.PNG-w375">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
+<meta property="og:updated_time" content="2016-08-04T06:39:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS攻防——（三）Cycript攻·防">
+<meta name="twitter:description" content="简介
+Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。
+
+能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。
+对于一个特定的类，例如V">
+<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/"/>
+
+  <title> iOS攻防——（三）Cycript攻·防 | 小鱼周凌宇のCODE_HOME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小鱼周凌宇のCODE_HOME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术宅 iOS开发 JAVA开发 萌妹子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS攻防——（三）Cycript攻·防
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-19T14:09:36+08:00" content="2016-07-19">
+              2016-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/19/iOS攻防——（三）Cycript攻·防/" class="leancloud_visitors" data-flag-title="iOS攻防——（三）Cycript攻·防">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。<br>Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&gt; 运行时修改应用的很多东西。</p>
+<ol>
+<li>能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。</li>
+<li>对于一个特定的类，例如View Controller, App delegate或者任何其他的类，我们能够得到所有被使用的方法名称。</li>
+<li>能够得到所有实例变量的名称和在程序运行的任意时刻实例变量的值。</li>
+<li>能够在运行时修改实例变量的值。</li>
+<li>能够执行Method Swizzling，例如替换一个特定方法的实现。</li>
+<li>可以在运行时调用任意方法，即使这个方法目前并不在应用的实际代码当中。</li>
+</ol>
+</blockquote>
+<h1 id="Cycript安装"><a href="#Cycript安装" class="headerlink" title="Cycript安装"></a>Cycript安装</h1><p>在<a href="http://www.cycript.org" target="_blank" rel="external">这里下载</a><br>在<a href="">这里阅读</a>所有Cycript诡计</p>
+<h1 id="攻"><a href="#攻" class="headerlink" title="攻"></a>攻</h1><p>先看看怎么用Cycript干点坏事吧</p>
+<h2 id="1-给应用弹一个莫名其妙的alert"><a href="#1-给应用弹一个莫名其妙的alert" class="headerlink" title="1. 给应用弹一个莫名其妙的alert"></a>1. 给应用弹一个莫名其妙的alert</h2><h3 id="ssh登陆你的手机（如果不会，上一篇有-）"><a href="#ssh登陆你的手机（如果不会，上一篇有-）" class="headerlink" title="ssh登陆你的手机（如果不会，上一篇有~）"></a>ssh登陆你的手机（如果不会，上一篇有~）</h3><h3 id="找一个app"><a href="#找一个app" class="headerlink" title="找一个app"></a>找一个app</h3><p>这里我找的是以前做的一个app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep blackwidow</div></pre></td></tr></table></figure>
+<p>print</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mobile 466 6.6 7.0 508416 36204 ?? Ss 11:22AM 0:09.65 /xxxx/blackwidow</div></pre></td></tr></table></figure>
+<p>这样知道进程号是466</p>
+<h3 id="hock住"><a href="#hock住" class="headerlink" title="hock住"></a>hock住</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cycript -p 466</div></pre></td></tr></table></figure>
+<p>如果你看到出现了cy#，说明你可以开始编写Cycript代码了</p>
+<h3 id="alert"><a href="#alert" class="headerlink" title="alert"></a>alert</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 找到widnow</span></div><div class="line">var window = [<span class="built_in">UIApplication</span> sharedApplication].keyWindow;</div><div class="line"><span class="comment">// 初始化一个alert</span></div><div class="line">var alert = [[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@"hack you"</span> message:<span class="string">@"hack you"</span> window cancelButtonTitle:<span class="string">@"cancel"</span> otherButtonTitles:<span class="string">@"yes"</span>, <span class="literal">nil</span>];</div><div class="line"><span class="comment">// 弹出来吧</span></div><div class="line">[alert show];</div></pre></td></tr></table></figure>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375" alt=""></p>
+<h2 id="2-探索一个app"><a href="#2-探索一个app" class="headerlink" title="2. 探索一个app"></a>2. 探索一个app</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMethods</span>(<span class="params">className</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> count = <span class="keyword">new</span> <span class="keyword">new</span> Type(<span class="string">"I"</span>);</div><div class="line">  <span class="keyword">var</span> methods = class_copyMethodList(objc_getClass(className), count);</div><div class="line">  <span class="keyword">var</span> methodsArray = [];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; *count; i++) &#123;</div><div class="line">    <span class="keyword">var</span> method = methods[i];</div><div class="line">    methodsArray.push(&#123;selector:method_getName(method), implementation:method_getImplementation(method)&#125;);</div><div class="line">  &#125;</div><div class="line">  free(methods);</div><div class="line">  <span class="keyword">return</span> methodsArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调用一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printMethods(AppDelegate)</div></pre></td></tr></table></figure></p>
+<p>输出结果：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png" alt=""></p>
+<p>是不是觉得发生了很可怕的事情？该有的都被打印出来了。</p>
+<p>你还可以通过试探的方式找出每一个Controller的名字，例如：</p>
+<p>insert</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeVC= [[[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:<span class="number">0</span>] nextResponder];</div></pre></td></tr></table></figure>
+<p>print</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#&quot;&lt;HomePageTabBarViewController: 0x156cf200&gt;&quot;</div></pre></td></tr></table></figure>
+<p>insert</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> page0VC = [homeVC.childViewControllers objectAtIndex:<span class="number">3</span>]</div></pre></td></tr></table></figure>
+<p>print</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#&quot;&lt;BaseNavigationController: 0x156decc0&gt;&quot;</div></pre></td></tr></table></figure>
+<p>insert<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var meVC = page0VC.topViewController</div></pre></td></tr></table></figure></p>
+<p>print<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#&quot;&lt;MeViewController: 0x156de940&gt;&quot;</div></pre></td></tr></table></figure></p>
+<p>这样，我们就找到了『我的』页面所属Controller。</p>
+<p>查看所有的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printMethods(MeViewController)</div></pre></td></tr></table></figure>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png" alt=""></p>
+<p>改个标题试试：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[meVC setCurrentTitle:<span class="string">@"hack you"</span>];</div></pre></td></tr></table></figure>
+<p>效果如下：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-04.PNG-w375" alt=""></p>
+<p>试想一下，如果MeViewController中或者LoginViewController中有一个方法叫getUserInfo，那么通过Cycript就可以轻而易举的拿到用户信息。</p>
+<p>不过Cycript在这里最主要的作用还是偷窥APP和调试APP。<br>当然，好玩的方法还有很多。</p>
+<h1 id="防"><a href="#防" class="headerlink" title="防"></a>防</h1><p>知道了Cycript的可怕，在有重要信息藏在代码中的时候，我们也得学会如何放置Cycript修改运行时。</p>
+<p>你可以参考<a href="http://www.cocoachina.com/ios/20150511/11801.html" target="_blank" rel="external">这篇文章</a></p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼周凌宇的微博"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/" rel="next" title="iOS攻防——（二）如何窃取用户的通讯录信息">
+                <i class="fa fa-chevron-left"></i> iOS攻防——（二）如何窃取用户的通讯录信息
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+
+
+
+      
+        <span id="/"class="leancloud_visitors" data-flag-title="">
+          阅读次数
+        </span>
+      
+
+
+
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小鱼周凌宇" />
+          <p class="site-author-name" itemprop="name">小鱼周凌宇</p>
+          <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cycript安装"><span class="nav-number">2.</span> <span class="nav-text">Cycript安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#攻"><span class="nav-number">3.</span> <span class="nav-text">攻</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-给应用弹一个莫名其妙的alert"><span class="nav-number">3.1.</span> <span class="nav-text">1. 给应用弹一个莫名其妙的alert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh登陆你的手机（如果不会，上一篇有-）"><span class="nav-number">3.1.1.</span> <span class="nav-text">ssh登陆你的手机（如果不会，上一篇有~）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找一个app"><span class="nav-number">3.1.2.</span> <span class="nav-text">找一个app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hock住"><span class="nav-number">3.1.3.</span> <span class="nav-text">hock住</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alert"><span class="nav-number">3.1.4.</span> <span class="nav-text">alert</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-探索一个app"><span class="nav-number">3.2.</span> <span class="nav-text">2. 探索一个app</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防"><span class="nav-number">4.</span> <span class="nav-text">防</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鱼周凌宇</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+</body>
+</html>
