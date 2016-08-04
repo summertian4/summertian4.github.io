@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="小鱼のCODE_HOME" type="application/atom+xml" />
+
 
 
 
@@ -102,8 +104,7 @@ nil：        指向oc中对象的空指针，计数器0Nil：        指向oc�
 这样的显然不能帮助更好的理解，那么结合源码再去理解：
 
 nil：        #define nil">
-<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
-<meta property="og:updated_time" content="2016-08-03T08:07:06.000Z">
+<meta property="og:updated_time" content="2016-08-04T09:59:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速又深入的了解OC中的nil、Nil、NULL、NSNull">
 <meta name="twitter:description" content="在网上看过很多介绍，但是还是会晕掉，一大堆绕口的定义，比如下面这些：
@@ -113,7 +114,6 @@ nil：        指向oc中对象的空指针，计数器0Nil：        指向oc�
 这样的显然不能帮助更好的理解，那么结合源码再去理解：
 
 nil：        #define nil">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20151013163134872">
 
 
 
@@ -356,12 +356,11 @@ nil：        #define nil">
 <p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
 <h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#x40;&#49;&#54;&#51;&#46;&#x63;&#x6f;&#109;">&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#x40;&#49;&#54;&#51;&#46;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x63;&#111;&#x64;&#101;&#x72;&#102;&#x69;&#115;&#x68;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#111;&#x6d;">&#x63;&#111;&#x64;&#101;&#x72;&#102;&#x69;&#115;&#x68;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
 <p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼</a></p>
-<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼的微博"></p>
 
       
     </div>
@@ -517,6 +516,13 @@ nil：        #define nil">
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
