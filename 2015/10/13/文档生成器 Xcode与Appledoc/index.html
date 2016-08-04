@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="目录[TOC]
+博主是不写注释会死星人，以前 java 的时候常用 javadoc ，只要写好注释，然后用 javadoc 生成html 格式的文档。用eclipse和myeclipse都能挂上去。最近的iOS项目是一个十几个人一起写的项目，很多都初学者，我写主要框架这一块。uml和编码都搞定了，但是为了协作给他人使用，需要一份文档。除了word和markdown写的reference，api文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文档生成器 Xcode与Appledoc">
+<meta property="og:url" content="http://zhoulingyu.com/2015/10/13/文档生成器 Xcode与Appledoc/index.html">
+<meta property="og:site_name" content="小鱼のCODE_HOME">
+<meta property="og:description" content="目录[TOC]
+博主是不写注释会死星人，以前 java 的时候常用 javadoc ，只要写好注释，然后用 javadoc 生成html 格式的文档。用eclipse和myeclipse都能挂上去。最近的iOS项目是一个十几个人一起写的项目，很多都初学者，我写主要框架这一块。uml和编码都搞定了，但是为了协作给他人使用，需要一份文档。除了word和markdown写的reference，api文档">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013153313995">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013155112543">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013155205606">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013155748077">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013160016656">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013160128085">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013160235052">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013160702336">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013160717721">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013161028665">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
+<meta property="og:updated_time" content="2016-08-03T08:07:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文档生成器 Xcode与Appledoc">
+<meta name="twitter:description" content="目录[TOC]
+博主是不写注释会死星人，以前 java 的时候常用 javadoc ，只要写好注释，然后用 javadoc 生成html 格式的文档。用eclipse和myeclipse都能挂上去。最近的iOS项目是一个十几个人一起写的项目，很多都初学者，我写主要框架这一块。uml和编码都搞定了，但是为了协作给他人使用，需要一份文档。除了word和markdown写的reference，api文档">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151013153313995">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhoulingyu.com/2015/10/13/文档生成器 Xcode与Appledoc/"/>
+
+  <title> 文档生成器 Xcode与Appledoc | 小鱼のCODE_HOME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小鱼のCODE_HOME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术宅 iOS开发 JAVA开发 萌妹子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                文档生成器 Xcode与Appledoc
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-13T16:33:00+08:00" content="2015-10-13">
+              2015-10-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/10/13/文档生成器 Xcode与Appledoc/" class="leancloud_visitors" data-flag-title="文档生成器 Xcode与Appledoc">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h1><p>[TOC]</p>
+<p>博主是不写注释会死星人，以前 java 的时候常用 javadoc ，只要写好注释，然后用 javadoc 生成html 格式的文档。用eclipse和myeclipse都能挂上去。<br>最近的iOS项目是一个十几个人一起写的项目，很多都初学者，我写主要框架这一块。uml和编码都搞定了，但是为了协作给他人使用，需要一份文档。<br>除了word和markdown写的reference，api文档也是必不可少的。<br>所以就开始捣鼓appledoc。在中间遇到不少问题，最后成功的解决了，所以特意分享给大家。</p>
+<h1 id="安装Appledoc"><a href="#安装Appledoc" class="headerlink" title="安装Appledoc"></a><strong>安装Appledoc</strong></h1><p><strong>Appledoc的github地址：</strong><a href="https://github.com/tomaz/appledoc" target="_blank" rel="external">https://github.com/tomaz/appledoc</a></p>
+<p>其实不用下载的，在github项目的readme中已经写了安装方法：</p>
+<h2 id="快速安装"><a href="#快速安装" class="headerlink" title="快速安装"></a><strong>快速安装</strong></h2><p>打开终端，输入： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git://github.com/tomaz/appledoc.git</div></pre></td></tr></table></figure>
+<p>等待完成后继续输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sh install-appledoc.sh</div></pre></td></tr></table></figure>
+<p>等待安装完成。如果出现错误，参考后面的错误解决<br><br></p>
+<h2 id="brew安装"><a href="#brew安装" class="headerlink" title="brew安装"></a><strong>brew安装</strong></h2><p>如果你装了brew，Appledoc官方文档写的是打开终端输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install appledoc</div></pre></td></tr></table></figure>
+<p><hr></p>
+<h2 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a><strong>错误解决</strong></h2><p>我试了使用brew安装，然而显示错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Error: No available formula for appledoc </div><div class="line">==&gt; Searching formulae...</div><div class="line">==&gt; Searching taps...</div></pre></td></tr></table></figure>
+<p>这个问题让我查了很多资料都没解决，最后发现可能是新版的brew不能这样安装Appledoc（是我的猜测）。</p>
+<p>所以决定使用<strong>快速安装</strong>。<br>要注意的是，使用快速安装要<strong>保证<code>/usr/local/bin</code>路径要存在</strong>。如果没有，一定要手动创建相应的文件夹，并且保证bin文件夹是可读可写的（可以在文件夹的『显示简介』里更改）</p>
+<p><img src="http://img.blog.csdn.net/20151013153313995" alt="设置/usr/local/bin文件夹可读可写"></p>
+<p>然后就可以放心按照上面『快速安装』安装了，不会出现问题。</p>
+<hr>
+<h1 id="Appledoc使用"><a href="#Appledoc使用" class="headerlink" title="Appledoc使用"></a><strong>Appledoc使用</strong></h1><p>##<strong>在xcode里使用</strong><br>网上找的很多资料都是在很老版本的xcode中使用appledoc的方法，博主用的是xcode6和xcode7。<br>首先点击file-&gt;new-&gt;target</p>
+<p><img src="http://img.blog.csdn.net/20151013155112543" alt="这里写图片描述"></p>
+<p>然后在弹出的界面中选择Aggregate</p>
+<p><img src="http://img.blog.csdn.net/20151013155205606" alt="这里写图片描述"></p>
+<p>填写好名字</p>
+<p><img src="http://img.blog.csdn.net/20151013155748077" alt="这里写图片描述"></p>
+<p>这样就添加好了一个Target<br>然后会弹出一个界面，不同版本长得略有不同<br>总之选择Build Phases，点击左边的小加号</p>
+<p><img src="http://img.blog.csdn.net/20151013160016656" alt="这里写图片描述"></p>
+<p>选择New Run Script Phase</p>
+<p><img src="http://img.blog.csdn.net/20151013160128085" alt="这里写图片描述"></p>
+<p>建好了以后打开刚刚建立的Run Script</p>
+<p><img src="http://img.blog.csdn.net/20151013160235052" alt="这里写图片描述"></p>
+<p>把红框的地方里面替换成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">#appledoc Xcode script</div><div class="line"># Start constants</div><div class="line">company=&quot;ACME&quot;;</div><div class="line">companyID=&quot;com.ACME&quot;;</div><div class="line">companyURL=&quot;http://ACME.com&quot;;</div><div class="line">target=&quot;iphoneos&quot;;</div><div class="line">#target=&quot;macosx&quot;;</div><div class="line">outputPath=&quot;~/help&quot;;</div><div class="line"># End constants</div><div class="line"></div><div class="line">/usr/local/bin/appledoc \</div><div class="line">--project-name &quot;$&#123;PROJECT_NAME&#125;&quot; \</div><div class="line">--project-company &quot;$&#123;company&#125;&quot; \</div><div class="line">--company-id &quot;$&#123;companyID&#125;&quot; \</div><div class="line">--docset-atom-filename &quot;$&#123;company&#125;.atom&quot; \</div><div class="line">--docset-feed-url &quot;$&#123;companyURL&#125;/$&#123;company&#125;/%DOCSETATOMFILENAME&quot; \</div><div class="line">--docset-package-url &quot;$&#123;companyURL&#125;/$&#123;company&#125;/%DOCSETPACKAGEFILENAME&quot; \</div><div class="line">--docset-fallback-url &quot;$&#123;companyURL&#125;/$&#123;company&#125;&quot; \</div><div class="line">--output &quot;$&#123;outputPath&#125;&quot; \</div><div class="line">--publish-docset \</div><div class="line">--docset-platform-family &quot;$&#123;target&#125;&quot; \</div><div class="line">--logformat xcode \</div><div class="line">--keep-intermediate-files \</div><div class="line">--no-repeat-first-par \</div><div class="line">--no-warn-invalid-crossref \</div><div class="line">--exit-threshold 2 \</div><div class="line">&quot;$&#123;PROJECT_DIR&#125;&quot;</div></pre></td></tr></table></figure>
+<p>然后点左上角的项目，发现多了一个Document<br><img src="http://img.blog.csdn.net/20151013160702336" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151013160717721" alt="这里写图片描述"></p>
+<p>点Document，然后再运行，只要没报错就OK了<br>文档已经编译好并且自动安装进Xcode了。重启xcode，打开documentation。就会发现里面有你刚刚生成的文档。<br><img src="http://img.blog.csdn.net/20151013161028665" alt="这里写图片描述"></p>
+<p>如果你想直接看html</p>
+<p>可以用Finder进入<code>~/Library/Developer/Shared/Documentation/DocSets</code><br>看到你的文档以后可以右键查看包内容，就可以拿到里面的Html文档了</p>
+<h3 id="终端使用"><a href="#终端使用" class="headerlink" title="终端使用"></a><strong>终端使用</strong></h3><p><strong>博主还没有试过，可以先尝试上面的方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">appledoc --project-name test     </div><div class="line">         --project-company &quot;test&quot;   </div><div class="line">         --company-id com.test    </div><div class="line">         --output /Users/zhoulingyu/Desktop</div><div class="line">         /Users/zhoulingyu/Desktop/Test/Classes</div></pre></td></tr></table></figure></p>
+<p>从上到下分别代表的是：</p>
+<ol>
+<li>工程名称</li>
+<li>公司名称</li>
+<li>工程ID</li>
+<li>生成结果输出路径</li>
+<li>扫描哪个路径下的类.</li>
+</ol>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x63;&#111;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#111;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼</a></p>
+<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼的微博"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/25/iOS学习——Notification通知机制/" rel="next" title="iOS学习——Notification通知机制">
+                <i class="fa fa-chevron-left"></i> iOS学习——Notification通知机制
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/19/野生程序员的故事/" rel="prev" title="野生程序员的故事">
+                野生程序员的故事 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+
+
+
+      
+        <span id="/"class="leancloud_visitors" data-flag-title="">
+          阅读次数
+        </span>
+      
+
+
+
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小鱼" />
+          <p class="site-author-name" itemprop="name">小鱼</p>
+          <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Appledoc"><span class="nav-number">2.</span> <span class="nav-text">安装Appledoc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速安装"><span class="nav-number">2.1.</span> <span class="nav-text">快速安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brew安装"><span class="nav-number">2.2.</span> <span class="nav-text">brew安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误解决"><span class="nav-number">2.3.</span> <span class="nav-text">错误解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Appledoc使用"><span class="nav-number">3.</span> <span class="nav-text">Appledoc使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#终端使用"><span class="nav-number">3.0.1.</span> <span class="nav-text">终端使用</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+</body>
+</html>

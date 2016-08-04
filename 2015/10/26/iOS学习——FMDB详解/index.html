@@ -1,0 +1,885 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="介绍FMDB现在越来越多的被使用了，作为轻量级数据库框架，FMDB对sqlite做了简单的包装，使得使用更简单。
+但是小鱼认为FMDB还是不好用，毕竟不能做到像hebernate一样传一个对象直接保存，直接省去sql语句。之后小鱼打算自己动封装一个框架，至少能够对简单的entity进行一键增删改查。
+
+GitHubFMDB链接：https://github.com/ccgus/fmdb
+
+安装1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS学习——FMDB详解">
+<meta property="og:url" content="http://zhoulingyu.com/2015/10/26/iOS学习——FMDB详解/index.html">
+<meta property="og:site_name" content="小鱼のCODE_HOME">
+<meta property="og:description" content="介绍FMDB现在越来越多的被使用了，作为轻量级数据库框架，FMDB对sqlite做了简单的包装，使得使用更简单。
+但是小鱼认为FMDB还是不好用，毕竟不能做到像hebernate一样传一个对象直接保存，直接省去sql语句。之后小鱼打算自己动封装一个框架，至少能够对简单的entity进行一键增删改查。
+
+GitHubFMDB链接：https://github.com/ccgus/fmdb
+
+安装1.">
+<meta property="og:image" content="http://img.blog.csdn.net/20151027094718635">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
+<meta property="og:updated_time" content="2016-08-03T08:05:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS学习——FMDB详解">
+<meta name="twitter:description" content="介绍FMDB现在越来越多的被使用了，作为轻量级数据库框架，FMDB对sqlite做了简单的包装，使得使用更简单。
+但是小鱼认为FMDB还是不好用，毕竟不能做到像hebernate一样传一个对象直接保存，直接省去sql语句。之后小鱼打算自己动封装一个框架，至少能够对简单的entity进行一键增删改查。
+
+GitHubFMDB链接：https://github.com/ccgus/fmdb
+
+安装1.">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151027094718635">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://zhoulingyu.com/2015/10/26/iOS学习——FMDB详解/"/>
+
+  <title> iOS学习——FMDB详解 | 小鱼のCODE_HOME </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小鱼のCODE_HOME</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">技术宅 iOS开发 JAVA开发 萌妹子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/about.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS学习——FMDB详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-26T18:54:10+08:00" content="2015-10-26">
+              2015-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/10/26/iOS学习——FMDB详解/" class="leancloud_visitors" data-flag-title="iOS学习——FMDB详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>FMDB现在越来越多的被使用了，作为轻量级数据库框架，FMDB对sqlite做了简单的包装，使得使用更简单。</p>
+<p>但是小鱼认为FMDB还是不好用，毕竟不能做到像hebernate一样传一个对象直接保存，直接省去sql语句。之后小鱼打算自己动封装一个框架，至少能够对简单的entity进行一键增删改查。</p>
+<hr>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p>FMDB链接：<a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">https://github.com/ccgus/fmdb</a></p>
+<hr>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="1-使用CocoaPods安装"><a href="#1-使用CocoaPods安装" class="headerlink" title="1. 使用CocoaPods安装"></a>1. 使用CocoaPods安装</h2><p>pods安装当然是最简单的，在Podfile文件中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;FMDB&apos;</div></pre></td></tr></table></figure>
+<p>然后终端进入项目根目录，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<p>等待安装完就好了</p>
+<p>如果不会使用CocoaPods，可以参考我的这篇博文：<a href="http://zhoulingyu.com/2015/10/27/iOS学习——CocoaPods的使用/" target="_blank" rel="external">iOS学习——CocoaPods的使用</a></p>
+<h2 id="2-传统拖文件安装"><a href="#2-传统拖文件安装" class="headerlink" title="2. 传统拖文件安装"></a>2. 传统拖文件安装</h2><p>在github上下载FMDB，把这些文件直接拖入你的项目就可以用了</p>
+<p><img src="http://img.blog.csdn.net/20151027094718635" alt="FMDB所需要的文件"></p>
+<hr>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>首先要在用到的地方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &quot;FMDB.h&quot;</div></pre></td></tr></table></figure>
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>如果该位置没有此数据库文件将会建立一个新的数据库文件，如果已经有了，将会直接获得该数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FMDatabase *db = [FMDatabase databaseWithPath:dataBasePath];</div></pre></td></tr></table></figure>
+<p>dataBasePath可以这样设定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#define dataBasePath [[(NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)) lastObject]stringByAppendingPathComponent:dataBaseName]</div><div class="line">#define dataBaseName @&quot;test.sqlite&quot;</div></pre></td></tr></table></figure>
+<h2 id="打开数据库"><a href="#打开数据库" class="headerlink" title="打开数据库"></a>打开数据库</h2><p>返回BOOL类型，代表是否成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[db open]</div></pre></td></tr></table></figure>
+<h2 id="关闭数据库"><a href="#关闭数据库" class="headerlink" title="关闭数据库"></a>关闭数据库</h2><p>返回BOOL类型，代表是否成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[db close]</div></pre></td></tr></table></figure>
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if ([self.db open]) &#123;</div><div class="line">	NSString *sqlCreateTable = @&quot;CREATE TABLE IF NOT EXISTS Question (UUID TEXT PRIMARY KEY, type TEXT, bigQuetionIndex INTEGER, smallQuetionIndex INTEGER, state TEXT, time INTEGER, elapsedTime INTEGER, studentAnswer TEXT, answer TEXT, studentGrade INTEGER, grade INTEGER, content TEXT, examPaperUUID TEXT)&quot;;</div><div class="line">	      </div><div class="line">	BOOL res = [self.db executeStatements:sqlCreateTable];</div><div class="line">	if (!res) &#123;</div><div class="line">		CFLog(@&quot;error when creating db table&quot;);</div><div class="line">	&#125; else &#123;</div><div class="line">		CFLog(@&quot;success to creating db table&quot;);</div><div class="line">	&#125;</div><div class="line">	[self.db close];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">if ([self.db open]) &#123;</div><div class="line">	 NSString *sql = @&quot;INSERT INTO t_entity (UUID, title) VALUES (?, ?)&quot;;</div><div class="line">        </div><div class="line">        BOOL res = [self.db executeUpdate:sql, entity.UUID, entity.title];</div><div class="line">        </div><div class="line">        if (!res) &#123;</div><div class="line">            CFLog(@&quot;error when insert db table&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            CFLog(@&quot;success to insert db table&quot;);</div><div class="line">	&#125;</div><div class="line">	[self.db close];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if ([self.db open]) &#123;</div><div class="line">        NSString *sql = @&quot;DELETE FROM t_entity WHERE UUID = ?&quot;;</div><div class="line">        BOOL res = [self.db executeUpdate:sql, UUID];</div><div class="line">        </div><div class="line">        if (!res) &#123;</div><div class="line">            CFLog(@&quot;error when DELETE db table&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            CFLog(@&quot;success to DELETE db table&quot;);</div><div class="line">        &#125;</div><div class="line">        [self.db close];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">if ([self.db open]) &#123;</div><div class="line">        NSString *sql = @&quot;UPDATE t_entity SET title = ?&quot;;</div><div class="line">        BOOL res = [self.db executeUpdate:sql,</div><div class="line">                    examPaper.title,</div><div class="line">                    examPaper.UUID];</div><div class="line">        if (!res) &#123;</div><div class="line">            CFLog(@&quot;error when UPDATE db table&quot;);</div><div class="line">        &#125; else &#123;</div><div class="line">            CFLog(@&quot;success to UPDATE db table&quot;);</div><div class="line">        &#125;</div><div class="line">        [self.db close];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="查找数据"><a href="#查找数据" class="headerlink" title="查找数据"></a>查找数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Entity *entity;</div><div class="line">if ([self.db open]) &#123;</div><div class="line">	//返回数据库中第一条满足条件的结果</div><div class="line">	NSString *sql = @&quot;SELECT * FROM t_entity WHERE UUID = ?&quot;;</div><div class="line">        </div><div class="line">	//返回全部查询结果</div><div class="line">	FMResultSet *rs=[self.db executeQuery:sql, UUID, nil];</div><div class="line">        </div><div class="line">	while ([rs next])&#123;</div><div class="line">		entity = [[Entity alloc] init];</div><div class="line">		entity.UUID = [rs stringForColumn:@&quot;UUID&quot;];</div><div class="line">		entity.type = [rs stringForColumn:@&quot;type&quot;];</div><div class="line">	&#125;</div><div class="line">        </div><div class="line">	[rs close];</div><div class="line">	[self.db close];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="重要提示：使用占位符『-』"><a href="#重要提示：使用占位符『-』" class="headerlink" title="重要提示：使用占位符『?』"></a>重要提示：使用占位符『?』</h2><p>我在网上看到很多人是这样用的</p>
+<p><code>错误代码：</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *sql = [NSString stringWithFormat: @&quot;INSERT INTO &apos;%@&apos; (&apos;%@&apos;, &apos;%@&apos;, &apos;%@&apos;) VALUES (&apos;%@&apos;, &apos;%@&apos;, &apos;%@&apos;)&quot;, TABLENAME, NAME, AGE, ADDRESS, @&quot;value1&quot;, @&quot;value2&quot;, @&quot;value3&quot;];  </div><div class="line">BOOL res = [db sql];</div></pre></td></tr></table></figure>
+<p>这是 <code>错误</code> 的，在官方文档上已经指出：</p>
+<blockquote>
+<p>you SHOULD NOT do this (or anything like this):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; [db executeUpdate:[NSString stringWithFormat:@&quot;INSERT INTO myTable VALUES (%@)&quot;, @&quot;this has \&quot; lots of &apos; bizarre \&quot; quotes &apos;&quot;]];</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>Instead, you SHOULD do:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; [db executeUpdate:@&quot;INSERT INTO myTable VALUES (?)&quot;, @&quot;this has \&quot; lots of &apos; bizarre \&quot; quotes &apos;&quot;];</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>也就是说不应该使用拼串的方式，而应该使用<code>占位符</code></p>
+<h2 id="重要提示：使用NSNumber保存"><a href="#重要提示：使用NSNumber保存" class="headerlink" title="重要提示：使用NSNumber保存"></a>重要提示：使用NSNumber保存</h2><p>官方文档指出，用int保存是 <code>不起作用</code> 的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[db executeUpdate:@&quot;INSERT INTO myTable VALUES (?)&quot;, 42];</div></pre></td></tr></table></figure>
+<p><code>正确</code> 的做法是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[db executeUpdate:@&quot;INSERT INTO myTable VALUES (?)&quot;, &gt; [NSNumber numberWithInt:42]];</div></pre></td></tr></table></figure>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#x6d;">&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼</a></p>
+<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼的微博"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/19/偏执却管用的 10 条 Java 编程技巧/" rel="next" title="偏执却管用的 10 条 Java 编程技巧">
+                <i class="fa fa-chevron-left"></i> 偏执却管用的 10 条 Java 编程技巧
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/27/iOS学习——CocoaPods的使用/" rel="prev" title="iOS学习——CocoaPods的使用">
+                iOS学习——CocoaPods的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+
+
+
+      
+        <span id="/"class="leancloud_visitors" data-flag-title="">
+          阅读次数
+        </span>
+      
+
+
+
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小鱼" />
+          <p class="site-author-name" itemprop="name">小鱼</p>
+          <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GitHub"><span class="nav-number">2.</span> <span class="nav-text">GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-使用CocoaPods安装"><span class="nav-number">3.1.</span> <span class="nav-text">1. 使用CocoaPods安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-传统拖文件安装"><span class="nav-number">3.2.</span> <span class="nav-text">2. 传统拖文件安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">4.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数据库"><span class="nav-number">4.1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开数据库"><span class="nav-number">4.2.</span> <span class="nav-text">打开数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关闭数据库"><span class="nav-number">4.3.</span> <span class="nav-text">关闭数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建表"><span class="nav-number">4.4.</span> <span class="nav-text">建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加数据"><span class="nav-number">4.5.</span> <span class="nav-text">增加数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除数据"><span class="nav-number">4.6.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新数据"><span class="nav-number">4.7.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找数据"><span class="nav-number">4.8.</span> <span class="nav-text">查找数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要提示：使用占位符『-』"><span class="nav-number">4.9.</span> <span class="nav-text">重要提示：使用占位符『?』</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要提示：使用NSNumber保存"><span class="nav-number">4.10.</span> <span class="nav-text">重要提示：使用NSNumber保存</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鱼</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = '0 ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+
+	});
+}
+
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+}); 
+</script>
+  
+
+</body>
+</html>
