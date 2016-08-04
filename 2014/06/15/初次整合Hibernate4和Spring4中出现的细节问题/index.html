@@ -339,7 +339,7 @@
 <p>因为使用的Annotation所以必须要要扫描所有的源码</p>
 <h1 id="二、第二个错误"><a href="#二、第二个错误" class="headerlink" title="二、第二个错误"></a>二、第二个错误</h1><p>修改完成后还是出现同样的错误<br>查了一下相关资料，原来发现hibernate4已经将hibernate3的一些功能改掉了，在hibernate4已经不使用CacheProvider了，所以做了以下修改，<br>原先：<br> <code>class=&quot;org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean&quot;&gt;</code><br>改成：<br>  <code>class=&quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&quot;&gt;</code><br>问题解决，发现可以正常使用了<br>参考链接<a href="http://stackoverflow.com/questions/8565051/spring-3-1-hibernate-4-sessionfactory" target="_blank" rel="external">http://stackoverflow.com/questions/8565051/spring-3-1-hibernate-4-sessionfactory</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;">&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#x63;&#111;&#100;&#x65;&#114;&#x66;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#109;">&#x63;&#111;&#100;&#x65;&#114;&#x66;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -397,17 +397,6 @@
 
     <div class="post-spread">
       
-
-
-
-      
-        <span id="/"class="leancloud_visitors" data-flag-title="">
-          阅读次数
-        </span>
-      
-
-
-
     </div>
   </div>
 
@@ -742,91 +731,6 @@
 
 
 
-  
-
-  
-  <!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
-<script>
-function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
-
-	});
-}
-
-function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
-}
-$(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
-}); 
-</script>
   
 
 </body>

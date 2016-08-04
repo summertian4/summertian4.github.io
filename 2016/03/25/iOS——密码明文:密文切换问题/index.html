@@ -369,7 +369,7 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其实很多奇怪的问题只有在实际开发的时候发现，这时候你就会认识到自己的经验不足。所以啦，学无止境~。</p>
 <p>过段时间妹子我会奉上自己的照片哦~（好久没自拍啦~~😲）</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#99;&#111;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#64;&#x31;&#54;&#x33;&#46;&#x63;&#x6f;&#x6d;">&#99;&#111;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#64;&#x31;&#54;&#x33;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#104;&#x40;&#49;&#x36;&#x33;&#46;&#99;&#111;&#109;">&#99;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#104;&#x40;&#49;&#x36;&#x33;&#46;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -431,17 +431,6 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 
     <div class="post-spread">
       
-
-
-
-      
-        <span id="/"class="leancloud_visitors" data-flag-title="">
-          阅读次数
-        </span>
-      
-
-
-
     </div>
   </div>
 
@@ -776,91 +765,6 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 
 
 
-  
-
-  
-  <!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
-<script>
-function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
-
-	});
-}
-
-function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
-}
-$(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
-}); 
-</script>
   
 
 </body>
