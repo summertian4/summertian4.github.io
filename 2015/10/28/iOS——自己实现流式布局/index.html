@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="小鱼周凌宇のCODE_HOME" type="application/atom+xml" />
+
 
 
 
@@ -106,8 +108,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151028142014475">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-01.png-w500">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-02.png-h500">
-<meta property="og:image" content="http://img.blog.csdn.net/20151013163134872">
-<meta property="og:updated_time" content="2016-08-03T08:05:33.000Z">
+<meta property="og:updated_time" content="2016-08-04T10:02:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS——自己实现流式布局">
 <meta name="twitter:description" content="描述因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局
@@ -364,7 +365,7 @@
 <li>安置第一个按钮的位置（居左、居右），并将按钮加入<code>rowFirstButtons</code> 中</li>
 <li>在安置其后的按钮位置：<br> 4.1  计算从本行第一个按钮到该按钮所有的宽度及间距和，如果超过了父控件的宽度，<code>row++</code> ，并将其加入<code>rowFirstButtons</code> 中。计算相应的x、y值<br> 4.2 如果没有超过过父控件的宽度，算相应的x、y值</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">- (void)layoutSubviews &#123;</div><div class="line"></div><div class="line">    CGFloat margin = 10;</div><div class="line"></div><div class="line">    // 存放每行的第一个Button</div><div class="line">    NSMutableArray *rowFirstButtons = [NSMutableArray array];</div><div class="line">    </div><div class="line">    // 对第一个Button进行设置</div><div class="line">    UIButton *button0 = self.buttonList[0];</div><div class="line">    button0.x = margin;</div><div class="line">    button0.y = margin;</div><div class="line">    [rowFirstButtons addObject:self.buttonList[0]];</div><div class="line">    </div><div class="line">    // 对其他Button进行设置</div><div class="line">    int row = 0;</div><div class="line">    for (int i = 1; i &lt; self.buttonList.count; i++) &#123;</div><div class="line">        UIButton *button = self.buttonList[i];</div><div class="line">        </div><div class="line">        int sumWidth = 0;</div><div class="line">        int start = (int)[self.buttonList indexOfObject:rowFirstButtons[row]];</div><div class="line">        for (int j = start; j &lt;= i; j++) &#123;</div><div class="line">            UIButton *button = self.buttonList[j];</div><div class="line">                sumWidth += (button.width + margin);</div><div class="line">        &#125;</div><div class="line">        sumWidth += 10;</div><div class="line">        </div><div class="line">        UIButton *lastButton = self.buttonList[i - 1];</div><div class="line">        if (sumWidth &gt;= self.width) &#123;</div><div class="line">            button.x = margin;</div><div class="line">            button.y = lastButton.y + margin + button.height;</div><div class="line">            [rowFirstButtons addObject:button];</div><div class="line">            row ++;</div><div class="line">        &#125; else &#123;</div><div class="line">            button.x = sumWidth - margin - button.width;</div><div class="line">            button.y = lastButton.y;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    UIButton *lastButton = self.buttonList.lastObject;</div><div class="line">    self.height = CGRectGetMaxY(lastButton.frame) + 10;</div><div class="line">    </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)layoutSubviews &#123;</div><div class="line"></div><div class="line">    <span class="built_in">CGFloat</span> margin = <span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 存放每行的第一个Button</span></div><div class="line">    <span class="built_in">NSMutableArray</span> *rowFirstButtons = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    </div><div class="line">    <span class="comment">// 对第一个Button进行设置</span></div><div class="line">    <span class="built_in">UIButton</span> *button0 = <span class="keyword">self</span>.buttonList[<span class="number">0</span>];</div><div class="line">    button0.x = margin;</div><div class="line">    button0.y = margin;</div><div class="line">    [rowFirstButtons addObject:<span class="keyword">self</span>.buttonList[<span class="number">0</span>]];</div><div class="line">    </div><div class="line">    <span class="comment">// 对其他Button进行设置</span></div><div class="line">    <span class="keyword">int</span> row = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="keyword">self</span>.buttonList.count; i++) &#123;</div><div class="line">        <span class="built_in">UIButton</span> *button = <span class="keyword">self</span>.buttonList[i];</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> sumWidth = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> start = (<span class="keyword">int</span>)[<span class="keyword">self</span>.buttonList indexOfObject:rowFirstButtons[row]];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = start; j &lt;= i; j++) &#123;</div><div class="line">            <span class="built_in">UIButton</span> *button = <span class="keyword">self</span>.buttonList[j];</div><div class="line">                sumWidth += (button.width + margin);</div><div class="line">        &#125;</div><div class="line">        sumWidth += <span class="number">10</span>;</div><div class="line">        </div><div class="line">        <span class="built_in">UIButton</span> *lastButton = <span class="keyword">self</span>.buttonList[i - <span class="number">1</span>];</div><div class="line">        <span class="keyword">if</span> (sumWidth &gt;= <span class="keyword">self</span>.width) &#123;</div><div class="line">            button.x = margin;</div><div class="line">            button.y = lastButton.y + margin + button.height;</div><div class="line">            [rowFirstButtons addObject:button];</div><div class="line">            row ++;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            button.x = sumWidth - margin - button.width;</div><div class="line">            button.y = lastButton.y;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="built_in">UIButton</span> *lastButton = <span class="keyword">self</span>.buttonList.lastObject;</div><div class="line">    <span class="keyword">self</span>.height = <span class="built_in">CGRectGetMaxY</span>(lastButton.frame) + <span class="number">10</span>;</div><div class="line">    </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>因为将计算布局的代码放在了layoutSubviews方法中，所以适应横竖屏转换，不管是父控件如何变化都能正确设置布局。</p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-01.png-w500" alt="竖屏显示"></p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-02.png-h500" alt="横屏显示"></p>
@@ -390,16 +391,15 @@
 <p><a href="https://github.com/summertian4/iOS-CFFlowButtonView" target="_blank" rel="external">github链接</a></p>
 <p>使用的时候拖入CFFlowButtonView文件夹下的文件至项目中。</p>
 <p>实例化一个CFFlowButtonView对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CFFlowButtonView *flowButtonView = [[CFFlowButtonView alloc] initWithButtonList:buttonList];</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CFFlowButtonView</span> *flowButtonView = [[<span class="built_in">CFFlowButtonView</span> alloc] initWithButtonList:buttonList];</div></pre></td></tr></table></figure>
 <p>设置CFFlowButtonView的约束或者frame，<code>注意</code> ，对CFFlowButtonView设置约束时<code>不需要</code> 设置高度相关的约束。</p>
 <p>更多用法可以查看DEMO。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#99;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#99;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#99;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#64;&#49;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#64;&#49;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
 <p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
-<p><img src="http://img.blog.csdn.net/20151013163134872" alt="小鱼周凌宇的微博"></p>
 
       
     </div>
@@ -555,6 +555,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
