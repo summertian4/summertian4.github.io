@@ -365,7 +365,7 @@ sta">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Person.m</div><div class="line">//  test_command</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/8/11.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Person.h&quot;</div><div class="line"></div><div class="line"></div><div class="line">static NSString *_planetName;</div><div class="line"></div><div class="line">@implementation Person</div><div class="line"></div><div class="line">+(void) setPlanetName: (NSString *)planetName &#123;</div><div class="line">    _planetName = planetName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(NSString *) planetName &#123;</div><div class="line">    return _planetName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  main.m</div><div class="line">//  test_command</div><div class="line">//</div><div class="line">//  Created by 周凌宇 on 15/8/11.</div><div class="line">//  Copyright (c) 2015年 周凌宇. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;Person.h&quot;</div><div class="line"></div><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        [Person setPlanetName:@&quot;地球&quot;];</div><div class="line">        NSLog(@&quot;%@&quot;,[Person planetName]);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#99;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#x6d;">&#99;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -427,17 +427,6 @@ sta">
 
     <div class="post-spread">
       
-
-
-
-      
-        <span id="/"class="leancloud_visitors" data-flag-title="">
-          阅读次数
-        </span>
-      
-
-
-
     </div>
   </div>
 
@@ -772,91 +761,6 @@ sta">
 
 
 
-  
-
-  
-  <!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("PI8DkEcwwAeUsSvTJirjB4NY-gzGzoHsz", "F82ePXFzAey9dKSBAFdoB6ka");</script>
-<script>
-function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
-
-	});
-}
-
-function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
-}
-$(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
-}); 
-</script>
   
 
 </body>
