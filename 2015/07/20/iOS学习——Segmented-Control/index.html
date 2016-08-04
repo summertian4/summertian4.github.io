@@ -359,7 +359,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  showLabelViewController.m</div><div class="line">//  coderfish004</div><div class="line">//</div><div class="line">//  Created by apple40 on 15-7-20.</div><div class="line">//  Copyright (c) 2015年 coderfish. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line"># import &quot;showLabelViewController.h&quot;</div><div class="line"></div><div class="line">@interface showLabelViewController ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation showLabelViewController</div><div class="line"></div><div class="line">- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil</div><div class="line">&#123;</div><div class="line">    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];</div><div class="line">    if (self) &#123;</div><div class="line">        // Custom initialization</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad</div><div class="line">&#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">	// Do any additional setup after loading the view.</div><div class="line">    self.name = @&quot;周凌宇&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)didReceiveMemoryWarning</div><div class="line">&#123;</div><div class="line">    [super didReceiveMemoryWarning];</div><div class="line">    // Dispose of any resources that can be recreated.</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (IBAction)actionShowName:(id)sender &#123;</div><div class="line">    self.lblShow.text = self.name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (IBAction)actionSelectPage:(id)sender &#123;</div><div class="line">    </div><div class="line">    switch (self.segmentControl.selectedSegmentIndex) &#123;</div><div class="line">        case 0:</div><div class="line">            self.viewSchoolPage.hidden = true;</div><div class="line">            self.viewUserPage.hidden = false;</div><div class="line">            break;</div><div class="line">        case 1:</div><div class="line">            self.viewSchoolPage.hidden = false;</div><div class="line">            self.viewUserPage.hidden = true;</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>最后结果就是点击segment切换不同的View<br><img src="http://img.blog.csdn.net/20150720162114238" alt="Segmented Control切换视图"></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#100;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -536,7 +536,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2016</span>
@@ -557,6 +560,9 @@
   </a>
 </div>
 
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次 统计起始日期：2016年8月4日
+</span>
         
 
         
