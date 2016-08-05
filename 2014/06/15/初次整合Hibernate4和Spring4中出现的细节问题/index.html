@@ -304,6 +304,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -339,7 +346,7 @@
 <p>因为使用的Annotation所以必须要要扫描所有的源码</p>
 <h1 id="二、第二个错误"><a href="#二、第二个错误" class="headerlink" title="二、第二个错误"></a>二、第二个错误</h1><p>修改完成后还是出现同样的错误<br>查了一下相关资料，原来发现hibernate4已经将hibernate3的一些功能改掉了，在hibernate4已经不使用CacheProvider了，所以做了以下修改，<br>原先：<br> <code>class=&quot;org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean&quot;&gt;</code><br>改成：<br>  <code>class=&quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&quot;&gt;</code><br>问题解决，发现可以正常使用了<br>参考链接<a href="http://stackoverflow.com/questions/8565051/spring-3-1-hibernate-4-sessionfactory" target="_blank" rel="external">http://stackoverflow.com/questions/8565051/spring-3-1-hibernate-4-sessionfactory</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x63;&#x6f;&#100;&#101;&#114;&#102;&#105;&#x73;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#x63;&#x6f;&#100;&#101;&#114;&#102;&#105;&#x73;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -422,6 +429,25 @@
 
     <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/"
+     data-title="初次整合Hibernate4和Spring4中出现的细节问题"
+     data-content=""
+     data-url="http://zhoulingyu.com/2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
     </div>
   </div>
 
@@ -432,6 +458,10 @@
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/"
+           data-title="初次整合Hibernate4和Spring4中出现的细节问题" data-url="http://zhoulingyu.com/2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/">
+      </div>
     
   </div>
 
@@ -492,7 +522,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -677,9 +707,30 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"14076594"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 

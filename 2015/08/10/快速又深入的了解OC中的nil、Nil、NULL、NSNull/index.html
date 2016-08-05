@@ -316,6 +316,13 @@ nil：        #define nil">
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -356,7 +363,7 @@ nil：        #define nil">
 <p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
 <h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#111;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#114;&#102;&#x69;&#115;&#104;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;">&#99;&#x6f;&#x64;&#101;&#114;&#102;&#x69;&#115;&#104;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -443,6 +450,25 @@ nil：        #define nil">
 
     <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/"
+     data-title="快速又深入的了解OC中的nil、Nil、NULL、NSNull"
+     data-content=""
+     data-url="http://zhoulingyu.com/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
     </div>
   </div>
 
@@ -453,6 +479,10 @@ nil：        #define nil">
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/"
+           data-title="快速又深入的了解OC中的nil、Nil、NULL、NSNull" data-url="http://zhoulingyu.com/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/">
+      </div>
     
   </div>
 
@@ -513,7 +543,7 @@ nil：        #define nil">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -698,9 +728,30 @@ nil：        #define nil">
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"14076594"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 

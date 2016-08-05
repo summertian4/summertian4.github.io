@@ -304,6 +304,13 @@ AssetsLibrary的图片资源">
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -348,7 +355,7 @@ AssetsLibrary的图片资源">
 <h2 id="问题为什么是问题"><a href="#问题为什么是问题" class="headerlink" title="问题为什么是问题"></a>问题为什么是问题</h2><p>如果你不去注意这个地方，就可能和我一样去踩坑。<br>为什么这样说？在项目中，我们选中了一批图片，当我需要上传图片到我们的服务器时，需要将PHAsset换成UIImage。<br>当调用<code>- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler;</code>并在回调中写入上传图片至服务器的代码。这时候，如果回调被调用了两次，就会导致同一张图片被上传两次。如果做了同图判断，就会不断的报出一张图片上传不成功，或者少传一张的情况。</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>关于AssetsLibrary框架的坑，可以看<a href="http://kayosite.com/ios-development-and-detail-of-photo-framework.html/comment-page-1" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#99;&#111;&#100;&#x65;&#x72;&#x66;&#x69;&#115;&#104;&#64;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#x65;&#x72;&#x66;&#x69;&#115;&#104;&#64;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#99;&#x6f;&#100;&#x65;&#114;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#99;&#x6f;&#100;&#x65;&#114;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -435,6 +442,25 @@ AssetsLibrary的图片资源">
 
     <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/"
+     data-title="iOS——iOS8 Photo库 PHAsset之坑"
+     data-content=""
+     data-url="http://zhoulingyu.com/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
     </div>
   </div>
 
@@ -445,6 +471,10 @@ AssetsLibrary的图片资源">
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/"
+           data-title="iOS——iOS8 Photo库 PHAsset之坑" data-url="http://zhoulingyu.com/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/">
+      </div>
     
   </div>
 
@@ -505,7 +535,7 @@ AssetsLibrary的图片资源">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -690,9 +720,30 @@ AssetsLibrary的图片资源">
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"14076594"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 
