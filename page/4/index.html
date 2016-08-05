@@ -260,8 +260,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/" itemprop="url">
-                  iOS进阶学习——React-Native-环境搭建-run-it
+                <a class="post-title-link" href="/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/" itemprop="url">
+                  快速又深入的了解OC中的nil、Nil、NULL、NSNull
                 </a>
               
             
@@ -274,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-19T11:08:06+08:00" content="2016-04-19">
-              2016-04-19
+            <time itemprop="dateCreated" datetime="2015-08-10T16:29:00+08:00" content="2015-08-10">
+              2015-08-10
             </time>
           </span>
 
@@ -304,8 +304,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/" itemprop="commentsCount"></span>
+                <a href="/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -315,7 +315,7 @@
 
           
           
-             <span id="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/" class="leancloud_visitors" data-flag-title="iOS进阶学习——React-Native-环境搭建-run-it">
+             <span id="/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/" class="leancloud_visitors" data-flag-title="快速又深入的了解OC中的nil、Nil、NULL、NSNull">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -339,55 +339,19 @@
       
         
           
-            <h1 id="官方参考"><a href="#官方参考" class="headerlink" title="官方参考"></a>官方参考</h1><ol>
-<li><a href="https://github.com/facebook/react-native" target="_blank" rel="external">react-native github</a></li>
-<li><a href="http://reactnative.cn/docs/0.24/getting-started.html#content" target="_blank" rel="external">react-native 中文文档</a></li>
-<li><a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a></li>
-<li><a href="https://github.com/creationix/nvm#installation" target="_blank" rel="external">nvm</a></li>
-<li><a href="https://facebook.github.io/watchman/docs/install.html" target="_blank" rel="external">watchman</a></li>
-<li><a href="http://www.flowtype.org" target="_blank" rel="external">flow</a></li>
-</ol>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h2><ol>
-<li>nvm istall<ul>
-<li>输入命令<code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash</code></li>
-<li>如果你希望卸载nvm，你可以输入命令<code>$ npm uninstall -g a_module</code></li>
-</ul>
-</li>
-<li>输入命令<code>nvm install node &amp;&amp; nvm</code></li>
-<li>使nvm生效：<code>. ~/.nvm/nvm.sh</code> </li>
-<li>安装Node.js<code>nvm install node &amp;&amp; nvm alias default node</code><h2 id="watchman安装"><a href="#watchman安装" class="headerlink" title="watchman安装"></a>watchman安装</h2></li>
-<li><code>brew install watchman</code><h2 id="flow"><a href="#flow" class="headerlink" title="flow"></a>flow</h2><code>brew install flow</code></li>
-</ol>
-<h2 id="快速使用React-Native"><a href="#快速使用React-Native" class="headerlink" title="快速使用React Native"></a>快速使用React Native</h2><ol>
-<li>安装React Native<ul>
-<li><code>npm install -g react-native-cli</code> </li>
-</ul>
-</li>
-<li>创建React Native工程<ul>
-<li>进入你常用的workspace，输入命令<code>react-native init AwesomeProject</code></li>
-<li>稍等会自动帮你创建好工程，大概是这样：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94React-Native-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-run-it-01.png-w375" alt="图片"></li>
-</ul>
-</li>
-<li><p>打开<code>iOS</code>文件夹，发现里面是熟悉的常规工程目录，打开工程，在模拟器上运行（稍后会说明如何在真机运行），效果如下 </p>
-<p> <img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94React-Native-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-run-it-02.png-w375" alt="图片"></p>
-</li>
-<li><p>真机运行</p>
-<ul>
-<li><p>观察项目<code>AppDelegate.m</code>你可以发现<code>didFinishLaunchingWithOptions</code>中有这样一句</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jsCodeLocation = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://localhost:8081/index.ios.bundle?platform=ios&amp;dev=true"</span>];</div></pre></td></tr></table></figure>
-<p>所以简单的来说，要保证你的真机和mac在同一个网络，将localhost换成mac的IP地址</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h1><h2 id="react-native命令行慢"><a href="#react-native命令行慢" class="headerlink" title="react-native命令行慢"></a>react-native命令行慢</h2><p>老问题了……替换npm仓库源，换成国内的源</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm config set registry https:<span class="comment">//registry.npm.taobao.org</span></div><div class="line">npm config set disturl https:<span class="comment">//npm.taobao.org/dist</span></div></pre></td></tr></table></figure>
-<h2 id="watchman无法启动"><a href="#watchman无法启动" class="headerlink" title="watchman无法启动"></a>watchman无法启动</h2><ol>
-<li>命令台报错：ERROR  watchman–no-pretty get-sockname returned with exit code null dyld: Library not loaded: /usr/local/lib/libpcre.1.dylib<br>   Referenced from: /usr/local/bin/watchman<br>   Reason: image not found</li>
-<li>解决<br> brew uninstall watchman<br> brew install –HEAD watchman</li>
-</ol>
+            <p>在网上看过很多介绍，但是还是会晕掉，一大堆绕口的定义，比如下面这些：</p>
+<blockquote>
+<p>nil：        指向oc中对象的空指针，计数器0<br>Nil：        指向oc中类的空指针<br>NULL：        指向其他类型的空指针，如一个c类型的内存指针<br>NSNull：    在集合对象中，表示空值的对象。</p>
+</blockquote>
+<p>这样的显然不能帮助更好的理解，那么结合源码再去理解：</p>
+<blockquote>
+<p>nil：        #define nil ((id)0)——–&gt;指向oc中对象的空指针<br>NULL：#define NULL ((void *)0)——–&gt;NULL其实是C语言中的定义<br>NSNull：    用在不能使用nil的场合。——–&gt;下面会进行详细描述</p>
+</blockquote>
+<h2 id="NSNull补充"><a href="#NSNull补充" class="headerlink" title="NSNull补充"></a><strong>NSNull补充</strong></h2><p>对于NSNull，如果还是困难，那就记住这一句话：NSNull是nil的对象形式。</p>
+<p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
+<h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x63;&#111;&#100;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#x63;&#111;&#100;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -441,8 +405,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/25/iOS——密码明文:密文切换问题/" itemprop="url">
-                  iOS——密码明文/密文切换问题
+                <a class="post-title-link" href="/2015/08/07/快速入门OC:iOS你必须知道的事情/" itemprop="url">
+                  快速入门OC/iOS你必须知道的事情
                 </a>
               
             
@@ -455,8 +419,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-25T15:35:27+08:00" content="2016-03-25">
-              2016-03-25
+            <time itemprop="dateCreated" datetime="2015-08-07T20:06:00+08:00" content="2015-08-07">
+              2015-08-07
             </time>
           </span>
 
@@ -485,8 +449,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/25/iOS——密码明文:密文切换问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/25/iOS——密码明文:密文切换问题/" itemprop="commentsCount"></span>
+                <a href="/2015/08/07/快速入门OC:iOS你必须知道的事情/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/07/快速入门OC:iOS你必须知道的事情/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -496,7 +460,7 @@
 
           
           
-             <span id="/2016/03/25/iOS——密码明文:密文切换问题/" class="leancloud_visitors" data-flag-title="iOS——密码明文/密文切换问题">
+             <span id="/2015/08/07/快速入门OC:iOS你必须知道的事情/" class="leancloud_visitors" data-flag-title="快速入门OC/iOS你必须知道的事情">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -520,29 +484,22 @@
       
         
           
-            <p>前段时间根据产品经理的要求给我们输入密码的部分加了明文/密文切换，中间也遇到了一些颇有意思的问题。其中也有些很难查到资料。</p>
-<p>在这里记录下来，也供大家参考，避免大家重复踩坑。</p>
-<h1 id="情景描述"><a href="#情景描述" class="headerlink" title="情景描述"></a>情景描述</h1><p>明文/密文切换，就是输入密码的时候可以选择<code>明文显示</code>还是<code>**</code>这样的显示。</p>
-<p><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375" alt=""></p>
-<p><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg-w375" alt=""></p>
-<p>右侧的按钮可以切换明文、密文模式</p>
-<h1 id="UITextField明文-密文切换属性的属性"><a href="#UITextField明文-密文切换属性的属性" class="headerlink" title="UITextField明文\密文切换属性的属性"></a>UITextField明文\密文切换属性的属性</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">getter</span>=isSecureTextEntry) <span class="built_in">BOOL</span> secureTextEntry;       <span class="comment">// default is NO</span></div></pre></td></tr></table></figure>
-<h1 id="Q1：光标位置错乱"><a href="#Q1：光标位置错乱" class="headerlink" title="Q1：光标位置错乱"></a>Q1：光标位置错乱</h1><p>一般来说密文的时候*号要比字母更宽，当密文切换成明文的时候光标的位置居然没有变化，出现了这样的情况。<br><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-03.png-w375" alt="嗯 没有用我们自己的app了，写了个demo，样式很简约"></p>
-<p>这个问题在查了一些资料之后发现可能是苹果自己的BUG，当然，对应方法是有的。我们可以在切换代码前将textfiled的enable设为NO，切换后在设置YES。当然，这回让textfiled退出编辑模式。</p>
-<p>如果你有更好的方式，欢迎交流，或者在博文后留言😘<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span>.tfPassword.enabled = <span class="literal">NO</span>;</div><div class="line"><span class="keyword">self</span>.tfPassword.secureTextEntry = !<span class="keyword">self</span>.tfPassword.secureTextEntry;</div><div class="line"><span class="keyword">self</span>.tfPassword.enabled = <span class="literal">YES</span>;</div></pre></td></tr></table></figure></p>
-<h1 id="Q2：光标位置错乱"><a href="#Q2：光标位置错乱" class="headerlink" title="Q2：光标位置错乱"></a>Q2：光标位置错乱</h1><p>当UITextField经历 <code>明文-&gt;密文-&gt;明文</code> 时，再次输入，无论你输入什么，都会将所有输入清空。</p>
-<p>嗯，这确实是个头疼的问题，也没有任何理由，因为UITextField本身如此，而且当时真的想不到任何办法。</p>
-<p>最后终于解决。</p>
-<p>思路是这样的：我们都只到UITextField的代理UITextFieldDelegate中有方法<code>- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;</code> 相信每个人都会常用，通常我们用来抓用户输入的文字，在每次textfield发生字符改变的时候。</p>
-<p>但是我们忽略了这个方法的本身作用，注意返回值，这个方法本身是用来返回<code>『是否允许改变textfield字符』</code>。</p>
-<p>所以只要在这里做判断：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">BOOL</span>)textField:(<span class="built_in">UITextField</span> *)textField shouldChangeCharactersInRange:(<span class="built_in">NSRange</span>)range replacementString:(<span class="built_in">NSString</span> *)string &#123;</div><div class="line">    </div><div class="line">    <span class="comment">//string就是此时输入的那个字符</span></div><div class="line">    <span class="comment">//得到输入框的内容</span></div><div class="line">    <span class="built_in">NSString</span> * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];</div><div class="line">    <span class="keyword">if</span> (textField == _tfPassword &amp;&amp; textField.isSecureTextEntry ) &#123;</div><div class="line">        textField.text = toBeString;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>完美解决</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>唔，这篇也给个代码吧，其实只有几行。<br><a href="http://download.csdn.net/detail/u010127917/9472703" target="_blank" rel="external">http://download.csdn.net/detail/u010127917/9472703</a></p>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其实很多奇怪的问题只有在实际开发的时候发现，这时候你就会认识到自己的经验不足。所以啦，学无止境~。</p>
-<p>过段时间妹子我会奉上自己的照片哦~（好久没自拍啦~~😲）</p>
+            <h1 id="符号的用法"><a href="#符号的用法" class="headerlink" title=".符号的用法"></a><strong>.符号的用法</strong></h1><p>OC中最刚开始最让人困惑的地方就是.符号，OC中object.property不是一般语言中的引用传递，实际上相当于[object setProperty]或者[object getProperty]，可能一开始就容易搞晕了。这给告诉大家到底什么时候是get方法什么时候是set方法。<br>当object.property出现在等号右边的时候调用的是get方法<br><code>XXX = object.property</code>    相当于   <code>XXX = [object getProperty];</code><br>当object.property出现在等号左边的时候调用的是set方法<br><code>object.property = XXX</code>    相当于   <code>[object setProperty : XXX]</code>;<br>所以当看到object.property = propertyVal时，如果发生了很多不能理解的变化，那一定是在.setProperty(propertyVal)中加了很多逻辑，比如做一些深拷贝。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<h1 id="self代表什么"><a href="#self代表什么" class="headerlink" title="self代表什么"></a><strong>self代表什么</strong></h1><p>JAVA中代表类的对象，在OC中可以代表对象也可以代表这个类。<br>具体的：当self出现在对象方法（动态方法）中，代表调用方法的对象；当self出现在类方法（静态方法）中，代表类。<br>典型用法：<br><code>return [[self alloc] init];//返回一个自己的对象</code></p>
+<hr>
+<h1 id="加号-减号-，并非静态方法"><a href="#加号-减号-，并非静态方法" class="headerlink" title="加号(+)减号(-)，并非静态方法"></a><strong>加号(+)减号(-)，并非静态方法</strong></h1><p>补充在博文中了：<a href="http://blog.csdn.net/u010127917/article/details/47782845" target="_blank" rel="external">iOS学习——objective-c 加号减号，并非静态方法</a></p>
+<hr>
+<h1 id="class以及-class-import的区别"><a href="#class以及-class-import的区别" class="headerlink" title="@class以及@class#import的区别"></a><strong>@class以及@class#import的区别</strong></h1><blockquote>
+<p>1.import会包含这个类的所有信息，包括实体变量和方法，而@class只是告诉编译器，其后面声明的名称是类的名称，至于这些类是如何定义的，暂时不用考虑，后面会再告诉你。</p>
+<p>2.在头文件中， 一般只需要知道被引用的类的名称就可以了。 不需要知道其内部的实体变量和方法，所以在头文件中一般使用@class来声明这个名称是类的名称。 而在实现类里面，因为会用到这个引用类的内部的实体变量和方法，所以需要使用#import来包含这个被引用类的头文件。</p>
+<p>3.在编译效率方面考虑，如果你有100个头文件都#import了同一个头文件，或者这些文件是依次引用的，如A–&gt;B, B–&gt;C, C–&gt;D这样的引用关系。当最开始的那个头文件有变化的话，后面所有引用它的类都需要重新编译，如果你的类有很多的话，这将耗费大量的时间。而是用@class则不会。</p>
+<p>4.如果有循环依赖关系，如:A–&gt;B, B–&gt;A这样的相互依赖关系，如果使用#import来相互包含，那么就会出现编译错误，如果使用@class在两个类的头文件中相互声明，则不会有编译错误出现。</p>
+</blockquote>
+<hr>
+<h1 id="group"><a href="#group" class="headerlink" title="group"></a><strong>group</strong></h1><p>经常写java的程序员们都绝对对习惯性的建好包，分好层。并且习惯性的认为包路径是真实存在的（有相应的文件夹），然而xcode中的group看似是文件夹，实际是只是一个逻辑上的分类，是不存在相应文件件的。<br>xcode中显示看似是文件夹：<br><img src="http://img.blog.csdn.net/20150807204034235" alt="xcode中显示看似是文件夹"><br>实际上却是没有的：<br><img src="http://img.blog.csdn.net/20150807204110753" alt="实际上没有文件夹"></p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x63;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#46;&#99;&#x6f;&#x6d;">&#x63;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#46;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -575,11 +532,1159 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/20/iOS学习——页面间的传值/" itemprop="url">
+                  iOS学习——页面间的传值
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-20T16:39:00+08:00" content="2015-07-20">
+              2015-07-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/20/iOS学习——页面间的传值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/20/iOS学习——页面间的传值/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/07/20/iOS学习——页面间的传值/" class="leancloud_visitors" data-flag-title="iOS学习——页面间的传值">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学会ios的页面间传值。</p>
+<p>和android不同，iOS传值不是通过Intent，而是更直接的方法，直接在被传值类中定义一个存放值的变量，在上一个页面直接将值放入，达到传值的目的。</p>
+<h2 id="故事板："><a href="#故事板：" class="headerlink" title="故事板："></a>故事板：</h2><p><img src="http://img.blog.csdn.net/20150720163651231" alt="故事板"></p>
+<hr>
+<h2 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述:"></a>功能描述:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: 开始</div><div class="line">e=&gt;end: 结束</div><div class="line">s1=&gt;operation: 在输入框内输入内容</div><div class="line">s2=&gt;operation: 点击下一页按钮</div><div class="line">s3=&gt;operation: 在Label中显示上一页输入框内容</div><div class="line">st-&gt;s1-&gt;s2-&gt;s3-&gt;e</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><p>第一个页面替换自己成自己写的类getDataViewController</p>
+<ul>
+<li>createDataViewController.h</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  createDataViewController.h</span></div><div class="line"><span class="comment">//  coderfish003</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by apple40 on 15-7-20.</span></div><div class="line"><span class="comment">//  Copyright (c) 2015年 coderfish. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">createDataViewController</span> : <span class="title">UIViewController</span></span></div><div class="line"></div><div class="line"><span class="comment">// 定义输入框</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UITextField</span> *tfCreateData;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/20/iOS学习——页面间的传值/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/07/20/iOS学习——Segmented-Control/" itemprop="url">
+                  iOS学习——Segmented Control
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-20T16:05:00+08:00" content="2015-07-20">
+              2015-07-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/20/iOS学习——Segmented-Control/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/20/iOS学习——Segmented-Control/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/07/20/iOS学习——Segmented-Control/" class="leancloud_visitors" data-flag-title="iOS学习——Segmented Control">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学会Segmented Control点击切换视图</p>
+<h2 id="故事版："><a href="#故事版：" class="headerlink" title="故事版："></a>故事版：</h2><p><img src="http://img.blog.csdn.net/20150720160726029" alt="故事版"></p>
+<p><br/ ><br/ ><br>要注意的是，这里有两个view，一个是被隐藏的，我放在了同一个位置<br><img src="http://img.blog.csdn.net/20150720160959192" alt="被隐藏的view"></p>
+<hr>
+<h2 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述:"></a>功能描述:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: 开始</div><div class="line">e=&gt;end: 结束</div><div class="line">op=&gt;operation: 选择一个segment</div><div class="line">s1=&gt;operation: 个人信息segment</div><div class="line">s2=&gt;operation: 学校信息segment</div><div class="line">r1=&gt;operation: 个人信息页面</div><div class="line">r2=&gt;operation: 学校信息页面</div><div class="line">cond=&gt;condition: 判断选择哪一个segment</div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;s1-&gt;r1-&gt;e</div><div class="line">cond(no)-&gt;s2-&gt;r2-&gt;e</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/20/iOS学习——Segmented-Control/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/28/ID3算法详解/" itemprop="url">
+                  ID3算法详解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-28T16:40:00+08:00" content="2015-05-28">
+              2015-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/28/ID3算法详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/28/ID3算法详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/05/28/ID3算法详解/" class="leancloud_visitors" data-flag-title="ID3算法详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>这学期hadoop的作业是实现ID3算法，在网上找到了一篇非常好的资料，但是代码没有详细介绍。研究一番之后写出了自己ID3算法的普通实现和线程模拟分布式实现。</p>
+<p>先附上原文地址：<br><a href="http://www.cnblogs.com/zhangchaoyang/articles/2196631.html">http://www.cnblogs.com/zhangchaoyang/articles/2196631.html</a><br>博主写的非常好，基本上简单易懂的描述了ID3算法的原理。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>统计了14天的气象数据(指标包括outlook，temperature，humidity，windy)，并已知这些天气是否打球(play)。如果给出新一天的气象指标数据:sunny,cool,high,TRUE，判断一下会不会去打球。</p>
+<h2 id="ID3原理"><a href="#ID3原理" class="headerlink" title="ID3原理"></a>ID3原理</h2><p>直接看博客链接，非常详细<a href="http://www.cnblogs.com/zhangchaoyang/articles/2196631.html">http://www.cnblogs.com/zhangchaoyang/articles/2196631.html</a></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>别忘了放入输入文件，按我的程序保存在指定位置，保存名为weather.arff</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/28/ID3算法详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/" itemprop="url">
+                  大数据时代入门<二>——数据挖掘方法和技术 理论篇
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-28T10:15:00+08:00" content="2015-05-28">
+              2015-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/" class="leancloud_visitors" data-flag-title="大数据时代入门<二>——数据挖掘方法和技术 理论篇">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>数据挖掘方法依据的基本原理主要有：<br/><br>&emsp;&emsp;1. 信息论，主要是计算数据库中属性的信息量，如ID3、IBLE等方法<br/><br>&emsp;&emsp;2. 集合论，利用集合之间的覆盖关系（如粗糙集方法、覆盖正例排斥反例的AQ11方法），或计算数据项在整个集合中所占的比例（如关联规则挖掘方法）；<br/><br>&emsp;&emsp;3. 仿生物技术，把生物体的运转过程转换成数学模型，再用数学模型去解决现实世界的非生物问题，如神经网络、遗传算法等<br/><br>&emsp;&emsp;4. 人工智能技术，主要是利用启发式搜索方法，如公式发现的BACOM、FDD等方法<br/><br>&emsp;&emsp;5. 可视化技术，主要是利用图形显示技术<br/><br><br/></p>
+<h3 id="归纳学习的信息论方法"><a href="#归纳学习的信息论方法" class="headerlink" title="归纳学习的信息论方法"></a>归纳学习的信息论方法</h3><p>&emsp;&emsp;归纳学习方法是目前重点研究的方向，研究成果角落。从采用的技术上看，分为两大类：信息论方法（这也是常说的决策树方法）和集合论方法。每类方法又包含多个具体方法。<br/><br>信息论方法是利用信息论的原理建立决策树。由于该方法最后获得的知识表示形式是决策树，因此一般文献中称它为决策树方法。该类方法的实用效果好，影响较大。<br/><br>信心轮方法中较有特色的方法有以下几种。<br/></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/08/大数据时代入门<一>——数据库与数据仓库/" itemprop="url">
+                  大数据时代入门<一>——数据库与数据仓库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-08T15:26:00+08:00" content="2015-03-08">
+              2015-03-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/08/大数据时代入门<一>——数据库与数据仓库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/08/大数据时代入门<一>——数据库与数据仓库/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/03/08/大数据时代入门<一>——数据库与数据仓库/" class="leancloud_visitors" data-flag-title="大数据时代入门<一>——数据库与数据仓库">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>文\周凌宇</p>
+<h3 id="最先需要了解的名词"><a href="#最先需要了解的名词" class="headerlink" title="最先需要了解的名词"></a>最先需要了解的名词</h3><p><strong>OLTP：</strong> On-Line Transaction Processing联机事务处理系统<br><strong>OLAP：</strong> On-Line Analytical  Processing联机分析处理系统</p>
+<h4 id="1-它们代表了什么？"><a href="#1-它们代表了什么？" class="headerlink" title="1. 它们代表了什么？"></a>1. 它们代表了什么？</h4><p>从我们过去的接触中可以很快感知到数据库所对应的是OLTP，而数据仓库对应的是OLAP。<br>数据库中最常用的名词是“事务”，所有的操作都是面向事务的。<br>数据仓库（Data Warehouse）是一个面向主题的（Subject Oriented）、集成的（Integrate）、相对稳定的（Non-Volatile）、反映历史变化（Time Variant）的数据集合，用于支持管理决策。</p>
+<h4 id="2-他们分别能做什么？"><a href="#2-他们分别能做什么？" class="headerlink" title="2. 他们分别能做什么？"></a>2. 他们分别能做什么？</h4><p>数据库技术可以实现数据的存储和管理数据，同时也是用户所需要的各种数据管理的方式。我们可以看到数据库可以管理信息系统、办公自动化系统等等系统必不可少的核心部分。因为现在技术一切数据需要管理。</p>
+<p>数据仓库创建目的是为了分析性报告和决策支持。它为企业提供需要业务智能来指导业务流程改进和监视时间、成本、质量和控制。总的来说，数据仓库可以分析市场提供有效的提供企业决策。</p>
+<h3 id="数据库和数据仓库-OLTP与OLAP"><a href="#数据库和数据仓库-OLTP与OLAP" class="headerlink" title="数据库和数据仓库/OLTP与OLAP"></a>数据库和数据仓库/OLTP与OLAP</h3><p>数据仓库的出现，并不是要取代数据库。并且，一般来说数据仓库就是由大量数据库数据构成的。数据仓库是为了解决数据库所不能解决的问题，数据库能够实现对数据的操作但不能分析数据。数据仓库通过对数据库数据集合的分析实现决策。<br>数据仓库建设是一个工程，是一个过程，而不是一种可以购买的产品。企业数据处理方式是以联机事务处理形式信息，并利用信息进行决策；在信息应用过程中管理信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据库</th>
+<th style="text-align:center">数据仓库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">面向事务的设计</td>
+<td style="text-align:center">面向主题设计的</td>
+</tr>
+<tr>
+<td style="text-align:center">一般存储在线交易数据</td>
+<td style="text-align:center">一般是<strong>历史数据</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">尽量避免冗余</td>
+<td style="text-align:center">有意引入冗余</td>
+</tr>
+<tr>
+<td style="text-align:center">为捕获数据而设计</td>
+<td style="text-align:center">为分析数据而设计</td>
+</tr>
+</tbody>
+</table>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/03/08/大数据时代入门<一>——数据库与数据仓库/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/22/究竟什么是Transaction事务/" itemprop="url">
+                  究竟什么是Transaction事务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-22T12:52:00+08:00" content="2015-01-22">
+              2015-01-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/22/究竟什么是Transaction事务/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/22/究竟什么是Transaction事务/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/01/22/究竟什么是Transaction事务/" class="leancloud_visitors" data-flag-title="究竟什么是Transaction事务">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Transaction不管在WEB开发还是数据库中都是相当重要的概念。在WEB开发框架中Transaction的实现方面却有着很多的不同。下面以J2EE介绍Transaction。</p>
+<h1 id="一、-Transaction是什么"><a href="#一、-Transaction是什么" class="headerlink" title="一、 Transaction是什么"></a>一、 Transaction是什么</h1><p>Transaction是指一系列不可分割的改动数据库的操作。这里的“一系列”操作指的是一组SQL语句；“不可分割”就意味着一致性和完整性，要么这一系列操作全部commit（提交），要么就全部rollback（回滚）。（如果一系列的操作只包含enquiry操作，那么这些操作也不是Transaction） 所以常见的代码结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">Session s = sessionFactory.openSession();</div><div class="line">s.beginTransaction();</div><div class="line">s.save(user);</div><div class="line"><span class="comment">//…</span></div><div class="line">s.getTransaction().commit();</div><div class="line">s.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="二、在J2EE中，Transaction主要有几大类，具体有几种？"><a href="#二、在J2EE中，Transaction主要有几大类，具体有几种？" class="headerlink" title="二、在J2EE中，Transaction主要有几大类，具体有几种？"></a>二、在J2EE中，Transaction主要有几大类，具体有几种？</h1><p>在J2EE中，Transaction主要有</p>
+<ul>
+<li>Bean-Managed Transaction</li>
+<li>JDBC Transaction</li>
+<li>JTA Transaction</li>
+<li>Container-Managed Transaction</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/01/22/究竟什么是Transaction事务/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" itemprop="url">
+                  深入浅出，Struts1对比Struts2的缺点和比较
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-07-25T21:57:00+08:00" content="2014-07-25">
+              2014-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" class="leancloud_visitors" data-flag-title="深入浅出，Struts1对比Struts2的缺点和比较">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Action的构造"><a href="#Action的构造" class="headerlink" title="Action的构造:"></a>Action的构造:</h1><ol>
+<li>Struts1要求Action类继承Action或者其他几个基类。</li>
+<li>Struts2的Action类不需要继承任何类，出于习惯可以继承ActionSupport。<br>所以任何一个javabean都可以作为Action，在写起来时候没有太多规范。理过程不再是控制死死的流程，而是通过AOP的方式将request和response进行处理。</li>
+</ol>
+<h1 id="依赖容器"><a href="#依赖容器" class="headerlink" title="依赖容器:"></a>依赖容器:</h1><ol>
+<li>Struts1基于M2开发，所以Action依赖Servlet，导致Struts1中的Action方法必须传入HttpServletRequest和HttpServletResponse等4个参数。依赖Servlet导致依赖容器，因为调用方法必须传入参数，所有Struts1中Action不能单独被测试。</li>
+<li>Struts2 Action不依赖于容器，允许Action脱离容器单独被测试。在Struts2中需要Session和Request时，可以让Action实现SessionAware和RequestAware接口，其实该接口只需要实现session和requeset的get,set方法，只要Action中有这两个对象和getter,setter就可以直接获得session和request。</li>
+</ol>
+<h1 id="IOC思想"><a href="#IOC思想" class="headerlink" title="IOC思想:"></a>IOC思想:</h1><p>在获取参数时</p>
+<ol>
+<li>Struts1 使用ActionForm对象捕获输入，这回使得结构非常的复杂，并且让人觉得多此一举（因为你不但要使用ActionForm对象，还需要写一个ActionForm，同时在xml对其配置）。或者使用session.getAttribute()，每次获得一个参数需要使用大量的重复代码，这样导致了大量的代码冗余。最重要的是，struts1没有将属性当做对象来对待。</li>
+<li>Struts2在Action中加入需要的属性，通过调用其getter,setter将页面的参数传入其中，最重要的事，它将页面的属性封装好成为对象，这里用到的就是OGNL。大家或许注意到，在页面中动态显示的部分都是一个对象全部属性或者是一个对象的部分属性，比如登陆页面，显示（或者输入）的是user对象的username和password属性。这时候，直接将封装成对象减少了大量的getAttribute，减少了代码冗余。</li>
+</ol>
+<p>IOC或者说“依赖注入”的思想虽然由spring提出，但是在Struts2中已经可以体现，Action中的实体对象，就是通过注入的方式获得。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/" itemprop="url">
+                  SSH2如何用Cookie做两周免登陆效果
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-07-25T20:00:00+08:00" content="2014-07-25">
+              2014-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/25/SSH2如何用Cookie做两周免登陆效果/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/" class="leancloud_visitors" data-flag-title="SSH2如何用Cookie做两周免登陆效果">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>今天将会做一个Cookie的Demo，也是我今天在写项目时刚刚学的小技术，这里将会展示最简单的实现Cookie的方法，以及JAVAEE中Cookie的使用。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>需要注意的时，这里贴出的源码是我项目中的一部分，不需要大家具体理解其中一些变量的意思，只需要关注Cookie部分。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>点击页面中登录，链接到登录action<br>登录时选中“两周免登陆”选框，输入用户名密码，点击登录<br>存入Cookie<br>下次无需登录</p>
+<h2 id="登录页面表单"><a href="#登录页面表单" class="headerlink" title="登录页面表单"></a>登录页面表单</h2><pre style="margin-top:15px; margin-bottom:15px; padding:6px 10px; border:1px solid rgb(204,204,204); font-size:13px; font-family:Consolas,'Liberation Mono',Courier,monospace; background-color:rgb(248,248,248); line-height:19px; overflow:auto"><code style="margin:0px; padding:0px; font-size:12px; font-family:Consolas,'Liberation Mono',Courier,monospace; background-color:transparent">&lt;form class=&quot;registed&quot; action=&quot;User_login&quot; method=&quot;post&quot;&gt;
+&lt;h2&gt;登陆&lt;/h2&gt;
+&lt;div class=&quot;email&quot;&gt;
+    &lt;strong&gt;用户名&lt;/strong&gt;&lt;sup class=&quot;surely&quot;&gt;*&lt;/sup&gt;&lt;br /&gt;
+&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;password&quot;&gt;
+    &lt;strong&gt;密码&lt;/strong&gt;&lt;sup class=&quot;surely&quot;&gt;*&lt;/sup&gt;&lt;br /&gt;
+&lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; /&gt;
+    &lt;a class=&quot;forgot&quot; href=&quot;#&quot;&gt;忘记密码?&lt;/a&gt;
+&lt;/div&gt;
+&lt;!-- .password --&gt;
+&lt;div class=&quot;remember&quot;&gt;
+&lt;input class=&quot;niceCheck&quot; type=&quot;checkbox&quot; name=&quot;useCookie&quot;  value=&quot;true&quot;/&gt;
+    &lt;span class=&quot;rem&quot;&gt;两周免登陆&lt;/span&gt;
+&lt;/div&gt;
+&lt;!-- .remember --&gt;
+
+&lt;div class=&quot;submit&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot; /&gt;
+&lt;/div&gt;
+    &lt;!-- .submit --&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>注意action为User_login</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 

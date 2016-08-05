@@ -113,7 +113,7 @@ http://www.apple.com就是一个URL。
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-09.png-w500">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-10.png-w375">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-11.png-w375">
-<meta property="og:updated_time" content="2016-08-04T10:00:46.000Z">
+<meta property="og:updated_time" content="2016-08-05T06:23:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用">
 <meta name="twitter:description" content="转到移动端开发后居然现在才用到Scheme真是惭愧惭愧。
@@ -370,7 +370,8 @@ http://www.apple.com就是一个URL。
 <p>有了这些URL Scheme你可以像网页跳转一样通过URL来传递参数、信息。</p>
 <p>比如常见的分享功能，从其他应用点击微信分享，会自动跳转到微信APP的朋友圈发表动态页面，并填好相应的动态内容。你可以想象一下其URL Scheme可能是这样的：weixin://dl/moments?content=”今天在学习URL Scheme”&amp;src=”zhoulingyu.com”（我只是举个例子）</p>
 <p>有一点需要注意的是，和Web开发不同，iOS中并不是所有的页面或者操作都有URL Schemes，这完全是由你主导的的，如果你需要，你就可以自己定义一些，并去解析。</p>
-<h1 id="自定义你应用的Scheme"><a href="#自定义你应用的Scheme" class="headerlink" title="自定义你应用的Scheme"></a>自定义你应用的Scheme</h1><h2 id="什么时候用到URL-Scheme"><a href="#什么时候用到URL-Scheme" class="headerlink" title="什么时候用到URL Scheme"></a>什么时候用到URL Scheme</h2><p>自定义Scheme是有意义的<br>有以下几种使用场景供你参考：</p>
+<h1 id="自定义你应用的Scheme"><a href="#自定义你应用的Scheme" class="headerlink" title="自定义你应用的Scheme"></a>自定义你应用的Scheme</h1><a id="more"></a>
+<h2 id="什么时候用到URL-Scheme"><a href="#什么时候用到URL-Scheme" class="headerlink" title="什么时候用到URL Scheme"></a>什么时候用到URL Scheme</h2><p>自定义Scheme是有意义的<br>有以下几种使用场景供你参考：</p>
 <ol>
 <li>从一个页面跳转到另一个页面，你不想写N多行代码来『获取下一个控制器』-&gt;『创建控制器』-&gt;『传递参数』</li>
 <li>从其他应用中跳转到你的应用中特定的位置，并填好相应的参数。比如微博分享的时候，是从另一个页面跳转到微博应用的『发微博』页面，并自动填好了微博的文字内容</li>
@@ -426,7 +427,7 @@ http://www.apple.com就是一个URL。
 <h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><p>如果想要源代码，小鱼已经上传了一份，可以在<a href="http://download.csdn.net/detail/u010127917/9387848" target="_blank" rel="external">这里</a>下载</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可以解析更加复杂的URL Scheme，可以参考官方文档：<a href="https://github.com/joeldev/JLRoutes" target="_blank" rel="external">https://github.com/joeldev/JLRoutes</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;">&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>

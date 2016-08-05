@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20151028142014475">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-01.png-w500">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-02.png-h500">
-<meta property="og:updated_time" content="2016-08-04T10:02:53.000Z">
+<meta property="og:updated_time" content="2016-08-05T06:24:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS——自己实现流式布局">
 <meta name="twitter:description" content="描述因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局
@@ -364,8 +364,7 @@
 <p><img src="http://img.blog.csdn.net/20151028142014475" alt="条件选择栏"></p>
 <p>实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。</p>
 <p>所以最后决定自己封装一个FlowView来实现流式布局的效果。</p>
-<hr>
-<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>当你看完下面这些代码的时候，你就会明白，布局本身是非常简单的，基本如下：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>当你看完下面这些代码的时候，你就会明白，布局本身是非常简单的，基本如下：</p>
 <ol>
 <li>设置一个<code>row</code>变量，记录当前按钮排到了第几行</li>
 <li>设置一个数组<code>rowFirstButtons</code> 放置每一个行第一个按钮</li>
@@ -402,7 +401,7 @@
 <p>设置CFFlowButtonView的约束或者frame，<code>注意</code> ，对CFFlowButtonView设置约束时<code>不需要</code> 设置高度相关的约束。</p>
 <p>更多用法可以查看DEMO。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;">&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -647,7 +646,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心代码"><span class="nav-number">3.</span> <span class="nav-text">核心代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">5.</span> <span class="nav-text">使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心代码"><span class="nav-number">3.</span> <span class="nav-text">核心代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">5.</span> <span class="nav-text">使用</span></a></li></ol></div>
             
           </div>
         </section>
