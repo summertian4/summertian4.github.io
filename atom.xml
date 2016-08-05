@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhoulingyu.com/"/>
-  <updated>2016-08-05T02:33:47.000Z</updated>
+  <updated>2016-08-05T06:21:36.000Z</updated>
   <id>http://zhoulingyu.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://zhoulingyu.com/2016/07/19/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2/"/>
     <id>http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/</id>
     <published>2016-07-19T06:09:36.000Z</published>
-    <updated>2016-08-05T02:33:47.000Z</updated>
+    <updated>2016-08-05T06:21:36.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
 <p>Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。<br>Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&gt; 运行时修改应用的很多东西。</p>
@@ -33,6 +33,7 @@
 <li>可以在运行时调用任意方法，即使这个方法目前并不在应用的实际代码当中。</li>
 </ol>
 </blockquote>
+<a id="more"></a>
 <h1 id="Cycript安装"><a href="#Cycript安装" class="headerlink" title="Cycript安装"></a>Cycript安装</h1><p>在<a href="http://www.cycript.org" target="_blank" rel="external">这里下载</a><br>在<a href="">这里阅读</a>所有Cycript诡计</p>
 <h1 id="攻"><a href="#攻" class="headerlink" title="攻"></a>攻</h1><p>先看看怎么用Cycript干点坏事吧</p>
 <h2 id="1-给应用弹一个莫名其妙的alert"><a href="#1-给应用弹一个莫名其妙的alert" class="headerlink" title="1. 给应用弹一个莫名其妙的alert"></a>1. 给应用弹一个莫名其妙的alert</h2><h3 id="ssh登陆你的手机（如果不会，上一篇有-）"><a href="#ssh登陆你的手机（如果不会，上一篇有-）" class="headerlink" title="ssh登陆你的手机（如果不会，上一篇有~）"></a>ssh登陆你的手机（如果不会，上一篇有~）</h3><h3 id="找一个app"><a href="#找一个app" class="headerlink" title="找一个app"></a>找一个app</h3><p>这里我找的是以前做的一个app</p>
@@ -71,7 +72,7 @@
 <h1 id="防"><a href="#防" class="headerlink" title="防"></a>防</h1><p>知道了Cycript的可怕，在有重要信息藏在代码中的时候，我们也得学会如何放置Cycript修改运行时。</p>
 <p>你可以参考<a href="http://www.cocoachina.com/ios/20150511/11801.html" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#x69;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#x69;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -81,7 +82,16 @@
     <summary type="html">
     
       &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。&lt;br&gt;Cycript是一个理解Ob
+&lt;p&gt;Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。&lt;br&gt;Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。&lt;/li&gt;
+&lt;li&gt;对于一个特定的类，例如View Controller, App delegate或者任何其他的类，我们能够得到所有被使用的方法名称。&lt;/li&gt;
+&lt;li&gt;能够得到所有实例变量的名称和在程序运行的任意时刻实例变量的值。&lt;/li&gt;
+&lt;li&gt;能够在运行时修改实例变量的值。&lt;/li&gt;
+&lt;li&gt;能够执行Method Swizzling，例如替换一个特定方法的实现。&lt;/li&gt;
+&lt;li&gt;可以在运行时调用任意方法，即使这个方法目前并不在应用的实际代码当中。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -99,12 +109,13 @@
     <link href="http://zhoulingyu.com/2016/07/12/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A6%82%E4%BD%95%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E9%80%9A%E8%AE%AF%E5%BD%95%E4%BF%A1%E6%81%AF/"/>
     <id>http://zhoulingyu.com/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/</id>
     <published>2016-07-12T13:31:24.000Z</published>
-    <updated>2016-08-05T02:33:55.000Z</updated>
+    <updated>2016-08-05T06:21:46.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>2016年7月15更新，最近试了一下，发现用nc拿不到数据了，拿数据的代码是没有问题的，直接运行可以拿到数据，但是从mac通过IP和端口拿到的.sqlitedb文件是空文件，博主也正在看为什么~大家有兴趣可以一起找一下原因。</p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文章基于念茜的iOS攻防系列。<br>本文将会讲解如何窃取用户的通讯录信息。<br>同样在越狱手机环境下。</p>
 <h1 id="hack"><a href="#hack" class="headerlink" title="hack"></a>hack</h1><h2 id="1-需要一个plist"><a href="#1-需要一个plist" class="headerlink" title="1. 需要一个plist"></a>1. 需要一个plist</h2><p>需要这样一个plist，它看起来是这样：</p>
 <p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A6%82%E4%BD%95%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84iTunesstore%E4%BF%A1%E6%81%AF-01.png" alt=""></p>
+<a id="more"></a>
 <p>源文件是这样：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>Program<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/bin/hack<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>StandardErrorPath<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">string</span>&gt;</span>/dev/null<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>SessionCreate<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">true</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/bin/hack<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>inetdCompatibility<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">key</span>&gt;</span>Wait<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">false</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>Sockets<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">key</span>&gt;</span>Listeners<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">key</span>&gt;</span>SockServiceName<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">string</span>&gt;</span>55<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>SockServiceName指的是通信名称<br>将plist文件传送到至iPhone/System/Library/LaunchDaemons/ 下 </p>
@@ -221,7 +232,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nc 192.168.31.152 55 &gt; itunesstored2.sqlitedb</div></pre></td></tr></table></figure>
 <p>OK，在MAC查看一下内容。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#58;&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#x73;&#x68;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#x73;&#x68;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -230,7 +241,10 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;2016年7月15更新，最近试了一下，发现用nc拿不到数据了，拿数据的代码是没有问题的，直接运行可以拿到数据，但是从mac通过IP和端口拿到
+      &lt;h1 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h1&gt;&lt;p&gt;2016年7月15更新，最近试了一下，发现用nc拿不到数据了，拿数据的代码是没有问题的，直接运行可以拿到数据，但是从mac通过IP和端口拿到的.sqlitedb文件是空文件，博主也正在看为什么~大家有兴趣可以一起找一下原因。&lt;/p&gt;
+&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文章基于念茜的iOS攻防系列。&lt;br&gt;本文将会讲解如何窃取用户的通讯录信息。&lt;br&gt;同样在越狱手机环境下。&lt;/p&gt;
+&lt;h1 id=&quot;hack&quot;&gt;&lt;a href=&quot;#hack&quot; class=&quot;headerlink&quot; title=&quot;hack&quot;&gt;&lt;/a&gt;hack&lt;/h1&gt;&lt;h2 id=&quot;1-需要一个plist&quot;&gt;&lt;a href=&quot;#1-需要一个plist&quot; class=&quot;headerlink&quot; title=&quot;1. 需要一个plist&quot;&gt;&lt;/a&gt;1. 需要一个plist&lt;/h2&gt;&lt;p&gt;需要这样一个plist，它看起来是这样：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A6%82%E4%BD%95%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84iTunesstore%E4%BF%A1%E6%81%AF-01.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -248,7 +262,7 @@
     <link href="http://zhoulingyu.com/2016/07/11/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/"/>
     <id>http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/</id>
     <published>2016-07-11T12:49:11.000Z</published>
-    <updated>2016-08-05T02:34:01.000Z</updated>
+    <updated>2016-08-05T06:21:56.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。<br>所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。</p>
 <h1 id="你需要一部越狱手机"><a href="#你需要一部越狱手机" class="headerlink" title="你需要一部越狱手机"></a>你需要一部越狱手机</h1><p>首先要做的事，找一部越狱后的iPhone，攻防方面的探索很多需要借助越狱手机的帮助。作为平常的消遣和研究你也应该有一部越狱手机，我的越狱手机是iPhone4，比较古老，但是研究够用了。</p>
@@ -270,6 +284,7 @@
 <li><a href="http://apt.thebigboss.org/repofiles/cydia/" target="_blank" rel="external">http://apt.thebigboss.org/repofiles/cydia/</a></li>
 </ol>
 </blockquote>
+<a id="more"></a>
 <p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375" alt=""><br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-02.PNG-w375" alt=""><br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-03.PNG-w375" alt=""></p>
 <h1 id="hacking"><a href="#hacking" class="headerlink" title="hacking"></a>hacking</h1><h2 id="1-ssh登陆手机"><a href="#1-ssh登陆手机" class="headerlink" title="1. ssh登陆手机"></a>1. ssh登陆手机</h2><p>ssh登陆，大家应该不算陌生，如果你第一次听说，你可以简单理解成『远程登录』，可以通过一台设备远程登陆另一台设备。</p>
 <ol>
@@ -305,7 +320,7 @@
 <p>将root:及mobile:后面的13个x字符处修改成<code>/smx7MYTQIi2M</code>，修改后保存此文件，你iphone的ssh密码就重新回到默认的alpine</p>
 <h1 id="下期内容"><a href="#下期内容" class="headerlink" title="下期内容"></a>下期内容</h1><p>只是写个HelloWorld是不是很无聊，下一期内容将会教你如何<strong>非法窃取iTunesstore信息</strong>以及<strong>Cycript修改运行时</strong>。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#x68;&#64;&#x31;&#54;&#x33;&#46;&#99;&#111;&#x6d;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#x68;&#64;&#x31;&#54;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#x6d;">&#x63;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -314,7 +329,26 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。&lt;br&gt;所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。&lt;/p&gt;
+&lt;h1 id=&quot;你需要一部越狱手机&quot;&gt;&lt;a href=&quot;#你需要一部越狱手机&quot; class=&quot;headerlink&quot; title=&quot;你需要一部越狱手机&quot;&gt;&lt;/a&gt;你需要一部越狱手机&lt;/h1&gt;&lt;p&gt;首先要做的事，找一部越狱后的iPhone，攻防方面的探索很多需要借助越狱手机的帮助。作为平常的消遣和研究你也应该有一部越狱手机，我的越狱手机是iPhone4，比较古老，但是研究够用了。&lt;/p&gt;
+&lt;h1 id=&quot;前期准备&quot;&gt;&lt;a href=&quot;#前期准备&quot; class=&quot;headerlink&quot; title=&quot;前期准备&quot;&gt;&lt;/a&gt;前期准备&lt;/h1&gt;&lt;p&gt;首先是手机（前面说过了）。其次，越狱手机大家都知道一个app——Cydia，在上面可以下载所有的越狱APP，相当于越狱后的app store。对于iOS攻防，首先需要以下软件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;openSSH&lt;/li&gt;
+&lt;li&gt;LLVM+Clang&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可能还需要的软件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cydia Translations&lt;/li&gt;
+&lt;li&gt;Cydia Substrate&lt;/li&gt;
+&lt;li&gt;Cydia Installer&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这些软件都可以在Cydia下载到，如果你搜索不到，那么你需要添加一些源&lt;br&gt;在Cydia的软件源中点击『编辑』-&amp;gt;『添加』，依次添加以下源&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://yuan.duowan.com&quot;&gt;http://yuan.duowan.com&lt;/a&gt; - 多玩源&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://apt.thebigboss.org/repofiles/cydia/&quot;&gt;http://apt.thebigboss.org/repofiles/cydia/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -332,7 +366,7 @@
     <link href="http://zhoulingyu.com/2016/05/20/iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ReactiveCocoa%E5%92%8CMVVM%E4%B8%BA%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%80%A6%E6%9E%84%E5%BB%BA%E6%B8%85%E7%88%BDAPP/"/>
     <id>http://zhoulingyu.com/2016/05/20/iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP/</id>
     <published>2016-05-20T04:39:44.000Z</published>
-    <updated>2016-08-04T09:57:29.000Z</updated>
+    <updated>2016-08-05T06:22:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-MVVM简介"><a href="#1-MVVM简介" class="headerlink" title="1. MVVM简介"></a>1. MVVM简介</h1><p>不过多赘述MVC，用最通俗的方式解说MVVM。</p>
 <ol>
@@ -343,6 +377,9 @@
 <li><strong>Binder：</strong>这是我最近发现的，在标准MVVM中没有提到的一部分，但是如果使用MVVM + ReactiveCocoa就会自然地写出这一层。这一层主要为了实现响应式编程的功能，实现 <code>View</code> 和  <code>ViewModel</code> 的同步</li>
 </ol>
 </li>
+</ol>
+<a id="more"></a>
+<ol>
 <li><p>MVC——&gt;MVVM：</p>
 <p> MVC是苹果官方推荐的开发模式，但是伴随这这模式产生的问题非常的多，这是随着项目的逐渐扩大、架构的逐渐复杂显示出来的，这也是为什么MVC也被调侃成<strong>Massive View Controller（重量级视图控制器）</strong>。大多数情况下，小型项目MVC开发不会带来太大的负担，即使你将大量的逻辑代码（不包括通用的工具类逻辑）放在了ViewController中，但只要该部分由一个人维护，相对来说还是可以保持逻辑清晰的。</p>
 <p> 但当项目越来越大时，或者一个模块会有多个人维护时，读代码变成了一件非常困难的事，并且，MVC模式的iOS开发一直存在<strong>难以测试</strong>的问题。博主在做JAVA开发时JUnit的测试就像每天的必修课一样。开始iOS开发后，加上第二家公司一直没有QA，线上发现的BUG简直就是每天的噩梦。MVVM带来的好处是 <code>VM</code> 层可以<strong>方便的做测试</strong>，因为 <code>VM</code> 层是<strong>独立的逻辑</strong>，脱离对 <code>View</code> 和 <code>Model</code> 的依赖。</p>
@@ -391,7 +428,7 @@
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>以上代码地址请点<a href="http://download.csdn.net/detail/u010127917/9528911" target="_blank" rel="external">这里</a>。</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>小鱼最近在换工作哟~各路的朋友有推荐的请务必介绍我哟~<br>简历在<a href="http://zhoulingyu.com/about/">这里</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#109;">&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -403,6 +440,13 @@
       &lt;h1 id=&quot;1-MVVM简介&quot;&gt;&lt;a href=&quot;#1-MVVM简介&quot; class=&quot;headerlink&quot; title=&quot;1. MVVM简介&quot;&gt;&lt;/a&gt;1. MVVM简介&lt;/h1&gt;&lt;p&gt;不过多赘述MVC，用最通俗的方式解说MVVM。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;拆解：&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;M：&lt;/strong&gt; &lt;code&gt;Model&lt;/code&gt; ，包括数据模型、访问数据库的操作和网络请求等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;V：&lt;/strong&gt; &lt;code&gt;View&lt;/code&gt; ，包括了iOS中的 &lt;code&gt;View&lt;/code&gt; 和 &lt;code&gt;controller&lt;/code&gt; 组成，负责 UI 的展示，绑定 viewModel 中的属性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VM：&lt;/strong&gt; &lt;code&gt;ViewModel&lt;/code&gt; ，负责从 &lt;code&gt;Model&lt;/code&gt; 中获取 &lt;code&gt;View&lt;/code&gt; 所需的数据，转换成 &lt;code&gt;View&lt;/code&gt; 可以展示的数据，并暴露公开的属性和命令供 &lt;code&gt;View&lt;/code&gt; 进行绑定&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Binder：&lt;/strong&gt;这是我最近发现的，在标准MVVM中没有提到的一部分，但是如果使用MVVM + ReactiveCocoa就会自然地写出这一层。这一层主要为了实现响应式编程的功能，实现 &lt;code&gt;View&lt;/code&gt; 和  &lt;code&gt;ViewModel&lt;/code&gt; 的同步&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -418,10 +462,11 @@
     <link href="http://zhoulingyu.com/2016/04/28/iOS%E2%80%94%E2%80%94CFWaterWave%E6%B0%B4%E6%B3%A2%E6%95%88%E6%9E%9C%E5%B7%A5%E5%85%B7/"/>
     <id>http://zhoulingyu.com/2016/04/28/iOS——CFWaterWave水波效果工具/</id>
     <published>2016-04-28T08:53:37.000Z</published>
-    <updated>2016-08-04T09:57:32.000Z</updated>
+    <updated>2016-08-05T06:22:21.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="最近通过前辈，学着做了一个水波效果工具共享出来，github连接"><a href="#最近通过前辈，学着做了一个水波效果工具共享出来，github连接" class="headerlink" title="最近通过前辈，学着做了一个水波效果工具共享出来，github连接"></a>最近通过前辈，学着做了一个水波效果工具共享出来，<a href="https://github.com/summertian4/CFWaterWave" target="_blank" rel="external">github连接</a></h3><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>CFWaterWave是一个简单好用的iOS水波效果工具，可以让你的APP更加好看有趣</p>
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_show_01.gif" alt="CFWaterWave效果展示"></p>
+<a id="more"></a>
 <h1 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h1><p>CFWaterWave的原理很简单，我们用Example里的工程做简介。(这里首先要感谢@hy，我敬爱的前辈，最初是从他这里学习的水波效果原理)</p>
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_pic_white.png-w100" alt="白色图片"><br><img src="http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_pic_red.png-w100" alt="红色图片"><br><img src="http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_img_03.png-w100" alt="叠加添加遮盖效果"></p>
 <ol>
@@ -452,7 +497,7 @@
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>约定好的奉上自拍哈哈</p>
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94CFWaterWave%E6%B0%B4%E6%B3%A2%E6%95%88%E6%9E%9C%E5%B7%A5%E5%85%B7-01.JPG-w375" alt=""></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;">&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#109;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -461,7 +506,8 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;最近通过前辈，学着做了一个水波效果工具共享出来，github连接&quot;&gt;&lt;a href=&quot;#最近通过前辈，学着做了一个水波效果工具共享出来，github连接&quot; class=&quot;headerlink&quot; title=&quot;最近通过前辈，学着做了一个水波效果工具共享出来，gith
+      &lt;h3 id=&quot;最近通过前辈，学着做了一个水波效果工具共享出来，github连接&quot;&gt;&lt;a href=&quot;#最近通过前辈，学着做了一个水波效果工具共享出来，github连接&quot; class=&quot;headerlink&quot; title=&quot;最近通过前辈，学着做了一个水波效果工具共享出来，github连接&quot;&gt;&lt;/a&gt;最近通过前辈，学着做了一个水波效果工具共享出来，&lt;a href=&quot;https://github.com/summertian4/CFWaterWave&quot;&gt;github连接&lt;/a&gt;&lt;/h3&gt;&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;CFWaterWave是一个简单好用的iOS水波效果工具，可以让你的APP更加好看有趣&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_show_01.gif&quot; alt=&quot;CFWaterWave效果展示&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -477,7 +523,7 @@
     <link href="http://zhoulingyu.com/2016/04/21/iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler/"/>
     <id>http://zhoulingyu.com/2016/04/21/iOS——抢鲜来体验一下FBMemoryProfiler/</id>
     <published>2016-04-21T13:32:31.000Z</published>
-    <updated>2016-08-04T09:57:33.000Z</updated>
+    <updated>2016-08-05T06:22:26.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="FBMemoryProfiler简介"><a href="#FBMemoryProfiler简介" class="headerlink" title="FBMemoryProfiler简介"></a>FBMemoryProfiler简介</h1><ol>
 <li>4月刚刚推出的新品~保证中你口味</li>
@@ -486,6 +532,7 @@
 <li>功能及前身：也许你用过<a href="https://github.com/facebook/FBRetainCycleDetector" target="_blank" rel="external">FBRetainCycleDetector</a>，这就是<a href="https://github.com/facebook/FBMemoryProfiler" target="_blank" rel="external">FBMemoryProfiler</a>的前身了，是由Gricha编写用来检测循环引用的小工具。FBMemoryProfiler比FBRetainCycleDetector要强大的多，提供了非常帮的<code>交互界面</code>和更多的功能。</li>
 </ol>
 <p><img src="https://raw.githubusercontent.com/facebook/FBMemoryProfiler/master/Example/Images/Example2.gif" alt="FBMemoryProfiler一览"></p>
+<a id="more"></a>
 <h1 id="初上手"><a href="#初上手" class="headerlink" title="初上手"></a>初上手</h1><ol>
 <li><p><strong>pod安装</strong></p>
  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod 'FBMemoryProfiler'</div></pre></td></tr></table></figure>
@@ -529,7 +576,7 @@
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-04.png-w500" alt=""></p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>FBMemoryProfiler目前只是0.1版本，不能算稳定，我在使用的时候也Crash了好几次。但是谁不相信FaceBook的大神呢~嘿嘿</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#109;">&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#104;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#99;&#111;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#104;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -539,7 +586,12 @@
     <summary type="html">
     
       &lt;h1 id=&quot;FBMemoryProfiler简介&quot;&gt;&lt;a href=&quot;#FBMemoryProfiler简介&quot; class=&quot;headerlink&quot; title=&quot;FBMemoryProfiler简介&quot;&gt;&lt;/a&gt;FBMemoryProfiler简介&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;
+&lt;li&gt;4月刚刚推出的新品~保证中你口味&lt;/li&gt;
+&lt;li&gt;FaceBook荣誉出品~&lt;/li&gt;
+&lt;li&gt;作者&lt;a href=&quot;https://github.com/Gricha&quot;&gt;Gricha&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;功能及前身：也许你用过&lt;a href=&quot;https://github.com/facebook/FBRetainCycleDetector&quot;&gt;FBRetainCycleDetector&lt;/a&gt;，这就是&lt;a href=&quot;https://github.com/facebook/FBMemoryProfiler&quot;&gt;FBMemoryProfiler&lt;/a&gt;的前身了，是由Gricha编写用来检测循环引用的小工具。FBMemoryProfiler比FBRetainCycleDetector要强大的多，提供了非常帮的&lt;code&gt;交互界面&lt;/code&gt;和更多的功能。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/facebook/FBMemoryProfiler/master/Example/Images/Example2.gif&quot; alt=&quot;FBMemoryProfiler一览&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -555,7 +607,7 @@
     <link href="http://zhoulingyu.com/2016/04/19/iOS%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94React-Native-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-run-it/"/>
     <id>http://zhoulingyu.com/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/</id>
     <published>2016-04-19T03:08:06.000Z</published>
-    <updated>2016-08-04T09:57:36.000Z</updated>
+    <updated>2016-08-05T06:22:38.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="官方参考"><a href="#官方参考" class="headerlink" title="官方参考"></a>官方参考</h1><ol>
 <li><a href="https://github.com/facebook/react-native" target="_blank" rel="external">react-native github</a></li>
@@ -573,7 +625,10 @@
 </li>
 <li>输入命令<code>nvm install node &amp;&amp; nvm</code></li>
 <li>使nvm生效：<code>. ~/.nvm/nvm.sh</code> </li>
-<li>安装Node.js<code>nvm install node &amp;&amp; nvm alias default node</code><h2 id="watchman安装"><a href="#watchman安装" class="headerlink" title="watchman安装"></a>watchman安装</h2></li>
+<li>安装Node.js<code>nvm install node &amp;&amp; nvm alias default node</code></li>
+</ol>
+<a id="more"></a>
+<h2 id="watchman安装"><a href="#watchman安装" class="headerlink" title="watchman安装"></a>watchman安装</h2><ol>
 <li><code>brew install watchman</code><h2 id="flow"><a href="#flow" class="headerlink" title="flow"></a>flow</h2><code>brew install flow</code></li>
 </ol>
 <h2 id="快速使用React-Native"><a href="#快速使用React-Native" class="headerlink" title="快速使用React Native"></a>快速使用React Native</h2><ol>
@@ -605,7 +660,7 @@
 <li>解决<br> brew uninstall watchman<br> brew install –HEAD watchman</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x63;&#111;&#100;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#x63;&#111;&#100;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -615,7 +670,23 @@
     <summary type="html">
     
       &lt;h1 id=&quot;官方参考&quot;&gt;&lt;a href=&quot;#官方参考&quot; class=&quot;headerlink&quot; title=&quot;官方参考&quot;&gt;&lt;/a&gt;官方参考&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/facebook/react-native&quot; targe
+&lt;li&gt;&lt;a href=&quot;https://github.com/facebook/react-native&quot;&gt;react-native github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://reactnative.cn/docs/0.24/getting-started.html#content&quot;&gt;react-native 中文文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nodejs.org/en/&quot;&gt;node.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/creationix/nvm#installation&quot;&gt;nvm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://facebook.github.io/watchman/docs/install.html&quot;&gt;watchman&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.flowtype.org&quot;&gt;flow&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h1&gt;&lt;h2 id=&quot;Node-js安装&quot;&gt;&lt;a href=&quot;#Node-js安装&quot; class=&quot;headerlink&quot; title=&quot;Node.js安装&quot;&gt;&lt;/a&gt;Node.js安装&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;nvm istall&lt;ul&gt;
+&lt;li&gt;输入命令&lt;code&gt;curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果你希望卸载nvm，你可以输入命令&lt;code&gt;$ npm uninstall -g a_module&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;输入命令&lt;code&gt;nvm install node &amp;amp;&amp;amp; nvm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;使nvm生效：&lt;code&gt;. ~/.nvm/nvm.sh&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;安装Node.js&lt;code&gt;nvm install node &amp;amp;&amp;amp; nvm alias default node&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
@@ -631,7 +702,7 @@
     <link href="http://zhoulingyu.com/2016/03/25/iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87:%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98/"/>
     <id>http://zhoulingyu.com/2016/03/25/iOS——密码明文:密文切换问题/</id>
     <published>2016-03-25T07:35:27.000Z</published>
-    <updated>2016-08-04T09:57:38.000Z</updated>
+    <updated>2016-08-05T06:22:46.000Z</updated>
     
     <content type="html"><![CDATA[<p>前段时间根据产品经理的要求给我们输入密码的部分加了明文/密文切换，中间也遇到了一些颇有意思的问题。其中也有些很难查到资料。</p>
 <p>在这里记录下来，也供大家参考，避免大家重复踩坑。</p>
@@ -639,6 +710,7 @@
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375" alt=""></p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg-w375" alt=""></p>
 <p>右侧的按钮可以切换明文、密文模式</p>
+<a id="more"></a>
 <h1 id="UITextField明文-密文切换属性的属性"><a href="#UITextField明文-密文切换属性的属性" class="headerlink" title="UITextField明文\密文切换属性的属性"></a>UITextField明文\密文切换属性的属性</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">getter</span>=isSecureTextEntry) <span class="built_in">BOOL</span> secureTextEntry;       <span class="comment">// default is NO</span></div></pre></td></tr></table></figure>
 <h1 id="Q1：光标位置错乱"><a href="#Q1：光标位置错乱" class="headerlink" title="Q1：光标位置错乱"></a>Q1：光标位置错乱</h1><p>一般来说密文的时候*号要比字母更宽，当密文切换成明文的时候光标的位置居然没有变化，出现了这样的情况。<br><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-03.png-w375" alt="嗯 没有用我们自己的app了，写了个demo，样式很简约"></p>
 <p>这个问题在查了一些资料之后发现可能是苹果自己的BUG，当然，对应方法是有的。我们可以在切换代码前将textfiled的enable设为NO，切换后在设置YES。当然，这回让textfiled退出编辑模式。</p>
@@ -655,7 +727,7 @@
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其实很多奇怪的问题只有在实际开发的时候发现，这时候你就会认识到自己的经验不足。所以啦，学无止境~。</p>
 <p>过段时间妹子我会奉上自己的照片哦~（好久没自拍啦~~😲）</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#58;&#99;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;">&#99;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -666,7 +738,10 @@
     
       &lt;p&gt;前段时间根据产品经理的要求给我们输入密码的部分加了明文/密文切换，中间也遇到了一些颇有意思的问题。其中也有些很难查到资料。&lt;/p&gt;
 &lt;p&gt;在这里记录下来，也供大家参考，避免大家重复踩坑。&lt;/p&gt;
-&lt;h1 id=&quot;情景描述&quot;&gt;&lt;a href=&quot;#情景描述&quot; class=&quot;he
+&lt;h1 id=&quot;情景描述&quot;&gt;&lt;a href=&quot;#情景描述&quot; class=&quot;headerlink&quot; title=&quot;情景描述&quot;&gt;&lt;/a&gt;情景描述&lt;/h1&gt;&lt;p&gt;明文/密文切换，就是输入密码的时候可以选择&lt;code&gt;明文显示&lt;/code&gt;还是&lt;code&gt;**&lt;/code&gt;这样的显示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg-w375&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;右侧的按钮可以切换明文、密文模式&lt;/p&gt;
     
     </summary>
     
@@ -682,13 +757,14 @@
     <link href="http://zhoulingyu.com/2016/03/05/iOS%E2%80%94%E2%80%94iOS8-Photo%E5%BA%93-PHAsset%E4%B9%8B%E5%9D%91/"/>
     <id>http://zhoulingyu.com/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/</id>
     <published>2016-03-05T06:06:28.000Z</published>
-    <updated>2016-08-04T09:57:40.000Z</updated>
+    <updated>2016-08-05T06:23:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h1><p>最近在做项目的时候，我们选择了一个可以下载iClould图片的三方Picker——CTAssetsPickerController，这个Picker会根据不同系统版本，返回不同类型的图片资源。</p>
 <p>iOS8之前，访问系统照片视频使用的是 AssetsLibrary 框架，iOS8之后有了新的系统框架PhotoKit，这一框架对iCloud选图有很好的支持。</p>
 <p>AssetsLibrary的图片资源类型是ALAsset，而PhotoKit的图片资源类型是PHAsset。</p>
 <p>如果通过PHAsset获取图片资源，可以调用以下方法：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[PHImageManager defaultManager] requestImageForAsset:asset targetSize:<span class="built_in">CGSizeMake</span>(pixelWidth, pixelHeight) contentMode:PHImageContentModeAspectFit options:<span class="literal">nil</span> resultHandler:^(<span class="built_in">UIImage</span> * _Nullable result, <span class="built_in">NSDictionary</span> * _Nullable info) &#123;</div><div class="line">	<span class="comment">// 回调部分</span></div><div class="line">            </div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>但是这个方法有一个潜在的坑——<code>回调部分会被调两次</code>。</p>
 <p>这里是该方法的官方注释：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// If the asset's aspect ratio does not match that of the given targetSize, contentMode determines how the image will be resized.</span></div><div class="line"><span class="comment">//      PHImageContentModeAspectFit: Fit the asked size by maintaining the aspect ratio, the delivered image may not necessarily be the asked targetSize (see PHImageRequestOptionsDeliveryMode and PHImageRequestOptionsResizeMode)</span></div><div class="line"><span class="comment">//      PHImageContentModeAspectFill: Fill the asked size, some portion of the content may be clipped, the delivered image may not necessarily be the asked targetSize (see PHImageRequestOptionsDeliveryMode &amp;&amp; PHImageRequestOptionsResizeMode)</span></div><div class="line"><span class="comment">//      PHImageContentModeDefault: Use PHImageContentModeDefault when size is PHImageManagerMaximumSize (though no scaling/cropping will be done on the result)</span></div><div class="line"><span class="comment">// If -[PHImageRequestOptions isSynchronous] returns NO (or options is nil), resultHandler may be called 1 or more times.</span></div><div class="line"><span class="comment">//     Typically in this case, resultHandler will be called asynchronously on the main thread with the requested results.</span></div><div class="line"><span class="comment">//     However, if deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic, resultHandler may be called synchronously on the calling thread if any image data is immediately available. If the image data returned in this first pass is of insufficient quality, resultHandler will be called again, asychronously on the main thread at a later time with the "correct" results.</span></div><div class="line"><span class="comment">//     If the request is cancelled, resultHandler may not be called at all.</span></div><div class="line"><span class="comment">// If -[PHImageRequestOptions isSynchronous] returns YES, resultHandler will be called exactly once, synchronously and on the calling thread. Synchronous requests cannot be cancelled. </span></div><div class="line"><span class="comment">// resultHandler for asynchronous requests, always called on main thread</span></div><div class="line"></div><div class="line">- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(<span class="built_in">CGSize</span>)targetSize contentMode:(PHImageContentMode)contentMode options:(<span class="keyword">nullable</span> PHImageRequestOptions *)options resultHandler:(<span class="keyword">void</span> (^)(<span class="built_in">UIImage</span> *__<span class="keyword">nullable</span> result, <span class="built_in">NSDictionary</span> *__<span class="keyword">nullable</span> info))resultHandler;</div></pre></td></tr></table></figure>
@@ -700,7 +776,7 @@
 <h2 id="问题为什么是问题"><a href="#问题为什么是问题" class="headerlink" title="问题为什么是问题"></a>问题为什么是问题</h2><p>如果你不去注意这个地方，就可能和我一样去踩坑。<br>为什么这样说？在项目中，我们选中了一批图片，当我需要上传图片到我们的服务器时，需要将PHAsset换成UIImage。<br>当调用<code>- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler;</code>并在回调中写入上传图片至服务器的代码。这时候，如果回调被调用了两次，就会导致同一张图片被上传两次。如果做了同图判断，就会不断的报出一张图片上传不成功，或者少传一张的情况。</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>关于AssetsLibrary框架的坑，可以看<a href="http://kayosite.com/ios-development-and-detail-of-photo-framework.html/comment-page-1" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#109;">&#99;&#x6f;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x63;&#111;&#x64;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#x64;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -709,7 +785,11 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;问题重现&quot;&gt;&lt;a href=&quot;#问题重现&quot; class=&quot;headerlink&quot; title=&quot;问题重现&quot;&gt;&lt;/a&gt;问题重现&lt;/h1&gt;&lt;p&gt;最近在做项目的时候，我们选择了一个可以下载iClould图片的三方Picker——CTAssetsPickerControl
+      &lt;h1 id=&quot;问题重现&quot;&gt;&lt;a href=&quot;#问题重现&quot; class=&quot;headerlink&quot; title=&quot;问题重现&quot;&gt;&lt;/a&gt;问题重现&lt;/h1&gt;&lt;p&gt;最近在做项目的时候，我们选择了一个可以下载iClould图片的三方Picker——CTAssetsPickerController，这个Picker会根据不同系统版本，返回不同类型的图片资源。&lt;/p&gt;
+&lt;p&gt;iOS8之前，访问系统照片视频使用的是 AssetsLibrary 框架，iOS8之后有了新的系统框架PhotoKit，这一框架对iCloud选图有很好的支持。&lt;/p&gt;
+&lt;p&gt;AssetsLibrary的图片资源类型是ALAsset，而PhotoKit的图片资源类型是PHAsset。&lt;/p&gt;
+&lt;p&gt;如果通过PHAsset获取图片资源，可以调用以下方法：&lt;/p&gt;
+&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[[PHImageManager defaultManager] requestImageForAsset:asset targetSize:&lt;span class=&quot;built_in&quot;&gt;CGSizeMake&lt;/span&gt;(pixelWidth, pixelHeight) contentMode:PHImageContentModeAspectFit options:&lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt; resultHandler:^(&lt;span class=&quot;built_in&quot;&gt;UIImage&lt;/span&gt; * _Nullable result, &lt;span class=&quot;built_in&quot;&gt;NSDictionary&lt;/span&gt; * _Nullable info) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	&lt;span class=&quot;comment&quot;&gt;// 回调部分&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;];&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -725,7 +805,7 @@
     <link href="http://zhoulingyu.com/2016/01/16/iOS%E2%80%94%E2%80%94%E4%B8%BA%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%BC%95%E5%85%A5%E8%B6%85%E8%BD%BB%E9%87%8F%E7%BA%A7JS%E5%BC%95%E6%93%8EJSPatch/"/>
     <id>http://zhoulingyu.com/2016/01/16/iOS——为你的项目引入超轻量级JS引擎JSPatch/</id>
     <published>2016-01-16T08:10:11.000Z</published>
-    <updated>2016-08-04T10:00:26.000Z</updated>
+    <updated>2016-08-05T06:23:08.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-JSPatch"><a href="#1-JSPatch" class="headerlink" title="1. JSPatch"></a>1. JSPatch</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>JSPatch是由国内一位年轻帅气的大牛bang编写的极小的JS引擎文件</p>
 <p>这个开源项目(<a href="http://jspatch.com" target="_blank" rel="external">主页</a>、<a href="https://github.com/bang590/JSPatch" target="_blank" rel="external">Github连接</a>)，让你只需要在项目里引入极小的引擎文件，就可以使用 JavaScript 调用任何 Objective-C 的原生接口，替换任意 Objective-C 原生方法。</p>
@@ -734,6 +814,7 @@
 <p>试想一下，当你的项目已经上线了，用户反馈给你一堆BUG，作为一个优秀的程序员，你一定会第一时间修正BUG并且在一定修复量之后发布新的版本。但是问题是：你的用户不一定会更新新版本的app。</p>
 <p>这里暴露了移动端的一个弊端：不能像服务器端一样实时发布，即使修复了BUG用户却可以不选择更新。</p>
 <p>而JSPatch由于可以从网络请求JS替换你原本的代码，你可以在在服务器端设置一个借口获取一个JS文件，当你的项目出现问题是，你可以通过向JS文件中编写代码来实时修复你的BUG。所以JSPatch可以完美的实时修复线上bug。</p>
+<a id="more"></a>
 <h1 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>常规的两种：</p>
 <ol>
 <li><p>CocoaPods</p>
@@ -771,7 +852,7 @@
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>想想一下，上面的问题，如果这时候你的项目已经上线了，所有用户浏览这个页面时都会崩溃，必须及时修复。Don’t worry，如果你已经预先在<code>AppDelegate</code>的<code>didFinishLaunchingWithOptions</code>中做了网络加载，你只需要去修改那段js，所有线上的用户问题都会被及时解决</p>
 <h1 id="3-源码"><a href="#3-源码" class="headerlink" title="3. 源码"></a>3. 源码</h1><p>老规矩，这里奉上上面demo的<a href="http://download.csdn.net/detail/u010127917/9407227" target="_blank" rel="external">源码</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#99;&#111;&#109;">&#x63;&#x6f;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#99;&#x6f;&#100;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#49;&#54;&#51;&#46;&#x63;&#x6f;&#x6d;">&#99;&#x6f;&#100;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#49;&#54;&#51;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -780,7 +861,13 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;1-JSPatch&quot;&gt;&lt;a href=&quot;#1-JSPatch&quot; class=&quot;headerlink&quot; title=&quot;1. JSPatch&quot;&gt;&lt;/a&gt;1. JSPatch&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink
+      &lt;h1 id=&quot;1-JSPatch&quot;&gt;&lt;a href=&quot;#1-JSPatch&quot; class=&quot;headerlink&quot; title=&quot;1. JSPatch&quot;&gt;&lt;/a&gt;1. JSPatch&lt;/h1&gt;&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;JSPatch是由国内一位年轻帅气的大牛bang编写的极小的JS引擎文件&lt;/p&gt;
+&lt;p&gt;这个开源项目(&lt;a href=&quot;http://jspatch.com&quot;&gt;主页&lt;/a&gt;、&lt;a href=&quot;https://github.com/bang590/JSPatch&quot;&gt;Github连接&lt;/a&gt;)，让你只需要在项目里引入极小的引擎文件，就可以使用 JavaScript 调用任何 Objective-C 的原生接口，替换任意 Objective-C 原生方法。&lt;/p&gt;
+&lt;p&gt;我了解这个项目的原因是因为项目的大神率先用了这个Mini引擎解决了我们线上BUG的燃眉之急，当我去学习这个引擎的时候，我觉得我的移动编码观被震撼了，这绝对是有重大意义的项目，所以推荐给所有还不了解人&lt;/p&gt;
+&lt;h2 id=&quot;JSPatch解决了什么问题&quot;&gt;&lt;a href=&quot;#JSPatch解决了什么问题&quot; class=&quot;headerlink&quot; title=&quot;JSPatch解决了什么问题&quot;&gt;&lt;/a&gt;JSPatch解决了什么问题&lt;/h2&gt;&lt;p&gt;JSPatch可以调用一段JS替换OC原生方法。而最关键的是JSPatch调用的JS不仅可以是本地的，还可以是网络请求来的。&lt;/p&gt;
+&lt;p&gt;试想一下，当你的项目已经上线了，用户反馈给你一堆BUG，作为一个优秀的程序员，你一定会第一时间修正BUG并且在一定修复量之后发布新的版本。但是问题是：你的用户不一定会更新新版本的app。&lt;/p&gt;
+&lt;p&gt;这里暴露了移动端的一个弊端：不能像服务器端一样实时发布，即使修复了BUG用户却可以不选择更新。&lt;/p&gt;
+&lt;p&gt;而JSPatch由于可以从网络请求JS替换你原本的代码，你可以在在服务器端设置一个借口获取一个JS文件，当你的项目出现问题是，你可以通过向JS文件中编写代码来实时修复你的BUG。所以JSPatch可以完美的实时修复线上bug。&lt;/p&gt;
     
     </summary>
     
@@ -796,7 +883,7 @@
     <link href="http://zhoulingyu.com/2016/01/03/iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88%E3%80%81%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme%E3%80%81JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://zhoulingyu.com/2016/01/03/iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用/</id>
     <published>2016-01-03T06:34:12.000Z</published>
-    <updated>2016-08-04T10:00:46.000Z</updated>
+    <updated>2016-08-05T06:23:21.000Z</updated>
     
     <content type="html"><![CDATA[<p>转到移动端开发后居然现在才用到Scheme真是惭愧惭愧。</p>
 <h1 id="URL-Scheme是什么"><a href="#URL-Scheme是什么" class="headerlink" title="URL Scheme是什么"></a>URL Scheme是什么</h1><p>相信大家都知道URL。</p>
@@ -808,7 +895,8 @@
 <p>有了这些URL Scheme你可以像网页跳转一样通过URL来传递参数、信息。</p>
 <p>比如常见的分享功能，从其他应用点击微信分享，会自动跳转到微信APP的朋友圈发表动态页面，并填好相应的动态内容。你可以想象一下其URL Scheme可能是这样的：weixin://dl/moments?content=”今天在学习URL Scheme”&amp;src=”zhoulingyu.com”（我只是举个例子）</p>
 <p>有一点需要注意的是，和Web开发不同，iOS中并不是所有的页面或者操作都有URL Schemes，这完全是由你主导的的，如果你需要，你就可以自己定义一些，并去解析。</p>
-<h1 id="自定义你应用的Scheme"><a href="#自定义你应用的Scheme" class="headerlink" title="自定义你应用的Scheme"></a>自定义你应用的Scheme</h1><h2 id="什么时候用到URL-Scheme"><a href="#什么时候用到URL-Scheme" class="headerlink" title="什么时候用到URL Scheme"></a>什么时候用到URL Scheme</h2><p>自定义Scheme是有意义的<br>有以下几种使用场景供你参考：</p>
+<h1 id="自定义你应用的Scheme"><a href="#自定义你应用的Scheme" class="headerlink" title="自定义你应用的Scheme"></a>自定义你应用的Scheme</h1><a id="more"></a>
+<h2 id="什么时候用到URL-Scheme"><a href="#什么时候用到URL-Scheme" class="headerlink" title="什么时候用到URL Scheme"></a>什么时候用到URL Scheme</h2><p>自定义Scheme是有意义的<br>有以下几种使用场景供你参考：</p>
 <ol>
 <li>从一个页面跳转到另一个页面，你不想写N多行代码来『获取下一个控制器』-&gt;『创建控制器』-&gt;『传递参数』</li>
 <li>从其他应用中跳转到你的应用中特定的位置，并填好相应的参数。比如微博分享的时候，是从另一个页面跳转到微博应用的『发微博』页面，并自动填好了微博的文字内容</li>
@@ -864,7 +952,7 @@
 <h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><p>如果想要源代码，小鱼已经上传了一份，可以在<a href="http://download.csdn.net/detail/u010127917/9387848" target="_blank" rel="external">这里</a>下载</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可以解析更加复杂的URL Scheme，可以参考官方文档：<a href="https://github.com/joeldev/JLRoutes" target="_blank" rel="external">https://github.com/joeldev/JLRoutes</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;">&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -874,7 +962,16 @@
     <summary type="html">
     
       &lt;p&gt;转到移动端开发后居然现在才用到Scheme真是惭愧惭愧。&lt;/p&gt;
-&lt;h1 id=&quot;URL-Scheme是什么&quot;&gt;&lt;a href=&quot;#URL-Scheme是什么&quot; class=&quot;headerlink&quot; title=&quot;URL Scheme是什么&quot;&gt;&lt;/a&gt;URL Scheme是
+&lt;h1 id=&quot;URL-Scheme是什么&quot;&gt;&lt;a href=&quot;#URL-Scheme是什么&quot; class=&quot;headerlink&quot; title=&quot;URL Scheme是什么&quot;&gt;&lt;/a&gt;URL Scheme是什么&lt;/h1&gt;&lt;p&gt;相信大家都知道URL。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.apple.com就是一个URL。&quot;&gt;http://www.apple.com就是一个URL。&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;而://之前的部分就称为Scheme&lt;/p&gt;
+&lt;p&gt;（所以，你看，其实并没有什么难的，在这里多插一句给新人的话：不要看到新东西就觉得难，其实很多时候难的就是在于你看到新事物而不敢去研究）&lt;/p&gt;
+&lt;p&gt;也就是说&lt;a href=&quot;http://www.apple.com的Scheme就是http。&quot;&gt;http://www.apple.com的Scheme就是http。&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;iOS中的URL-Scheme&quot;&gt;&lt;a href=&quot;#iOS中的URL-Scheme&quot; class=&quot;headerlink&quot; title=&quot;iOS中的URL Scheme&quot;&gt;&lt;/a&gt;iOS中的URL Scheme&lt;/h1&gt;&lt;p&gt;iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后定义一些自己的URL解析，就好像YourApp://OneController?username=xxx&amp;amp;userInput=xxx&lt;/p&gt;
+&lt;p&gt;有了这些URL Scheme你可以像网页跳转一样通过URL来传递参数、信息。&lt;/p&gt;
+&lt;p&gt;比如常见的分享功能，从其他应用点击微信分享，会自动跳转到微信APP的朋友圈发表动态页面，并填好相应的动态内容。你可以想象一下其URL Scheme可能是这样的：weixin://dl/moments?content=”今天在学习URL Scheme”&amp;amp;src=”zhoulingyu.com”（我只是举个例子）&lt;/p&gt;
+&lt;p&gt;有一点需要注意的是，和Web开发不同，iOS中并不是所有的页面或者操作都有URL Schemes，这完全是由你主导的的，如果你需要，你就可以自己定义一些，并去解析。&lt;/p&gt;
+&lt;h1 id=&quot;自定义你应用的Scheme&quot;&gt;&lt;a href=&quot;#自定义你应用的Scheme&quot; class=&quot;headerlink&quot; title=&quot;自定义你应用的Scheme&quot;&gt;&lt;/a&gt;自定义你应用的Scheme&lt;/h1&gt;
     
     </summary>
     
@@ -890,13 +987,14 @@
     <link href="http://zhoulingyu.com/2015/12/01/iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81/"/>
     <id>http://zhoulingyu.com/2015/12/01/iOS——教你如何实现瀑布流/</id>
     <published>2015-12-01T02:07:19.000Z</published>
-    <updated>2016-08-04T10:01:29.000Z</updated>
+    <updated>2016-08-05T06:23:26.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-GitHub"><a href="#1-GitHub" class="headerlink" title="1 GitHub"></a>1 GitHub</h1><p>博主已经写好了一份瀑布流的框架，如果你想直接使用，可以点击进入<a href="https://github.com/summertian4/iOS-CFWaterFlowView" target="_blank" rel="external">CFWaterFlowView</a>的项目主页。</p>
 <p><a href="https://github.com/summertian4/iOS-CFWaterFlowView" target="_blank" rel="external">CFWaterFlowView</a>是博主已经封装好的瀑布流框架，轻量级、简单、易用，希望你喜欢。</p>
 <h1 id="2-简介"><a href="#2-简介" class="headerlink" title="2 简介"></a>2 简介</h1><p>瀑布流是一种非常常用的UI布局，可以为用户带来沉浸式的体验，不需要打断用户的阅读。非常适合带图片信息的展示。</p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFWaterFlowView-show-02.jpg-w375" alt="CFWaterFlowView展示"></p>
 <p><img src="http://www.hong16.net/wp-content/uploads/2015/03/v3.jpg" alt="瀑布流样式示例"></p>
+<a id="more"></a>
 <h1 id="3-思路与实现"><a href="#3-思路与实现" class="headerlink" title="3 思路与实现"></a>3 思路与实现</h1><h2 id="3-1-选择什么作为基类"><a href="#3-1-选择什么作为基类" class="headerlink" title="3.1 选择什么作为基类"></a>3.1 选择什么作为基类</h2><p>-&gt; 首先你要想到这个能滚动的布局一定是通过UIScrollView实现的</p>
 <p>-&gt; 那么现在有三种选择</p>
 <ol>
@@ -981,7 +1079,7 @@
 <p>希望你能够喜欢本套框架以及博主这个萌萌哒大四女程序员^_^</p>
 <p>如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到我的<a href="http://zhoulingyu.com">博客</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#46;&#99;&#111;&#109;">&#x63;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#100;&#101;&#114;&#102;&#x69;&#x73;&#104;&#64;&#49;&#54;&#x33;&#46;&#99;&#111;&#109;">&#99;&#111;&#100;&#101;&#114;&#102;&#x69;&#x73;&#104;&#64;&#49;&#54;&#x33;&#46;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -990,7 +1088,11 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;1-GitHub&quot;&gt;&lt;a href=&quot;#1-GitHub&quot; class=&quot;headerlink&quot; title=&quot;1 GitHub&quot;&gt;&lt;/a&gt;1 GitHub&lt;/h1&gt;&lt;p&gt;博主已经写好了一份瀑布流的框架，如果你想直接使用，可以点击进入&lt;a href=&quot;https:
+      &lt;h1 id=&quot;1-GitHub&quot;&gt;&lt;a href=&quot;#1-GitHub&quot; class=&quot;headerlink&quot; title=&quot;1 GitHub&quot;&gt;&lt;/a&gt;1 GitHub&lt;/h1&gt;&lt;p&gt;博主已经写好了一份瀑布流的框架，如果你想直接使用，可以点击进入&lt;a href=&quot;https://github.com/summertian4/iOS-CFWaterFlowView&quot;&gt;CFWaterFlowView&lt;/a&gt;的项目主页。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/summertian4/iOS-CFWaterFlowView&quot;&gt;CFWaterFlowView&lt;/a&gt;是博主已经封装好的瀑布流框架，轻量级、简单、易用，希望你喜欢。&lt;/p&gt;
+&lt;h1 id=&quot;2-简介&quot;&gt;&lt;a href=&quot;#2-简介&quot; class=&quot;headerlink&quot; title=&quot;2 简介&quot;&gt;&lt;/a&gt;2 简介&lt;/h1&gt;&lt;p&gt;瀑布流是一种非常常用的UI布局，可以为用户带来沉浸式的体验，不需要打断用户的阅读。非常适合带图片信息的展示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFWaterFlowView-show-02.jpg-w375&quot; alt=&quot;CFWaterFlowView展示&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.hong16.net/wp-content/uploads/2015/03/v3.jpg&quot; alt=&quot;瀑布流样式示例&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1006,7 +1108,7 @@
     <link href="http://zhoulingyu.com/2015/11/20/iOS%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94block%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA/"/>
     <id>http://zhoulingyu.com/2015/11/20/iOS学习——block深入浅出/</id>
     <published>2015-11-20T04:00:58.000Z</published>
-    <updated>2016-08-04T10:02:05.000Z</updated>
+    <updated>2016-08-05T06:23:36.000Z</updated>
     
     <content type="html"><![CDATA[<p>其实几乎天天都在用block吧，却没有仔细研究过，这次也当给自己补课啦</p>
 <h1 id="block"><a href="#block" class="headerlink" title="block"></a>block</h1><p>这几个基本概念会帮助你理解block</p>
@@ -1021,6 +1123,7 @@
 <p>现在看是不是有点麻烦？直接上例子，小鱼喜欢把详细的解释放在代码里（程序员风格），相信你一定瞬间弄懂</p>
 <p>建立了一个command项目，列出了各种block的定义</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</div><div class="line">    <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        </div><div class="line">        <span class="comment">/********* 1.1 无参数无返回值-完整写法 *********/</span></div><div class="line">        <span class="keyword">void</span> (^myBlock1)() = ^()&#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"无参数无返回值的block"</span>);</div><div class="line">        &#125;;</div><div class="line">        myBlock1();</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">/********* 1.2 无参数无返回值-简写 *********/</span></div><div class="line">        <span class="keyword">void</span> (^myBlock1_simple)() = ^&#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"无参数无返回值的block的简写"</span>);</div><div class="line">        &#125;;</div><div class="line">        myBlock1_simple();</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">/********* 2.1 有参数无返回值 *********/</span></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * void (^block变量名)(参数类型及个数) = ^(形参列表)&#123;代码块&#125;;</div><div class="line">         */</div><div class="line">        <span class="keyword">void</span> (^myBlock2)(<span class="keyword">int</span>, <span class="keyword">int</span>) = ^(<span class="keyword">int</span> x, <span class="keyword">int</span> y)&#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"有参数无返回值，两数和为:%d"</span>, x + y);</div><div class="line">        &#125;;</div><div class="line">        myBlock2(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">/********* 2.2 对block变量重新赋值 *********/</span></div><div class="line">        myBlock2 = ^(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"对block变量重新赋值，两数差为:%d"</span>, x - y);</div><div class="line">        &#125;;</div><div class="line">        myBlock2(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">/********* 3 无参数有返回值 *********/</span></div><div class="line">        <span class="built_in">NSString</span> *(^myBlock3)() = ^ ()&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">@"无参数有返回值"</span>;</div><div class="line">        &#125;;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, myBlock3());</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        <span class="comment">/********* 4 有参数有返回值 *********/</span></div><div class="line">        <span class="keyword">int</span> (^myBlock4)(<span class="keyword">int</span>, <span class="keyword">int</span>) = ^(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</div><div class="line">            <span class="keyword">return</span> x + y;</div><div class="line">        &#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> result = myBlock4(<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"有参数有返回值，两数和为:%d"</span>, result);</div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h1 id="block的类型定义-typedef"><a href="#block的类型定义-typedef" class="headerlink" title="block的类型定义/typedef"></a>block的类型定义/typedef</h1><p>C语言的typedef，大家应该比较常见，没见过也没关系。typedef用来为复杂的声明定义简单的别名，比如对变量、类型等等取别名。</p>
 <p>OC是兼容C的，block又是一个block是C级别的语法，所以我们可以为block进行别称定义。</p>
 <p>别称定义是为了减少代码量，并使得代码可读性更强。你可以把『对block的typedef』理解成『对象抽象成类』</p>
@@ -1075,7 +1178,7 @@
 <p>在JAVA著名的Spring框架中，提出了面向切面编程。也就是利用回调，向代码中插入切面，拦截、过滤、织入自己想添加的逻辑。切面编程可以实现种种不可思议的编程，在每一个方法前、方法后、或者方法中的任意位置，织入你想添加逻辑。这种结合了责任链设计模式的优秀的编程思想被迅速广泛使用。</p>
 <p>iOS在加入了block后同样被广泛使用，所以掌握好block是iOS学习之路不可少的一部分。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#99;&#111;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#99;&#111;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1085,7 +1188,18 @@
     <summary type="html">
     
       &lt;p&gt;其实几乎天天都在用block吧，却没有仔细研究过，这次也当给自己补课啦&lt;/p&gt;
-&lt;h1 id=&quot;block&quot;&gt;&lt;a href=&quot;#block&quot; class=&quot;headerlink&quot; title=&quot;block&quot;&gt;&lt;/a&gt;block&lt;/h1&gt;&lt;p&gt;这几个基本概念会帮助你理解bl
+&lt;h1 id=&quot;block&quot;&gt;&lt;a href=&quot;#block&quot; class=&quot;headerlink&quot; title=&quot;block&quot;&gt;&lt;/a&gt;block&lt;/h1&gt;&lt;p&gt;这几个基本概念会帮助你理解block&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;block是一种变量类型&lt;/li&gt;
+&lt;li&gt;block是C级别的语法和运行机制&lt;/li&gt;
+&lt;li&gt;block除了包含可执行代码以外，还包含了与堆、栈内存绑定的变量。所以Block对象包含着一组状态数据，这些数据在程序执行时用于对行为产生影响&lt;/li&gt;
+&lt;li&gt;block的意义在于不仅包含了回调期间的代码，又包含了执行期间需要的数据，并且支持多线程&lt;/li&gt;
+&lt;li&gt;block类似于C语言的函数指针，不要看的太难&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&quot;block的定义和基本结构&quot;&gt;&lt;a href=&quot;#block的定义和基本结构&quot; class=&quot;headerlink&quot; title=&quot;block的定义和基本结构&quot;&gt;&lt;/a&gt;block的定义和基本结构&lt;/h1&gt;&lt;p&gt;放上@传智如意大师的解说图&lt;br&gt;&lt;img src=&quot;http://img.my.csdn.net/uploads/201208/07/1344323584_7609.png&quot; alt=&quot;block定义&quot;&gt;&lt;/p&gt;
+&lt;p&gt;现在看是不是有点麻烦？直接上例子，小鱼喜欢把详细的解释放在代码里（程序员风格），相信你一定瞬间弄懂&lt;/p&gt;
+&lt;p&gt;建立了一个command项目，列出了各种block的定义&lt;/p&gt;
+&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;40&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;41&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;42&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;43&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;44&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;45&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;46&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;47&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;48&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;49&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;50&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;51&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;52&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;53&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;54&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;55&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;56&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;57&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;58&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;59&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;60&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;61&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;62&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;63&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;64&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;65&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;66&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; main(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; argc, &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt; * argv[]) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;@autoreleasepool&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/********* 1.1 无参数无返回值-完整写法 *********/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^myBlock1)() = ^()&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;无参数无返回值的block&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        myBlock1();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/********* 1.2 无参数无返回值-简写 *********/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^myBlock1_simple)() = ^&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;无参数无返回值的block的简写&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        myBlock1_simple();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/********* 2.1 有参数无返回值 *********/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/**&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         * void (^block变量名)(参数类型及个数) = ^(形参列表)&amp;#123;代码块&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         */&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; (^myBlock2)(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;) = ^(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; x, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; y)&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;有参数无返回值，两数和为:%d&quot;&lt;/span&gt;, x + y);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        myBlock2(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/********* 2.2 对block变量重新赋值 *********/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        myBlock2 = ^(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; x, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; y) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;对block变量重新赋值，两数差为:%d&quot;&lt;/span&gt;, x - y);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        myBlock2(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/********* 3 无参数有返回值 *********/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSString&lt;/span&gt; *(^myBlock3)() = ^ ()&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;@&quot;无参数有返回值&quot;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;%@&quot;&lt;/span&gt;, myBlock3());&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;/********* 4 有参数有返回值 *********/&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; (^myBlock4)(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;) = ^(&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; x, &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; y) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; x + y;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; result = myBlock4(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;NSLog&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;@&quot;有参数有返回值，两数和为:%d&quot;&lt;/span&gt;, result);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -1101,13 +1215,14 @@
     <link href="http://zhoulingyu.com/2015/11/18/iOS%E2%80%94%E2%80%94%E4%B8%80%E7%9B%B4%E5%BF%98%E4%BA%86%E5%88%86%E4%BA%AB%E7%9A%84FishDraw/"/>
     <id>http://zhoulingyu.com/2015/11/18/iOS——一直忘了分享的FishDraw/</id>
     <published>2015-11-18T10:21:18.000Z</published>
-    <updated>2016-08-04T09:57:53.000Z</updated>
+    <updated>2016-08-05T06:23:42.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="FishDraw"><a href="#FishDraw" class="headerlink" title="FishDraw"></a>FishDraw</h1><p>很早以前写的一个CAD画图板，早早上传到github，博客忘了拿出来分享。可以绘制图形并且缩放、移动图形。<br>有详细的<a href="https://github.com/summertian4/iOS-FishDraw/blob/master/FishDraw/FishDraw.pdf" target="_blank" rel="external">UML结构图</a>。</p>
 <p><a href="https://github.com/summertian4/iOS-FishDraw" target="_blank" rel="external">Github链接</a>：<a href="https://github.com/summertian4/iOS-FishDraw" target="_blank" rel="external">https://github.com/summertian4/iOS-FishDraw</a></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>iOS-FishDraw是一个简单的画图app。</p>
 <p>动图展示:</p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-FishDraw-show.gif" alt="FishDraw效果演示"></p>
+<a id="more"></a>
 <h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
 <li>绘制椭圆、矩形、圆形等基本图形</li>
 <li>选择即将绘制图形的颜色</li>
@@ -1127,7 +1242,7 @@
 <li>绘制空心图形</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#99;&#111;&#100;&#x65;&#114;&#x66;&#105;&#115;&#104;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#111;&#109;">&#99;&#111;&#100;&#x65;&#114;&#x66;&#105;&#115;&#104;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#x40;&#49;&#54;&#x33;&#46;&#99;&#x6f;&#109;">&#x63;&#111;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#x40;&#49;&#54;&#x33;&#46;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1136,7 +1251,11 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;FishDraw&quot;&gt;&lt;a href=&quot;#FishDraw&quot; class=&quot;headerlink&quot; title=&quot;FishDraw&quot;&gt;&lt;/a&gt;FishDraw&lt;/h1&gt;&lt;p&gt;很早以前写的一个CAD画图板，早早上传到github，博客忘了拿出来分享。可以绘制图形并且缩
+      &lt;h1 id=&quot;FishDraw&quot;&gt;&lt;a href=&quot;#FishDraw&quot; class=&quot;headerlink&quot; title=&quot;FishDraw&quot;&gt;&lt;/a&gt;FishDraw&lt;/h1&gt;&lt;p&gt;很早以前写的一个CAD画图板，早早上传到github，博客忘了拿出来分享。可以绘制图形并且缩放、移动图形。&lt;br&gt;有详细的&lt;a href=&quot;https://github.com/summertian4/iOS-FishDraw/blob/master/FishDraw/FishDraw.pdf&quot;&gt;UML结构图&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/summertian4/iOS-FishDraw&quot;&gt;Github链接&lt;/a&gt;：&lt;a href=&quot;https://github.com/summertian4/iOS-FishDraw&quot;&gt;https://github.com/summertian4/iOS-FishDraw&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;iOS-FishDraw是一个简单的画图app。&lt;/p&gt;
+&lt;p&gt;动图展示:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-FishDraw-show.gif&quot; alt=&quot;FishDraw效果演示&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1159,7 +1278,7 @@
 <ul>
 <li>姓名：周凌宇</li>
 <li>联系电话：18717819045</li>
-<li>邮箱：<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#99;&#111;&#x64;&#x65;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#54;&#x33;&#46;&#99;&#x6f;&#x6d;">&#99;&#111;&#x64;&#x65;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#54;&#x33;&#46;&#99;&#x6f;&#x6d;</a></li>
+<li>邮箱：<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;</a></li>
 <li>博客：<a href="http://zhoulingyu.com">http://zhoulingyu.com</a></li>
 <li>github：<a href="https://github.com/summertian4" target="_blank" rel="external">https://github.com/summertian4</a></li>
 <li>应聘职位：iOS工程师</li>
@@ -1413,11 +1532,12 @@
     <link href="http://zhoulingyu.com/2015/11/10/iOS%E2%80%94%E2%80%94%E5%88%86%E4%BA%AB%E8%87%AA%E5%B7%B1%E5%B0%81%E8%A3%85%E7%9A%84%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8C%89%E9%92%AE%E6%8E%A7%E4%BB%B6CFSecurityCodeButton/"/>
     <id>http://zhoulingyu.com/2015/11/10/iOS——分享自己封装的验证码按钮控件CFSecurityCodeButton/</id>
     <published>2015-11-10T07:07:27.000Z</published>
-    <updated>2016-08-04T10:02:26.000Z</updated>
+    <updated>2016-08-05T06:23:47.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="CFSecurityCodeButton"><a href="#CFSecurityCodeButton" class="headerlink" title="CFSecurityCodeButton"></a>CFSecurityCodeButton</h1><p>写了一个验证码按钮的控件，简约好用，希望大家喜欢。</p>
 <p>github地址：<a href="https://github.com/summertian4/iOS-CFSecurityCodeButton" target="_blank" rel="external">https://github.com/summertian4/iOS-CFSecurityCodeButton</a></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>CFSecurityCodeButton是一个简约的验证码按钮。<br><img src="http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFSecurityCodeButton-show.gif" alt="CFSecurityCodeButton演示"></p>
+<a id="more"></a>
 <h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
 <li>自定义Normal状态下文字和Disabled状态下文字</li>
 <li>自动根据Normal和Disabled状态下文字设置宽高</li>
@@ -1449,7 +1569,7 @@
 </ol>
 <h1 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h1><p>如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到<a href="http://zhoulingyu.com">我的博客</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#x73;&#x68;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#109;">&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#x73;&#x68;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#x6d;">&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#46;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1458,7 +1578,9 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;CFSecurityCodeButton&quot;&gt;&lt;a href=&quot;#CFSecurityCodeButton&quot; class=&quot;headerlink&quot; title=&quot;CFSecurityCodeButton&quot;&gt;&lt;/a&gt;CFSecurityCodeButton&lt;/h1&gt;&lt;
+      &lt;h1 id=&quot;CFSecurityCodeButton&quot;&gt;&lt;a href=&quot;#CFSecurityCodeButton&quot; class=&quot;headerlink&quot; title=&quot;CFSecurityCodeButton&quot;&gt;&lt;/a&gt;CFSecurityCodeButton&lt;/h1&gt;&lt;p&gt;写了一个验证码按钮的控件，简约好用，希望大家喜欢。&lt;/p&gt;
+&lt;p&gt;github地址：&lt;a href=&quot;https://github.com/summertian4/iOS-CFSecurityCodeButton&quot;&gt;https://github.com/summertian4/iOS-CFSecurityCodeButton&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;CFSecurityCodeButton是一个简约的验证码按钮。&lt;br&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFSecurityCodeButton-show.gif&quot; alt=&quot;CFSecurityCodeButton演示&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1474,11 +1596,12 @@
     <link href="http://zhoulingyu.com/2015/11/08/iOS%E2%80%94%E2%80%94%E5%88%86%E4%BA%AB%E8%87%AA%E5%B7%B1%E5%B0%81%E8%A3%85%E7%9A%84%E6%8C%87%E7%A4%BA%E5%99%A8CFHUD/"/>
     <id>http://zhoulingyu.com/2015/11/08/iOS——分享自己封装的指示器CFHUD/</id>
     <published>2015-11-08T10:12:27.000Z</published>
-    <updated>2016-08-04T10:02:38.000Z</updated>
+    <updated>2016-08-05T06:23:50.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="CFHUD"><a href="#CFHUD" class="headerlink" title="CFHUD"></a>CFHUD</h1><p>这几天自己写了一个HUD，感觉挺漂亮的，有虚化效果，传到了github上给大家分享。<br><a href="https://github.com/summertian4/iOS-CFBlurHUD" target="_blank" rel="external">GitHub链接</a>：<a href="https://github.com/summertian4/iOS-CFBlurHUD" target="_blank" rel="external">https://github.com/summertian4/iOS-CFBlurHUD</a></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>CFBlurHUD是基于UIVisualEffectView实现的指示器，拥有虚化模糊效果。</p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFBlurHUD-show.gif" alt="CFBlurHUD效果演示"></p>
+<a id="more"></a>
 <h1 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h1><p>最低支持版本：iOS 8</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>将CFBlurHUD下的所有内容拖入你的项目中</p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>普通Loading指示器</p>
@@ -1493,7 +1616,7 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define CFBlurHUDBorderColor [UIColor colorWithRed:98/255.0 green:98/255.0 blue:98/255.0 alpha:0.5]</span></div><div class="line"><span class="meta">#define CFBlurHUDMessageColor [UIColor colorWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1]</span></div><div class="line"><span class="meta">#define CFBlurHUDActivityIndicatorColor [UIColor colorWithRed:142/255.0 green:155/255.0 blue:236/255.0 alpha:1]</span></div></pre></td></tr></table></figure>
 <h1 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h1><p>如果你有需要更改CFBlurHUD的代码，请尽量不要更改CFBlurHUD的边框。因为UIVisualEffectView的Light样式在背景是白色情况下会难以被看见。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#99;&#111;&#x64;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#99;&#111;&#x64;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#x6d;">&#99;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1502,7 +1625,9 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;CFHUD&quot;&gt;&lt;a href=&quot;#CFHUD&quot; class=&quot;headerlink&quot; title=&quot;CFHUD&quot;&gt;&lt;/a&gt;CFHUD&lt;/h1&gt;&lt;p&gt;这几天自己写了一个HUD，感觉挺漂亮的，有虚化效果，传到了github上给大家分享。&lt;br&gt;&lt;a href=&quot;htt
+      &lt;h1 id=&quot;CFHUD&quot;&gt;&lt;a href=&quot;#CFHUD&quot; class=&quot;headerlink&quot; title=&quot;CFHUD&quot;&gt;&lt;/a&gt;CFHUD&lt;/h1&gt;&lt;p&gt;这几天自己写了一个HUD，感觉挺漂亮的，有虚化效果，传到了github上给大家分享。&lt;br&gt;&lt;a href=&quot;https://github.com/summertian4/iOS-CFBlurHUD&quot;&gt;GitHub链接&lt;/a&gt;：&lt;a href=&quot;https://github.com/summertian4/iOS-CFBlurHUD&quot;&gt;https://github.com/summertian4/iOS-CFBlurHUD&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;CFBlurHUD是基于UIVisualEffectView实现的指示器，拥有虚化模糊效果。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFBlurHUD-show.gif&quot; alt=&quot;CFBlurHUD效果演示&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1554,7 +1679,7 @@
 <p><br></p>
 <h2 id="9-资源文件规范"><a href="#9-资源文件规范" class="headerlink" title="9 资源文件规范"></a><strong>9 资源文件规范</strong></h2><p>1.1    资源文件全部放入Supporting Files文件夹下<br>1.2    图片资源放入Assets.xcassets。可以建立自己的Folder</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#111;&#x64;&#x65;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#x63;&#111;&#x64;&#x65;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x63;&#x6f;&#x64;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#x6f;&#x64;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1582,7 +1707,7 @@
     <link href="http://zhoulingyu.com/2015/10/28/iOS%E2%80%94%E2%80%94%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80/"/>
     <id>http://zhoulingyu.com/2015/10/28/iOS——自己实现流式布局/</id>
     <published>2015-10-28T05:51:33.000Z</published>
-    <updated>2016-08-04T10:02:53.000Z</updated>
+    <updated>2016-08-05T06:24:07.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局</p>
 <p><img src="http://img.blog.csdn.net/20151028135937412" alt="流式布局目标图"></p>
@@ -1592,8 +1717,7 @@
 <p><img src="http://img.blog.csdn.net/20151028142014475" alt="条件选择栏"></p>
 <p>实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。</p>
 <p>所以最后决定自己封装一个FlowView来实现流式布局的效果。</p>
-<hr>
-<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>当你看完下面这些代码的时候，你就会明白，布局本身是非常简单的，基本如下：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>当你看完下面这些代码的时候，你就会明白，布局本身是非常简单的，基本如下：</p>
 <ol>
 <li>设置一个<code>row</code>变量，记录当前按钮排到了第几行</li>
 <li>设置一个数组<code>rowFirstButtons</code> 放置每一个行第一个按钮</li>
@@ -1630,7 +1754,7 @@
 <p>设置CFFlowButtonView的约束或者frame，<code>注意</code> ，对CFFlowButtonView设置约束时<code>不需要</code> 设置高度相关的约束。</p>
 <p>更多用法可以查看DEMO。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;">&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1640,7 +1764,14 @@
     <summary type="html">
     
       &lt;h1 id=&quot;描述&quot;&gt;&lt;a href=&quot;#描述&quot; class=&quot;headerlink&quot; title=&quot;描述&quot;&gt;&lt;/a&gt;描述&lt;/h1&gt;&lt;p&gt;因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.n
+&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151028135937412&quot; alt=&quot;流式布局目标图&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h1&gt;&lt;p&gt;最先想到的是用UICollectionView做，因为UICollectionView也可以做成瀑布流的样子，虽然平常看到的都是纵向的，但做成横向应该也不是什么问题。而且UICollectionView可以重用Cell。&lt;/p&gt;
+&lt;p&gt;但是考虑了实际需求，我们项目需要的是一个条件选择栏，像这样，类似于淘宝：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151028142014475&quot; alt=&quot;条件选择栏&quot;&gt;&lt;/p&gt;
+&lt;p&gt;实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。&lt;/p&gt;
+&lt;p&gt;所以最后决定自己封装一个FlowView来实现流式布局的效果。&lt;/p&gt;
+&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;
     
     </summary>
     
@@ -1675,7 +1806,7 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span>&lt;<span class="title">__covariant</span> <span class="title">ObjectType</span>&gt; : <span class="title">NSObject</span> &lt;<span class="title">NSCopying</span>, <span class="title">NSMutableCopying</span>, <span class="title">NSSecureCoding</span>, <span class="title">NSFastEnumeration</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>也就是说objective-c确实已经支持泛型了。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#99;&#111;&#x64;&#101;&#x72;&#102;&#105;&#x73;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;">&#99;&#111;&#x64;&#101;&#x72;&#102;&#105;&#x73;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>

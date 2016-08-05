@@ -99,7 +99,7 @@
 “任何可能出错的事情，最后都会出错。”
 这就是人们为什么喜欢进行“防错性程序设计”的原因。偏执">
 <meta property="og:image" content="http://static.oschina.net/uploads/img/201510/15081159_pzQc.jpg">
-<meta property="og:updated_time" content="2015-11-20T07:26:40.000Z">
+<meta property="og:updated_time" content="2016-08-05T06:27:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="偏执却管用的 10 条 Java 编程技巧">
 <meta name="twitter:description" content="原文链接： javacodegeeks 翻译： ImportNew.com - LynnShaw 译文链接： http://www.importnew.com/16805.html
@@ -351,6 +351,7 @@
 <h2 id="1-把字符串常量放在前面"><a href="#1-把字符串常量放在前面" class="headerlink" title="1. 把字符串常量放在前面"></a>1. 把字符串常量放在前面</h2><p>通过把字符串常量放在比较函数equals()比较项的左侧来防止偶然的 NullPointerException 从来都不是一个坏主意，就像这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Bad</div><div class="line">if (variable.equals(&quot;literal&quot;)) &#123; ... &#125;</div><div class="line">  </div><div class="line">// Good</div><div class="line">if (&quot;literal&quot;.equals(variable)) &#123; ... &#125;</div></pre></td></tr></table></figure>
 <p>这是毫无疑问的，把一种表达式转换成另一种更好的表达式，并不会失去什么。只要我们的Options是真实存在的（Java 8中 Optional是对可以为空的对象进行的封装），不是吗？讨论一下…</p>
+<a id="more"></a>
 <h2 id="2-不要相信早期的JDK-APIs"><a href="#2-不要相信早期的JDK-APIs" class="headerlink" title="2. 不要相信早期的JDK APIs"></a>2. 不要相信早期的JDK APIs</h2><p>Java刚出现的时候，编程一定是件很痛苦的事。那时的API仍然不够成熟，你可能曾经遇到过这样一段代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String[] files = file.list();</div><div class="line">  </div><div class="line">// Watch out</div><div class="line">if (files != null) &#123;</div><div class="line">    for (int i = 0; i &lt; files.length; i++) &#123;</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>看起来很奇怪对吗？也许吧，但是看看这个Javadoc：</p>

@@ -97,7 +97,7 @@
 分析状态的样式，是交由当前的控制器（viewController、tableViewController等），所以更改状态栏样式需要在控制器的代码里设定。
 实现改变状态栏的颜色：重写- (UIStatusBarStyl">
 <meta property="og:image" content="http://img.blog.csdn.net/20150819161929310">
-<meta property="og:updated_time" content="2016-08-04T10:05:06.000Z">
+<meta property="og:updated_time" content="2016-08-05T06:25:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS学习——StatusBar状态栏的简单设置">
 <meta name="twitter:description" content="引入默认情况下，状态栏的文字、图标颜色是黑色但有的时候，比如我们的应用程序背景是深色的，就会看不到状态栏，这时候，我们希望状态栏文字、图标变成白色。或者，你干脆不让状态栏显示出来。
@@ -347,8 +347,9 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  改变状态栏的文字颜色</div><div class="line"> *</div><div class="line"> *  @return 状态栏风格</div><div class="line"> */</div><div class="line">- (<span class="built_in">UIStatusBarStyle</span>)preferredStatusBarStyle &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>隐藏状态栏</strong>：重写- (BOOL)prefersStatusBarHidden方法：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  隐藏状态栏</div><div class="line"> *</div><div class="line"> *  @return</div><div class="line"> */</div><div class="line">- (<span class="built_in">BOOL</span>)prefersStatusBarHidden &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#105;&#x73;&#104;&#64;&#x31;&#54;&#51;&#46;&#99;&#111;&#109;">&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#105;&#x73;&#104;&#64;&#x31;&#54;&#51;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>

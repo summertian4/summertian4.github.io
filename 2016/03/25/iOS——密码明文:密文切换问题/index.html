@@ -91,8 +91,7 @@
 情景描述明文/密文切换，就是输入密码的时候可以选择明文显示还是**这样的显示。
 
 
-右侧的按钮可以切换明文、密文模式
-UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
+右侧的按钮可以切换明文、密文模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS——密码明文/密文切换问题">
 <meta property="og:url" content="http://zhoulingyu.com/2016/03/25/iOS——密码明文:密文切换问题/index.html">
@@ -102,12 +101,11 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 情景描述明文/密文切换，就是输入密码的时候可以选择明文显示还是**这样的显示。
 
 
-右侧的按钮可以切换明文、密文模式
-UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
+右侧的按钮可以切换明文、密文模式">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg-w375">
 <meta property="og:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-03.png-w375">
-<meta property="og:updated_time" content="2016-08-04T09:57:38.000Z">
+<meta property="og:updated_time" content="2016-08-05T06:22:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS——密码明文/密文切换问题">
 <meta name="twitter:description" content="前段时间根据产品经理的要求给我们输入密码的部分加了明文/密文切换，中间也遇到了一些颇有意思的问题。其中也有些很难查到资料。
@@ -115,8 +113,7 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 情景描述明文/密文切换，就是输入密码的时候可以选择明文显示还是**这样的显示。
 
 
-右侧的按钮可以切换明文、密文模式
-UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
+右侧的按钮可以切换明文、密文模式">
 <meta name="twitter:image" content="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375">
 
 
@@ -361,6 +358,7 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375" alt=""></p>
 <p><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg-w375" alt=""></p>
 <p>右侧的按钮可以切换明文、密文模式</p>
+<a id="more"></a>
 <h1 id="UITextField明文-密文切换属性的属性"><a href="#UITextField明文-密文切换属性的属性" class="headerlink" title="UITextField明文\密文切换属性的属性"></a>UITextField明文\密文切换属性的属性</h1><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">getter</span>=isSecureTextEntry) <span class="built_in">BOOL</span> secureTextEntry;       <span class="comment">// default is NO</span></div></pre></td></tr></table></figure>
 <h1 id="Q1：光标位置错乱"><a href="#Q1：光标位置错乱" class="headerlink" title="Q1：光标位置错乱"></a>Q1：光标位置错乱</h1><p>一般来说密文的时候*号要比字母更宽，当密文切换成明文的时候光标的位置居然没有变化，出现了这样的情况。<br><img src="http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-03.png-w375" alt="嗯 没有用我们自己的app了，写了个demo，样式很简约"></p>
 <p>这个问题在查了一些资料之后发现可能是苹果自己的BUG，当然，对应方法是有的。我们可以在切换代码前将textfiled的enable设为NO，切换后在设置YES。当然，这回让textfiled退出编辑模式。</p>
@@ -377,7 +375,7 @@ UITextField明文\密文切换属性的属性1@property(nonatomic,getter=isS">
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其实很多奇怪的问题只有在实际开发的时候发现，这时候你就会认识到自己的经验不足。所以啦，学无止境~。</p>
 <p>过段时间妹子我会奉上自己的照片哦~（好久没自拍啦~~😲）</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#58;&#99;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;">&#99;&#111;&#100;&#101;&#x72;&#x66;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>

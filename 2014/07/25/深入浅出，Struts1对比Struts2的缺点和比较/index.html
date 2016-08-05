@@ -102,7 +102,7 @@ Struts2的Action类不需要继承任何类，出于习惯可以继承ActionSupp
 
 依赖容器:
 Struts1基于M2开发，所以">
-<meta property="og:updated_time" content="2016-08-04T09:59:04.000Z">
+<meta property="og:updated_time" content="2016-08-05T06:26:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入浅出，Struts1对比Struts2的缺点和比较">
 <meta name="twitter:description" content="Action的构造:
@@ -362,6 +362,7 @@ Struts1基于M2开发，所以">
 <li>Struts2在Action中加入需要的属性，通过调用其getter,setter将页面的参数传入其中，最重要的事，它将页面的属性封装好成为对象，这里用到的就是OGNL。大家或许注意到，在页面中动态显示的部分都是一个对象全部属性或者是一个对象的部分属性，比如登陆页面，显示（或者输入）的是user对象的username和password属性。这时候，直接将封装成对象减少了大量的getAttribute，减少了代码冗余。</li>
 </ol>
 <p>IOC或者说“依赖注入”的思想虽然由spring提出，但是在Struts2中已经可以体现，Action中的实体对象，就是通过注入的方式获得。</p>
+<a id="more"></a>
 <h1 id="面向切面（AOP）："><a href="#面向切面（AOP）：" class="headerlink" title="面向切面（AOP）："></a>面向切面（AOP）：</h1><ol>
 <li>Struts1基于M2开发，没有太优秀的抽象。</li>
 <li>Struts2中可以在源代码中看到大量的Filter，这些大量的过滤器体现了Struts2的面向切面思想。<br>当然大家一定会说AOP也是Spring提出的，这里可以感受到，好的编程思想其实一直在被优秀的程序员使用着，最后也会被人提出，我自己热爱开源的原因就是在于开源可以向全世界分享最新，最好的思想技术。</li>
@@ -384,7 +385,7 @@ Struts1基于M2开发，所以">
 <li>Struts2 Action对象为每一个请求产生一个实例，因此没有线程安全问题。</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x63;&#111;&#100;&#x65;&#x72;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#109;">&#x63;&#111;&#100;&#x65;&#x72;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#100;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
