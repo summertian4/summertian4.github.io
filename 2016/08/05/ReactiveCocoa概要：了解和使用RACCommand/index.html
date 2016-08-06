@@ -101,7 +101,7 @@
 在查阅资料的时候发现了此篇博文，写的非常细致，所以做了一次搬运工。
 另，妹子我的英文属于渣渣系列，所以有什么翻译不当，请一定要指教。">
 <meta property="og:image" content="http://codeblog.shape.dk/images/raccommand_example_app_screenshot.png">
-<meta property="og:updated_time" content="2016-08-06T07:00:39.000Z">
+<meta property="og:updated_time" content="2016-08-06T07:57:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReactiveCocoa概要：了解和使用RACCommand">
 <meta name="twitter:description" content="原文地址点击这里
@@ -354,7 +354,7 @@
 <p>另，妹子我的英文属于渣渣系列，所以有什么翻译不当，请一定要指教。</p>
 <a id="more"></a>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><p>文章中所有代码在<a href="https://github.com/olegam/RACCommandExample" target="_blank" rel="external">这里</a></p>
-<h1 id="RACCommand是你最新结实的好伙伴吗？"><a href="#RACCommand是你最新结实的好伙伴吗？" class="headerlink" title="RACCommand是你最新结实的好伙伴吗？"></a>RACCommand是你最新结实的好伙伴吗？</h1><p><code>RACCommand</code>是ReactiveCocoa最精华的部分之一，它可以让你在开发中节约大量的时间并让你的iOS或者OS X app有更强的鲁棒性。</p>
+<h1 id="RACCommand是你的新伙伴吗？"><a href="#RACCommand是你的新伙伴吗？" class="headerlink" title="RACCommand是你的新伙伴吗？"></a>RACCommand是你的新伙伴吗？</h1><p><code>RACCommand</code>是ReactiveCocoa最精华的部分之一，它可以让你在开发中节约大量的时间并让你的iOS或者OS X app有更强的鲁棒性。</p>
 <p>我见过不少刚接触ReactiveCocoa（后文将简写为RAC），还不能完全理解<code>RACCommand</code>是如何工作又不知何时应该使用<code>RACCommand</code>的同学。所以我认为这个小介绍将会市场实用，可以给他们带来一些启发。官方文档并没有给出多少如何使用RACCommand的Examples，但是<a href="https://github.com/ReactiveCocoa/ReactiveCocoa/blob/master/ReactiveCocoa/Objective-C/RACCommand.h" target="_blank" rel="external">RACCommand头文件的介绍还是很不错的</a>，不过这对刚开始用RAC的同学来说还是太难理解了。</p>
 <p><code>RACCommand</code>类是用于表示一些操作的执行。通常，是由于UI上的一些事件触发了<code>RACCommand</code>的执行。比如当用户按了一个按钮，如果对应<code>RACCommand</code>实例可以被执行，就会执行相应的操作。这使得它很容易和UI进行绑定，同时可以保证当<code>RACCommand</code>处于<code>not enabled</code>时<code>RACCommand</code>实例的操作不会被执行。当Command可以执行时，常做的方式是把allowsconcuuent的属性设置为NO，这可以保证Command已经执行完成后不会被重复执行。Command执行的结果是一个RACSignal，因此你可以调用<code>next:</code>、<code>completed:</code>、或者<code>error:</code>。后面将会展示具体使用方式。</p>
 <h1 id="Example-App"><a href="#Example-App" class="headerlink" title="Example App"></a>Example App</h1><p>我们假设我们正在设计一个简单的app，其功能是让用户订阅一个邮件。最简单的方式是，用一个UITextField和一个UIButton。当用户输入email并且点击按钮的时候，email地址将会传给某个web服务。看起来很简单，但是我们应该确保用户有最好的体验。<code>如果用户按了两次按钮？``如何处理请求出错？``如果email不合法？``RACCommand</code>可以帮助我们处理这些情况。在这篇文章中将一步步完善这个小app以此来讨论一些概念和工作原理。</p>
@@ -391,7 +391,7 @@
 <p><code>enabled</code>属性也是一个发送<code>YES</code>和<code>NO</code>的信号。当Command通过发送<code>NO</code>的<code>enabledSignal</code>信号创建，或者如果信号在执行并且<code>allowsConcurrentExecutions</code> 为 <code>NO</code>，<code>enabled</code>就会发送<code>NO</code>。</p>
 <p><code>-execute:</code>方法会自动订阅原始Signal并且广播它。这意味着你不需要去订阅<code>-execute:</code>返回的信号，但是如果你订阅了也不需要担心它会被执行两次。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#x3a;&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -648,7 +648,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原文地址"><span class="nav-number">1.</span> <span class="nav-text">原文地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RACCommand是你最新结实的好伙伴吗？"><span class="nav-number">3.</span> <span class="nav-text">RACCommand是你最新结实的好伙伴吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example-App"><span class="nav-number">4.</span> <span class="nav-text">Example App</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他有趣的RACCommand使用细节"><span class="nav-number">5.</span> <span class="nav-text">其他有趣的RACCommand使用细节</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原文地址"><span class="nav-number">1.</span> <span class="nav-text">原文地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RACCommand是你的新伙伴吗？"><span class="nav-number">3.</span> <span class="nav-text">RACCommand是你的新伙伴吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example-App"><span class="nav-number">4.</span> <span class="nav-text">Example App</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他有趣的RACCommand使用细节"><span class="nav-number">5.</span> <span class="nav-text">其他有趣的RACCommand使用细节</span></a></li></ol></div>
             
           </div>
         </section>
