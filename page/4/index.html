@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="小鱼周凌宇のCODE_HOME" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="小鱼のCODE_HOME" type="application/atom+xml" />
 
 
 
@@ -88,12 +88,12 @@
 
 <meta name="description" content="技术宅 iOS开发 JAVA开发 萌妹子">
 <meta property="og:type" content="website">
-<meta property="og:title" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:title" content="小鱼のCODE_HOME">
 <meta property="og:url" content="http://zhoulingyu.com/page/4/index.html">
-<meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:site_name" content="小鱼のCODE_HOME">
 <meta property="og:description" content="技术宅 iOS开发 JAVA开发 萌妹子">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小鱼周凌宇のCODE_HOME">
+<meta name="twitter:title" content="小鱼のCODE_HOME">
 <meta name="twitter:description" content="技术宅 iOS开发 JAVA开发 萌妹子">
 
 
@@ -117,7 +117,7 @@
 
   <link rel="canonical" href="http://zhoulingyu.com/page/4/"/>
 
-  <title> 小鱼周凌宇のCODE_HOME </title>
+  <title> 小鱼のCODE_HOME </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -150,7 +150,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">小鱼周凌宇のCODE_HOME</span>
+      <span class="site-title">小鱼のCODE_HOME</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -238,6 +238,151 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/08/17/iOS学习——Object-C模拟类变量/" itemprop="url">
+                  iOS学习——Object-C模拟类变量
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-17T11:18:00+08:00" content="2015-08-17">
+              2015-08-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/17/iOS学习——Object-C模拟类变量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/17/iOS学习——Object-C模拟类变量/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/17/iOS学习——Object-C模拟类变量/" class="leancloud_visitors" data-flag-title="iOS学习——Object-C模拟类变量">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Object-C中并没有JAVA中的类变量，博主在刚开始时，又是给@property加static修饰，又是给字段加static修饰，都会报错。查阅文档得到以下信息：</p>
+<blockquote>
+<ol>
+<li>static关键字不能用于修饰成员变量</li>
+<li>static关键字只能用于修饰<strong>局部变量</strong>、<strong>全局变量</strong>、<strong>函数</strong></li>
+<li>static修饰局部变量，代表将该局部变量存放到静态存储区</li>
+<li>static修饰全局变量，可以限制该全局变量只能被当前源文件访问</li>
+<li>static修饰函数，可以限制该函数只能在当前源文件调用</li>
+</ol>
+</blockquote>
+<p>那么现在可以明白OC中的static修饰符跟不少语言中的static不是一回事。</p>
+<p>但事实上，类变量确实是面向对象中很有必要的。现在要用另一种方式模拟类变量。</p>
+<p>解决方案是：<strong>建立static的全局变量，并在实现public的get、set方法，供外部调用</strong></p>
+<p>下面给出代码示例，相信你能很快明白其用法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Person.h</span></div><div class="line"><span class="comment">//  test_command</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by 周凌宇 on 15/8/11.</span></div><div class="line"><span class="comment">//  Copyright (c) 2015年 周凌宇. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line">+(<span class="keyword">void</span>) setPlanetName: (<span class="built_in">NSString</span> *)planetName;</div><div class="line">+(<span class="built_in">NSString</span> *) planetName;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/17/iOS学习——Object-C模拟类变量/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -351,11 +496,11 @@
 <p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
 <h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x63;&#111;&#100;&#x65;&#114;&#x66;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#111;&#100;&#x65;&#114;&#x66;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
-<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼</a></p>
 
           
         
@@ -499,11 +644,11 @@
 <hr>
 <h1 id="group"><a href="#group" class="headerlink" title="group"></a><strong>group</strong></h1><p>经常写java的程序员们都绝对对习惯性的建好包，分好层。并且习惯性的认为包路径是真实存在的（有相应的文件夹），然而xcode中的group看似是文件夹，实际是只是一个逻辑上的分类，是不存在相应文件件的。<br>xcode中显示看似是文件夹：<br><img src="http://img.blog.csdn.net/20150807204034235" alt="xcode中显示看似是文件夹"><br>实际上却是没有的：<br><img src="http://img.blog.csdn.net/20150807204110753" alt="实际上没有文件夹"></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#100;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;">&#99;&#111;&#100;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#99;&#x6f;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#x6d;">&#99;&#x6f;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
-<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼</a></p>
 
           
         
@@ -1521,165 +1666,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/" itemprop="url">
-                  SSH2如何用Cookie做两周免登陆效果
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-07-25T20:00:00+08:00" content="2014-07-25">
-              2014-07-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/25/SSH2如何用Cookie做两周免登陆效果/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/" class="leancloud_visitors" data-flag-title="SSH2如何用Cookie做两周免登陆效果">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>今天将会做一个Cookie的Demo，也是我今天在写项目时刚刚学的小技术，这里将会展示最简单的实现Cookie的方法，以及JAVAEE中Cookie的使用。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>需要注意的时，这里贴出的源码是我项目中的一部分，不需要大家具体理解其中一些变量的意思，只需要关注Cookie部分。</p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>点击页面中登录，链接到登录action<br>登录时选中“两周免登陆”选框，输入用户名密码，点击登录<br>存入Cookie<br>下次无需登录</p>
-<h2 id="登录页面表单"><a href="#登录页面表单" class="headerlink" title="登录页面表单"></a>登录页面表单</h2><pre style="margin-top:15px; margin-bottom:15px; padding:6px 10px; border:1px solid rgb(204,204,204); font-size:13px; font-family:Consolas,'Liberation Mono',Courier,monospace; background-color:rgb(248,248,248); line-height:19px; overflow:auto"><code style="margin:0px; padding:0px; font-size:12px; font-family:Consolas,'Liberation Mono',Courier,monospace; background-color:transparent">&lt;form class=&quot;registed&quot; action=&quot;User_login&quot; method=&quot;post&quot;&gt;
-&lt;h2&gt;登陆&lt;/h2&gt;
-&lt;div class=&quot;email&quot;&gt;
-    &lt;strong&gt;用户名&lt;/strong&gt;&lt;sup class=&quot;surely&quot;&gt;*&lt;/sup&gt;&lt;br /&gt;
-&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;password&quot;&gt;
-    &lt;strong&gt;密码&lt;/strong&gt;&lt;sup class=&quot;surely&quot;&gt;*&lt;/sup&gt;&lt;br /&gt;
-&lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; /&gt;
-    &lt;a class=&quot;forgot&quot; href=&quot;#&quot;&gt;忘记密码?&lt;/a&gt;
-&lt;/div&gt;
-&lt;!-- .password --&gt;
-&lt;div class=&quot;remember&quot;&gt;
-&lt;input class=&quot;niceCheck&quot; type=&quot;checkbox&quot; name=&quot;useCookie&quot;  value=&quot;true&quot;/&gt;
-    &lt;span class=&quot;rem&quot;&gt;两周免登陆&lt;/span&gt;
-&lt;/div&gt;
-&lt;!-- .remember --&gt;
-
-&lt;div class=&quot;submit&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot; /&gt;
-&lt;/div&gt;
-    &lt;!-- .submit --&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>注意action为User_login</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/07/25/SSH2如何用Cookie做两周免登陆效果/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1718,14 +1704,14 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
-               alt="小鱼周凌宇" />
-          <p class="site-author-name" itemprop="name">小鱼周凌宇</p>
+               alt="小鱼" />
+          <p class="site-author-name" itemprop="name">小鱼</p>
           <p class="site-description motion-element" itemprop="description">技术宅 iOS开发 JAVA开发 萌妹子</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1742,7 +1728,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1836,7 +1822,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">小鱼周凌宇</span>
+  <span class="author" itemprop="copyrightHolder">小鱼</span>
 </div>
 
 <div class="powered-by">
