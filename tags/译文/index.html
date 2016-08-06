@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,34 +86,15 @@
 
 
 
-<meta name="description" content="在网上看过很多介绍，但是还是会晕掉，一大堆绕口的定义，比如下面这些：
-
-nil：        指向oc中对象的空指针，计数器0Nil：        指向oc中类的空指针NULL：        指向其他类型的空指针，如一个c类型的内存指针NSNull：    在集合对象中，表示空值的对象。
-
-这样的显然不能帮助更好的理解，那么结合源码再去理解：
-
-nil：        #define nil">
-<meta property="og:type" content="article">
-<meta property="og:title" content="快速又深入的了解OC中的nil、Nil、NULL、NSNull">
-<meta property="og:url" content="http://zhoulingyu.com/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/index.html">
+<meta name="description" content="技术宅 iOS开发 JAVA开发 萌妹子">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小鱼周凌宇のCODE_HOME">
+<meta property="og:url" content="http://zhoulingyu.com/tags/译文/index.html">
 <meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
-<meta property="og:description" content="在网上看过很多介绍，但是还是会晕掉，一大堆绕口的定义，比如下面这些：
-
-nil：        指向oc中对象的空指针，计数器0Nil：        指向oc中类的空指针NULL：        指向其他类型的空指针，如一个c类型的内存指针NSNull：    在集合对象中，表示空值的对象。
-
-这样的显然不能帮助更好的理解，那么结合源码再去理解：
-
-nil：        #define nil">
-<meta property="og:updated_time" content="2016-08-04T09:59:00.000Z">
+<meta property="og:description" content="技术宅 iOS开发 JAVA开发 萌妹子">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速又深入的了解OC中的nil、Nil、NULL、NSNull">
-<meta name="twitter:description" content="在网上看过很多介绍，但是还是会晕掉，一大堆绕口的定义，比如下面这些：
-
-nil：        指向oc中对象的空指针，计数器0Nil：        指向oc中类的空指针NULL：        指向其他类型的空指针，如一个c类型的内存指针NSNull：    在集合对象中，表示空值的对象。
-
-这样的显然不能帮助更好的理解，那么结合源码再去理解：
-
-nil：        #define nil">
+<meta name="twitter:title" content="小鱼周凌宇のCODE_HOME">
+<meta name="twitter:description" content="技术宅 iOS开发 JAVA开发 萌妹子">
 
 
 
@@ -134,9 +115,9 @@ nil：        #define nil">
 
 
 
-  <link rel="canonical" href="http://zhoulingyu.com/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/"/>
+  <link rel="canonical" href="http://zhoulingyu.com/tags/译文/"/>
 
-  <title> 快速又深入的了解OC中的nil、Nil、NULL、NSNull | 小鱼周凌宇のCODE_HOME </title>
+  <title> 标签: 译文 | 小鱼周凌宇のCODE_HOME </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,7 +138,7 @@ nil：        #define nil">
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -255,222 +236,46 @@ nil：        #define nil">
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        译文
+        <small>标签</small>
+      </h2>
+    </div>
 
     
-      <header class="post-header">
+      
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2016/08/05/ReactiveCocoa概要：了解和使用RACCommand/" itemprop="url">
               
-                快速又深入的了解OC中的nil、Nil、NULL、NSNull
+                <span itemprop="name">ReactiveCocoa概要：了解和使用RACCommand</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-10T16:29:00+08:00" content="2015-08-10">
-              2015-08-10
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-08-05T10:33:00+08:00"
+              content="2016-08-05" >
+          08-05
+        </time>
+      </div>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/" class="leancloud_visitors" data-flag-title="快速又深入的了解OC中的nil、Nil、NULL、NSNull">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>在网上看过很多介绍，但是还是会晕掉，一大堆绕口的定义，比如下面这些：</p>
-<blockquote>
-<p>nil：        指向oc中对象的空指针，计数器0<br>Nil：        指向oc中类的空指针<br>NULL：        指向其他类型的空指针，如一个c类型的内存指针<br>NSNull：    在集合对象中，表示空值的对象。</p>
-</blockquote>
-<p>这样的显然不能帮助更好的理解，那么结合源码再去理解：</p>
-<blockquote>
-<p>nil：        #define nil ((id)0)——–&gt;指向oc中对象的空指针<br>NULL：#define NULL ((void *)0)——–&gt;NULL其实是C语言中的定义<br>NSNull：    用在不能使用nil的场合。——–&gt;下面会进行详细描述</p>
-</blockquote>
-<h2 id="NSNull补充"><a href="#NSNull补充" class="headerlink" title="NSNull补充"></a><strong>NSNull补充</strong></h2><p>对于NSNull，如果还是困难，那就记住这一句话：NSNull是nil的对象形式。</p>
-<p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
-<h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
-<hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x63;&#111;&#100;&#x65;&#114;&#x66;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#111;&#100;&#x65;&#114;&#x66;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
-<p>博主主要写javaEE和iOS的。</p>
-<p>希望大家一起进步。</p>
-<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
-<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt="小鱼周凌宇 wechat" style="width: 200px; max-width: 100%;"/>
-    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
-</div>
-
-
-      
-    </div>
-
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt="小鱼周凌宇 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt="小鱼周凌宇 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
-
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/08/07/快速入门OC:iOS你必须知道的事情/" rel="next" title="快速入门OC/iOS你必须知道的事情">
-                <i class="fa fa-chevron-left"></i> 快速入门OC/iOS你必须知道的事情
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/17/iOS学习——Object-C模拟类变量/" rel="prev" title="iOS学习——Object-C模拟类变量">
-                iOS学习——Object-C模拟类变量 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        <div class="ds-share flat" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/"
-     data-title="快速又深入的了解OC中的nil、Nil、NULL、NSNull"
-     data-content=""
-     data-url="http://zhoulingyu.com/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
+    
   </div>
-</div>
-      
-    </div>
-  </div>
+
+  
 
 
           </div>
@@ -478,14 +283,6 @@ nil：        #define nil">
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/"
-           data-title="快速又深入的了解OC中的nil、Nil、NULL、NSNull" data-url="http://zhoulingyu.com/2015/08/10/快速又深入的了解OC中的nil、Nil、NULL、NSNull/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -505,17 +302,8 @@ nil：        #define nil">
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -615,17 +403,6 @@ nil：        #define nil">
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSNull补充"><span class="nav-number">1.</span> <span class="nav-text">NSNull补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nil和NSNull除了类型完全没有区别吗？"><span class="nav-number">2.</span> <span class="nav-text">nil和NSNull除了类型完全没有区别吗？</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -728,10 +505,6 @@ nil：        #define nil">
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 
