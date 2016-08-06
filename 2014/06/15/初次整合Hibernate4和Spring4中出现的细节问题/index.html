@@ -109,7 +109,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -347,7 +347,7 @@
 <a id="more"></a>
 <h1 id="二、第二个错误"><a href="#二、第二个错误" class="headerlink" title="二、第二个错误"></a>二、第二个错误</h1><p>修改完成后还是出现同样的错误<br>查了一下相关资料，原来发现hibernate4已经将hibernate3的一些功能改掉了，在hibernate4已经不使用CacheProvider了，所以做了以下修改，<br>原先：<br> <code>class=&quot;org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean&quot;&gt;</code><br>改成：<br>  <code>class=&quot;org.springframework.orm.hibernate4.LocalSessionFactoryBean&quot;&gt;</code><br>问题解决，发现可以正常使用了<br>参考链接<a href="http://stackoverflow.com/questions/8565051/spring-3-1-hibernate-4-sessionfactory" target="_blank" rel="external">http://stackoverflow.com/questions/8565051/spring-3-1-hibernate-4-sessionfactory</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#x68;&#64;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#109;">&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#x68;&#64;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
