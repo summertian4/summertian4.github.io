@@ -260,6 +260,145 @@
             
               
                 
+                <a class="post-title-link" href="/2015/10/28/iOS——自己实现流式布局/" itemprop="url">
+                  iOS——自己实现流式布局
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-28T13:51:33+08:00" content="2015-10-28">
+              2015-10-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/28/iOS——自己实现流式布局/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/28/iOS——自己实现流式布局/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/10/28/iOS——自己实现流式布局/" class="leancloud_visitors" data-flag-title="iOS——自己实现流式布局">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局</p>
+<p><img src="http://img.blog.csdn.net/20151028135937412" alt="流式布局目标图"></p>
+<hr>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>最先想到的是用UICollectionView做，因为UICollectionView也可以做成瀑布流的样子，虽然平常看到的都是纵向的，但做成横向应该也不是什么问题。而且UICollectionView可以重用Cell。</p>
+<p>但是考虑了实际需求，我们项目需要的是一个条件选择栏，像这样，类似于淘宝：</p>
+<p><img src="http://img.blog.csdn.net/20151028142014475" alt="条件选择栏"></p>
+<p>实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。</p>
+<p>所以最后决定自己封装一个FlowView来实现流式布局的效果。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/28/iOS——自己实现流式布局/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/10/27/iOS——objective-c已经支持泛型/" itemprop="url">
                   iOS——objective-c已经支持泛型
                 </a>
@@ -356,7 +495,7 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span>&lt;<span class="title">__covariant</span> <span class="title">ObjectType</span>&gt; : <span class="title">NSObject</span> &lt;<span class="title">NSCopying</span>, <span class="title">NSMutableCopying</span>, <span class="title">NSSecureCoding</span>, <span class="title">NSFastEnumeration</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>也就是说objective-c确实已经支持泛型了。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#99;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;">&#99;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#99;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#99;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -518,7 +657,7 @@
 <h1 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h1><p>之前遇到一个前辈，他们公司刚刚使用CocoaPods（别问我为啥，我也奇了怪了）。然后他们<code>pod update</code>之后，出现了大量的错误。原因是他们之前使用的三方库太老了，早就已经更新，连方法名都变了。为了预防这一类错误，在Podfile中可以指定版本，像这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;JSONKit&apos;,       &apos;~&gt; 1.4&apos;</div></pre></td></tr></table></figure>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#99;&#x6f;&#x64;&#x65;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;">&#99;&#x6f;&#x64;&#x65;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -734,8 +873,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/转载/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
                   </a>
                 </span>
 
@@ -871,8 +1010,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/转载/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
                   </a>
                 </span>
 
@@ -1483,149 +1622,13 @@
 <p>如果写的demo，就会发现+号方法居然是可以访问非静态变量的，这充分的证明了+号方法不是静态方法。</p>
 <p>写下这篇博客，希望和我一样被OC的特殊写法震撼到的程序员能后赶快发现。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#99;&#111;&#100;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;">&#99;&#111;&#100;&#x65;&#114;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;">&#99;&#x6f;&#100;&#x65;&#x72;&#102;&#x69;&#115;&#104;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
 <p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
 
           
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/" itemprop="url">
-                  iOS学习——StatusBar状态栏的简单设置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-19T16:29:00+08:00" content="2015-08-19">
-              2015-08-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/19/iOS学习——StatusBar状态栏的简单设置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/" class="leancloud_visitors" data-flag-title="iOS学习——StatusBar状态栏的简单设置">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>默认情况下，状态栏的文字、图标颜色是黑色<br><img src="http://img.blog.csdn.net/20150819161929310" alt="这里写图片描述"><br>但有的时候，比如我们的应用程序背景是深色的，就会看不到状态栏，这时候，我们希望状态栏文字、图标变成白色。<br>或者，你干脆不让状态栏显示出来。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>状态的样式，是交由当前的控制器（viewController、tableViewController等），所以更改状态栏样式需要在控制器的代码里设定。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><strong>改变状态栏的颜色</strong>：重写<code>- (UIStatusBarStyle)preferredStatusBarStyle</code>方法：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> *  改变状态栏的文字颜色</div><div class="line"> *</div><div class="line"> *  @return 状态栏风格</div><div class="line"> */</span></div><div class="line">- (<span class="built_in">UIStatusBarStyle</span>)preferredStatusBarStyle &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>隐藏状态栏</strong>：重写- (BOOL)prefersStatusBarHidden方法：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> *  隐藏状态栏</div><div class="line"> *</div><div class="line"> *  @return</div><div class="line"> */</span></div><div class="line">- (<span class="built_in">BOOL</span>)prefersStatusBarHidden &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1697,7 +1700,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1705,7 +1708,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1714,7 +1717,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

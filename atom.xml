@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhoulingyu.com/"/>
-  <updated>2016-08-06T07:57:03.000Z</updated>
+  <updated>2016-08-17T11:14:08.000Z</updated>
   <id>http://zhoulingyu.com/</id>
   
   <author>
@@ -14,6 +14,349 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[来自Github·sparanoid]中文文案排版指北</title>
+    <link href="http://zhoulingyu.com/2016/08/17/%E6%9D%A5%E8%87%AAGithub%C2%B7sparanoid-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%88%E6%8E%92%E7%89%88%E6%8C%87%E5%8C%97/"/>
+    <id>http://zhoulingyu.com/2016/08/17/来自Github·sparanoid-中文文案排版指北/</id>
+    <published>2016-08-17T11:03:01.000Z</published>
+    <updated>2016-08-17T11:14:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文来自 <a href="https://github.com/sparanoid/chinese-copywriting-guidelines" target="_blank" rel="external">chinese-copywriting-guidelines</a><br>作者：<a href="https://github.com/sparanoid" target="_blank" rel="external">sparanoid</a><br>中文版作者：<a href="https://github.com/mzlogin" target="_blank" rel="external">mzlogin</a></p>
+<h1 id="中文文案排版指北"><a href="#中文文案排版指北" class="headerlink" title="中文文案排版指北"></a>中文文案排版指北</h1><p><img src="https://david-dm.org/mzlogin/chinese-copywriting-guidelines/dev-status.svg" alt="devDependency Status"></p>
+<p>统一中文文案、排版的相关用法，降低团队成员之间的沟通成本，增强网站气质。</p>
+<p>Other languages:</p>
+<ul>
+<li><a href="https://github.com/mzlogin/chinese-copywriting-guidelines/blob/Simplified/README.en.md" target="_blank" rel="external">English</a></li>
+<li><a href="https://github.com/sparanoid/chinese-copywriting-guidelines" target="_blank" rel="external">Chinese Traditional</a></li>
+<li><a href="https://github.com/mzlogin/chinese-copywriting-guidelines" target="_blank" rel="external">Chinese Simplified</a></li>
+</ul>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#空格">空格</a><ul>
+<li><a href="#中英文之间需要增加空格">中英文之间需要增加空格</a></li>
+<li><a href="#中文与数字之间需要增加空格">中文与数字之间需要增加空格</a></li>
+<li><a href="#数字与单位之间需要增加空格">数字与单位之间需要增加空格</a></li>
+<li><a href="#全角标点与其他字符之间不加空格">全角标点与其他字符之间不加空格</a></li>
+<li><a href="#-ms-text-autospace-to-the-rescue"><code>-ms-text-autospace</code> to the rescue?</a></li>
+</ul>
+</li>
+<li><a href="#标点符号">标点符号</a><ul>
+<li><a href="#不重复使用标点符号">不重复使用标点符号</a></li>
+</ul>
+</li>
+<li><a href="#全角和半角">全角和半角</a><ul>
+<li><a href="#使用全角中文标点">使用全角中文标点</a></li>
+<li><a href="#数字使用半角字符">数字使用半角字符</a></li>
+<li><a href="#遇到完整的英文整句特殊名词其內容使用半角标点">遇到完整的英文整句、特殊名词，其內容使用半角标点</a></li>
+</ul>
+</li>
+<li><a href="#名词">名词</a><ul>
+<li><a href="#专有名词使用正确的大小写">专有名词使用正确的大小写</a></li>
+<li><a href="#不要使用不地道的缩写">不要使用不地道的缩写</a></li>
+</ul>
+</li>
+<li><a href="#争议">争议</a><ul>
+<li><a href="#链接之间增加空格">链接之间增加空格</a></li>
+<li><a href="#简体中文使用直角引号">简体中文使用直角引号</a></li>
+</ul>
+</li>
+<li><a href="#工具">工具</a></li>
+<li><a href="#谁在这样做">谁在这样做？</a></li>
+<li><a href="#参考文献">参考文献</a></li>
+</ul>
+<h2 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h2><p>「有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。</p>
+<p>与大家共勉之。」——<a href="https://github.com/vinta/pangu.js" target="_blank" rel="external">vinta/paranoid-auto-spacing</a></p>
+<h3 id="中英文之间需要增加空格"><a href="#中英文之间需要增加空格" class="headerlink" title="中英文之间需要增加空格"></a>中英文之间需要增加空格</h3><p>正确：</p>
+<blockquote>
+<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>在LeanCloud上，数据存储是围绕<code>AVObject</code>进行的。</p>
+<p>在 LeanCloud上，数据存储是围绕<code>AVObject</code> 进行的。</p>
+</blockquote>
+<p>完整的正确用法：</p>
+<blockquote>
+<p>在 LeanCloud 上，数据存储是围绕 <code>AVObject</code> 进行的。每个 <code>AVObject</code> 都包含了与 JSON 兼容的 key-value 对应的数据。数据是 schema-free 的，你不需要在每个 <code>AVObject</code> 上提前指定存在哪些键，只要直接设定对应的 key-value 即可。</p>
+</blockquote>
+<p>例外：「豆瓣FM」等产品名词，按照官方所定义的格式书写。</p>
+<h3 id="中文与数字之间需要增加空格"><a href="#中文与数字之间需要增加空格" class="headerlink" title="中文与数字之间需要增加空格"></a>中文与数字之间需要增加空格</h3><p>正确：</p>
+<blockquote>
+<p>今天出去买菜花了 5000 元。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>今天出去买菜花了 5000元。</p>
+<p>今天出去买菜花了5000元。</p>
+</blockquote>
+<h3 id="数字与单位之间需要增加空格"><a href="#数字与单位之间需要增加空格" class="headerlink" title="数字与单位之间需要增加空格"></a>数字与单位之间需要增加空格</h3><p>正确：</p>
+<blockquote>
+<p>我家的光纤入户宽带有 10 Gbps，SSD 一共有 20 TB。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>我家的光纤入户宽带有 10Gbps，SSD 一共有 10TB。</p>
+</blockquote>
+<p>例外：度／百分比与数字之间不需要增加空格：</p>
+<p>正确：</p>
+<blockquote>
+<p>今天是 233° 的高温。</p>
+<p>新 MacBook Pro 有 15% 的 CPU 性能提升。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>今天是 233 ° 的高温。</p>
+<p>新 MacBook Pro 有 15 % 的 CPU 性能提升。</p>
+</blockquote>
+<h3 id="全角标点与其他字符之间不加空格"><a href="#全角标点与其他字符之间不加空格" class="headerlink" title="全角标点与其他字符之间不加空格"></a>全角标点与其他字符之间不加空格</h3><p>正确：</p>
+<blockquote>
+<p>刚刚买了一部 iPhone，好开心！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>刚刚买了一部 iPhone ，好开心！</p>
+</blockquote>
+<h3 id="ms-text-autospace-to-the-rescue"><a href="#ms-text-autospace-to-the-rescue" class="headerlink" title="-ms-text-autospace to the rescue?"></a><code>-ms-text-autospace</code> to the rescue?</h3><p>Microsoft 有个 <a href="http://msdn.microsoft.com/en-us/library/ie/ms531164(v=vs.85" target="_blank" rel="external"><code>-ms-text-autospace</code></a>.aspx) 的 CSS 属性可以实现自动为中英文之间增加空白。不过目前并未普及，另外在其他应用场景，例如 OS X、iOS 的用户界面目前并不存在这个特性，所以请继续保持随手加空格的习惯。</p>
+<h2 id="标点符号"><a href="#标点符号" class="headerlink" title="标点符号"></a>标点符号</h2><h3 id="不重复使用标点符号"><a href="#不重复使用标点符号" class="headerlink" title="不重复使用标点符号"></a>不重复使用标点符号</h3><p>正确：</p>
+<blockquote>
+<p>德国队竟然战胜了巴西队！</p>
+<p>她竟然对你说「喵」？！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>德国队竟然战胜了巴西队！！</p>
+<p>德国队竟然战胜了巴西队！！！！！！！！</p>
+<p>她竟然对你说「喵」？？！！</p>
+<p>她竟然对你说「喵」？！？！？？！！</p>
+</blockquote>
+<h2 id="全角和半角"><a href="#全角和半角" class="headerlink" title="全角和半角"></a>全角和半角</h2><p>不明白什么是全角（全形）与半角（半形）符号？请查看维基百科词条『<a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2" target="_blank" rel="external">全角和半角</a>』。</p>
+<h3 id="使用全角中文标点"><a href="#使用全角中文标点" class="headerlink" title="使用全角中文标点"></a>使用全角中文标点</h3><p>正确：</p>
+<blockquote>
+<p>嗨！你知道嘛？今天前台的小妹跟我说「喵」了哎！</p>
+<p>核磁共振成像（NMRI）是什么原理都不知道？JFGI！</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>嗨! 你知道嘛? 今天前台的小妹跟我说 “喵” 了哎!</p>
+<p>嗨!你知道嘛?今天前台的小妹跟我说”喵”了哎!</p>
+<p>核磁共振成像 (NMRI) 是什么原理都不知道? JFGI!</p>
+<p>核磁共振成像(NMRI)是什么原理都不知道?JFGI!</p>
+</blockquote>
+<h3 id="数字使用半角字符"><a href="#数字使用半角字符" class="headerlink" title="数字使用半角字符"></a>数字使用半角字符</h3><p>正确：</p>
+<blockquote>
+<p>这件蛋糕只卖 1000 元。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>这件蛋糕只卖 １０００ 元。</p>
+</blockquote>
+<p>例外：在设计稿、宣传海报中如出现极少量数字的情形时，为方便文字对齐，是可以使用全角数字的。</p>
+<h3 id="遇到完整的英文整句、特殊名词，其內容使用半角标点"><a href="#遇到完整的英文整句、特殊名词，其內容使用半角标点" class="headerlink" title="遇到完整的英文整句、特殊名词，其內容使用半角标点"></a>遇到完整的英文整句、特殊名词，其內容使用半角标点</h3><p>正确：</p>
+<blockquote>
+<p>乔布斯那句话是怎么说的？「Stay hungry, stay foolish.」</p>
+<p>推荐你阅读《Hackers &amp; Painters: Big Ideas from the Computer Age》，非常的有趣。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>乔布斯那句话是怎么说的？「Stay hungry，stay foolish。」</p>
+<p>推荐你阅读《Hackers＆Painters：Big Ideas from the Computer Age》，非常的有趣。</p>
+</blockquote>
+<h2 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h2><h3 id="专有名词使用正确的大小写"><a href="#专有名词使用正确的大小写" class="headerlink" title="专有名词使用正确的大小写"></a>专有名词使用正确的大小写</h3><p>大小写相关用法原属于英文书写范畴，不属于本 wiki 讨论內容，在这里只对部分易错用法进行简述。</p>
+<p>正确：</p>
+<blockquote>
+<p>使用 GitHub 登录</p>
+<p>我们的客户有 GitHub、Foursquare、Microsoft Corporation、Google、Facebook, Inc.。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>使用 github 登录</p>
+<p>使用 GITHUB 登录</p>
+<p>使用 Github 登录</p>
+<p>使用 gitHub 登录</p>
+<p>使用 gｲんĤЦ8 登录</p>
+<p>我们的客户有 github、foursquare、microsoft corporation、google、facebook, inc.。</p>
+<p>我们的客户有 GITHUB、FOURSQUARE、MICROSOFT CORPORATION、GOOGLE、FACEBOOK, INC.。</p>
+<p>我们的客户有 Github、FourSquare、MicroSoft Corporation、Google、FaceBook, Inc.。</p>
+<p>我们的客户有 gitHub、fourSquare、microSoft Corporation、google、faceBook, Inc.。</p>
+<p>我们的客户有 gｲんĤЦ8、ｷouЯƧquﾑгє、๓เςг๏ร๏Ŧt ς๏гק๏гคtเ๏ภn、900913、ƒ4ᄃëв๏๏к, IПᄃ.。</p>
+</blockquote>
+<p>注意：当网页中需要配合整体视觉风格而出现全部大写／小写的情形，HTML 中请使用标准的大小写规范进行书写；并通过 <code>text-transform: uppercase;</code>／<code>text-transform: lowercase;</code> 对表现形式进行定义。</p>
+<h3 id="不要使用不地道的缩写"><a href="#不要使用不地道的缩写" class="headerlink" title="不要使用不地道的缩写"></a>不要使用不地道的缩写</h3><p>正确：</p>
+<blockquote>
+<p>我们需要一位熟悉 JavaScript、HTML5，至少理解一种框架（如 Backbone.js、AngularJS、React 等）的前端开发者。</p>
+</blockquote>
+<p>错误：</p>
+<blockquote>
+<p>我们需要一位熟悉 Js、h5，至少理解一种框架（如 backbone、angular、RJS 等）的 FED。</p>
+</blockquote>
+<h2 id="争议"><a href="#争议" class="headerlink" title="争议"></a>争议</h2><p>以下用法略带有个人色彩，既：无论是否遵循下述规则，从语法的角度来讲都是<strong>正确</strong>的。</p>
+<h3 id="链接之间增加空格"><a href="#链接之间增加空格" class="headerlink" title="链接之间增加空格"></a>链接之间增加空格</h3><p>用法：</p>
+<blockquote>
+<p>请 <a href="#">提交一个 issue</a> 并分配给相关同事。</p>
+<p>访问我们网站的最新动态，请 <a href="#">点击这里</a> 进行订阅！</p>
+</blockquote>
+<p>对比用法：</p>
+<blockquote>
+<p>请<a href="#">提交一个 issue</a> 并分配给相关同事。</p>
+<p>访问我们网站的最新动态，请<a href="#">点击这里</a>进行订阅！</p>
+</blockquote>
+<h3 id="简体中文使用直角引号"><a href="#简体中文使用直角引号" class="headerlink" title="简体中文使用直角引号"></a>简体中文使用直角引号</h3><p>用法：</p>
+<blockquote>
+<p>「老师，『有条不紊』的『紊』是什么意思？」</p>
+</blockquote>
+<p>对比用法：</p>
+<blockquote>
+<p>“老师，‘有条不紊’的‘紊’是什么意思？”</p>
+</blockquote>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><table>
+<thead>
+<tr>
+<th>仓库</th>
+<th>语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/vinta/paranoid-auto-spacing" target="_blank" rel="external">vinta/paranoid-auto-spacing</a></td>
+<td>JavaScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huei90/pangu.node" target="_blank" rel="external">huei90/pangu.node</a></td>
+<td>Node.js</td>
+</tr>
+<tr>
+<td><a href="https://github.com/huacnlee/auto-correct" target="_blank" rel="external">huacnlee/auto-correct</a></td>
+<td>Ruby</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sparanoid/space-lover" target="_blank" rel="external">sparanoid/space-lover</a></td>
+<td>PHP (WordPress)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/NauxLiu/auto-correct" target="_blank" rel="external">nauxliu/auto-correct</a></td>
+<td>PHP</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hotoo/pangu.vim" target="_blank" rel="external">hotoo/pangu.vim</a></td>
+<td>Vim</td>
+</tr>
+<tr>
+<td><a href="https://github.com/sparanoid/grunt-auto-spacing" target="_blank" rel="external">sparanoid/grunt-auto-spacing</a></td>
+<td>Node.js (Grunt)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hjiang/scripts/blob/master/add-space-between-latin-and-cjk" target="_blank" rel="external">hjiang/scripts/add-space-between-latin-and-cjk</a></td>
+<td>Python</td>
+</tr>
+</tbody>
+</table>
+<h2 id="谁在这样做？"><a href="#谁在这样做？" class="headerlink" title="谁在这样做？"></a>谁在这样做？</h2><table>
+<thead>
+<tr>
+<th>网站</th>
+<th>文案</th>
+<th>UGC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.apple.com/cn/" target="_blank" rel="external">Apple 中国</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.apple.com/hk/" target="_blank" rel="external">Apple 香港</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.apple.com/tw/" target="_blank" rel="external">Apple 台湾</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-cn/" target="_blank" rel="external">Microsoft 中国</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-hk/" target="_blank" rel="external">Microsoft 香港</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="http://www.microsoft.com/zh-tw/" target="_blank" rel="external">Microsoft 台湾</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://leancloud.cn/" target="_blank" rel="external">LeanCloud</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://www.zhihu.com/" target="_blank" rel="external">知乎</a></td>
+<td>Yes</td>
+<td>部分用户达成</td>
+</tr>
+<tr>
+<td><a href="https://www.v2ex.com/" target="_blank" rel="external">V2EX</a></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://segmentfault.com/" target="_blank" rel="external">SegmentFault</a></td>
+<td>Yes</td>
+<td>部分用户达成</td>
+</tr>
+<tr>
+<td><a href="http://apple4us.com/" target="_blank" rel="external">Apple4us</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://www.wandoujia.com/" target="_blank" rel="external">豌豆荚</a></td>
+<td>Yes</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><a href="https://ruby-china.org/" target="_blank" rel="external">Ruby China</a></td>
+<td>Yes</td>
+<td>标题达成</td>
+</tr>
+<tr>
+<td><a href="https://phphub.org/" target="_blank" rel="external">PHPHub</a></td>
+<td>Yes</td>
+<td>标题达成</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="http://grammar.about.com/od/punctuationandmechanics/a/Guidelines-For-Using-Capital-Letters.htm" target="_blank" rel="external">Guidelines for Using Capital Letters</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Letter_case" target="_blank" rel="external">Letter case - Wikipedia</a></li>
+<li><a href="http://www.oxforddictionaries.com/words/punctuation" target="_blank" rel="external">Punctuation - Oxford Dictionaries</a></li>
+<li><a href="https://owl.english.purdue.edu/owl/section/1/6/" target="_blank" rel="external">Punctuation - The Purdue OWL</a></li>
+<li><a href="http://www.wikihow.com/Use-English-Punctuation-Correctly" target="_blank" rel="external">How to Use English Punctuation Corrently - wikiHow</a></li>
+<li><a href="https://zh.opensuse.org/index.php?title=Help:%E6%A0%BC%E5%BC%8F" target="_blank" rel="external">格式 - openSUSE</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%85%A8%E5%BD%A2%E5%92%8C%E5%8D%8A%E5%BD%A2" target="_blank" rel="external">全角和半角 - 维基百科</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E5%BC%95%E8%99%9F" target="_blank" rel="external">引号 - 维基百科</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/%E7%96%91%E5%95%8F%E9%A9%9A%E5%98%86%E8%99%9F" target="_blank" rel="external">疑问惊叹号 - 维基百科</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文来自 &lt;a href=&quot;https://github.com/sparanoid/chinese-copywriting-guidelines&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;chinese-copywriting-guidelines&lt;
+    
+    </summary>
+    
+      <category term="转载" scheme="http://zhoulingyu.com/categories/%E8%BD%AC%E8%BD%BD/"/>
+    
+    
+      <category term="reproduction" scheme="http://zhoulingyu.com/tags/reproduction/"/>
+    
+  </entry>
   
   <entry>
     <title>ReactiveCocoa概要：了解和使用RACCommand</title>
@@ -66,7 +409,7 @@
 <p><code>enabled</code>属性也是一个发送<code>YES</code>和<code>NO</code>的信号。当Command通过发送<code>NO</code>的<code>enabledSignal</code>信号创建，或者如果信号在执行并且<code>allowsConcurrentExecutions</code> 为 <code>NO</code>，<code>enabled</code>就会发送<code>NO</code>。</p>
 <p><code>-execute:</code>方法会自动订阅原始Signal并且广播它。这意味着你不需要去订阅<code>-execute:</code>返回的信号，但是如果你订阅了也不需要担心它会被执行两次。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#104;&#x40;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;">&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -149,7 +492,7 @@
 <h1 id="防"><a href="#防" class="headerlink" title="防"></a>防</h1><p>知道了Cycript的可怕，在有重要信息藏在代码中的时候，我们也得学会如何放置Cycript修改运行时。</p>
 <p>你可以参考<a href="http://www.cocoachina.com/ios/20150511/11801.html" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x63;&#111;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#x36;&#x33;&#x2e;&#x63;&#111;&#109;">&#x63;&#111;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#x36;&#x33;&#x2e;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -309,7 +652,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nc 192.168.31.152 55 &gt; itunesstored2.sqlitedb</div></pre></td></tr></table></figure>
 <p>OK，在MAC查看一下内容。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#46;&#x63;&#111;&#109;">&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#46;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#109;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -397,7 +740,7 @@
 <p>将root:及mobile:后面的13个x字符处修改成<code>/smx7MYTQIi2M</code>，修改后保存此文件，你iphone的ssh密码就重新回到默认的alpine</p>
 <h1 id="下期内容"><a href="#下期内容" class="headerlink" title="下期内容"></a>下期内容</h1><p>只是写个HelloWorld是不是很无聊，下一期内容将会教你如何<strong>非法窃取iTunesstore信息</strong>以及<strong>Cycript修改运行时</strong>。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#99;&#111;&#x64;&#101;&#114;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#111;&#109;">&#99;&#111;&#x64;&#101;&#114;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -505,7 +848,7 @@
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>以上代码地址请点<a href="http://download.csdn.net/detail/u010127917/9528911" target="_blank" rel="external">这里</a>。</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>小鱼最近在换工作哟~各路的朋友有推荐的请务必介绍我哟~<br>简历在<a href="http://zhoulingyu.com/about/">这里</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#49;&#54;&#x33;&#46;&#x63;&#111;&#x6d;">&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#49;&#54;&#x33;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#111;&#x6d;">&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -574,7 +917,7 @@
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>约定好的奉上自拍哈哈</p>
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94CFWaterWave%E6%B0%B4%E6%B3%A2%E6%95%88%E6%9E%9C%E5%B7%A5%E5%85%B7-01.JPG-w375" alt=""></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#109;">&#99;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -653,7 +996,7 @@
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-04.png-w500" alt=""></p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>FBMemoryProfiler目前只是0.1版本，不能算稳定，我在使用的时候也Crash了好几次。但是谁不相信FaceBook的大神呢~嘿嘿</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#46;&#99;&#111;&#109;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x63;&#111;&#x64;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;">&#x63;&#111;&#x64;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -737,7 +1080,7 @@
 <li>解决<br> brew uninstall watchman<br> brew install –HEAD watchman</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#x6d;">&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -804,7 +1147,7 @@
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其实很多奇怪的问题只有在实际开发的时候发现，这时候你就会认识到自己的经验不足。所以啦，学无止境~。</p>
 <p>过段时间妹子我会奉上自己的照片哦~（好久没自拍啦~~😲）</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -853,7 +1196,7 @@
 <h2 id="问题为什么是问题"><a href="#问题为什么是问题" class="headerlink" title="问题为什么是问题"></a>问题为什么是问题</h2><p>如果你不去注意这个地方，就可能和我一样去踩坑。<br>为什么这样说？在项目中，我们选中了一批图片，当我需要上传图片到我们的服务器时，需要将PHAsset换成UIImage。<br>当调用<code>- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler;</code>并在回调中写入上传图片至服务器的代码。这时候，如果回调被调用了两次，就会导致同一张图片被上传两次。如果做了同图判断，就会不断的报出一张图片上传不成功，或者少传一张的情况。</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>关于AssetsLibrary框架的坑，可以看<a href="http://kayosite.com/ios-development-and-detail-of-photo-framework.html/comment-page-1" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#109;">&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#99;&#x6f;&#100;&#101;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#99;&#x6f;&#100;&#101;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#46;&#99;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -929,7 +1272,7 @@
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>想想一下，上面的问题，如果这时候你的项目已经上线了，所有用户浏览这个页面时都会崩溃，必须及时修复。Don’t worry，如果你已经预先在<code>AppDelegate</code>的<code>didFinishLaunchingWithOptions</code>中做了网络加载，你只需要去修改那段js，所有线上的用户问题都会被及时解决</p>
 <h1 id="3-源码"><a href="#3-源码" class="headerlink" title="3. 源码"></a>3. 源码</h1><p>老规矩，这里奉上上面demo的<a href="http://download.csdn.net/detail/u010127917/9407227" target="_blank" rel="external">源码</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#99;&#x6f;&#100;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#109;">&#99;&#x6f;&#100;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1029,7 +1372,7 @@
 <h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><p>如果想要源代码，小鱼已经上传了一份，可以在<a href="http://download.csdn.net/detail/u010127917/9387848" target="_blank" rel="external">这里</a>下载</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可以解析更加复杂的URL Scheme，可以参考官方文档：<a href="https://github.com/joeldev/JLRoutes" target="_blank" rel="external">https://github.com/joeldev/JLRoutes</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#115;&#104;&#64;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#58;&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1156,7 +1499,7 @@
 <p>希望你能够喜欢本套框架以及博主这个萌萌哒大四女程序员^_^</p>
 <p>如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到我的<a href="http://zhoulingyu.com">博客</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x63;&#111;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#46;&#99;&#x6f;&#109;">&#x63;&#111;&#x64;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#51;&#46;&#99;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#46;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#54;&#51;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1255,7 +1598,7 @@
 <p>在JAVA著名的Spring框架中，提出了面向切面编程。也就是利用回调，向代码中插入切面，拦截、过滤、织入自己想添加的逻辑。切面编程可以实现种种不可思议的编程，在每一个方法前、方法后、或者方法中的任意位置，织入你想添加逻辑。这种结合了责任链设计模式的优秀的编程思想被迅速广泛使用。</p>
 <p>iOS在加入了block后同样被广泛使用，所以掌握好block是iOS学习之路不可少的一部分。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#99;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#51;&#46;&#x63;&#111;&#109;">&#99;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#51;&#46;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1319,7 +1662,7 @@
 <li>绘制空心图形</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#111;&#x6d;">&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#109;">&#99;&#x6f;&#x64;&#x65;&#114;&#x66;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#51;&#46;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1355,7 +1698,7 @@
 <ul>
 <li>姓名：周凌宇</li>
 <li>联系电话：18717819045</li>
-<li>邮箱：<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#109;</a></li>
+<li>邮箱：<a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;</a></li>
 <li>博客：<a href="http://zhoulingyu.com">http://zhoulingyu.com</a></li>
 <li>github：<a href="https://github.com/summertian4" target="_blank" rel="external">https://github.com/summertian4</a></li>
 <li>应聘职位：iOS工程师</li>
@@ -1646,7 +1989,7 @@
 </ol>
 <h1 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h1><p>如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到<a href="http://zhoulingyu.com">我的博客</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#115;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#115;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1693,7 +2036,7 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define CFBlurHUDBorderColor [UIColor colorWithRed:98/255.0 green:98/255.0 blue:98/255.0 alpha:0.5]</span></div><div class="line"><span class="meta">#define CFBlurHUDMessageColor [UIColor colorWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1]</span></div><div class="line"><span class="meta">#define CFBlurHUDActivityIndicatorColor [UIColor colorWithRed:142/255.0 green:155/255.0 blue:236/255.0 alpha:1]</span></div></pre></td></tr></table></figure>
 <h1 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h1><p>如果你有需要更改CFBlurHUD的代码，请尽量不要更改CFBlurHUD的边框。因为UIVisualEffectView的Light样式在背景是白色情况下会难以被看见。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#99;&#111;&#100;&#101;&#x72;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#46;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#101;&#x72;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#54;&#51;&#46;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;&#99;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#104;&#64;&#x31;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;">&#99;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#104;&#64;&#x31;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1756,7 +2099,7 @@
 <p><br></p>
 <h2 id="9-资源文件规范"><a href="#9-资源文件规范" class="headerlink" title="9 资源文件规范"></a><strong>9 资源文件规范</strong></h2><p>1.1    资源文件全部放入Supporting Files文件夹下<br>1.2    图片资源放入Assets.xcassets。可以建立自己的Folder</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1769,86 +2112,6 @@
 &lt;p&gt;还有很多不完善的地方，而且只是针对这次项目的，只是给一个参考。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&quot;XXXiOS项目-命名及编码规范&quot;
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://zhoulingyu.com/categories/iOS/"/>
-    
-    
-      <category term="iOS" scheme="http://zhoulingyu.com/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS——自己实现流式布局</title>
-    <link href="http://zhoulingyu.com/2015/10/28/iOS%E2%80%94%E2%80%94%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80/"/>
-    <id>http://zhoulingyu.com/2015/10/28/iOS——自己实现流式布局/</id>
-    <published>2015-10-28T05:51:33.000Z</published>
-    <updated>2016-08-05T06:24:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局</p>
-<p><img src="http://img.blog.csdn.net/20151028135937412" alt="流式布局目标图"></p>
-<hr>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>最先想到的是用UICollectionView做，因为UICollectionView也可以做成瀑布流的样子，虽然平常看到的都是纵向的，但做成横向应该也不是什么问题。而且UICollectionView可以重用Cell。</p>
-<p>但是考虑了实际需求，我们项目需要的是一个条件选择栏，像这样，类似于淘宝：</p>
-<p><img src="http://img.blog.csdn.net/20151028142014475" alt="条件选择栏"></p>
-<p>实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。</p>
-<p>所以最后决定自己封装一个FlowView来实现流式布局的效果。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>当你看完下面这些代码的时候，你就会明白，布局本身是非常简单的，基本如下：</p>
-<ol>
-<li>设置一个<code>row</code>变量，记录当前按钮排到了第几行</li>
-<li>设置一个数组<code>rowFirstButtons</code> 放置每一个行第一个按钮</li>
-<li>安置第一个按钮的位置（居左、居右），并将按钮加入<code>rowFirstButtons</code> 中</li>
-<li>在安置其后的按钮位置：<br> 4.1  计算从本行第一个按钮到该按钮所有的宽度及间距和，如果超过了父控件的宽度，<code>row++</code> ，并将其加入<code>rowFirstButtons</code> 中。计算相应的x、y值<br> 4.2 如果没有超过过父控件的宽度，算相应的x、y值</li>
-</ol>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)layoutSubviews &#123;</div><div class="line"></div><div class="line">    <span class="built_in">CGFloat</span> margin = <span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 存放每行的第一个Button</span></div><div class="line">    <span class="built_in">NSMutableArray</span> *rowFirstButtons = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    </div><div class="line">    <span class="comment">// 对第一个Button进行设置</span></div><div class="line">    <span class="built_in">UIButton</span> *button0 = <span class="keyword">self</span>.buttonList[<span class="number">0</span>];</div><div class="line">    button0.x = margin;</div><div class="line">    button0.y = margin;</div><div class="line">    [rowFirstButtons addObject:<span class="keyword">self</span>.buttonList[<span class="number">0</span>]];</div><div class="line">    </div><div class="line">    <span class="comment">// 对其他Button进行设置</span></div><div class="line">    <span class="keyword">int</span> row = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="keyword">self</span>.buttonList.count; i++) &#123;</div><div class="line">        <span class="built_in">UIButton</span> *button = <span class="keyword">self</span>.buttonList[i];</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> sumWidth = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> start = (<span class="keyword">int</span>)[<span class="keyword">self</span>.buttonList indexOfObject:rowFirstButtons[row]];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = start; j &lt;= i; j++) &#123;</div><div class="line">            <span class="built_in">UIButton</span> *button = <span class="keyword">self</span>.buttonList[j];</div><div class="line">                sumWidth += (button.width + margin);</div><div class="line">        &#125;</div><div class="line">        sumWidth += <span class="number">10</span>;</div><div class="line">        </div><div class="line">        <span class="built_in">UIButton</span> *lastButton = <span class="keyword">self</span>.buttonList[i - <span class="number">1</span>];</div><div class="line">        <span class="keyword">if</span> (sumWidth &gt;= <span class="keyword">self</span>.width) &#123;</div><div class="line">            button.x = margin;</div><div class="line">            button.y = lastButton.y + margin + button.height;</div><div class="line">            [rowFirstButtons addObject:button];</div><div class="line">            row ++;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            button.x = sumWidth - margin - button.width;</div><div class="line">            button.y = lastButton.y;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="built_in">UIButton</span> *lastButton = <span class="keyword">self</span>.buttonList.lastObject;</div><div class="line">    <span class="keyword">self</span>.height = <span class="built_in">CGRectGetMaxY</span>(lastButton.frame) + <span class="number">10</span>;</div><div class="line">    </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>因为将计算布局的代码放在了layoutSubviews方法中，所以适应横竖屏转换，不管是父控件如何变化都能正确设置布局。</p>
-<p><img src="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-01.png-w500" alt="竖屏显示"></p>
-<p><img src="http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-02.png-h500" alt="横屏显示"></p>
-<hr>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>小鱼已经把FlowView封装成控件，小伙伴们可以直接使用了，只要给FlowView对象塞入一个按钮数组即可。</p>
-<p>现在的问题主要有这几点：</p>
-<ol>
-<li>目前FlowView只能放入按钮</li>
-<li>按钮本身需要已经有宽高</li>
-<li>按钮的高度要相同</li>
-</ol>
-<p>对于这三点问题</p>
-<ol>
-<li><p>对于第一点：<br>在稍后的版本中将更新为可以放入所有UIView控件，这里改动并不大，控件的共性本身就很大。</p>
-</li>
-<li><p>对于第二点：<br>首先是控件本身确实应该是有宽高之后FlowView再能计算。但是对于UILabel和UIButton两个控件，在稍后的版本将会在其没有设置宽高的时候由FlowView通过计算按钮和标签文字的宽高来自动设置。</p>
-</li>
-<li><p>对于第三点：</p>
-</li>
-</ol>
-<hr>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>小鱼已经将源码上传。</p>
-<p><a href="https://github.com/summertian4/iOS-CFFlowButtonView" target="_blank" rel="external">github链接</a></p>
-<p>使用的时候拖入CFFlowButtonView文件夹下的文件至项目中。</p>
-<p>实例化一个CFFlowButtonView对象</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CFFlowButtonView</span> *flowButtonView = [[<span class="built_in">CFFlowButtonView</span> alloc] initWithButtonList:buttonList];</div></pre></td></tr></table></figure>
-<p>设置CFFlowButtonView的约束或者frame，<code>注意</code> ，对CFFlowButtonView设置约束时<code>不需要</code> 设置高度相关的约束。</p>
-<p>更多用法可以查看DEMO。</p>
-<hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#x72;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#111;&#100;&#101;&#x72;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
-<p>博主主要写javaEE和iOS的。</p>
-<p>希望大家一起进步。</p>
-<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
-<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;描述&quot;&gt;&lt;a href=&quot;#描述&quot; class=&quot;headerlink&quot; title=&quot;描述&quot;&gt;&lt;/a&gt;描述&lt;/h1&gt;&lt;p&gt;因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151028135937412&quot; alt=&quot;流式布局目标图&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h1&gt;&lt;p&gt;最先想到的是用UICollectionView做，因为UICollectionView也可以做成瀑布流的样子，虽然平常看到的都是纵向的，但做成横向应该也不是什么问题。而且UICollectionView可以重用Cell。&lt;/p&gt;
-&lt;p&gt;但是考虑了实际需求，我们项目需要的是一个条件选择栏，像这样，类似于淘宝：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20151028142014475&quot; alt=&quot;条件选择栏&quot;&gt;&lt;/p&gt;
-&lt;p&gt;实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。&lt;/p&gt;
-&lt;p&gt;所以最后决定自己封装一个FlowView来实现流式布局的效果。&lt;/p&gt;
-&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;
     
     </summary>
     

@@ -260,6 +260,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/" itemprop="url">
+                  iOS——iOS8 Photo库 PHAsset之坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T14:06:28+08:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/" class="leancloud_visitors" data-flag-title="iOS——iOS8 Photo库 PHAsset之坑">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h1><p>最近在做项目的时候，我们选择了一个可以下载iClould图片的三方Picker——CTAssetsPickerController，这个Picker会根据不同系统版本，返回不同类型的图片资源。</p>
+<p>iOS8之前，访问系统照片视频使用的是 AssetsLibrary 框架，iOS8之后有了新的系统框架PhotoKit，这一框架对iCloud选图有很好的支持。</p>
+<p>AssetsLibrary的图片资源类型是ALAsset，而PhotoKit的图片资源类型是PHAsset。</p>
+<p>如果通过PHAsset获取图片资源，可以调用以下方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[PHImageManager defaultManager] requestImageForAsset:asset targetSize:<span class="built_in">CGSizeMake</span>(pixelWidth, pixelHeight) contentMode:PHImageContentModeAspectFit options:<span class="literal">nil</span> resultHandler:^(<span class="built_in">UIImage</span> * _Nullable result, <span class="built_in">NSDictionary</span> * _Nullable info) &#123;</div><div class="line">	<span class="comment">// 回调部分</span></div><div class="line">            </div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/05/iOS——iOS8-Photo库-PHAsset之坑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/16/iOS——为你的项目引入超轻量级JS引擎JSPatch/" itemprop="url">
                   iOS——为你的项目引入超轻量级JS引擎JSPatch
                 </a>
@@ -1035,7 +1170,7 @@
 <ul>
 <li>姓名：周凌宇</li>
 <li>联系电话：18717819045</li>
-<li>邮箱：<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#46;&#x63;&#x6f;&#109;</a></li>
+<li>邮箱：<a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;</a></li>
 <li>博客：<a href="http://zhoulingyu.com">http://zhoulingyu.com</a></li>
 <li>github：<a href="https://github.com/summertian4" target="_blank" rel="external">https://github.com/summertian4</a></li>
 <li>应聘职位：iOS工程师</li>
@@ -1697,152 +1832,13 @@
 <p><br></p>
 <h2 id="9-资源文件规范"><a href="#9-资源文件规范" class="headerlink" title="9 资源文件规范"></a><strong>9 资源文件规范</strong></h2><p>1.1    资源文件全部放入Supporting Files文件夹下<br>1.2    图片资源放入Assets.xcassets。可以建立自己的Folder</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#54;&#51;&#46;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
 <p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
 
           
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/28/iOS——自己实现流式布局/" itemprop="url">
-                  iOS——自己实现流式布局
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-28T13:51:33+08:00" content="2015-10-28">
-              2015-10-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/28/iOS——自己实现流式布局/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/28/iOS——自己实现流式布局/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/10/28/iOS——自己实现流式布局/" class="leancloud_visitors" data-flag-title="iOS——自己实现流式布局">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>因为做项目的时候，需要用到这样布局，也就是通常所说的流式布局</p>
-<p><img src="http://img.blog.csdn.net/20151028135937412" alt="流式布局目标图"></p>
-<hr>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>最先想到的是用UICollectionView做，因为UICollectionView也可以做成瀑布流的样子，虽然平常看到的都是纵向的，但做成横向应该也不是什么问题。而且UICollectionView可以重用Cell。</p>
-<p>但是考虑了实际需求，我们项目需要的是一个条件选择栏，像这样，类似于淘宝：</p>
-<p><img src="http://img.blog.csdn.net/20151028142014475" alt="条件选择栏"></p>
-<p>实际上，每栏的按钮大约5~8个，而且本来每栏都是一个TableViewCell，所以重用的问题不需要考虑了。</p>
-<p>所以最后决定自己封装一个FlowView来实现流式布局的效果。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/28/iOS——自己实现流式布局/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
       
     </div>
@@ -1914,7 +1910,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1922,7 +1918,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1931,7 +1927,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

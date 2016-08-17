@@ -260,6 +260,142 @@
             
               
                 
+                <a class="post-title-link" href="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/" itemprop="url">
+                  iOS学习——StatusBar状态栏的简单设置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-19T16:29:00+08:00" content="2015-08-19">
+              2015-08-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/19/iOS学习——StatusBar状态栏的简单设置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/" class="leancloud_visitors" data-flag-title="iOS学习——StatusBar状态栏的简单设置">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>默认情况下，状态栏的文字、图标颜色是黑色<br><img src="http://img.blog.csdn.net/20150819161929310" alt="这里写图片描述"><br>但有的时候，比如我们的应用程序背景是深色的，就会看不到状态栏，这时候，我们希望状态栏文字、图标变成白色。<br>或者，你干脆不让状态栏显示出来。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>状态的样式，是交由当前的控制器（viewController、tableViewController等），所以更改状态栏样式需要在控制器的代码里设定。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p><strong>改变状态栏的颜色</strong>：重写<code>- (UIStatusBarStyle)preferredStatusBarStyle</code>方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> *  改变状态栏的文字颜色</div><div class="line"> *</div><div class="line"> *  @return 状态栏风格</div><div class="line"> */</span></div><div class="line">- (<span class="built_in">UIStatusBarStyle</span>)preferredStatusBarStyle &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">UIStatusBarStyleLightContent</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>隐藏状态栏</strong>：重写- (BOOL)prefersStatusBarHidden方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> *  隐藏状态栏</div><div class="line"> *</div><div class="line"> *  @return</div><div class="line"> */</span></div><div class="line">- (<span class="built_in">BOOL</span>)prefersStatusBarHidden &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/19/iOS学习——StatusBar状态栏的简单设置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/17/iOS学习——Object-C模拟类变量/" itemprop="url">
                   iOS学习——Object-C模拟类变量
                 </a>
@@ -496,7 +632,7 @@
 <p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
 <h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x63;&#111;&#x64;&#x65;&#114;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#111;&#x64;&#x65;&#114;&#x66;&#x69;&#x73;&#x68;&#x40;&#x31;&#54;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#x33;&#46;&#99;&#x6f;&#109;">&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#54;&#x33;&#46;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -644,7 +780,7 @@
 <hr>
 <h1 id="group"><a href="#group" class="headerlink" title="group"></a><strong>group</strong></h1><p>经常写java的程序员们都绝对对习惯性的建好包，分好层。并且习惯性的认为包路径是真实存在的（有相应的文件夹），然而xcode中的group看似是文件夹，实际是只是一个逻辑上的分类，是不存在相应文件件的。<br>xcode中显示看似是文件夹：<br><img src="http://img.blog.csdn.net/20150807204034235" alt="xcode中显示看似是文件夹"><br>实际上却是没有的：<br><img src="http://img.blog.csdn.net/20150807204110753" alt="实际上没有文件夹"></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x63;&#111;&#100;&#x65;&#114;&#102;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#111;&#100;&#x65;&#114;&#102;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#99;&#111;&#x64;&#101;&#x72;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#109;">&#99;&#111;&#x64;&#101;&#x72;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1522,150 +1658,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" itemprop="url">
-                  深入浅出，Struts1对比Struts2的缺点和比较
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-07-25T21:57:00+08:00" content="2014-07-25">
-              2014-07-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/" class="leancloud_visitors" data-flag-title="深入浅出，Struts1对比Struts2的缺点和比较">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Action的构造"><a href="#Action的构造" class="headerlink" title="Action的构造:"></a>Action的构造:</h1><ol>
-<li>Struts1要求Action类继承Action或者其他几个基类。</li>
-<li>Struts2的Action类不需要继承任何类，出于习惯可以继承ActionSupport。<br>所以任何一个javabean都可以作为Action，在写起来时候没有太多规范。理过程不再是控制死死的流程，而是通过AOP的方式将request和response进行处理。</li>
-</ol>
-<h1 id="依赖容器"><a href="#依赖容器" class="headerlink" title="依赖容器:"></a>依赖容器:</h1><ol>
-<li>Struts1基于M2开发，所以Action依赖Servlet，导致Struts1中的Action方法必须传入HttpServletRequest和HttpServletResponse等4个参数。依赖Servlet导致依赖容器，因为调用方法必须传入参数，所有Struts1中Action不能单独被测试。</li>
-<li>Struts2 Action不依赖于容器，允许Action脱离容器单独被测试。在Struts2中需要Session和Request时，可以让Action实现SessionAware和RequestAware接口，其实该接口只需要实现session和requeset的get,set方法，只要Action中有这两个对象和getter,setter就可以直接获得session和request。</li>
-</ol>
-<h1 id="IOC思想"><a href="#IOC思想" class="headerlink" title="IOC思想:"></a>IOC思想:</h1><p>在获取参数时</p>
-<ol>
-<li>Struts1 使用ActionForm对象捕获输入，这回使得结构非常的复杂，并且让人觉得多此一举（因为你不但要使用ActionForm对象，还需要写一个ActionForm，同时在xml对其配置）。或者使用session.getAttribute()，每次获得一个参数需要使用大量的重复代码，这样导致了大量的代码冗余。最重要的是，struts1没有将属性当做对象来对待。</li>
-<li>Struts2在Action中加入需要的属性，通过调用其getter,setter将页面的参数传入其中，最重要的事，它将页面的属性封装好成为对象，这里用到的就是OGNL。大家或许注意到，在页面中动态显示的部分都是一个对象全部属性或者是一个对象的部分属性，比如登陆页面，显示（或者输入）的是user对象的username和password属性。这时候，直接将封装成对象减少了大量的getAttribute，减少了代码冗余。</li>
-</ol>
-<p>IOC或者说“依赖注入”的思想虽然由spring提出，但是在Struts2中已经可以体现，Action中的实体对象，就是通过注入的方式获得。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/07/25/深入浅出，Struts1对比Struts2的缺点和比较/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1711,7 +1703,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1719,7 +1711,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1728,7 +1720,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
