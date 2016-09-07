@@ -86,26 +86,37 @@
 
 
 
-<meta name="description" content="简介iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。
-你需要一部越狱手机首先要做的事，找一部越狱后的iPhone，攻防方">
+<meta name="description" content="1 class dumpclass dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。
+1.1 class dump 好玩在哪？class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
+
+查看闭源的应用、frameworks、bundles。
+对比一个 APP 不同版本之间的接口变化。
+对一些">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS攻防——（一）ssh登陆与交叉编译">
-<meta property="og:url" content="http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/index.html">
+<meta property="og:title" content="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
+<meta property="og:url" content="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/index.html">
 <meta property="og:site_name" content="小鱼のCODE_HOME">
-<meta property="og:description" content="简介iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。
-你需要一部越狱手机首先要做的事，找一部越狱后的iPhone，攻防方">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-02.PNG-w375">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-03.PNG-w375">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-05.png">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-06.png">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-07.png">
-<meta property="og:updated_time" content="2016-08-05T06:21:56.000Z">
+<meta property="og:description" content="1 class dumpclass dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。
+1.1 class dump 好玩在哪？class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
+
+查看闭源的应用、frameworks、bundles。
+对比一个 APP 不同版本之间的接口变化。
+对一些">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png">
+<meta property="og:updated_time" content="2016-08-31T08:07:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS攻防——（一）ssh登陆与交叉编译">
-<meta name="twitter:description" content="简介iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。
-你需要一部越狱手机首先要做的事，找一部越狱后的iPhone，攻防方">
-<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375">
+<meta name="twitter:title" content="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
+<meta name="twitter:description" content="1 class dumpclass dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。
+1.1 class dump 好玩在哪？class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
+
+查看闭源的应用、frameworks、bundles。
+对比一个 APP 不同版本之间的接口变化。
+对一些">
+<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png">
 
 
 
@@ -126,9 +137,9 @@
 
 
 
-  <link rel="canonical" href="http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/"/>
+  <link rel="canonical" href="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/"/>
 
-  <title> iOS攻防——（一）ssh登陆与交叉编译 | 小鱼のCODE_HOME </title>
+  <title> iOS攻防——（四）class-dump 与 Dumpdecrypted 使用 | 小鱼のCODE_HOME </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -268,7 +279,7 @@
             
             
               
-                iOS攻防——（一）ssh登陆与交叉编译
+                iOS攻防——（四）class-dump 与 Dumpdecrypted 使用
               
             
           </h1>
@@ -280,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-11T20:49:11+08:00" content="2016-07-11">
-              2016-07-11
+            <time itemprop="dateCreated" datetime="2016-08-30T13:09:36+08:00" content="2016-08-30">
+              2016-08-30
             </time>
           </span>
 
@@ -310,8 +321,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/" itemprop="commentsCount"></span>
+                <a href="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -321,7 +332,7 @@
 
           
           
-             <span id="/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/" class="leancloud_visitors" data-flag-title="iOS攻防——（一）ssh登陆与交叉编译">
+             <span id="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" class="leancloud_visitors" data-flag-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -343,63 +354,70 @@
       
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>iOS攻防系列大家耳熟能详的是我们iOS女神念茜的系列文章。博主在看了之后也进行了一系列的学习和尝试。念茜的文章写的比较早，有很多文章中提到的东西已经不再适合现在使用，写的也不算详细，很多地方一笔带过，却不是那么好探索。在中间也有很多摸索的过程。<br>所以本系列文章算是对念茜iOS攻防系列的一个补充，中间细节的地方也会写的更加详尽。</p>
-<h1 id="你需要一部越狱手机"><a href="#你需要一部越狱手机" class="headerlink" title="你需要一部越狱手机"></a>你需要一部越狱手机</h1><p>首先要做的事，找一部越狱后的iPhone，攻防方面的探索很多需要借助越狱手机的帮助。作为平常的消遣和研究你也应该有一部越狱手机，我的越狱手机是iPhone4，比较古老，但是研究够用了。</p>
-<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>首先是手机（前面说过了）。其次，越狱手机大家都知道一个app——Cydia，在上面可以下载所有的越狱APP，相当于越狱后的app store。对于iOS攻防，首先需要以下软件：</p>
+        <h1 id="1-class-dump"><a href="#1-class-dump" class="headerlink" title="1 class dump"></a>1 class dump</h1><p>class dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。</p>
+<h2 id="1-1-class-dump-好玩在哪？"><a href="#1-1-class-dump-好玩在哪？" class="headerlink" title="1.1 class dump 好玩在哪？"></a>1.1 class dump 好玩在哪？</h2><p>class dump 绝对可以满足你的好奇心。你可以通过 class dump ：</p>
 <ol>
-<li>openSSH</li>
-<li>LLVM+Clang</li>
+<li>查看闭源的应用、frameworks、bundles。</li>
+<li>对比一个 APP 不同版本之间的接口变化。</li>
+<li>对一些私有 frameworks 做些有趣的试验。</li>
 </ol>
-<p>可能还需要的软件：</p>
-<ol>
-<li>Cydia Translations</li>
-<li>Cydia Substrate</li>
-<li>Cydia Installer</li>
-</ol>
-<p>这些软件都可以在Cydia下载到，如果你搜索不到，那么你需要添加一些源<br>在Cydia的软件源中点击『编辑』-&gt;『添加』，依次添加以下源</p>
+<h2 id="1-2-Download"><a href="#1-2-Download" class="headerlink" title="1.2 Download"></a>1.2 Download</h2><p>当前版本: 3.5 (64 bit Intel)<br>需要 Mac OS X 10.8 或更高版本</p>
+<p><a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">class-dump-3.5.dmg</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.gz" target="_blank" rel="external">class-dump-3.5.tar.gz</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.bz2" target="_blank" rel="external">class-dump-3.5.tar.bz2</a></p>
+<h2 id="1-3-Use"><a href="#1-3-Use" class="headerlink" title="1.3 Use"></a>1.3 Use</h2><p>下载好后，双击dmg文件，将其中的 class-dump 文件放到/usr/local/sbin 目录下，然后就可以在命令行中使用了。</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png" alt=""></p>
+<p>官方用法指南：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class-dump 3.5 (64 bit)</div><div class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</div><div class="line"></div><div class="line">  where options are:</div><div class="line">        -a             show instance variable offsets</div><div class="line">        -A             show implementation addresses</div><div class="line">        --arch &lt;arch&gt;  choose a specific architecture from a universal binary (ppc, ppc64, i386, x86_64)</div><div class="line">        -C &lt;regex&gt;     only display classes matching regular expression</div><div class="line">        -f &lt;str&gt;       find string in method name</div><div class="line">        -H             generate header files in current directory, or directory specified with -o</div><div class="line">        -I             sort classes, categories, and protocols by inheritance (overrides -s)</div><div class="line">        -o &lt;dir&gt;       output directory used for -H</div><div class="line">        -r             recursively expand frameworks and fixed VM shared libraries</div><div class="line">        -s             sort classes and categories by name</div><div class="line">        -S             sort methods by name</div><div class="line">        -t             suppress header in output, for testing</div><div class="line">        --list-arches  list the arches in the file, then exit</div><div class="line">        --sdk-ios      specify iOS SDK version (will look in /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk</div><div class="line">        --sdk-mac      specify Mac OS X version (will look in /Developer/SDKs/MacOSX&lt;version&gt;.sdk</div><div class="line">        --sdk-root     specify the full SDK root path (or use --sdk-ios/--sdk-mac for a shortcut)</div></pre></td></tr></table></figure>
+<p>简单的举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump -H /Applications/Calculator.app -o ~/Desktop/dump/Calculate-dump</div></pre></td></tr></table></figure>
+<p><code>/Applications/Calculator.app</code> 是 Mac 上计算器应用的路径。<br><code>~/Desktop/dump/Calculate-dump</code> 是指定的存放 dump 出来头文件的文件夹路径。</p>
+<p>执行完成后可以看到指定的保存目录下已经有 dump 出来的头文件了：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png" alt=""></p>
+<p>打开一个 <code>.h</code> 文件可以看到相应内容：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png" alt=""></p>
+<h1 id="2-Dumpdecrypted"><a href="#2-Dumpdecrypted" class="headerlink" title="2 Dumpdecrypted"></a>2 Dumpdecrypted</h1><p>class dump 虽然能帮你解析出一个 app 的头文件，但是对于 App Store 下载的 App 都是通过苹果的一层签名加密，通常我们成为『加壳』。对于已经加壳的 APP，解析后的效果就和加了代码混淆类似。</p>
+<p>比如直接去 dump 微信，出来的结果大概是这样：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png" alt=""></p>
+<h2 id="2-1-Download"><a href="#2-1-Download" class="headerlink" title="2.1 Download"></a>2.1 Download</h2><p><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">dumpdecrypted GitHub 地址</a></p>
+<h2 id="2-2-Install"><a href="#2-2-Install" class="headerlink" title="2.2 Install"></a>2.2 Install</h2><p>Dumpdecrypted 比另一个砸壳工具 Clutch 要难用的多。但由于 Clutch 无法砸开含有兼容 WatchOs<br>2 的 App，所以只能使用 Dumpdecrypted。</p>
+<p>下载后打开 <code>Makefile</code> 文件，注意第三行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ SDK=`xcrun --sdk iphoneos --show-sdk-path`</div></pre></td></tr></table></figure>
+<p>这里填写的 SDK 必须与你越狱的 iPhone 系统等级一致，你可以这样查看你 MAC 的 SDK ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ xcrun --sdk iphoneos --show-sdk-path</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk</div></pre></td></tr></table></figure>
+<p>而我的手机是 7.0 的，所以只能去这里下载对应的 SDK。</p>
+<p>Makefile 所有需要填写的填好后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd dumpdecrypted</div><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>在当前目录下生成 dumpdecrypted.dylib 文件。</p>
+<p>如果你觉得很麻烦，可以直接来<a href="https://github.com/DaSens/Crack-file/tree/master/crack%20file" target="_blank" rel="external">这里</a>或者<a href="http://git.oschina.net/hongyangyi/dumpdecrypted" target="_blank" rel="external">这里</a>下载。</p>
+<h2 id="2-3-Use"><a href="#2-3-Use" class="headerlink" title="2.3 Use"></a>2.3 Use</h2><p>将 <code>dumpdecrypted.dylib</code> 放到需要砸壳 app 的 Documents 下。</p>
+<p>查找微信的 Documents：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find / -name WeChat.app</div></pre></td></tr></table></figure>
+<p>得到路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app</div></pre></td></tr></table></figure>
+<p>scp 传输：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp ~/Desktop/dump/dumpdecrypted/dumpdecrypted_7.dylib root@172.16.212.217:/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/Documents</div></pre></td></tr></table></figure>
+<p>砸壳：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/Documents</div><div class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted_7.dylib /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat</div></pre></td></tr></table></figure>
 <blockquote>
-<ol>
-<li><a href="http://yuan.duowan.com" target="_blank" rel="external">http://yuan.duowan.com</a> - 多玩源</li>
-<li><a href="http://apt.thebigboss.org/repofiles/cydia/" target="_blank" rel="external">http://apt.thebigboss.org/repofiles/cydia/</a></li>
-</ol>
+<p>注意 <code>DYLD_INSERT_LIBRARIES=</code> 后填写的是你刚刚传输的 .dylib 文件名，我的是 dumpdecrypted_7.dylib</p>
 </blockquote>
-<a id="more"></a>
-<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-01.PNG-w375" alt=""><br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-02.PNG-w375" alt=""><br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-03.PNG-w375" alt=""></p>
-<h1 id="hacking"><a href="#hacking" class="headerlink" title="hacking"></a>hacking</h1><h2 id="1-ssh登陆手机"><a href="#1-ssh登陆手机" class="headerlink" title="1. ssh登陆手机"></a>1. ssh登陆手机</h2><p>ssh登陆，大家应该不算陌生，如果你第一次听说，你可以简单理解成『远程登录』，可以通过一台设备远程登陆另一台设备。</p>
-<ol>
-<li>保证你的Mac和iPhone在同一网段</li>
-<li>确定iPhone的IP</li>
-<li>远程登陆</li>
-</ol>
-<p>在你mac的Terminal输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@xxx.xxx.xxx.xxx</div></pre></td></tr></table></figure>
-<p>接着会提醒你是否连接，输入yes继续，输入密码，初始密码是<code>alpine</code>。<br>建议你将改密码改掉，因为这样很不安全，在默认密码的情况下，任何人都可以尝试登陆你的设备。<br>在登录之后，你可以更改你的密码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd root</div></pre></td></tr></table></figure>
-<p>ssh登陆后，可以试着看看手机的目录结构<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-05.png" alt=""></p>
-<h2 id="2-交叉编译"><a href="#2-交叉编译" class="headerlink" title="2. 交叉编译"></a>2. 交叉编译</h2><p>首先解释一下什么是交叉编译。交叉编译指在一个平台上生成另一个平台上的可执行代码。<br>我们将会在MAC上写代码，但要生成的可执行文件需要在iPhone上运行。<br>编译是由编译器完成的，所以我们首先要找到合适的编译器。</p>
-<p>我们本次的任务就是写一个简单的C程序，能在iPhone上跑的C程序。</p>
-<p>念茜所提到的arm-apple-darwin10-llvm-gcc-4.2我是没有找到的，因为这东西好像是在Xcode5的时候才有。</p>
-<p>我用的是Clang，所以我们需要下载一下Clang。Clang是一个C语言、C++、Objective-C、C++语言的轻量级编译器。<a href="http://clang.llvm.org/get_started.html" target="_blank" rel="external">这里是传送门</a></p>
-<h3 id="1-写经典HelloWorld"><a href="#1-写经典HelloWorld" class="headerlink" title="1. 写经典HelloWorld"></a>1. 写经典HelloWorld</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span>                                                                                               </span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;   </div><div class="line">       <span class="built_in">printf</span>(<span class="string">"Hello world !!!\n"</span>);   </div><div class="line">       <span class="keyword">return</span> <span class="number">0</span>;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2-编译"><a href="#2-编译" class="headerlink" title="2. 编译"></a>2. 编译</h3><p>命令台编译：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">touch helloworld.c</div><div class="line">open helloworld.c</div><div class="line">...（写一下代码）</div><div class="line">xcrun -sdk iphoneos clang -arch armv7 -o helloworld helloworld.c</div></pre></td></tr></table></figure>
-<p>用过自动打包ipa的同学都对xcrun和xcodebuild很熟悉。这与打包过程类似。</p>
-<p>格式：<code>xcrun -sdk iphoneos clang -arch armv7 -o [目标文件名] [源文件名]</code></p>
-<p>生成可在iPhone平台运行的二进制可执行文件</p>
-<h3 id="3-放到iPhone中"><a href="#3-放到iPhone中" class="headerlink" title="3. 放到iPhone中"></a>3. 放到iPhone中</h3><p>通过ssh文件传输将helloworld传到iPhone中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp helloworld root@192.168.31.152:helloworld</div></pre></td></tr></table></figure>
-<p>再看一下iPhone文件目录，是不是已经有了helloworld<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-06.png" alt=""></p>
-<p>运行一下：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%80%EF%BC%89ssh%E7%99%BB%E9%99%86%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-07.png" alt=""></p>
-<p>Bingo！</p>
-<p>如果你继续玩，你会发现其实你的iPhone就是一个类Linux系统（本来就是Unix~~），你可以随便玩。</p>
-<h1 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h1><h2 id="1-重置ssh登陆密码"><a href="#1-重置ssh登陆密码" class="headerlink" title="1. 重置ssh登陆密码"></a>1. 重置ssh登陆密码</h2><p>如果你不幸忘记了ssh密码，可以在Cydia中下载ifile软件，通过ifile找到/private/etc/master.password文件，文件中会有以下一段：</p>
+<p>砸壳成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[+] detected 32bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0xfea4c(from 0xfe000) = a4c</div><div class="line">[+] Found encrypted data at address 00004000 of length 42237952 bytes - type 1.[+] Opening /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type[+] Executable is a FAT image - searching for right architecture[+] Correct arch is at offset 16384 in the file[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file[+] Dumping the decrypted data into the file[+] Copying the not encrypted remainder of the file[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset 4a4c</div><div class="line">[+] Closing original file[+] Closing dump file</div></pre></td></tr></table></figure>
+<p>ls 查看 Documents 中文件多了一个 <code>WeChat.decrypted</code>，这就是砸壳过后的文件，scp出来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp WeChat.decrypted zhoulingyu@172.16.211.181:/Users/zhoulingyu/Desktop/dump/Wechat</div></pre></td></tr></table></figure>
+<h1 id="3-class-dump-砸壳后的文件"><a href="#3-class-dump-砸壳后的文件" class="headerlink" title="3 class dump 砸壳后的文件"></a>3 class dump 砸壳后的文件</h1><p>上一步我们得到了 <code>WeChat.decrypted</code>，现在可以对其进行 dump：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump --arch armv7 WeChat.decrypted -H -o /Users/zhoulingyu/Desktop/dump/Wechat/Wechat-decrypted-dump</div></pre></td></tr></table></figure>
 <blockquote>
-<p>root:xxxxxxxxxxxxx:0:0::0:0:System<br>Administrator:/var/root:/bin/sh<br>mobile:xxxxxxxxxxxxx:501:501::0:0:Mobile<br>User:/var/mobile:/bin/sh</p>
+<p>–arch armv7 是指定架构，dumpdecrypted 只会砸你手机处理器对应的那个壳，fat binary 的其它部分仍然是有壳的，而 class-dump 的默认目标又不是被砸壳的那个部分，如果不指定架构只能导出 CDStructures.h 一个文件</p>
+<p>现在就可以看到 dump 后是明文的了：</p>
 </blockquote>
-<p>将root:及mobile:后面的13个x字符处修改成<code>/smx7MYTQIi2M</code>，修改后保存此文件，你iphone的ssh密码就重新回到默认的alpine</p>
-<h1 id="下期内容"><a href="#下期内容" class="headerlink" title="下期内容"></a>下期内容</h1><p>只是写个HelloWorld是不是很无聊，下一期内容将会教你如何<strong>非法窃取iTunesstore信息</strong>以及<strong>Cycript修改运行时</strong>。</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png" alt=""></p>
+<h1 id="4-Learn-More"><a href="#4-Learn-More" class="headerlink" title="4 Learn More"></a>4 Learn More</h1><p>当你能看到 .h 文件时候，意味着你知道了这个应用程序的各种接口，除了学习别人的优雅代码之外，显然也也可以做一些更有意思的事情，通过一些猜想和试验，我们可以去尝试做一个微信的插件。</p>
+<p>下一次iOS攻防将会介绍动态库的注入和微信插件的制作~</p>
+<p>如果您感兴趣~请点击下方打赏支持萌妹子的原创哟~</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;">&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -463,16 +481,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/20/iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP/" rel="next" title="iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP">
-                <i class="fa fa-chevron-left"></i> iOS——教你如何使用ReactiveCocoa和MVVM为代码解耦构建清爽APP
+              <a href="/2016/08/29/来自Github·sparanoid-中文文案排版指北/" rel="next" title="[来自Github·sparanoid]中文文案排版指北">
+                <i class="fa fa-chevron-left"></i> [来自Github·sparanoid]中文文案排版指北
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/" rel="prev" title="iOS攻防——（二）如何窃取用户的通讯录信息">
-                iOS攻防——（二）如何窃取用户的通讯录信息 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/31/iOS攻防——（五）微信红包插件制作/" rel="prev" title="iOS攻防——（五）微信红包插件制作">
+                iOS攻防——（五）微信红包插件制作 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -488,10 +506,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/"
-     data-title="iOS攻防——（一）ssh登陆与交叉编译"
+        <div class="ds-share flat" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/"
+     data-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用"
      data-content=""
-     data-url="http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/">
+     data-url="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -518,8 +536,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/"
-           data-title="iOS攻防——（一）ssh登陆与交叉编译" data-url="http://zhoulingyu.com/2016/07/11/iOS攻防——（一）ssh登陆与交叉编译/">
+      <div class="ds-thread" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/"
+           data-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用" data-url="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/">
       </div>
     
   </div>
@@ -664,7 +682,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#你需要一部越狱手机"><span class="nav-number">2.</span> <span class="nav-text">你需要一部越狱手机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备"><span class="nav-number">3.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hacking"><span class="nav-number">4.</span> <span class="nav-text">hacking</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ssh登陆手机"><span class="nav-number">4.1.</span> <span class="nav-text">1. ssh登陆手机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-交叉编译"><span class="nav-number">4.2.</span> <span class="nav-text">2. 交叉编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-写经典HelloWorld"><span class="nav-number">4.2.1.</span> <span class="nav-text">1. 写经典HelloWorld</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-编译"><span class="nav-number">4.2.2.</span> <span class="nav-text">2. 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-放到iPhone中"><span class="nav-number">4.2.3.</span> <span class="nav-text">3. 放到iPhone中</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充知识"><span class="nav-number">5.</span> <span class="nav-text">补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-重置ssh登陆密码"><span class="nav-number">5.1.</span> <span class="nav-text">1. 重置ssh登陆密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下期内容"><span class="nav-number">6.</span> <span class="nav-text">下期内容</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-class-dump"><span class="nav-number">1.</span> <span class="nav-text">1 class dump</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-class-dump-好玩在哪？"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 class dump 好玩在哪？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Download"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Use"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Use</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Dumpdecrypted"><span class="nav-number">2.</span> <span class="nav-text">2 Dumpdecrypted</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Download"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Install"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Use"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Use</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-class-dump-砸壳后的文件"><span class="nav-number">3.</span> <span class="nav-text">3 class dump 砸壳后的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Learn-More"><span class="nav-number">4.</span> <span class="nav-text">4 Learn More</span></a></li></ol></div>
             
           </div>
         </section>

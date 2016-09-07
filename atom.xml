@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhoulingyu.com/"/>
-  <updated>2016-08-30T04:10:53.000Z</updated>
+  <updated>2016-08-31T08:40:18.000Z</updated>
   <id>http://zhoulingyu.com/</id>
   
   <author>
@@ -16,33 +16,83 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>iOS攻防——（四）class dump 与 Dumpdecrypted 使用</title>
-    <link href="http://zhoulingyu.com/2016/08/29/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class-dump%20%E4%B8%8E%20Dumpdecrypted%20%E4%BD%BF%E7%94%A8/"/>
-    <id>http://zhoulingyu.com/2016/08/29/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/</id>
-    <published>2016-08-29T06:04:15.000Z</published>
-    <updated>2016-08-30T04:10:53.000Z</updated>
+    <title>iOS攻防——（五）微信红包插件制作</title>
+    <link href="http://zhoulingyu.com/2016/08/31/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C/"/>
+    <id>http://zhoulingyu.com/2016/08/31/iOS攻防——（五）微信红包插件制作/</id>
+    <published>2016-08-31T08:08:31.000Z</published>
+    <updated>2016-08-31T08:40:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="观察"><a href="#观察" class="headerlink" title="观察"></a>观察</h1><p><a href="http://zhoulingyu.com/2016/08/29/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class-dump%20%E4%B8%8E%20Dumpdecrypted%20%E4%BD%BF%E7%94%A8/">上篇</a>中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。</p>
+<p>首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。</p>
+<p>通过观察微信头文件，注意到以下两个文件</p>
+<ol>
+<li><code>CMessageMgr.h</code></li>
+<li><code>WCRedEnvelopesLogicMgr.h</code></li>
+</ol>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-01.png" alt=""></p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-02.png" alt=""></p>
+<p>观察到有这两个方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)AsyncOnAddMsg:(<span class="keyword">id</span>)arg1 MsgWrap:(<span class="keyword">id</span>)arg2;</div><div class="line">- (<span class="keyword">void</span>)OpenRedEnvelopesRequest:(<span class="keyword">id</span>)arg1;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>名字上去猜测第一个方法是异步异步接收消息，第二方法是请求打开红包。</p>
+<p>简单的理一下思路：</p>
+<ol>
+<li>hook微信的 <code>- (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2</code> 方法，滤出红包消息</li>
+<li>调用 <code>(void)OpenRedEnvelopesRequest:(id)arg1</code> 打开红包</li>
+</ol>
+<h1 id="Do-it"><a href="#Do-it" class="headerlink" title="Do it"></a>Do it</h1><p>要做到上一节的目标，我们需要通过动态链接库实现。</p>
+<p>在 Xcode 中新建一个 dylib 工程，我取名叫 <code>RedEnvelopesGenius</code>。</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-03.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;观察&quot;&gt;&lt;a href=&quot;#观察&quot; class=&quot;headerlink&quot; title=&quot;观察&quot;&gt;&lt;/a&gt;观察&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://zhoulingyu.com/2016/08/29/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class-dump%20%E4%B8%8E%20Dumpdecrypted%20%E4%BD%BF%E7%94%A8/&quot;&gt;上篇&lt;/a&gt;中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。&lt;/p&gt;
+&lt;p&gt;首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。&lt;/p&gt;
+&lt;p&gt;通过观察微信头文件，注意到以下两个文件&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;CMessageMgr.h&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WCRedEnvelopesLogicMgr.h&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-01.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-02.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;观察到有这两个方法：&lt;/p&gt;
+&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)AsyncOnAddMsg:(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)arg1 MsgWrap:(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)arg2;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)OpenRedEnvelopesRequest:(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)arg1;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://zhoulingyu.com/categories/iOS/"/>
+    
+    
+      <category term="iOS" scheme="http://zhoulingyu.com/tags/iOS/"/>
+    
+      <category term="iOS攻防" scheme="http://zhoulingyu.com/tags/iOS%E6%94%BB%E9%98%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS攻防——（四）class-dump 与 Dumpdecrypted 使用</title>
+    <link href="http://zhoulingyu.com/2016/08/30/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class-dump%20%E4%B8%8E%20Dumpdecrypted%20%E4%BD%BF%E7%94%A8/"/>
+    <id>http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/</id>
+    <published>2016-08-30T05:09:36.000Z</published>
+    <updated>2016-08-31T08:07:53.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-class-dump"><a href="#1-class-dump" class="headerlink" title="1 class dump"></a>1 class dump</h1><p>class dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。</p>
 <h2 id="1-1-class-dump-好玩在哪？"><a href="#1-1-class-dump-好玩在哪？" class="headerlink" title="1.1 class dump 好玩在哪？"></a>1.1 class dump 好玩在哪？</h2><p>class dump 绝对可以满足你的好奇心。你可以通过 class dump ：</p>
 <ol>
 <li>查看闭源的应用、frameworks、bundles。</li>
 <li>对比一个 APP 不同版本之间的接口变化。</li>
-<li>对一些私有frameworks做些有趣的试验。</li>
+<li>对一些私有 frameworks 做些有趣的试验。</li>
 </ol>
 <h2 id="1-2-Download"><a href="#1-2-Download" class="headerlink" title="1.2 Download"></a>1.2 Download</h2><p>当前版本: 3.5 (64 bit Intel)<br>需要 Mac OS X 10.8 或更高版本</p>
-<ul>
-<li><a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">class-dump-3.5.dmg</a></li>
-<li><a href="http://stevenygard.com/download/class-dump-3.5.tar.gz" target="_blank" rel="external">class-dump-3.5.tar.gz</a></li>
-<li><a href="http://stevenygard.com/download/class-dump-3.5.tar.bz2" target="_blank" rel="external">class-dump-3.5.tar.bz2</a></li>
-</ul>
-<a id="more"></a>
-<h2 id="1-3-Use"><a href="#1-3-Use" class="headerlink" title="1.3 Use"></a>1.3 Use</h2><p>下载好后，双击dmg文件，将其中的 class-dump 文件放到 <code>/usr/local/sbin</code> 目录下，然后就可以在命令行中使用了。</p>
+<p><a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">class-dump-3.5.dmg</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.gz" target="_blank" rel="external">class-dump-3.5.tar.gz</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.bz2" target="_blank" rel="external">class-dump-3.5.tar.bz2</a></p>
+<h2 id="1-3-Use"><a href="#1-3-Use" class="headerlink" title="1.3 Use"></a>1.3 Use</h2><p>下载好后，双击dmg文件，将其中的 class-dump 文件放到/usr/local/sbin 目录下，然后就可以在命令行中使用了。</p>
 <p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png" alt=""></p>
 <p>官方用法指南：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class-dump 3.5 (64 bit)</div><div class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</div><div class="line"></div><div class="line">  where options are:</div><div class="line">        -a             show instance variable offsets</div><div class="line">        -A             show implementation addresses</div><div class="line">        --arch &lt;arch&gt;  choose a specific architecture from a universal binary (ppc, ppc64, i386, x86_64)</div><div class="line">        -C &lt;regex&gt;     only display classes matching regular expression</div><div class="line">        -f &lt;str&gt;       find string in method name</div><div class="line">        -H             generate header files in current directory, or directory specified with -o</div><div class="line">        -I             sort classes, categories, and protocols by inheritance (overrides -s)</div><div class="line">        -o &lt;dir&gt;       output directory used for -H</div><div class="line">        -r             recursively expand frameworks and fixed VM shared libraries</div><div class="line">        -s             sort classes and categories by name</div><div class="line">        -S             sort methods by name</div><div class="line">        -t             suppress header in output, for testing</div><div class="line">        --list-arches  list the arches in the file, then exit</div><div class="line">        --sdk-ios      specify iOS SDK version (will look in /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk</div><div class="line">        --sdk-mac      specify Mac OS X version (will look in /Developer/SDKs/MacOSX&lt;version&gt;.sdk</div><div class="line">        --sdk-root     specify the full SDK root path (or use --sdk-ios/--sdk-mac for a shortcut)</div></pre></td></tr></table></figure>
 <p>简单的举例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump -H /Applications/Calculator.app -o ~/Desktop/dump/Calculate-dump</div></pre></td></tr></table></figure>
-<p><code>/Applications/Calculator.app</code> 是 Mac 上计算器应用的路径。<br><code>~/Desktop/dump/Calculate-dump</code> 是指定的存放dump出来头文件的文件夹路径。</p>
+<p><code>/Applications/Calculator.app</code> 是 Mac 上计算器应用的路径。<br><code>~/Desktop/dump/Calculate-dump</code> 是指定的存放 dump 出来头文件的文件夹路径。</p>
 <p>执行完成后可以看到指定的保存目录下已经有 dump 出来的头文件了：</p>
 <p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png" alt=""></p>
 <p>打开一个 <code>.h</code> 文件可以看到相应内容：</p>
@@ -50,21 +100,21 @@
 <h1 id="2-Dumpdecrypted"><a href="#2-Dumpdecrypted" class="headerlink" title="2 Dumpdecrypted"></a>2 Dumpdecrypted</h1><p>class dump 虽然能帮你解析出一个 app 的头文件，但是对于 App Store 下载的 App 都是通过苹果的一层签名加密，通常我们成为『加壳』。对于已经加壳的 APP，解析后的效果就和加了代码混淆类似。</p>
 <p>比如直接去 dump 微信，出来的结果大概是这样：</p>
 <p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png" alt=""></p>
-<h2 id="2-1-Download"><a href="#2-1-Download" class="headerlink" title="2.1 Download"></a>2.1 Download</h2><p><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">Clutch GitHub 地址</a></p>
-<h2 id="2-2-Install"><a href="#2-2-Install" class="headerlink" title="2.2 Install"></a>2.2 Install</h2><p>Dumpdecrypted 比另一个砸壳工具 Clutch 要难用的多。但由于 Clutch 无法砸开含有兼容 WatchOs<br>2 的App，所以只能使用Dumpdecrypted。</p>
+<h2 id="2-1-Download"><a href="#2-1-Download" class="headerlink" title="2.1 Download"></a>2.1 Download</h2><p><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">dumpdecrypted GitHub 地址</a></p>
+<h2 id="2-2-Install"><a href="#2-2-Install" class="headerlink" title="2.2 Install"></a>2.2 Install</h2><p>Dumpdecrypted 比另一个砸壳工具 Clutch 要难用的多。但由于 Clutch 无法砸开含有兼容 WatchOs<br>2 的 App，所以只能使用 Dumpdecrypted。</p>
 <p>下载后打开 <code>Makefile</code> 文件，注意第三行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ SDK=`xcrun --sdk iphoneos --show-sdk-path`</div></pre></td></tr></table></figure>
 <p>这里填写的 SDK 必须与你越狱的 iPhone 系统等级一致，你可以这样查看你 MAC 的 SDK ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ xcrun --sdk iphoneos --show-sdk-path</div></pre></td></tr></table></figure>
 <p>输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk</div></pre></td></tr></table></figure>
-<p>而我的手机是 7.0 的，所以只能去<a href="https://sdks.website/" target="_blank" rel="external">这里</a>下载对应的 SDK。、</p>
+<p>而我的手机是 7.0 的，所以只能去这里下载对应的 SDK。</p>
 <p>Makefile 所有需要填写的填好后：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd dumpdecrypted</div><div class="line">$ make</div></pre></td></tr></table></figure>
-<p>在当前目录下生成 <code>dumpdecrypted.dylib</code> 文件。</p>
-<p>如果你觉得很麻烦，可以直接来<a href="https://github.com/DaSens/Crack-file/tree/master/crack%20file" target="_blank" rel="external">这里</a>或者<a href="http://git.oschina.net/hongyangyi/dumpdecrypted" target="_blank" rel="external">这里</a>下载</p>
-<h2 id="2-3-Use"><a href="#2-3-Use" class="headerlink" title="2.3 Use"></a>2.3 Use</h2><p>将 <code>dumpdecrypted.dylib</code> 放到需要砸壳 app 的 Document 下。</p>
-<p>查找微信的 Document：</p>
+<p>在当前目录下生成 dumpdecrypted.dylib 文件。</p>
+<p>如果你觉得很麻烦，可以直接来<a href="https://github.com/DaSens/Crack-file/tree/master/crack%20file" target="_blank" rel="external">这里</a>或者<a href="http://git.oschina.net/hongyangyi/dumpdecrypted" target="_blank" rel="external">这里</a>下载。</p>
+<h2 id="2-3-Use"><a href="#2-3-Use" class="headerlink" title="2.3 Use"></a>2.3 Use</h2><p>将 <code>dumpdecrypted.dylib</code> 放到需要砸壳 app 的 Documents 下。</p>
+<p>查找微信的 Documents：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find / -name WeChat.app</div></pre></td></tr></table></figure>
 <p>得到路径：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app</div></pre></td></tr></table></figure>
@@ -76,21 +126,21 @@
 <p>注意 <code>DYLD_INSERT_LIBRARIES=</code> 后填写的是你刚刚传输的 .dylib 文件名，我的是 dumpdecrypted_7.dylib</p>
 </blockquote>
 <p>砸壳成功：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[+] detected 32bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0xfea4c(from 0xfe000) = a4c</div><div class="line">[+] Found encrypted data at address 00004000 of length 42237952 bytes - type 1.</div><div class="line">[+] Opening /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type</div><div class="line">[+] Executable is a FAT image - searching for right architecture</div><div class="line">[+] Correct arch is at offset 16384 in the file</div><div class="line">[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file</div><div class="line">[+] Dumping the decrypted data into the file</div><div class="line">[+] Copying the not encrypted remainder of the file</div><div class="line">[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset 4a4c</div><div class="line">[+] Closing original file</div><div class="line">[+] Closing dump file</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[+] detected 32bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0xfea4c(from 0xfe000) = a4c</div><div class="line">[+] Found encrypted data at address 00004000 of length 42237952 bytes - type 1.[+] Opening /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type[+] Executable is a FAT image - searching for right architecture[+] Correct arch is at offset 16384 in the file[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file[+] Dumping the decrypted data into the file[+] Copying the not encrypted remainder of the file[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset 4a4c</div><div class="line">[+] Closing original file[+] Closing dump file</div></pre></td></tr></table></figure>
 <p>ls 查看 Documents 中文件多了一个 <code>WeChat.decrypted</code>，这就是砸壳过后的文件，scp出来：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp WeChat.decrypted zhoulingyu@172.16.211.181:/Users/zhoulingyu/Desktop/dump/Wechat</div></pre></td></tr></table></figure>
 <h1 id="3-class-dump-砸壳后的文件"><a href="#3-class-dump-砸壳后的文件" class="headerlink" title="3 class dump 砸壳后的文件"></a>3 class dump 砸壳后的文件</h1><p>上一步我们得到了 <code>WeChat.decrypted</code>，现在可以对其进行 dump：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump --arch armv7 WeChat.decrypted -H -o /Users/zhoulingyu/Desktop/dump/Wechat/Wechat-decrypted-dump</div></pre></td></tr></table></figure>
 <blockquote>
 <p>–arch armv7 是指定架构，dumpdecrypted 只会砸你手机处理器对应的那个壳，fat binary 的其它部分仍然是有壳的，而 class-dump 的默认目标又不是被砸壳的那个部分，如果不指定架构只能导出 CDStructures.h 一个文件</p>
-</blockquote>
 <p>现在就可以看到 dump 后是明文的了：</p>
+</blockquote>
 <p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png" alt=""></p>
 <h1 id="4-Learn-More"><a href="#4-Learn-More" class="headerlink" title="4 Learn More"></a>4 Learn More</h1><p>当你能看到 .h 文件时候，意味着你知道了这个应用程序的各种接口，除了学习别人的优雅代码之外，显然也也可以做一些更有意思的事情，通过一些猜想和试验，我们可以去尝试做一个微信的插件。</p>
 <p>下一次iOS攻防将会介绍动态库的注入和微信插件的制作~</p>
-<p>如果您感兴趣~请点击下方<strong>打赏</strong>支持萌妹子的原创哟~</p>
+<p>如果您感兴趣~请点击下方打赏支持萌妹子的原创哟~</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#99;&#111;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#x68;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#99;&#111;&#100;&#x65;&#x72;&#x66;&#105;&#x73;&#x68;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;">&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -99,19 +149,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;1-class-dump&quot;&gt;&lt;a href=&quot;#1-class-dump&quot; class=&quot;headerlink&quot; title=&quot;1 class dump&quot;&gt;&lt;/a&gt;1 class dump&lt;/h1&gt;&lt;p&gt;class dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。&lt;/p&gt;
-&lt;h2 id=&quot;1-1-class-dump-好玩在哪？&quot;&gt;&lt;a href=&quot;#1-1-class-dump-好玩在哪？&quot; class=&quot;headerlink&quot; title=&quot;1.1 class dump 好玩在哪？&quot;&gt;&lt;/a&gt;1.1 class dump 好玩在哪？&lt;/h2&gt;&lt;p&gt;class dump 绝对可以满足你的好奇心。你可以通过 class dump ：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;查看闭源的应用、frameworks、bundles。&lt;/li&gt;
-&lt;li&gt;对比一个 APP 不同版本之间的接口变化。&lt;/li&gt;
-&lt;li&gt;对一些私有frameworks做些有趣的试验。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;1-2-Download&quot;&gt;&lt;a href=&quot;#1-2-Download&quot; class=&quot;headerlink&quot; title=&quot;1.2 Download&quot;&gt;&lt;/a&gt;1.2 Download&lt;/h2&gt;&lt;p&gt;当前版本: 3.5 (64 bit Intel)&lt;br&gt;需要 Mac OS X 10.8 或更高版本&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://stevenygard.com/download/class-dump-3.5.dmg&quot;&gt;class-dump-3.5.dmg&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://stevenygard.com/download/class-dump-3.5.tar.gz&quot;&gt;class-dump-3.5.tar.gz&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://stevenygard.com/download/class-dump-3.5.tar.bz2&quot;&gt;class-dump-3.5.tar.bz2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+      &lt;h1 id=&quot;1-class-dump&quot;&gt;&lt;a href=&quot;#1-class-dump&quot; class=&quot;headerlink&quot; title=&quot;1 class dump&quot;&gt;&lt;/a&gt;1 class dump&lt;/h1&gt;&lt;p&gt;class dump 是一个用于检查保存在 Mach-O 文
     
     </summary>
     
@@ -126,10 +164,10 @@
   
   <entry>
     <title>[来自Github·sparanoid]中文文案排版指北</title>
-    <link href="http://zhoulingyu.com/2016/08/17/%E6%9D%A5%E8%87%AAGithub%C2%B7sparanoid-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%88%E6%8E%92%E7%89%88%E6%8C%87%E5%8C%97/"/>
-    <id>http://zhoulingyu.com/2016/08/17/来自Github·sparanoid-中文文案排版指北/</id>
-    <published>2016-08-17T11:03:01.000Z</published>
-    <updated>2016-08-17T11:14:08.000Z</updated>
+    <link href="http://zhoulingyu.com/2016/08/29/%E6%9D%A5%E8%87%AAGithub%C2%B7sparanoid-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%88%E6%8E%92%E7%89%88%E6%8C%87%E5%8C%97/"/>
+    <id>http://zhoulingyu.com/2016/08/29/来自Github·sparanoid-中文文案排版指北/</id>
+    <published>2016-08-29T05:03:01.000Z</published>
+    <updated>2016-08-31T02:47:56.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文来自 <a href="https://github.com/sparanoid/chinese-copywriting-guidelines" target="_blank" rel="external">chinese-copywriting-guidelines</a><br>作者：<a href="https://github.com/sparanoid" target="_blank" rel="external">sparanoid</a><br>中文版作者：<a href="https://github.com/mzlogin" target="_blank" rel="external">mzlogin</a></p>
 <h1 id="中文文案排版指北"><a href="#中文文案排版指北" class="headerlink" title="中文文案排版指北"></a>中文文案排版指北</h1><p><img src="https://david-dm.org/mzlogin/chinese-copywriting-guidelines/dev-status.svg" alt="devDependency Status"></p>
@@ -518,7 +556,7 @@
 <p><code>enabled</code>属性也是一个发送<code>YES</code>和<code>NO</code>的信号。当Command通过发送<code>NO</code>的<code>enabledSignal</code>信号创建，或者如果信号在执行并且<code>allowsConcurrentExecutions</code> 为 <code>NO</code>，<code>enabled</code>就会发送<code>NO</code>。</p>
 <p><code>-execute:</code>方法会自动订阅原始Signal并且广播它。这意味着你不需要去订阅<code>-execute:</code>返回的信号，但是如果你订阅了也不需要担心它会被执行两次。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#x69;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#x64;&#101;&#x72;&#x66;&#x69;&#x73;&#104;&#x40;&#x31;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -601,7 +639,7 @@
 <h1 id="防"><a href="#防" class="headerlink" title="防"></a>防</h1><p>知道了Cycript的可怕，在有重要信息藏在代码中的时候，我们也得学会如何放置Cycript修改运行时。</p>
 <p>你可以参考<a href="http://www.cocoachina.com/ios/20150511/11801.html" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -761,7 +799,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nc 192.168.31.152 55 &gt; itunesstored2.sqlitedb</div></pre></td></tr></table></figure>
 <p>OK，在MAC查看一下内容。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#58;&#99;&#x6f;&#100;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#99;&#x6f;&#100;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#104;&#x40;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#109;">&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#104;&#x40;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -849,7 +887,7 @@
 <p>将root:及mobile:后面的13个x字符处修改成<code>/smx7MYTQIi2M</code>，修改后保存此文件，你iphone的ssh密码就重新回到默认的alpine</p>
 <h1 id="下期内容"><a href="#下期内容" class="headerlink" title="下期内容"></a>下期内容</h1><p>只是写个HelloWorld是不是很无聊，下一期内容将会教你如何<strong>非法窃取iTunesstore信息</strong>以及<strong>Cycript修改运行时</strong>。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#46;&#x63;&#111;&#x6d;">&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -957,7 +995,7 @@
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>以上代码地址请点<a href="http://download.csdn.net/detail/u010127917/9528911" target="_blank" rel="external">这里</a>。</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>小鱼最近在换工作哟~各路的朋友有推荐的请务必介绍我哟~<br>简历在<a href="http://zhoulingyu.com/about/">这里</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#101;&#x72;&#102;&#x69;&#115;&#x68;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#111;&#109;">&#x63;&#x6f;&#100;&#101;&#x72;&#102;&#x69;&#115;&#x68;&#x40;&#x31;&#x36;&#51;&#46;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#99;&#x6f;&#100;&#101;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#x6f;&#100;&#101;&#x72;&#102;&#105;&#115;&#104;&#64;&#x31;&#x36;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1026,7 +1064,7 @@
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>约定好的奉上自拍哈哈</p>
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94CFWaterWave%E6%B0%B4%E6%B3%A2%E6%95%88%E6%9E%9C%E5%B7%A5%E5%85%B7-01.JPG-w375" alt=""></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#105;&#115;&#x68;&#x40;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#99;&#x6f;&#109;">&#x63;&#x6f;&#x64;&#x65;&#114;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#54;&#x33;&#x2e;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1105,7 +1143,7 @@
 <p><img src="http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-04.png-w500" alt=""></p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>FBMemoryProfiler目前只是0.1版本，不能算稳定，我在使用的时候也Crash了好几次。但是谁不相信FaceBook的大神呢~嘿嘿</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;">&#99;&#x6f;&#x64;&#x65;&#x72;&#102;&#105;&#115;&#x68;&#64;&#49;&#54;&#51;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x63;&#111;&#100;&#x65;&#114;&#x66;&#105;&#115;&#104;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;">&#x63;&#111;&#100;&#x65;&#114;&#x66;&#105;&#115;&#104;&#x40;&#49;&#54;&#51;&#x2e;&#99;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1189,7 +1227,7 @@
 <li>解决<br> brew uninstall watchman<br> brew install –HEAD watchman</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;">&#99;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#x31;&#54;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#54;&#x33;&#46;&#99;&#x6f;&#109;">&#x63;&#x6f;&#100;&#101;&#114;&#102;&#x69;&#x73;&#104;&#64;&#x31;&#54;&#x33;&#46;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1256,7 +1294,7 @@
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其实很多奇怪的问题只有在实际开发的时候发现，这时候你就会认识到自己的经验不足。所以啦，学无止境~。</p>
 <p>过段时间妹子我会奉上自己的照片哦~（好久没自拍啦~~😲）</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#99;&#111;&#x64;&#x65;&#114;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#111;&#109;">&#99;&#111;&#x64;&#x65;&#114;&#x66;&#x69;&#115;&#x68;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#111;&#100;&#x65;&#114;&#102;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1305,7 +1343,7 @@
 <h2 id="问题为什么是问题"><a href="#问题为什么是问题" class="headerlink" title="问题为什么是问题"></a>问题为什么是问题</h2><p>如果你不去注意这个地方，就可能和我一样去踩坑。<br>为什么这样说？在项目中，我们选中了一批图片，当我需要上传图片到我们的服务器时，需要将PHAsset换成UIImage。<br>当调用<code>- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler;</code>并在回调中写入上传图片至服务器的代码。这时候，如果回调被调用了两次，就会导致同一张图片被上传两次。如果做了同图判断，就会不断的报出一张图片上传不成功，或者少传一张的情况。</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>关于AssetsLibrary框架的坑，可以看<a href="http://kayosite.com/ios-development-and-detail-of-photo-framework.html/comment-page-1" target="_blank" rel="external">这篇文章</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#x6f;&#x6d;">&#99;&#111;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#109;">&#99;&#111;&#100;&#101;&#114;&#102;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1381,7 +1419,7 @@
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>想想一下，上面的问题，如果这时候你的项目已经上线了，所有用户浏览这个页面时都会崩溃，必须及时修复。Don’t worry，如果你已经预先在<code>AppDelegate</code>的<code>didFinishLaunchingWithOptions</code>中做了网络加载，你只需要去修改那段js，所有线上的用户问题都会被及时解决</p>
 <h1 id="3-源码"><a href="#3-源码" class="headerlink" title="3. 源码"></a>3. 源码</h1><p>老规矩，这里奉上上面demo的<a href="http://download.csdn.net/detail/u010127917/9407227" target="_blank" rel="external">源码</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#99;&#x6f;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;">&#99;&#x6f;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#x31;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#100;&#x65;&#x72;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1481,7 +1519,7 @@
 <h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><p>如果想要源代码，小鱼已经上传了一份，可以在<a href="http://download.csdn.net/detail/u010127917/9387848" target="_blank" rel="external">这里</a>下载</p>
 <h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可以解析更加复杂的URL Scheme，可以参考官方文档：<a href="https://github.com/joeldev/JLRoutes" target="_blank" rel="external">https://github.com/joeldev/JLRoutes</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#114;&#102;&#105;&#115;&#104;&#64;&#x31;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;">&#99;&#x6f;&#x64;&#101;&#114;&#102;&#105;&#115;&#104;&#64;&#x31;&#x36;&#x33;&#46;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#x33;&#46;&#x63;&#111;&#x6d;">&#99;&#111;&#x64;&#x65;&#114;&#102;&#105;&#115;&#104;&#64;&#49;&#x36;&#x33;&#46;&#x63;&#111;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1608,7 +1646,7 @@
 <p>希望你能够喜欢本套框架以及博主这个萌萌哒大四女程序员^_^</p>
 <p>如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到我的<a href="http://zhoulingyu.com">博客</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#x63;&#x6f;&#100;&#101;&#114;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#x6d;">&#x63;&#x6f;&#100;&#101;&#114;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#54;&#x33;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#99;&#x6f;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#111;&#109;">&#99;&#x6f;&#100;&#x65;&#114;&#102;&#105;&#115;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1707,7 +1745,7 @@
 <p>在JAVA著名的Spring框架中，提出了面向切面编程。也就是利用回调，向代码中插入切面，拦截、过滤、织入自己想添加的逻辑。切面编程可以实现种种不可思议的编程，在每一个方法前、方法后、或者方法中的任意位置，织入你想添加逻辑。这种结合了责任链设计模式的优秀的编程思想被迅速广泛使用。</p>
 <p>iOS在加入了block后同样被广泛使用，所以掌握好block是iOS学习之路不可少的一部分。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#99;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#x68;&#64;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;">&#99;&#111;&#x64;&#x65;&#x72;&#102;&#x69;&#115;&#x68;&#64;&#49;&#54;&#x33;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#111;&#100;&#101;&#114;&#102;&#x69;&#115;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#111;&#100;&#101;&#114;&#102;&#x69;&#115;&#104;&#x40;&#x31;&#54;&#51;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1771,7 +1809,7 @@
 <li>绘制空心图形</li>
 </ol>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#105;&#115;&#104;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;">&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#105;&#115;&#104;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#99;&#x6f;&#x64;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#99;&#x6f;&#x64;&#101;&#114;&#x66;&#105;&#115;&#104;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1807,7 +1845,7 @@
 <ul>
 <li>姓名：周凌宇</li>
 <li>联系电话：18717819045</li>
-<li>邮箱：<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x63;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#109;">&#x63;&#111;&#x64;&#x65;&#114;&#102;&#105;&#x73;&#104;&#64;&#49;&#54;&#x33;&#x2e;&#99;&#111;&#109;</a></li>
+<li>邮箱：<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#100;&#101;&#114;&#x66;&#x69;&#x73;&#104;&#64;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;</a></li>
 <li>博客：<a href="http://zhoulingyu.com">http://zhoulingyu.com</a></li>
 <li>github：<a href="https://github.com/summertian4" target="_blank" rel="external">https://github.com/summertian4</a></li>
 <li>应聘职位：iOS工程师</li>
@@ -2098,7 +2136,7 @@
 </ol>
 <h1 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h1><p>如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到<a href="http://zhoulingyu.com">我的博客</a></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#x72;&#x66;&#x69;&#115;&#104;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#x65;&#x72;&#x66;&#x69;&#115;&#104;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#x63;&#x6f;&#100;&#101;&#x72;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -2110,53 +2148,6 @@
       &lt;h1 id=&quot;CFSecurityCodeButton&quot;&gt;&lt;a href=&quot;#CFSecurityCodeButton&quot; class=&quot;headerlink&quot; title=&quot;CFSecurityCodeButton&quot;&gt;&lt;/a&gt;CFSecurityCodeButton&lt;/h1&gt;&lt;p&gt;写了一个验证码按钮的控件，简约好用，希望大家喜欢。&lt;/p&gt;
 &lt;p&gt;github地址：&lt;a href=&quot;https://github.com/summertian4/iOS-CFSecurityCodeButton&quot;&gt;https://github.com/summertian4/iOS-CFSecurityCodeButton&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;CFSecurityCodeButton是一个简约的验证码按钮。&lt;br&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFSecurityCodeButton-show.gif&quot; alt=&quot;CFSecurityCodeButton演示&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://zhoulingyu.com/categories/iOS/"/>
-    
-    
-      <category term="iOS" scheme="http://zhoulingyu.com/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS——分享自己封装的指示器CFHUD</title>
-    <link href="http://zhoulingyu.com/2015/11/08/iOS%E2%80%94%E2%80%94%E5%88%86%E4%BA%AB%E8%87%AA%E5%B7%B1%E5%B0%81%E8%A3%85%E7%9A%84%E6%8C%87%E7%A4%BA%E5%99%A8CFHUD/"/>
-    <id>http://zhoulingyu.com/2015/11/08/iOS——分享自己封装的指示器CFHUD/</id>
-    <published>2015-11-08T10:12:27.000Z</published>
-    <updated>2016-08-05T06:23:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="CFHUD"><a href="#CFHUD" class="headerlink" title="CFHUD"></a>CFHUD</h1><p>这几天自己写了一个HUD，感觉挺漂亮的，有虚化效果，传到了github上给大家分享。<br><a href="https://github.com/summertian4/iOS-CFBlurHUD" target="_blank" rel="external">GitHub链接</a>：<a href="https://github.com/summertian4/iOS-CFBlurHUD" target="_blank" rel="external">https://github.com/summertian4/iOS-CFBlurHUD</a></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>CFBlurHUD是基于UIVisualEffectView实现的指示器，拥有虚化模糊效果。</p>
-<p><img src="http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFBlurHUD-show.gif" alt="CFBlurHUD效果演示"></p>
-<a id="more"></a>
-<h1 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h1><p>最低支持版本：iOS 8</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>将CFBlurHUD下的所有内容拖入你的项目中</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>普通Loading指示器</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">CFBlurHUD</span> show:<span class="string">@"你的信息"</span>];</div></pre></td></tr></table></figure>
-<p>成功指示器</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">CFBlurHUD</span> showSuccess:<span class="string">@"成功"</span>];</div></pre></td></tr></table></figure>
-<p>失败指示器</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">CFBlurHUD</span> showFaild:<span class="string">@"错误"</span>];</div></pre></td></tr></table></figure>
-<p>如果你不希望显示信息，参数可以填入nil或者@””</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">CFBlurHUD</span> show:<span class="string">@""</span>];</div><div class="line">[<span class="built_in">CFBlurHUD</span> showSuccess:<span class="string">@""</span>];</div><div class="line">[<span class="built_in">CFBlurHUD</span> showFaild:<span class="string">@""</span>];</div></pre></td></tr></table></figure>
-<h1 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h1><p>如果你不喜欢CFBlurHUD的颜色，可以在CFBlurHUD.m的宏定义部分更改参数。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define CFBlurHUDBorderColor [UIColor colorWithRed:98/255.0 green:98/255.0 blue:98/255.0 alpha:0.5]</span></div><div class="line"><span class="meta">#define CFBlurHUDMessageColor [UIColor colorWithRed:110/255.0 green:110/255.0 blue:110/255.0 alpha:1]</span></div><div class="line"><span class="meta">#define CFBlurHUDActivityIndicatorColor [UIColor colorWithRed:142/255.0 green:155/255.0 blue:236/255.0 alpha:1]</span></div></pre></td></tr></table></figure>
-<h1 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h1><p>如果你有需要更改CFBlurHUD的代码，请尽量不要更改CFBlurHUD的边框。因为UIVisualEffectView的Light样式在背景是白色情况下会难以被看见。</p>
-<hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#58;&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#x64;&#x65;&#114;&#x66;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
-<p>博主主要写javaEE和iOS的。</p>
-<p>希望大家一起进步。</p>
-<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
-<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;CFHUD&quot;&gt;&lt;a href=&quot;#CFHUD&quot; class=&quot;headerlink&quot; title=&quot;CFHUD&quot;&gt;&lt;/a&gt;CFHUD&lt;/h1&gt;&lt;p&gt;这几天自己写了一个HUD，感觉挺漂亮的，有虚化效果，传到了github上给大家分享。&lt;br&gt;&lt;a href=&quot;https://github.com/summertian4/iOS-CFBlurHUD&quot;&gt;GitHub链接&lt;/a&gt;：&lt;a href=&quot;https://github.com/summertian4/iOS-CFBlurHUD&quot;&gt;https://github.com/summertian4/iOS-CFBlurHUD&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;CFBlurHUD是基于UIVisualEffectView实现的指示器，拥有虚化模糊效果。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFBlurHUD-show.gif&quot; alt=&quot;CFBlurHUD效果演示&quot;&gt;&lt;/p&gt;
     
     </summary>
     
