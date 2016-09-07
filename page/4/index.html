@@ -260,6 +260,152 @@
             
               
                 
+                <a class="post-title-link" href="/2015/09/25/iOS学习——Notification通知机制/" itemprop="url">
+                  iOS学习——Notification通知机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-25T20:37:00+08:00" content="2015-09-25">
+              2015-09-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/25/iOS学习——Notification通知机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/25/iOS学习——Notification通知机制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2015/09/25/iOS学习——Notification通知机制/" class="leancloud_visitors" data-flag-title="iOS学习——Notification通知机制">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="iOS中的事件有哪几种"><a href="#iOS中的事件有哪几种" class="headerlink" title="iOS中的事件有哪几种"></a><strong>iOS中的事件有哪几种</strong></h2><p>iOS的事件机制一共三种分别是</p>
+<ol>
+<li>addTarget方式</li>
+<li>delegate代理方式</li>
+<li>Notification通知机制</li>
+</ol>
+<hr>
+<h2 id="通知机制的原理"><a href="#通知机制的原理" class="headerlink" title="通知机制的原理"></a><strong>通知机制的原理</strong></h2><ol>
+<li>iOS的通知分为通知发布者和通知监听者，通知将会放在<strong><code>NSNotificationCenter</code></strong>中。</li>
+<li>通知发布者发布带有信息（或者不带有信息）的通知，放置到<strong><code>NSNotificationCenter</code></strong>中。</li>
+<li>通知监听者可以选择需要监听的对象。</li>
+<li>要注意的是，在编码中是先放置监听者，再放置通知发布者。保证通知发布时已经有监听者在监听。</li>
+</ol>
+<hr>
+<h2 id="通知机制的实现"><a href="#通知机制的实现" class="headerlink" title="通知机制的实现"></a><strong>通知机制的实现</strong></h2><p>相信你看了下面的代码一定能理解，博主把能打上的注释全部打上了</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  main.m</span></div><div class="line"><span class="comment">//  day34_通知</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by 周凌宇 on 15/9/3.</span></div><div class="line"><span class="comment">//  Copyright (c) 2015年 周凌宇. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"NotificationListener.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"NotificationSender.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</div><div class="line">    <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        <span class="comment">// 实例化一个通知发布者</span></div><div class="line">        NotificationSender *sender1 = [[NotificationSender alloc] init];</div><div class="line">        <span class="comment">// 实例化一个通知监听者</span></div><div class="line">        NotificationListener *listener1 = [[NotificationListener alloc] init];</div><div class="line">        </div><div class="line">        <span class="comment">// 1.获取NSnotificationCenter对象</span></div><div class="line">        <span class="built_in">NSNotificationCenter</span> *notificationCenter = [<span class="built_in">NSNotificationCenter</span> defaultCenter];</div><div class="line">        </div><div class="line">        <span class="comment">// 2.先监听</span></div><div class="line">        <span class="comment">// 参数1：要监听通知的对象</span></div><div class="line">        <span class="comment">// 参数2：该对象的哪个方法监听</span></div><div class="line">        <span class="comment">// 参数3：被监听的通知的名称</span></div><div class="line">        <span class="comment">// 参数4：发布通知的对象</span></div><div class="line">        <span class="comment">// 如果参数3为nil，表示参数4指定的对象发布的所有通知都会被参数2指定的方法监听</span></div><div class="line">        <span class="comment">// 如果参数4为nil，表示无论哪个给对象，只要发布的通知名称与参数3相同，都会被监听</span></div><div class="line">        <span class="comment">// 如果参数3、4都为nil 那么所有对象发布的所有通知都会被监听</span></div><div class="line">        [notificationCenter addObserver:listener1 selector:<span class="keyword">@selector</span>(listen:) name:<span class="string">@"通知1"</span> object:sender1];</div><div class="line">        </div><div class="line">        <span class="comment">// 3.向通知中心发布通知</span></div><div class="line">        [notificationCenter postNotificationName:<span class="string">@"通知1"</span> object:sender1 userInfo:@&#123;<span class="string">@"title"</span> : <span class="string">@"阅兵"</span>, <span class="string">@"content"</span> : <span class="string">@"阅兵将在9点开始"</span>&#125;];</div><div class="line">        </div><div class="line">        <span class="comment">// 4.移除通知，在监听者的dealloc中移除</span></div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/09/25/iOS学习——Notification通知机制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/08/24/iOS学习——ScrollView图片轮播和同类控件优先级问题/" itemprop="url">
                   iOS学习——ScrollView图片轮播和同类控件优先级问题
                 </a>
@@ -476,7 +622,7 @@
 <p>如果写的demo，就会发现+号方法居然是可以访问非静态变量的，这充分的证明了+号方法不是静态方法。</p>
 <p>写下这篇博客，希望和我一样被OC的特殊写法震撼到的程序员能后赶快发现。</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#99;&#x6f;&#x64;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;">&#99;&#x6f;&#x64;&#x65;&#x72;&#x66;&#105;&#x73;&#104;&#x40;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#x63;&#x6f;&#x64;&#101;&#x72;&#102;&#x69;&#x73;&#x68;&#64;&#49;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -902,7 +1048,7 @@
 <p>为什么要这样呢？举个例子，OC中的数组内可以保存所有类型对象，但是不能保存基本类型。<br>NSArray里不能放入int、double这样类型的，只能放入对象。那么这时候如果你想向数组存入一个空对象，存nil是不合理的，这时就可以用NSNull代替。所以说NSNull是nil的对象形式。</p>
 <h2 id="nil和NSNull除了类型完全没有区别吗？"><a href="#nil和NSNull除了类型完全没有区别吗？" class="headerlink" title="nil和NSNull除了类型完全没有区别吗？"></a><strong>nil和NSNull除了类型完全没有区别吗</strong>？</h2><p>实际上是有的：<br>若obj为nil：<br><code>［obj message］</code>将返回NO,而不是NSException<br>若obj为NSNull:<br><code>［obj message］</code>将抛出异常NSException，即NSNull类似于Java的null，可以报空指针错误</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#99;&#111;&#x64;&#101;&#114;&#102;&#x69;&#115;&#x68;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#109;">&#99;&#111;&#x64;&#101;&#114;&#102;&#x69;&#115;&#x68;&#64;&#x31;&#54;&#x33;&#x2e;&#99;&#111;&#109;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#99;&#111;&#x64;&#101;&#x72;&#102;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;">&#99;&#111;&#x64;&#101;&#x72;&#102;&#105;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1050,7 +1196,7 @@
 <hr>
 <h1 id="group"><a href="#group" class="headerlink" title="group"></a><strong>group</strong></h1><p>经常写java的程序员们都绝对对习惯性的建好包，分好层。并且习惯性的认为包路径是真实存在的（有相应的文件夹），然而xcode中的group看似是文件夹，实际是只是一个逻辑上的分类，是不存在相应文件件的。<br>xcode中显示看似是文件夹：<br><img src="http://img.blog.csdn.net/20150807204034235" alt="xcode中显示看似是文件夹"><br>实际上却是没有的：<br><img src="http://img.blog.csdn.net/20150807204110753" alt="实际上没有文件夹"></p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x63;&#111;&#x64;&#101;&#114;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#111;&#x6d;">&#x63;&#111;&#x64;&#101;&#114;&#x66;&#x69;&#x73;&#x68;&#x40;&#49;&#x36;&#x33;&#x2e;&#x63;&#111;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#99;&#111;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#104;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;">&#99;&#111;&#x64;&#101;&#114;&#x66;&#x69;&#115;&#104;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -1494,138 +1640,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/" itemprop="url">
-                  大数据时代入门<二>——数据挖掘方法和技术 理论篇
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-05-28T10:15:00+08:00" content="2015-05-28">
-              2015-05-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/" class="leancloud_visitors" data-flag-title="大数据时代入门<二>——数据挖掘方法和技术 理论篇">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>数据挖掘方法依据的基本原理主要有：<br/><br>&emsp;&emsp;1. 信息论，主要是计算数据库中属性的信息量，如ID3、IBLE等方法<br/><br>&emsp;&emsp;2. 集合论，利用集合之间的覆盖关系（如粗糙集方法、覆盖正例排斥反例的AQ11方法），或计算数据项在整个集合中所占的比例（如关联规则挖掘方法）；<br/><br>&emsp;&emsp;3. 仿生物技术，把生物体的运转过程转换成数学模型，再用数学模型去解决现实世界的非生物问题，如神经网络、遗传算法等<br/><br>&emsp;&emsp;4. 人工智能技术，主要是利用启发式搜索方法，如公式发现的BACOM、FDD等方法<br/><br>&emsp;&emsp;5. 可视化技术，主要是利用图形显示技术<br/><br><br/></p>
-<h3 id="归纳学习的信息论方法"><a href="#归纳学习的信息论方法" class="headerlink" title="归纳学习的信息论方法"></a>归纳学习的信息论方法</h3><p>&emsp;&emsp;归纳学习方法是目前重点研究的方向，研究成果角落。从采用的技术上看，分为两大类：信息论方法（这也是常说的决策树方法）和集合论方法。每类方法又包含多个具体方法。<br/><br>信息论方法是利用信息论的原理建立决策树。由于该方法最后获得的知识表示形式是决策树，因此一般文献中称它为决策树方法。该类方法的实用效果好，影响较大。<br/><br>信心轮方法中较有特色的方法有以下几种。<br/></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/05/28/大数据时代入门<二>——数据挖掘方法和技术 理论篇/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1671,7 +1685,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
