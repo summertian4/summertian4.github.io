@@ -260,8 +260,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/29/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" itemprop="url">
-                  iOS攻防——（四）class dump 与 Dumpdecrypted 使用
+                <a class="post-title-link" href="/2016/08/31/iOS攻防——（五）微信红包插件制作/" itemprop="url">
+                  iOS攻防——（五）微信红包插件制作
                 </a>
               
             
@@ -274,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-29T14:04:15+08:00" content="2016-08-29">
-              2016-08-29
+            <time itemprop="dateCreated" datetime="2016-08-31T16:08:31+08:00" content="2016-08-31">
+              2016-08-31
             </time>
           </span>
 
@@ -304,8 +304,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/29/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/29/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" itemprop="commentsCount"></span>
+                <a href="/2016/08/31/iOS攻防——（五）微信红包插件制作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/iOS攻防——（五）微信红包插件制作/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -315,7 +315,7 @@
 
           
           
-             <span id="/2016/08/29/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" class="leancloud_visitors" data-flag-title="iOS攻防——（四）class dump 与 Dumpdecrypted 使用">
+             <span id="/2016/08/31/iOS攻防——（五）微信红包插件制作/" class="leancloud_visitors" data-flag-title="iOS攻防——（五）微信红包插件制作">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -338,21 +338,19 @@
 
       
         
-          <h1 id="1-class-dump"><a href="#1-class-dump" class="headerlink" title="1 class dump"></a>1 class dump</h1><p>class dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。</p>
-<h2 id="1-1-class-dump-好玩在哪？"><a href="#1-1-class-dump-好玩在哪？" class="headerlink" title="1.1 class dump 好玩在哪？"></a>1.1 class dump 好玩在哪？</h2><p>class dump 绝对可以满足你的好奇心。你可以通过 class dump ：</p>
+          <h1 id="观察"><a href="#观察" class="headerlink" title="观察"></a>观察</h1><p><a href="http://zhoulingyu.com/2016/08/29/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class-dump%20%E4%B8%8E%20Dumpdecrypted%20%E4%BD%BF%E7%94%A8/">上篇</a>中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。</p>
+<p>首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。</p>
+<p>通过观察微信头文件，注意到以下两个文件</p>
 <ol>
-<li>查看闭源的应用、frameworks、bundles。</li>
-<li>对比一个 APP 不同版本之间的接口变化。</li>
-<li>对一些私有frameworks做些有趣的试验。</li>
+<li><code>CMessageMgr.h</code></li>
+<li><code>WCRedEnvelopesLogicMgr.h</code></li>
 </ol>
-<h2 id="1-2-Download"><a href="#1-2-Download" class="headerlink" title="1.2 Download"></a>1.2 Download</h2><p>当前版本: 3.5 (64 bit Intel)<br>需要 Mac OS X 10.8 或更高版本</p>
-<ul>
-<li><a href="http://stevenygard.com/download/class-dump-3.5.dmg">class-dump-3.5.dmg</a></li>
-<li><a href="http://stevenygard.com/download/class-dump-3.5.tar.gz">class-dump-3.5.tar.gz</a></li>
-<li><a href="http://stevenygard.com/download/class-dump-3.5.tar.bz2">class-dump-3.5.tar.bz2</a></li>
-</ul>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-01.png" alt=""></p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-02.png" alt=""></p>
+<p>观察到有这两个方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)AsyncOnAddMsg:(<span class="keyword">id</span>)arg1 MsgWrap:(<span class="keyword">id</span>)arg2;</div><div class="line">- (<span class="keyword">void</span>)OpenRedEnvelopesRequest:(<span class="keyword">id</span>)arg1;</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/29/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/#more" rel="contents">
+            <a class="btn" href="/2016/08/31/iOS攻防——（五）微信红包插件制作/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -403,7 +401,203 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/17/来自Github·sparanoid-中文文案排版指北/" itemprop="url">
+                <a class="post-title-link" href="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" itemprop="url">
+                  iOS攻防——（四）class-dump 与 Dumpdecrypted 使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T13:09:36+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" class="leancloud_visitors" data-flag-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-class-dump"><a href="#1-class-dump" class="headerlink" title="1 class dump"></a>1 class dump</h1><p>class dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。</p>
+<h2 id="1-1-class-dump-好玩在哪？"><a href="#1-1-class-dump-好玩在哪？" class="headerlink" title="1.1 class dump 好玩在哪？"></a>1.1 class dump 好玩在哪？</h2><p>class dump 绝对可以满足你的好奇心。你可以通过 class dump ：</p>
+<ol>
+<li>查看闭源的应用、frameworks、bundles。</li>
+<li>对比一个 APP 不同版本之间的接口变化。</li>
+<li>对一些私有 frameworks 做些有趣的试验。</li>
+</ol>
+<h2 id="1-2-Download"><a href="#1-2-Download" class="headerlink" title="1.2 Download"></a>1.2 Download</h2><p>当前版本: 3.5 (64 bit Intel)<br>需要 Mac OS X 10.8 或更高版本</p>
+<p><a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">class-dump-3.5.dmg</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.gz" target="_blank" rel="external">class-dump-3.5.tar.gz</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.bz2" target="_blank" rel="external">class-dump-3.5.tar.bz2</a></p>
+<h2 id="1-3-Use"><a href="#1-3-Use" class="headerlink" title="1.3 Use"></a>1.3 Use</h2><p>下载好后，双击dmg文件，将其中的 class-dump 文件放到/usr/local/sbin 目录下，然后就可以在命令行中使用了。</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png" alt=""></p>
+<p>官方用法指南：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class-dump 3.5 (64 bit)</div><div class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</div><div class="line"></div><div class="line">  where options are:</div><div class="line">        -a             show instance variable offsets</div><div class="line">        -A             show implementation addresses</div><div class="line">        --arch &lt;arch&gt;  choose a specific architecture from a universal binary (ppc, ppc64, i386, x86_64)</div><div class="line">        -C &lt;regex&gt;     only display classes matching regular expression</div><div class="line">        -f &lt;str&gt;       find string in method name</div><div class="line">        -H             generate header files in current directory, or directory specified with -o</div><div class="line">        -I             sort classes, categories, and protocols by inheritance (overrides -s)</div><div class="line">        -o &lt;dir&gt;       output directory used for -H</div><div class="line">        -r             recursively expand frameworks and fixed VM shared libraries</div><div class="line">        -s             sort classes and categories by name</div><div class="line">        -S             sort methods by name</div><div class="line">        -t             suppress header in output, for testing</div><div class="line">        --list-arches  list the arches in the file, then exit</div><div class="line">        --sdk-ios      specify iOS SDK version (will look in /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk</div><div class="line">        --sdk-mac      specify Mac OS X version (will look in /Developer/SDKs/MacOSX&lt;version&gt;.sdk</div><div class="line">        --sdk-root     specify the full SDK root path (or use --sdk-ios/--sdk-mac for a shortcut)</div></pre></td></tr></table></figure>
+<p>简单的举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump -H /Applications/Calculator.app -o ~/Desktop/dump/Calculate-dump</div></pre></td></tr></table></figure>
+<p><code>/Applications/Calculator.app</code> 是 Mac 上计算器应用的路径。<br><code>~/Desktop/dump/Calculate-dump</code> 是指定的存放 dump 出来头文件的文件夹路径。</p>
+<p>执行完成后可以看到指定的保存目录下已经有 dump 出来的头文件了：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png" alt=""></p>
+<p>打开一个 <code>.h</code> 文件可以看到相应内容：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png" alt=""></p>
+<h1 id="2-Dumpdecrypted"><a href="#2-Dumpdecrypted" class="headerlink" title="2 Dumpdecrypted"></a>2 Dumpdecrypted</h1><p>class dump 虽然能帮你解析出一个 app 的头文件，但是对于 App Store 下载的 App 都是通过苹果的一层签名加密，通常我们成为『加壳』。对于已经加壳的 APP，解析后的效果就和加了代码混淆类似。</p>
+<p>比如直接去 dump 微信，出来的结果大概是这样：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png" alt=""></p>
+<h2 id="2-1-Download"><a href="#2-1-Download" class="headerlink" title="2.1 Download"></a>2.1 Download</h2><p><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">dumpdecrypted GitHub 地址</a></p>
+<h2 id="2-2-Install"><a href="#2-2-Install" class="headerlink" title="2.2 Install"></a>2.2 Install</h2><p>Dumpdecrypted 比另一个砸壳工具 Clutch 要难用的多。但由于 Clutch 无法砸开含有兼容 WatchOs<br>2 的 App，所以只能使用 Dumpdecrypted。</p>
+<p>下载后打开 <code>Makefile</code> 文件，注意第三行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ SDK=`xcrun --sdk iphoneos --show-sdk-path`</div></pre></td></tr></table></figure>
+<p>这里填写的 SDK 必须与你越狱的 iPhone 系统等级一致，你可以这样查看你 MAC 的 SDK ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ xcrun --sdk iphoneos --show-sdk-path</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk</div></pre></td></tr></table></figure>
+<p>而我的手机是 7.0 的，所以只能去这里下载对应的 SDK。</p>
+<p>Makefile 所有需要填写的填好后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd dumpdecrypted</div><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>在当前目录下生成 dumpdecrypted.dylib 文件。</p>
+<p>如果你觉得很麻烦，可以直接来<a href="https://github.com/DaSens/Crack-file/tree/master/crack%20file" target="_blank" rel="external">这里</a>或者<a href="http://git.oschina.net/hongyangyi/dumpdecrypted" target="_blank" rel="external">这里</a>下载。</p>
+<h2 id="2-3-Use"><a href="#2-3-Use" class="headerlink" title="2.3 Use"></a>2.3 Use</h2><p>将 <code>dumpdecrypted.dylib</code> 放到需要砸壳 app 的 Documents 下。</p>
+<p>查找微信的 Documents：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find / -name WeChat.app</div></pre></td></tr></table></figure>
+<p>得到路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app</div></pre></td></tr></table></figure>
+<p>scp 传输：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp ~/Desktop/dump/dumpdecrypted/dumpdecrypted_7.dylib root@172.16.212.217:/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/Documents</div></pre></td></tr></table></figure>
+<p>砸壳：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/Documents</div><div class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted_7.dylib /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意 <code>DYLD_INSERT_LIBRARIES=</code> 后填写的是你刚刚传输的 .dylib 文件名，我的是 dumpdecrypted_7.dylib</p>
+</blockquote>
+<p>砸壳成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[+] detected 32bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0xfea4c(from 0xfe000) = a4c</div><div class="line">[+] Found encrypted data at address 00004000 of length 42237952 bytes - type 1.[+] Opening /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type[+] Executable is a FAT image - searching for right architecture[+] Correct arch is at offset 16384 in the file[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file[+] Dumping the decrypted data into the file[+] Copying the not encrypted remainder of the file[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset 4a4c</div><div class="line">[+] Closing original file[+] Closing dump file</div></pre></td></tr></table></figure>
+<p>ls 查看 Documents 中文件多了一个 <code>WeChat.decrypted</code>，这就是砸壳过后的文件，scp出来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp WeChat.decrypted zhoulingyu@172.16.211.181:/Users/zhoulingyu/Desktop/dump/Wechat</div></pre></td></tr></table></figure>
+<h1 id="3-class-dump-砸壳后的文件"><a href="#3-class-dump-砸壳后的文件" class="headerlink" title="3 class dump 砸壳后的文件"></a>3 class dump 砸壳后的文件</h1><p>上一步我们得到了 <code>WeChat.decrypted</code>，现在可以对其进行 dump：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump --arch armv7 WeChat.decrypted -H -o /Users/zhoulingyu/Desktop/dump/Wechat/Wechat-decrypted-dump</div></pre></td></tr></table></figure>
+<blockquote>
+<p>–arch armv7 是指定架构，dumpdecrypted 只会砸你手机处理器对应的那个壳，fat binary 的其它部分仍然是有壳的，而 class-dump 的默认目标又不是被砸壳的那个部分，如果不指定架构只能导出 CDStructures.h 一个文件</p>
+<p>现在就可以看到 dump 后是明文的了：</p>
+</blockquote>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png" alt=""></p>
+<h1 id="4-Learn-More"><a href="#4-Learn-More" class="headerlink" title="4 Learn More"></a>4 Learn More</h1><p>当你能看到 .h 文件时候，意味着你知道了这个应用程序的各种接口，除了学习别人的优雅代码之外，显然也也可以做一些更有意思的事情，通过一些猜想和试验，我们可以去尝试做一个微信的插件。</p>
+<p>下一次iOS攻防将会介绍动态库的注入和微信插件的制作~</p>
+<p>如果您感兴趣~请点击下方打赏支持萌妹子的原创哟~</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;">&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;</a>。</p>
+<p>博主主要写javaEE和iOS的。</p>
+<p>希望大家一起进步。</p>
+<p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
+<p>我的微博：<a href="http://weibo.com/coderfish/" target="_blank" rel="external">小鱼周凌宇</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/29/来自Github·sparanoid-中文文案排版指北/" itemprop="url">
                   [来自Github·sparanoid]中文文案排版指北
                 </a>
               
@@ -417,8 +611,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-17T19:03:01+08:00" content="2016-08-17">
-              2016-08-17
+            <time itemprop="dateCreated" datetime="2016-08-29T13:03:01+08:00" content="2016-08-29">
+              2016-08-29
             </time>
           </span>
 
@@ -447,8 +641,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/17/来自Github·sparanoid-中文文案排版指北/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/来自Github·sparanoid-中文文案排版指北/" itemprop="commentsCount"></span>
+                <a href="/2016/08/29/来自Github·sparanoid-中文文案排版指北/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/29/来自Github·sparanoid-中文文案排版指北/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -458,7 +652,7 @@
 
           
           
-             <span id="/2016/08/17/来自Github·sparanoid-中文文案排版指北/" class="leancloud_visitors" data-flag-title="[来自Github·sparanoid]中文文案排版指北">
+             <span id="/2016/08/29/来自Github·sparanoid-中文文案排版指北/" class="leancloud_visitors" data-flag-title="[来自Github·sparanoid]中文文案排版指北">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1800,154 +1994,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/" itemprop="url">
-                  iOS进阶学习——React-Native-环境搭建-run-it
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-19T11:08:06+08:00" content="2016-04-19">
-              2016-04-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/" class="leancloud_visitors" data-flag-title="iOS进阶学习——React-Native-环境搭建-run-it">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="官方参考"><a href="#官方参考" class="headerlink" title="官方参考"></a>官方参考</h1><ol>
-<li><a href="https://github.com/facebook/react-native">react-native github</a></li>
-<li><a href="http://reactnative.cn/docs/0.24/getting-started.html#content">react-native 中文文档</a></li>
-<li><a href="https://nodejs.org/en/">node.js</a></li>
-<li><a href="https://github.com/creationix/nvm#installation">nvm</a></li>
-<li><a href="https://facebook.github.io/watchman/docs/install.html">watchman</a></li>
-<li><a href="http://www.flowtype.org">flow</a></li>
-</ol>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h2><ol>
-<li>nvm istall<ul>
-<li>输入命令<code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash</code></li>
-<li>如果你希望卸载nvm，你可以输入命令<code>$ npm uninstall -g a_module</code></li>
-</ul>
-</li>
-<li>输入命令<code>nvm install node &amp;&amp; nvm</code></li>
-<li>使nvm生效：<code>. ~/.nvm/nvm.sh</code> </li>
-<li>安装Node.js<code>nvm install node &amp;&amp; nvm alias default node</code></li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/19/iOS进阶学习——React-Native-环境搭建-run-it/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1993,7 +2039,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

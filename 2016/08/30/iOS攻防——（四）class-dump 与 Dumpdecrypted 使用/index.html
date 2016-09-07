@@ -86,33 +86,37 @@
 
 
 
-<meta name="description" content="简介
-Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。
+<meta name="description" content="1 class dumpclass dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。
+1.1 class dump 好玩在哪？class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
 
-能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。
-对于一个特定的类，例如V">
+查看闭源的应用、frameworks、bundles。
+对比一个 APP 不同版本之间的接口变化。
+对一些">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS攻防——（三）Cycript攻·防">
-<meta property="og:url" content="http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/index.html">
+<meta property="og:title" content="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
+<meta property="og:url" content="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/index.html">
 <meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
-<meta property="og:description" content="简介
-Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。
+<meta property="og:description" content="1 class dumpclass dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。
+1.1 class dump 好玩在哪？class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
 
-能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。
-对于一个特定的类，例如V">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png">
-<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-04.PNG-w375">
-<meta property="og:updated_time" content="2016-08-05T06:21:36.000Z">
+查看闭源的应用、frameworks、bundles。
+对比一个 APP 不同版本之间的接口变化。
+对一些">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png">
+<meta property="og:updated_time" content="2016-08-31T08:07:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS攻防——（三）Cycript攻·防">
-<meta name="twitter:description" content="简介
-Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&amp;gt; 运行时修改应用的很多东西。
+<meta name="twitter:title" content="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
+<meta name="twitter:description" content="1 class dumpclass dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。
+1.1 class dump 好玩在哪？class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
 
-能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。
-对于一个特定的类，例如V">
-<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375">
+查看闭源的应用、frameworks、bundles。
+对比一个 APP 不同版本之间的接口变化。
+对一些">
+<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png">
 
 
 
@@ -133,9 +137,9 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
 
 
 
-  <link rel="canonical" href="http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/"/>
+  <link rel="canonical" href="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/"/>
 
-  <title> iOS攻防——（三）Cycript攻·防 | 小鱼周凌宇のCODE_HOME </title>
+  <title> iOS攻防——（四）class-dump 与 Dumpdecrypted 使用 | 小鱼周凌宇のCODE_HOME </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +279,7 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
             
             
               
-                iOS攻防——（三）Cycript攻·防
+                iOS攻防——（四）class-dump 与 Dumpdecrypted 使用
               
             
           </h1>
@@ -287,8 +291,8 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-19T14:09:36+08:00" content="2016-07-19">
-              2016-07-19
+            <time itemprop="dateCreated" datetime="2016-08-30T13:09:36+08:00" content="2016-08-30">
+              2016-08-30
             </time>
           </span>
 
@@ -317,8 +321,8 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/19/iOS攻防——（三）Cycript攻·防/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/iOS攻防——（三）Cycript攻·防/" itemprop="commentsCount"></span>
+                <a href="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,7 +332,7 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
 
           
           
-             <span id="/2016/07/19/iOS攻防——（三）Cycript攻·防/" class="leancloud_visitors" data-flag-title="iOS攻防——（三）Cycript攻·防">
+             <span id="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" class="leancloud_visitors" data-flag-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -350,57 +354,70 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
       
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
-<p>Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序。<br>Cycript是一个理解Objective-C语法的javascript解释器，它能够挂钩正在运行的进程，能够在&gt; 运行时修改应用的很多东西。</p>
+        <h1 id="1-class-dump"><a href="#1-class-dump" class="headerlink" title="1 class dump"></a>1 class dump</h1><p>class dump 是一个用于检查保存在 Mach-O 文件中的 objective-c 运行时信息的工具，攻防中最常用、实用的命令行工具。</p>
+<h2 id="1-1-class-dump-好玩在哪？"><a href="#1-1-class-dump-好玩在哪？" class="headerlink" title="1.1 class dump 好玩在哪？"></a>1.1 class dump 好玩在哪？</h2><p>class dump 绝对可以满足你的好奇心。你可以通过 class dump ：</p>
 <ol>
-<li>能够挂钩正在运行的进程，并且找出正被使用的类信息，例如view controllers，内部和第三方库，甚至程序的delegate的名称。</li>
-<li>对于一个特定的类，例如View Controller, App delegate或者任何其他的类，我们能够得到所有被使用的方法名称。</li>
-<li>能够得到所有实例变量的名称和在程序运行的任意时刻实例变量的值。</li>
-<li>能够在运行时修改实例变量的值。</li>
-<li>能够执行Method Swizzling，例如替换一个特定方法的实现。</li>
-<li>可以在运行时调用任意方法，即使这个方法目前并不在应用的实际代码当中。</li>
+<li>查看闭源的应用、frameworks、bundles。</li>
+<li>对比一个 APP 不同版本之间的接口变化。</li>
+<li>对一些私有 frameworks 做些有趣的试验。</li>
 </ol>
+<h2 id="1-2-Download"><a href="#1-2-Download" class="headerlink" title="1.2 Download"></a>1.2 Download</h2><p>当前版本: 3.5 (64 bit Intel)<br>需要 Mac OS X 10.8 或更高版本</p>
+<p><a href="http://stevenygard.com/download/class-dump-3.5.dmg" target="_blank" rel="external">class-dump-3.5.dmg</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.gz" target="_blank" rel="external">class-dump-3.5.tar.gz</a><br><a href="http://stevenygard.com/download/class-dump-3.5.tar.bz2" target="_blank" rel="external">class-dump-3.5.tar.bz2</a></p>
+<h2 id="1-3-Use"><a href="#1-3-Use" class="headerlink" title="1.3 Use"></a>1.3 Use</h2><p>下载好后，双击dmg文件，将其中的 class-dump 文件放到/usr/local/sbin 目录下，然后就可以在命令行中使用了。</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png" alt=""></p>
+<p>官方用法指南：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class-dump 3.5 (64 bit)</div><div class="line">Usage: class-dump [options] &lt;mach-o-file&gt;</div><div class="line"></div><div class="line">  where options are:</div><div class="line">        -a             show instance variable offsets</div><div class="line">        -A             show implementation addresses</div><div class="line">        --arch &lt;arch&gt;  choose a specific architecture from a universal binary (ppc, ppc64, i386, x86_64)</div><div class="line">        -C &lt;regex&gt;     only display classes matching regular expression</div><div class="line">        -f &lt;str&gt;       find string in method name</div><div class="line">        -H             generate header files in current directory, or directory specified with -o</div><div class="line">        -I             sort classes, categories, and protocols by inheritance (overrides -s)</div><div class="line">        -o &lt;dir&gt;       output directory used for -H</div><div class="line">        -r             recursively expand frameworks and fixed VM shared libraries</div><div class="line">        -s             sort classes and categories by name</div><div class="line">        -S             sort methods by name</div><div class="line">        -t             suppress header in output, for testing</div><div class="line">        --list-arches  list the arches in the file, then exit</div><div class="line">        --sdk-ios      specify iOS SDK version (will look in /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS&lt;version&gt;.sdk</div><div class="line">        --sdk-mac      specify Mac OS X version (will look in /Developer/SDKs/MacOSX&lt;version&gt;.sdk</div><div class="line">        --sdk-root     specify the full SDK root path (or use --sdk-ios/--sdk-mac for a shortcut)</div></pre></td></tr></table></figure>
+<p>简单的举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump -H /Applications/Calculator.app -o ~/Desktop/dump/Calculate-dump</div></pre></td></tr></table></figure>
+<p><code>/Applications/Calculator.app</code> 是 Mac 上计算器应用的路径。<br><code>~/Desktop/dump/Calculate-dump</code> 是指定的存放 dump 出来头文件的文件夹路径。</p>
+<p>执行完成后可以看到指定的保存目录下已经有 dump 出来的头文件了：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png" alt=""></p>
+<p>打开一个 <code>.h</code> 文件可以看到相应内容：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png" alt=""></p>
+<h1 id="2-Dumpdecrypted"><a href="#2-Dumpdecrypted" class="headerlink" title="2 Dumpdecrypted"></a>2 Dumpdecrypted</h1><p>class dump 虽然能帮你解析出一个 app 的头文件，但是对于 App Store 下载的 App 都是通过苹果的一层签名加密，通常我们成为『加壳』。对于已经加壳的 APP，解析后的效果就和加了代码混淆类似。</p>
+<p>比如直接去 dump 微信，出来的结果大概是这样：</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png" alt=""></p>
+<h2 id="2-1-Download"><a href="#2-1-Download" class="headerlink" title="2.1 Download"></a>2.1 Download</h2><p><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">dumpdecrypted GitHub 地址</a></p>
+<h2 id="2-2-Install"><a href="#2-2-Install" class="headerlink" title="2.2 Install"></a>2.2 Install</h2><p>Dumpdecrypted 比另一个砸壳工具 Clutch 要难用的多。但由于 Clutch 无法砸开含有兼容 WatchOs<br>2 的 App，所以只能使用 Dumpdecrypted。</p>
+<p>下载后打开 <code>Makefile</code> 文件，注意第三行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ SDK=`xcrun --sdk iphoneos --show-sdk-path`</div></pre></td></tr></table></figure>
+<p>这里填写的 SDK 必须与你越狱的 iPhone 系统等级一致，你可以这样查看你 MAC 的 SDK ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ xcrun --sdk iphoneos --show-sdk-path</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk</div></pre></td></tr></table></figure>
+<p>而我的手机是 7.0 的，所以只能去这里下载对应的 SDK。</p>
+<p>Makefile 所有需要填写的填好后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd dumpdecrypted</div><div class="line">$ make</div></pre></td></tr></table></figure>
+<p>在当前目录下生成 dumpdecrypted.dylib 文件。</p>
+<p>如果你觉得很麻烦，可以直接来<a href="https://github.com/DaSens/Crack-file/tree/master/crack%20file" target="_blank" rel="external">这里</a>或者<a href="http://git.oschina.net/hongyangyi/dumpdecrypted" target="_blank" rel="external">这里</a>下载。</p>
+<h2 id="2-3-Use"><a href="#2-3-Use" class="headerlink" title="2.3 Use"></a>2.3 Use</h2><p>将 <code>dumpdecrypted.dylib</code> 放到需要砸壳 app 的 Documents 下。</p>
+<p>查找微信的 Documents：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ find / -name WeChat.app</div></pre></td></tr></table></figure>
+<p>得到路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app</div></pre></td></tr></table></figure>
+<p>scp 传输：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp ~/Desktop/dump/dumpdecrypted/dumpdecrypted_7.dylib root@172.16.212.217:/private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/Documents</div></pre></td></tr></table></figure>
+<p>砸壳：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/Documents</div><div class="line">$ DYLD_INSERT_LIBRARIES=dumpdecrypted_7.dylib /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意 <code>DYLD_INSERT_LIBRARIES=</code> 后填写的是你刚刚传输的 .dylib 文件名，我的是 dumpdecrypted_7.dylib</p>
 </blockquote>
-<a id="more"></a>
-<h1 id="Cycript安装"><a href="#Cycript安装" class="headerlink" title="Cycript安装"></a>Cycript安装</h1><p>在<a href="http://www.cycript.org" target="_blank" rel="external">这里下载</a><br>在<a href="">这里阅读</a>所有Cycript诡计</p>
-<h1 id="攻"><a href="#攻" class="headerlink" title="攻"></a>攻</h1><p>先看看怎么用Cycript干点坏事吧</p>
-<h2 id="1-给应用弹一个莫名其妙的alert"><a href="#1-给应用弹一个莫名其妙的alert" class="headerlink" title="1. 给应用弹一个莫名其妙的alert"></a>1. 给应用弹一个莫名其妙的alert</h2><h3 id="ssh登陆你的手机（如果不会，上一篇有-）"><a href="#ssh登陆你的手机（如果不会，上一篇有-）" class="headerlink" title="ssh登陆你的手机（如果不会，上一篇有~）"></a>ssh登陆你的手机（如果不会，上一篇有~）</h3><h3 id="找一个app"><a href="#找一个app" class="headerlink" title="找一个app"></a>找一个app</h3><p>这里我找的是以前做的一个app</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep blackwidow</div></pre></td></tr></table></figure>
-<p>print</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mobile 466 6.6 7.0 508416 36204 ?? Ss 11:22AM 0:09.65 /xxxx/blackwidow</div></pre></td></tr></table></figure>
-<p>这样知道进程号是466</p>
-<h3 id="hock住"><a href="#hock住" class="headerlink" title="hock住"></a>hock住</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cycript -p 466</div></pre></td></tr></table></figure>
-<p>如果你看到出现了cy#，说明你可以开始编写Cycript代码了</p>
-<h3 id="alert"><a href="#alert" class="headerlink" title="alert"></a>alert</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 找到widnow</span></div><div class="line">var window = [<span class="built_in">UIApplication</span> sharedApplication].keyWindow;</div><div class="line"><span class="comment">// 初始化一个alert</span></div><div class="line">var alert = [[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@"hack you"</span> message:<span class="string">@"hack you"</span> window cancelButtonTitle:<span class="string">@"cancel"</span> otherButtonTitles:<span class="string">@"yes"</span>, <span class="literal">nil</span>];</div><div class="line"><span class="comment">// 弹出来吧</span></div><div class="line">[alert show];</div></pre></td></tr></table></figure>
-<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375" alt=""></p>
-<h2 id="2-探索一个app"><a href="#2-探索一个app" class="headerlink" title="2. 探索一个app"></a>2. 探索一个app</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printMethods</span>(<span class="params">className</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> count = <span class="keyword">new</span> <span class="keyword">new</span> Type(<span class="string">"I"</span>);</div><div class="line">  <span class="keyword">var</span> methods = class_copyMethodList(objc_getClass(className), count);</div><div class="line">  <span class="keyword">var</span> methodsArray = [];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; *count; i++) &#123;</div><div class="line">    <span class="keyword">var</span> method = methods[i];</div><div class="line">    methodsArray.push(&#123;selector:method_getName(method), implementation:method_getImplementation(method)&#125;);</div><div class="line">  &#125;</div><div class="line">  free(methods);</div><div class="line">  <span class="keyword">return</span> methodsArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>调用一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printMethods(AppDelegate)</div></pre></td></tr></table></figure></p>
-<p>输出结果：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png" alt=""></p>
-<p>是不是觉得发生了很可怕的事情？该有的都被打印出来了。</p>
-<p>你还可以通过试探的方式找出每一个Controller的名字，例如：</p>
-<p>insert</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeVC= [[[[[UIApplication sharedApplication] keyWindow] subviews] objectAtIndex:<span class="number">0</span>] nextResponder];</div></pre></td></tr></table></figure>
-<p>print</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#&quot;&lt;HomePageTabBarViewController: 0x156cf200&gt;&quot;</div></pre></td></tr></table></figure>
-<p>insert</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> page0VC = [homeVC.childViewControllers objectAtIndex:<span class="number">3</span>]</div></pre></td></tr></table></figure>
-<p>print</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#&quot;&lt;BaseNavigationController: 0x156decc0&gt;&quot;</div></pre></td></tr></table></figure>
-<p>insert<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var meVC = page0VC.topViewController</div></pre></td></tr></table></figure></p>
-<p>print<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#&quot;&lt;MeViewController: 0x156de940&gt;&quot;</div></pre></td></tr></table></figure></p>
-<p>这样，我们就找到了『我的』页面所属Controller。</p>
-<p>查看所有的方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printMethods(MeViewController)</div></pre></td></tr></table></figure>
-<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png" alt=""></p>
-<p>改个标题试试：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[meVC setCurrentTitle:<span class="string">@"hack you"</span>];</div></pre></td></tr></table></figure>
-<p>效果如下：<br><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-04.PNG-w375" alt=""></p>
-<p>试想一下，如果MeViewController中或者LoginViewController中有一个方法叫getUserInfo，那么通过Cycript就可以轻而易举的拿到用户信息。</p>
-<p>不过Cycript在这里最主要的作用还是偷窥APP和调试APP。<br>当然，好玩的方法还有很多。</p>
-<h1 id="防"><a href="#防" class="headerlink" title="防"></a>防</h1><p>知道了Cycript的可怕，在有重要信息藏在代码中的时候，我们也得学会如何放置Cycript修改运行时。</p>
-<p>你可以参考<a href="http://www.cocoachina.com/ios/20150511/11801.html" target="_blank" rel="external">这篇文章</a></p>
+<p>砸壳成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[+] detected 32bit ARM binary in memory.</div><div class="line">[+] offset to cryptid found: @0xfea4c(from 0xfe000) = a4c</div><div class="line">[+] Found encrypted data at address 00004000 of length 42237952 bytes - type 1.[+] Opening /private/var/mobile/Applications/3DE3657E-0F69-45FF-928B-3DD5CD7A59FD/WeChat.app/WeChat for reading.</div><div class="line">[+] Reading header</div><div class="line">[+] Detecting header type[+] Executable is a FAT image - searching for right architecture[+] Correct arch is at offset 16384 in the file[+] Opening WeChat.decrypted for writing.</div><div class="line">[+] Copying the not encrypted start of the file[+] Dumping the decrypted data into the file[+] Copying the not encrypted remainder of the file[+] Setting the LC_ENCRYPTION_INFO-&gt;cryptid to 0 at offset 4a4c</div><div class="line">[+] Closing original file[+] Closing dump file</div></pre></td></tr></table></figure>
+<p>ls 查看 Documents 中文件多了一个 <code>WeChat.decrypted</code>，这就是砸壳过后的文件，scp出来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp WeChat.decrypted zhoulingyu@172.16.211.181:/Users/zhoulingyu/Desktop/dump/Wechat</div></pre></td></tr></table></figure>
+<h1 id="3-class-dump-砸壳后的文件"><a href="#3-class-dump-砸壳后的文件" class="headerlink" title="3 class dump 砸壳后的文件"></a>3 class dump 砸壳后的文件</h1><p>上一步我们得到了 <code>WeChat.decrypted</code>，现在可以对其进行 dump：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class-dump --arch armv7 WeChat.decrypted -H -o /Users/zhoulingyu/Desktop/dump/Wechat/Wechat-decrypted-dump</div></pre></td></tr></table></figure>
+<blockquote>
+<p>–arch armv7 是指定架构，dumpdecrypted 只会砸你手机处理器对应的那个壳，fat binary 的其它部分仍然是有壳的，而 class-dump 的默认目标又不是被砸壳的那个部分，如果不指定架构只能导出 CDStructures.h 一个文件</p>
+<p>现在就可以看到 dump 后是明文的了：</p>
+</blockquote>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png" alt=""></p>
+<h1 id="4-Learn-More"><a href="#4-Learn-More" class="headerlink" title="4 Learn More"></a>4 Learn More</h1><p>当你能看到 .h 文件时候，意味着你知道了这个应用程序的各种接口，除了学习别人的优雅代码之外，显然也也可以做一些更有意思的事情，通过一些猜想和试验，我们可以去尝试做一个微信的插件。</p>
+<p>下一次iOS攻防将会介绍动态库的注入和微信插件的制作~</p>
+<p>如果您感兴趣~请点击下方打赏支持萌妹子的原创哟~</p>
 <hr>
-<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;">&#x63;&#x6f;&#100;&#x65;&#114;&#102;&#x69;&#115;&#x68;&#64;&#x31;&#x36;&#51;&#x2e;&#99;&#x6f;&#x6d;</a>。</p>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;">&#x63;&#x6f;&#100;&#x65;&#x72;&#x66;&#105;&#115;&#x68;&#64;&#x31;&#x36;&#x33;&#x2e;&#99;&#x6f;&#109;</a>。</p>
 <p>博主主要写javaEE和iOS的。</p>
 <p>希望大家一起进步。</p>
 <p>CSDN： <a href="http://blog.csdn.net/u010127917" target="_blank" rel="external">CSDN博客地址</a></p>
@@ -464,16 +481,16 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/12/iOS攻防——（二）如何窃取用户的通讯录信息/" rel="next" title="iOS攻防——（二）如何窃取用户的通讯录信息">
-                <i class="fa fa-chevron-left"></i> iOS攻防——（二）如何窃取用户的通讯录信息
+              <a href="/2016/08/29/来自Github·sparanoid-中文文案排版指北/" rel="next" title="[来自Github·sparanoid]中文文案排版指北">
+                <i class="fa fa-chevron-left"></i> [来自Github·sparanoid]中文文案排版指北
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/05/ReactiveCocoa概要：了解和使用RACCommand/" rel="prev" title="ReactiveCocoa概要：了解和使用RACCommand">
-                ReactiveCocoa概要：了解和使用RACCommand <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/31/iOS攻防——（五）微信红包插件制作/" rel="prev" title="iOS攻防——（五）微信红包插件制作">
+                iOS攻防——（五）微信红包插件制作 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,10 +506,10 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/07/19/iOS攻防——（三）Cycript攻·防/"
-     data-title="iOS攻防——（三）Cycript攻·防"
+        <div class="ds-share flat" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/"
+     data-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用"
      data-content=""
-     data-url="http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/">
+     data-url="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -519,8 +536,8 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/19/iOS攻防——（三）Cycript攻·防/"
-           data-title="iOS攻防——（三）Cycript攻·防" data-url="http://zhoulingyu.com/2016/07/19/iOS攻防——（三）Cycript攻·防/">
+      <div class="ds-thread" data-thread-key="2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/"
+           data-title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用" data-url="http://zhoulingyu.com/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/">
       </div>
     
   </div>
@@ -665,7 +682,7 @@ Cycript允许开发人员探讨和修改iOS和Mac OS X上运行的应用程序�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cycript安装"><span class="nav-number">2.</span> <span class="nav-text">Cycript安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#攻"><span class="nav-number">3.</span> <span class="nav-text">攻</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-给应用弹一个莫名其妙的alert"><span class="nav-number">3.1.</span> <span class="nav-text">1. 给应用弹一个莫名其妙的alert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh登陆你的手机（如果不会，上一篇有-）"><span class="nav-number">3.1.1.</span> <span class="nav-text">ssh登陆你的手机（如果不会，上一篇有~）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找一个app"><span class="nav-number">3.1.2.</span> <span class="nav-text">找一个app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hock住"><span class="nav-number">3.1.3.</span> <span class="nav-text">hock住</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alert"><span class="nav-number">3.1.4.</span> <span class="nav-text">alert</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-探索一个app"><span class="nav-number">3.2.</span> <span class="nav-text">2. 探索一个app</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防"><span class="nav-number">4.</span> <span class="nav-text">防</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-class-dump"><span class="nav-number">1.</span> <span class="nav-text">1 class dump</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-class-dump-好玩在哪？"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 class dump 好玩在哪？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Download"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Use"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Use</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Dumpdecrypted"><span class="nav-number">2.</span> <span class="nav-text">2 Dumpdecrypted</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Download"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Install"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Use"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Use</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-class-dump-砸壳后的文件"><span class="nav-number">3.</span> <span class="nav-text">3 class dump 砸壳后的文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Learn-More"><span class="nav-number">4.</span> <span class="nav-text">4 Learn More</span></a></li></ol></div>
             
           </div>
         </section>

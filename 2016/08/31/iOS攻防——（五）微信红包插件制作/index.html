@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS,iOS攻防," />
 
 
 
@@ -86,15 +86,50 @@
 
 
 
-<meta name="description" content="技术宅 iOS开发 JAVA开发 萌妹子">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小鱼周凌宇のCODE_HOME">
-<meta property="og:url" content="http://zhoulingyu.com/archives/2014/06/index.html">
+<meta name="description" content="观察上篇中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。
+首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。
+通过观察微信头文件，注意到以下两个文件
+
+CMessageMgr.h
+WCRedEnvelopesLogicMgr.h
+
+
+
+观察到有这两个方法：
+12- (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2;-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS攻防——（五）微信红包插件制作">
+<meta property="og:url" content="http://zhoulingyu.com/2016/08/31/iOS攻防——（五）微信红包插件制作/index.html">
 <meta property="og:site_name" content="小鱼周凌宇のCODE_HOME">
-<meta property="og:description" content="技术宅 iOS开发 JAVA开发 萌妹子">
+<meta property="og:description" content="观察上篇中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。
+首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。
+通过观察微信头文件，注意到以下两个文件
+
+CMessageMgr.h
+WCRedEnvelopesLogicMgr.h
+
+
+
+观察到有这两个方法：
+12- (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2;-">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-01.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-02.png">
+<meta property="og:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-03.png">
+<meta property="og:updated_time" content="2016-08-31T08:40:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小鱼周凌宇のCODE_HOME">
-<meta name="twitter:description" content="技术宅 iOS开发 JAVA开发 萌妹子">
+<meta name="twitter:title" content="iOS攻防——（五）微信红包插件制作">
+<meta name="twitter:description" content="观察上篇中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。
+首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。
+通过观察微信头文件，注意到以下两个文件
+
+CMessageMgr.h
+WCRedEnvelopesLogicMgr.h
+
+
+
+观察到有这两个方法：
+12- (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2;-">
+<meta name="twitter:image" content="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-01.png">
 
 
 
@@ -115,9 +150,9 @@
 
 
 
-  <link rel="canonical" href="http://zhoulingyu.com/archives/2014/06/"/>
+  <link rel="canonical" href="http://zhoulingyu.com/2016/08/31/iOS攻防——（五）微信红包插件制作/"/>
 
-  <title> 归档 | 小鱼周凌宇のCODE_HOME </title>
+  <title> iOS攻防——（五）微信红包插件制作 | 小鱼周凌宇のCODE_HOME </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,7 +173,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,102 +271,224 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-      
-      OK! 目前共计 46 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS攻防——（五）微信红包插件制作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T16:08:31+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/31/iOS攻防——（五）微信红包插件制作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/iOS攻防——（五）微信红包插件制作/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/31/iOS攻防——（五）微信红包插件制作/" class="leancloud_visitors" data-flag-title="iOS攻防——（五）微信红包插件制作">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <h1 id="观察"><a href="#观察" class="headerlink" title="观察"></a>观察</h1><p><a href="http://zhoulingyu.com/2016/08/29/iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class-dump%20%E4%B8%8E%20Dumpdecrypted%20%E4%BD%BF%E7%94%A8/">上篇</a>中，我们已经成功将微信的壳砸开，并且 dump 出了微信的头文件。</p>
+<p>首先明确本篇的目的——制作一个微信红包插件，并且能够让非越狱手机使用。</p>
+<p>通过观察微信头文件，注意到以下两个文件</p>
+<ol>
+<li><code>CMessageMgr.h</code></li>
+<li><code>WCRedEnvelopesLogicMgr.h</code></li>
+</ol>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-01.png" alt=""></p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-02.png" alt=""></p>
+<p>观察到有这两个方法：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)AsyncOnAddMsg:(<span class="keyword">id</span>)arg1 MsgWrap:(<span class="keyword">id</span>)arg2;</div><div class="line">- (<span class="keyword">void</span>)OpenRedEnvelopesRequest:(<span class="keyword">id</span>)arg1;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>名字上去猜测第一个方法是异步异步接收消息，第二方法是请求打开红包。</p>
+<p>简单的理一下思路：</p>
+<ol>
+<li>hook微信的 <code>- (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2</code> 方法，滤出红包消息</li>
+<li>调用 <code>(void)OpenRedEnvelopesRequest:(id)arg1</code> 打开红包</li>
+</ol>
+<h1 id="Do-it"><a href="#Do-it" class="headerlink" title="Do it"></a>Do it</h1><p>要做到上一节的目标，我们需要通过动态链接库实现。</p>
+<p>在 Xcode 中新建一个 dylib 工程，我取名叫 <code>RedEnvelopesGenius</code>。</p>
+<p><img src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%94%EF%BC%89%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C-03.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2014">2014</h2>
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt="小鱼周凌宇 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt="小鱼周凌宇 WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt="小鱼周凌宇 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/iOS攻防/" rel="tag">#iOS攻防</a>
+          
+        </div>
+      
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2014/06/15/关于初学者markdown一些问题回答/" itemprop="url">
-              
-                <span itemprop="name">关于初学者markdown一些问题回答</span>
-              
-            </a>
-        
-      </h1>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/30/iOS攻防——（四）class-dump 与 Dumpdecrypted 使用/" rel="next" title="iOS攻防——（四）class-dump 与 Dumpdecrypted 使用">
+                <i class="fa fa-chevron-left"></i> iOS攻防——（四）class-dump 与 Dumpdecrypted 使用
+              </a>
+            
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-06-15T12:17:00+08:00"
-              content="2014-06-15" >
-          06-15
-        </time>
-      </div>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2016/08/31/iOS攻防——（五）微信红包插件制作/"
+     data-title="iOS攻防——（五）微信红包插件制作"
+     data-content=""
+     data-url="http://zhoulingyu.com/2016/08/31/iOS攻防——（五）微信红包插件制作/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
       
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2014/06/15/初次整合Hibernate4和Spring4中出现的细节问题/" itemprop="url">
-              
-                <span itemprop="name">初次整合Hibernate4和Spring4中出现的细节问题</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-06-15T11:44:00+08:00"
-              content="2014-06-15" >
-          06-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-
+    </div>
+  </div>
 
 
           </div>
@@ -339,6 +496,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/31/iOS攻防——（五）微信红包插件制作/"
+           data-title="iOS攻防——（五）微信红包插件制作" data-url="http://zhoulingyu.com/2016/08/31/iOS攻防——（五）微信红包插件制作/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -358,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -464,6 +638,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#观察"><span class="nav-number">1.</span> <span class="nav-text">观察</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Do-it"><span class="nav-number">2.</span> <span class="nav-text">Do it</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -565,11 +750,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
