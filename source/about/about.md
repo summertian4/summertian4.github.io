@@ -26,7 +26,7 @@ categories:
 > * 毕业院校：安庆师范学院
 > * 院系：计算机与信息学院
 > * 专业：物联网工程专业
-> * 年级：大四毕业
+> * 毕业时间：2016届
 
 ## 技能
 > * 熟练掌握OC
@@ -209,9 +209,6 @@ categories:
 > * 热爱学习新事物
 > * <span style="color:#00aa99"><strong>代码洁癖</strong></span>，书写喜欢用Markdown
 > * 对自己<span style="color:#00aa99"><strong>学习能力自信</strong></span>
-
-
-
 
 ## Thanks
 > * 希望贵公司能够收下我这个『技术宅』『萌妹子』^_^
