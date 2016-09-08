@@ -1,0 +1,22 @@
+language: node_js
+node_js: stable
+# S: Build Lifecycle
+install:
+  - npm install
+  - npm install -S hexo-generator-json-content
+#before_script:
+ # - npm install -g gulp
+script:
+  - hexo g
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "${USER_NAME}"
+  - git config user.email "${EMAIL}"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+# E: Build LifeCycle
+branches:
+  only:
+    - source
