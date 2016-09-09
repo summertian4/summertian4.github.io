@@ -30,6 +30,8 @@ class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
 
 ## 1.3 Use
 
+<!--more-->
+
 下载好后，双击dmg文件，将其中的 class-dump 文件放到/usr/local/sbin 目录下，然后就可以在命令行中使用了。
 
 ![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png)
