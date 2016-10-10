@@ -1,7 +1,7 @@
 title: 'iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用'
 date: 2016-01-03 14:34:12
 tags:
-  iOS
+  - iOS
 categories:
   - iOS
 ---
@@ -190,6 +190,6 @@ JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可
 
 CSDN： [CSDN博客地址](http://blog.csdn.net/u010127917)
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[小鱼](http://weibo.com/coderfish/)
 
 
