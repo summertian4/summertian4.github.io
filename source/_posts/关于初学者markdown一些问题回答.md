@@ -1,7 +1,7 @@
 title: 关于初学者markdown一些问题回答
 date: 2014-06-15 12:17
 tags:
-  - essay
+  - 随笔
 categories:
   - 随笔
 ---
