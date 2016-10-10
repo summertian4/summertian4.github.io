@@ -20,11 +20,12 @@ categories:
 
 ![垂直线找黄金分割点](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E6%97%A5%E5%B8%B8%E6%91%84%E5%BD%B1%20Tips-001.png)
 
-<!-- More -->
-
 将相片中的重点放在黄金分割点可以使重点更加突出，因为人会更容易注意到处在黄金分割点附近的部分。
 
 ![垂直线找黄金分割点](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E6%97%A5%E5%B8%B8%E6%91%84%E5%BD%B1%20Tips-002.png)
+
+<!-- More -->
+
 
 这种分割方式将矩形画面分割成三个范围，通过这样的方式也可以找到一个好的构图模式。
 
@@ -106,13 +107,13 @@ categories:
 	
 调整半径，可以看到很明显的效果。
 
-![高斯模糊](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E6%97%A5%E5%B8%B8%E6%91%84%E5%BD%B1%20Tips-019png)
+![高斯模糊](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E6%97%A5%E5%B8%B8%E6%91%84%E5%BD%B1%20Tips-019.png)
 	
 1.2 动感模糊
 
 动感模糊可以营造出一种速度感，但通过恰当的运用也可以制造不一样的艺术感。
 
-![动感模糊](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E6%97%A5%E5%B8%B8%E6%91%84%E5%BD%B1%20Tips-020png)
+![动感模糊](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E6%97%A5%E5%B8%B8%E6%91%84%E5%BD%B1%20Tips-020.png)
 
 ### 2 曲线
 
