@@ -1,4 +1,4 @@
-title: iOS——iOS8 Photo库 PHAsset之坑
+title: iOS——iOS8 PhotoKit 库 PHAsset之坑
 date: 2016-03-05 14:06:28
 tags:
   - iOS
@@ -9,13 +9,13 @@ categories:
 # 问题重现
 
 
-最近在做项目的时候，我们选择了一个可以下载iClould图片的三方Picker——CTAssetsPickerController，这个Picker会根据不同系统版本，返回不同类型的图片资源。
+最近在做项目的时候，我们选择了一个可以下载 iClould 图片的三方 Picker——CTAssetsPickerController，这个 Picker 会根据不同系统版本，返回不同类型的图片资源。
 
-iOS8之前，访问系统照片视频使用的是 AssetsLibrary 框架，iOS8之后有了新的系统框架PhotoKit，这一框架对iCloud选图有很好的支持。
+iOS8 之前，访问系统照片视频使用的是 AssetsLibrary 框架，iOS8之后有了新的系统框架 PhotoKit，这一框架对 iCloud 选图有很好的支持。
 
-AssetsLibrary的图片资源类型是ALAsset，而PhotoKit的图片资源类型是PHAsset。
+AssetsLibrary 的图片资源类型是 ALAsset，而 PhotoKit 的图片资源类型是 PHAsset。
 
-如果通过PHAsset获取图片资源，可以调用以下方法：
+如果通过 PHAsset 获取图片资源，可以调用以下方法：
 
 
 ```objc
@@ -46,7 +46,7 @@ AssetsLibrary的图片资源类型是ALAsset，而PhotoKit的图片资源类型�
 - (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler;
 ```
 
-大意是：如果asset对应的资源不符合给定的尺寸，将由contentMode决定返回的图片如何压缩。
+大意是：如果 asset 对应的资源不符合给定的尺寸，将由 contentMode 决定返回的图片如何压缩。
 后面说到了回调可能被调用的次数，如果没有仔细看，你根本就搞不明白是怎么一回事。
 
 stackoverflow上有人一语中的([原链接](http://stackoverflow.com/questions/26663258/uiimage-size-returned-from-requestimageforasset-is-not-even-close-to-the-targ))：
@@ -83,11 +83,11 @@ if ([[info valueForKey:@"PHImageResultIsDegradedKey"]integerValue]==0){
 ## 问题为什么是问题
 
 如果你不去注意这个地方，就可能和我一样去踩坑。
-为什么这样说？在项目中，我们选中了一批图片，当我需要上传图片到我们的服务器时，需要将PHAsset换成UIImage。
+为什么这样说？在项目中，我们选中了一批图片，当我需要上传图片到我们的服务器时，需要将 PHAsset 换成 UIImage。
 当调用`- (PHImageRequestID)requestImageForAsset:(PHAsset *)asset targetSize:(CGSize)targetSize contentMode:(PHImageContentMode)contentMode options:(nullable PHImageRequestOptions *)options resultHandler:(void (^)(UIImage *__nullable result, NSDictionary *__nullable info))resultHandler;`并在回调中写入上传图片至服务器的代码。这时候，如果回调被调用了两次，就会导致同一张图片被上传两次。如果做了同图判断，就会不断的报出一张图片上传不成功，或者少传一张的情况。
 
 ## 其他
-关于AssetsLibrary框架的坑，可以看[这篇文章](http://kayosite.com/ios-development-and-detail-of-photo-framework.html/comment-page-1)
+关于 AssetsLibrary 框架的坑，可以看[这篇文章](http://kayosite.com/ios-development-and-detail-of-photo-framework.html/comment-page-1)
 
 ----
 
