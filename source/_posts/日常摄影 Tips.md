@@ -169,3 +169,13 @@ categories:
 > 3. [ForWallpaper](http://cn.forwallpaper.com/)
 > 4. [少数派·想要拍张好照片，学会利用「前景」很重要 | 手机摄影技巧](http://sspai.com/33571)
 
+----
+
+有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<coderfish@163.com>。
+
+博主主要写 javaEE 和 iOS 的。
+
+希望大家一起进步。
+
+我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+
