@@ -361,36 +361,36 @@ vendors:
   _internal: othersrc
 
   # Internal version: 2.1.3
-  jquery:
+  jquery: http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js
 
   # Internal version: 2.1.5
   # http://fancyapps.com/fancybox/
-  fancybox:
-  fancybox_css:
+  fancybox: http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js
+  fancybox_css: http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css
 
   # Internal version: 1.0.6
   # https://github.com/ftlabs/fastclick
-  fastclick:
+  fastclick: http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js
 
   # Internal version: 1.9.7
   # https://github.com/tuupola/jquery_lazyload
-  lazyload:
+  lazyload: http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js
 
   # Internal version: 1.2.1
   # http://VelocityJS.org
-  velocity:
+  velocity: http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js
 
   # Internal version: 1.2.1
   # http://VelocityJS.org
-  velocity_ui:
+  velocity_ui: http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js
 
   # Internal version: 0.7.9
   # https://faisalman.github.io/ua-parser-js/
-  ua_parser:
+  ua_parser: 
 
   # Internal version: 4.4.0
   # http://fontawesome.io/
-  fontawesome:
+  fontawesome: http://cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css
 
 
 # Assets
