@@ -132,6 +132,64 @@ UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWi
 [generator impactOccurred];
 ```
 
+# Others 
+
+观察 `UIImpactFeedbackGenerator` 你会发现它继承于 `UIFeedbackGenerator`。除了 `UIImpactFeedbackGenerator` 还有三种 FeedbackGenerator：
+
+1. UIImpactFeedbackGenerator
+2. UISelectionFeedbackGenerator
+3. UINotificationFeedbackGenerator
+
+详情可参考 Apple 的 [这篇 Reference](https://developer.apple.com/reference/uikit/uifeedbackgenerator?language=objc) 。
+
+对于震动反馈的应用，Apple 也给出了示例场景：
+
+```objc
+- (IBAction)gestureHandler:(UIPanGestureRecognizer *)sender {
+    
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            
+            // Instantiate a new generator.
+            self.feedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
+            
+            // Prepare the generator when the gesture begins.
+            [self.feedbackGenerator prepare];
+            
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+            
+            // Check to see if the selection has changed...
+            if ([self myCustomHasSelectionChangedMethodWithTranslation:[sender translationInView: self.view]]) {
+                
+                // Trigger selection feedback.
+                [self.feedbackGenerator selectionChanged];
+                
+                // Keep the generator in a prepared state.
+                [self.feedbackGenerator prepare];
+    
+            }
+            
+            break;
+            
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateFailed:
+            
+            // Release the current generator.
+            self.feedbackGenerator = nil;
+            
+            break;
+            
+        default:
+            
+            // Do nothing.
+            break;
+    }
+}
+```
+
 # 三种方法在测试机上不同的反馈结果
 
 
