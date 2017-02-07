@@ -16,6 +16,8 @@ categories:
 
 原因很简单，因为我丢失了两步验证的 app，也丢失了 recovery code。
 
+<!-- More -->
+
 # 2FA 和基于时间戳的实时验证码
 
 其实，是这样的。Github 也有两步验证（2FA），提供了两种可选方式：
