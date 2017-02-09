@@ -839,17 +839,17 @@ int main(int argc, const char * argv[]) {
 
 ![Block 的三道测试题](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-05.png)
 
-#### 第一题：
+1.  第一题：
 
-由于 Block 捕获瞬间值，所以输出为 `in block val = 0`
+	由于 Block 捕获瞬间值，所以输出为 `in block val = 0`
 
-#### 第二题：
+2.  第二题：
 
-由于 `val` 为 __block，外部更改会影响到内部访问，所以输出为 `in block val = 1`
+	由于 `val` 为 __block，外部更改会影响到内部访问，所以输出为 `in block val = 1`
 
-#### 第三题：
+3. 第三题：
 
-和第二题类似，`val = 1` 能影响到 Block 内部访问，所以先输出 `in block val = 1`，之后在 Block 内部更改 `val` 值，再次访问时输出 `after block val = 2`。
+	和第二题类似，`val = 1` 能影响到 Block 内部访问，所以先输出 `in block val = 1`，之后在 	Block 内部更改 `val` 值，再次访问时输出 `after block val = 2`。
 
 # Other
 
