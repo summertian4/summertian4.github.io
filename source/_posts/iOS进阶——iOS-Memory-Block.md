@@ -39,7 +39,10 @@ ARC 的内存管理规则可以简述为：
 
 ## 3 你需要知道
 
-1. 包含 NSObject 类的 Foundation 框架并没有公开
+~~1. 包含 NSObject 类的 Foundation 框架并没有公开~~
+（此处错误，感谢 [酷酷的哀殿](http://www.jianshu.com/u/486bf26e8dce) 的指出）
+
+1. Foundation 框架是非开源的，但是 NSObject 被包含在 [obj4](https://opensource.apple.com/source/objc4/objc4-706/runtime/NSObject.mm) 中，该库已开源。
 2. Core Foundation 框架源代码，以及通过 NSObject 进行内存管理的部分源代码是公开的。
 3. GNUstep 是 Foundation 框架的互换框架
 
