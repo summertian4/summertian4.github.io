@@ -1,11 +1,11 @@
-title: iOS进阶——iOS 内存管理&Block
+title: iOS进阶——iOS（Objective-C） 内存管理&Block
 date: 2017-02-08 15:33:40
 tags:
-  - iOS
-  - iOS进阶
+	- iOS
+	- iOS进阶
 categories:
-  - iOS
-  - iOS进阶
+	- iOS
+	- iOS进阶
 ---
 
 # 第一篇 iOS 内存管理
@@ -212,7 +212,7 @@ NSDeallocateObject(id anObject)
 
 > __CFdoExternRefOperation
 > CFBasicHashAddValue
- 
+
 **release**
 
 > __CFdoExternRefOperation
@@ -520,9 +520,9 @@ struct __main_block_impl_0 *blk = &tmp;
 
 以上代码即：将 `__main_block_impl_0` 结构体实例的指针，赋值给 `__main_block_impl_0` 结构体指针类型的变量 `blk`。也就是我们最初的结构体定义：
 
- ```objc
+```objc
  void (^blk)(void) = ^{NSLog(@"Block");};
- ```
+```
 
 另外，main 函数中还有另外一段：
 
@@ -710,7 +710,7 @@ __Block_byref_val_0 val = {(void*)0,
 而对 `val` 访问也是如此。你可以理解为通过取地址改变变量的值，这和 C 语言中取地址改变变量类似。
 
 所以，声明 __block 的变量可以被改变。至于 `__forwarding` 的其他巨大作用，会继续分析。
- 
+
 > 本节代码在 [EX05](https://github.com/summertian4/iOS-ObjectiveC/tree/master/ObjcMemory/ObjcMemory-Test-Code/EX07) 中
 
 ## 3 Block 的存储域
@@ -844,15 +844,15 @@ int main(int argc, const char * argv[]) {
 
 1.  第一题：
 
-	由于 Block 捕获瞬间值，所以输出为 `in block val = 0`
+    由于 Block 捕获瞬间值，所以输出为 `in block val = 0`
 
 2.  第二题：
 
-	由于 `val` 为 __block，外部更改会影响到内部访问，所以输出为 `in block val = 1`
+    由于 `val` 为 __block，外部更改会影响到内部访问，所以输出为 `in block val = 1`
 
-3. 第三题：
+3.  第三题：
 
-	和第二题类似，`val = 1` 能影响到 Block 内部访问，所以先输出 `in block val = 1`，之后在 	Block 内部更改 `val` 值，再次访问时输出 `after block val = 2`。
+    和第二题类似，`val = 1` 能影响到 Block 内部访问，所以先输出 `in block val = 1`，之后在 	Block 内部更改 `val` 值，再次访问时输出 `after block val = 2`。
 
 # Other
 
