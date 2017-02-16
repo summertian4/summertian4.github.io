@@ -146,6 +146,7 @@ NSIncrementExtraRefCount(id anObject)
       format: @"NSIncrementExtraRefCount() asked to increment too far”];
   ((obj_layout)anObject)[-1].retained++;
 }
+
 ```
 
 以上代码中， `NSIncrementExtraRefCount` 方法首先写入了当 `retained` 变量超出最大值时发生异常的代码（因为 `retained` 是 NSUInteger 变量），然后进行 `retain ++` 代码。
@@ -450,7 +451,7 @@ int main(int argc, const char * argv[]) {
 
 以上是转换后的代码，不要方，一段一段看。
 
-可以看到，Block 内部的内容，**被转换成了一个普通的静态函数 `__main_func_0`**。
+可以看到，Block 的实现内容，**被转换成了一个普通的静态函数 `__main_func_0`**。
 
 再看其他部分：
 
@@ -870,6 +871,6 @@ int main(int argc, const char * argv[]) {
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
 
 
