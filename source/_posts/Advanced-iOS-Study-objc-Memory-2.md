@@ -31,6 +31,8 @@ struct SideTable {
 };
 ```
 
+<!-- More -->
+
 SideTable 结构体重定了几个非常重要的变量。
 
 ```objc
