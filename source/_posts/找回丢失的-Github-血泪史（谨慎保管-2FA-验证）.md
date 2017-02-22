@@ -1,4 +1,4 @@
-title: 找回丢失的 Github 血泪史（谨慎保管 2FA 验证）
+title: 找回丢失的 Github（谨慎保管 2FA 验证）
 date: 2017-02-07 14:53:14
 tags:
   - Other
