@@ -31,6 +31,8 @@ ZLYWaterWave的原理很简单，我们用Example里的工程做简介。(这里
 5. ZLYWaterWave就是为你提供好了动态波浪的Path，你只需要在回调中加入遮盖即可
 6. 如果你还是晕晕的，那就直接看Example吧，相信你瞬间就会明白的
 
+<!-- More -->
+
 # 安装
 直接拽入`ZLYWaterWave.h`和`ZLYWaterWave.m`文件
 

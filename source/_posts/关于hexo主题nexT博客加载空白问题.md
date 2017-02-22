@@ -1,4 +1,4 @@
-title: 关于 hexo 主题 nexT 博客加载空白问题
+title: 近日关于 hexo 主题 nexT 博客加载空白问题
 date: 2016-11-07 12:42:43
 tags:
 	- Other
@@ -15,6 +15,8 @@ categories:
 ### 1. 用 Chrome 的开发者工具中的 Network 选项查看
 
 ![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_%E5%85%B3%E4%BA%8E%20hexo%20%E4%B8%BB%E9%A2%98%20nexT%20%E5%8D%9A%E5%AE%A2%E5%8A%A0%E8%BD%BD%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98-01.png)
+
+<!-- More -->
 
 发现很多 js 都加载失败，在加载失败的 js 右键 `Open Link in New Tab` 打开，发现返回 Github 的 404 页面。
 

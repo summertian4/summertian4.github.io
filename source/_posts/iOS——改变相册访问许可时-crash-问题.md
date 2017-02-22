@@ -1,4 +1,4 @@
-title: iOS——改变相册访问许可时 crash 问题
+title: iOS——改变相册访问许可时的 crash
 date: 2016-11-17 14:39:25
 tags:
 	- iOS
