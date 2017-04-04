@@ -3,7 +3,9 @@ node_js: stable
 # S: Build Lifecycle
 install:
   - npm install
-  - npm install -S hexo-generator-json-content
+  - npm install hexo-cli -g  
+  - npm install hexo --save 
+  - npm install hexo-server --save
 #before_script:
  # - npm install -g gulp
 script:

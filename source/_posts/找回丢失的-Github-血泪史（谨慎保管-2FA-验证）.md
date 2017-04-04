@@ -82,9 +82,9 @@ SO，拿到 verification token 之后，Github 客服就帮我关掉了 2FA。
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
 
-博主主要写 javaEE 和 iOS 的。
+博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 

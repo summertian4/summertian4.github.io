@@ -59,13 +59,11 @@ IOC或者说“依赖注入”的思想虽然由spring提出，但是在Struts2�
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我<coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
 
-博主主要写javaEE和iOS的。
+博主是 iOS 妹子一枚。
 
 希望大家一起进步。
-
-CSDN： [CSDN博客地址](http://blog.csdn.net/u010127917)
 
 我的微博：[小鱼](http://weibo.com/coderfish/)
 
