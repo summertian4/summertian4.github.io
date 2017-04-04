@@ -217,4 +217,14 @@ UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWi
 
 测试代码在[这里](https://github.com/summertian4/iOS-ObjectiveC/tree/master/iPhoneShakeDemo)。
 
+----
+
+有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+
+博主是 iOS 妹子一枚。
+
+希望大家一起进步。
+
+我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+
 
