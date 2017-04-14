@@ -6,16 +6,16 @@ categories:
   - iOS
 ---
 
-[](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png)
+![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png)
 
 # 你是否见过？
 
 1. 你是否见过测试人员或者自己在 CI 上 install 了一个版本，发现了 BUG 后，突然忘了自己下的是 CI 上的哪一个 commit 的包？
 2. 你是否见过下面这个东西：
 
-![blog_iOS——写一个快速定位问题的脚本-01](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-01.jpg)
+![blog_iOS——写一个快速定位问题的脚本-01](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-01.jpg)
 
-![blog_iOS——写一个快速定位问题的脚本-02](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-02.png)
+![blog_iOS——写一个快速定位问题的脚本-02](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-02.png)
 
 <!-- More -->
 
@@ -41,53 +41,53 @@ categories:
 
 让我们来看一些基本的。这是我们准备好的 `120*120` 的原图：
 
-![blog_iOS——写一个快速定位问题的脚本-03](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-03.png)
+![blog_iOS——写一个快速定位问题的脚本-03](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-03.png)
 
 `cd` 到图片所在的目录，执行以下命令，给图片添加高斯模糊效果：
 
-```shell
+```bash
 convert original.png -blur 10x8 blurred.png
 ```
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-04](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-04.png)
+![blog_iOS——写一个快速定位问题的脚本-04](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-04.png)
 
 -------
 
 继续，执行以下命令从 坐标 `(0,60)` 剪切成 `120*60` 的图片，
 
-```shell
+```bash
 convert blurred.png -crop 120x60+0+60 cropped-blurred.png
 ```
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-05](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-05.png)
+![blog_iOS——写一个快速定位问题的脚本-05](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-05.png)
 
 -------
 
 继续，给图片添加文字水印『zhoulingyu』，参数包括：背景不填充颜色、白色字体、字体大小 12、居中显示文字、文字为『zhoulingyu』：
 
-```shell
+```bash
 convert -background none -fill white -pointsize 12 -gravity center caption:"zhoulingyu" cropped-blurred.png +swap -composite label.png
 ```
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-06](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-06.png)
+![blog_iOS——写一个快速定位问题的脚本-06](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-06.png)
 
 -------
 
 继续，将上面得到的剪切好的带水印的 `label.png` 和 原图 `original.png` 合成在一起：
 
-```shell
+```bash
 composite label.png original.png finished-image.png
 ```
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-07](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-07.png)
+![blog_iOS——写一个快速定位问题的脚本-07](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-07.png)
 
 
 OK，我们得到了想要的效果图。
@@ -98,46 +98,46 @@ OK，我们得到了想要的效果图。
 
 1. 查看图片信息
 
-```shell
+```bash
 identify original.png 
 original.png PNG 120x120 120x120+0+0 8-bit sRGB 46c 2.58KB 0.010u 0:00.000
 ```
 
 2. 格式转换
 
-```shell
+```bash
 convert original.png original.jpg 
 ```
 
 3. 编辑图片大小
 
-```shell
+```bash
 convert original.png -resize 200x200 resize-image.png 
 ```
 
 4. 裁剪
 
-```shell
+```bash
 # 从坐标 (0,0) 裁剪 100*100 的图像
 convert original.png -crop 100x100+0+0 crop.png  
 ```
 
 5. 旋转
 
-```shell
+```bash
 convert original.png -rotate 45 rotate.png 
 ```
 
 6. 合并图像
 
-```shell
+```bash
 # 给图片添加水印
 convert original.png -compose over watermark.png -composite new-image.png  
 ```
 
 7. 高斯模糊
 
-```shell
+```bash
 convert -blur 80x5 original.jpg blur.png
 ```
 -blur radiusxsigma，两个分别是高斯模糊需要的两个参数，具体可以查看 [blur 参数使用](https://www.imagemagick.org/script/command-line-options.php#blur)
@@ -163,7 +163,7 @@ ImageMagick 可以实现 N 多效果，像油画、噪声、散射、旋涡，�
 
 在工程 `Target` -> `Build Phases` 中新建一个 Run Script，我们可以给它起名 `generate auxiliary icon`，这样稍后容易在 `Report Navigator` 观察。
 
-![blog_iOS——写一个快速定位问题的脚本-08](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-08.png)
+![blog_iOS——写一个快速定位问题的脚本-08](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-08.png)
 
 现在我们可以开始编写我们的脚本 `auxiliary_icon.sh`
 
@@ -199,7 +199,7 @@ ImageMagick 可以实现 N 多效果，像油画、噪声、散射、旋涡，�
 
 which 一下就知道
 
-```shell
+```bash
 convertPath=`which convert`
 # 判断 convertPath 文件是否存在
 if [ ! -f ${convertPath}]; then
@@ -216,7 +216,7 @@ fi
 PlistBuddy 可以用于读取 Plist 文件，通过描述路径就可以找到你想知道的 Key 对应的 Value。
 `${INFOPLIST_FILE}` 是 xcodebuild 提供的变量（具体可以参考 [Build settings reference](http://help.apple.com/xcode/mac/8.0/#/itcaec37c2a6)）提供了编译后 `info.plist` 的路径。
 
-```shell
+```bash
 commit=`git rev-parse --short HEAD`
 branch=`git rev-parse --abbrev-ref HEAD`
 buildNumber=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "${INFOPLIST_FILE}"`
@@ -225,7 +225,7 @@ caption="${buildNumber} \n${branch}\n${commit}"
 
 3. 判断编译环境
 
-```shell
+```bash
 # Release 不执行
 echo "Configuration: $CONFIGURATION"
 if [ ${CONFIGURATION} = "Release" ]; then
@@ -237,35 +237,35 @@ fi
 
 在编译后的 `info.plist` 中，可以找到如下结构：
 
-![blog_iOS——写一个快速定位问题的脚本-09](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-09.png)
+![blog_iOS——写一个快速定位问题的脚本-09](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-09.png)
 
 这里记录了所有的 Icon files。查看 plist 的原格式，可以看到原始的 key 是什么。通过 PlistBuddy 和 路径 `CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles` 可以输出 value。
 
 `| wc -l` 可以统计输出行数。
 
-```shell
+```bash
 icon_count=`/usr/libexec/PlistBuddy -c "Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "${CONFIGURATION_BUILD_DIR}/${INFOPLIST_PATH}" | wc -l`
 ```
 
 要注意的是， `/usr/libexec/PlistBuddy -c "Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "${CONFIGURATION_BUILD_DIR}/${INFOPLIST_PATH}"` 输出结果是这样的：
 
-![blog_iOS——写一个快速定位问题的脚本-10](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-10.png)
+![blog_iOS——写一个快速定位问题的脚本-10](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-10.png)
 
 输出一共是 **五行**，所以获得的结果是 5。
 
 那么真实的 CFBundleIconFiles count 其实是：
 
-```shell
+```bash
 real_icon_index=$((${icon_count} - 2))
 ```
 
 刚开始，我也没有注意。可想而知心情如何 =_=。
 
-![blog_iOS——写一个快速定位问题的脚本-11](image/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-11.jpg)
+![blog_iOS——写一个快速定位问题的脚本-11](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-11.JPG)
 
 5. 根据数量循环，执行调用『生成记号图方法』
 
-```shell
+```bash
 for ((i=0; i<$real_icon_index; i++)); do
 # 找到 icon 名
 icon=`/usr/libexec/PlistBuddy -c "Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles:$i" "${CONFIGURATION_BUILD_DIR}/${INFOPLIST_PATH}"`
@@ -278,7 +278,7 @@ done
 
 6. generateIcon 方法
 
-```shell
+```bash
 function generateIcon() {
     originalImg=$1
 
@@ -319,8 +319,9 @@ function generateIcon() {
 
 # 代码清单
 
-最终的代码清单在 [这里](https://github.com/summertian4/ZLYWatermarkIcon)
+最终的代码清单放在了 Github 上：
 
+> [ZLYWatermarkIcon](https://github.com/summertian4/ZLYWatermarkIcon)
 
 # 参考
 
