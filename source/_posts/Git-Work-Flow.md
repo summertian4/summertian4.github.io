@@ -19,7 +19,7 @@ categories:
 
 <!-- More -->
 
-# Git 使用规范
+# 常见 Git 使用规范
 
 先举一个例子，放上几张 Network 的图形截图。为了你的工程不变成下面这个样子，请善待 Git 的使用：
 
@@ -33,18 +33,20 @@ categories:
 
 先来说说几张图种的问题：
 
-1. 反向拉取 develop 分支
+1. 反向拉取 `develop` 分支
 2. 不经过 `Pull Request` 的合并
 3. 重复使用已经合并的分支
 4. 没有意义的 `Commit Message`
 
-对于问题 1，敢问这位同学，敢不敢用 `rebase`？很多同学在开发分支过程中，发现 `develop` 有更新，就去拉取 `develop` 的内容 Merge 进自己当前分支。这样造成的后果**不只是** `Network` 看起来其丑无比，而且会造成分支的污染，造成不必要的冲突，你在 Merge 过程中解决的冲突，很可能在再次合并入 `develop` 时还会再次发生冲突，这种情况尤其在多人需要合并时更为明显，反复解决不必要的冲突。
+**对于问题 1**，敢问这位同学，敢不敢用 `rebase`？很多同学在开发分支过程中，发现 `develop` 有更新，就去拉取 `develop` 的内容 Merge 进自己当前分支。这样造成的后果**不只是** `Network` 看起来其丑无比，而且会造成分支的污染，造成不必要的冲突，你在 Merge 过程中解决的冲突，很可能在再次合并入 `develop` 时还会再次发生冲突，这种情况尤其在多人需要合并时更为明显，反复解决不必要的冲突。
 
-对于问题 2，完全就是习惯问题，对于所有的合并，如果是你自己的两个分支之间，如果非要直接 Merge 也不是不可，但是如果是两个人分别开发的分支，直接的 Merge 是不负责任的。`Pull Request` 或者 `Merge Request` 可以更早的帮你发现合并冲突，并且**强制你 review 代码**，这在保证代码质量方面起着至关重要的作用。
+**对于问题 2**，完全就是习惯问题，对于所有的合并，如果是你自己的两个分支之间，如果非要直接 Merge 也不是不可，但是如果是两个人分别开发的分支，直接的 Merge 是不负责任的。`Pull Request` 或者 `Merge Request` 可以更早的帮你发现合并冲突，并且**强制你 review 代码**，这在保证代码质量方面起着至关重要的作用。
 
-对于问题 3，已经合并入 `develop` 分支的分支，最好在 `Pull Request` 合并时直接勾选移除原分支，更容易保持和 `develop` 的同步。
+**对于问题 3**，已经合并入 `develop` 分支的分支，最好在 `Pull Request` 合并时直接勾选移除原分支，更容易保持和 `develop` 的同步。
 
-对于问题 4：是最最最常见的问题，看看自己的项目，里面有多少个连续的 `Commit Message` 是『bug fix』、『update』、『pod add』、『修复』等等这样完全看不出啥内容的描述。敢问这样写的同学，你们的项目 Owner 看到 `Network` 时候是不是心里充满了 WTF？`Commit Message` 应当简短干练的描述这个 `commit` 做了什么。
+**对于问题 4**，是最最最常见的问题，看看自己的项目，里面有多少个连续的 `Commit Message` 是『bug fix』、『update』、『pod add』、『修复』等等这样完全看不出啥内容的描述。敢问这样写的同学，你们的项目 Owner 看到 `Network` 时候是不是心里充满了 WTF？`Commit Message` 应当简短干练的描述这个 `commit` 做了什么。
+
+![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-17.jpeg)
 
 下面再看一个正面的示例，无比清爽的 Network：
 
@@ -54,7 +56,7 @@ categories:
 
 ## Git Flow
 
-广为人知的 git flow 定义了一套标准的 git 开发流。[这里是经典文章](http://nvie.com/posts/a-successful-git-branching-model/)。
+广为人知的 Git Flow 定义了一套标准的 Git 开发流。[这里是经典文章](http://nvie.com/posts/a-successful-git-branching-model/)。
 
 大致的意思为：
 
@@ -62,7 +64,7 @@ categories:
 2. `develop` 是长期分支，一般用于作为日常开发汇总，即开发版的代码
 3. `feature` 是短期分支，一般用于一个新功能的开发
 4. `hotfix` 是短期分支 ，一般用于正式发布以后，出现 bug，需要创建一个分支，进行 bug 修补。
-5. `release` 是短期分支，一般用于发布正式版本之前（即合并到Master分支之前），需要有的预发布的版本进行测试。`release` 分支在经历测试之后，测试确认验收，将会被合并的 `develop` 和 `master`
+5. `release` 是短期分支，一般用于发布正式版本之前（即合并到 `master` 分支之前），需要有的预发布的版本进行测试。`release` 分支在经历测试之后，测试确认验收，将会被合并的 `develop` 和 `master`
 
 具体的也可以参考 [Git 工作流程](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)。
 
@@ -74,26 +76,26 @@ categories:
 
 大致意思为：
 
-1. master 开出新分支，不区分功能分支或补丁分支。
-2. 新分支开发完成后，或者需要讨论的时候，就向 master 发起一个 `Pull Request`。
+1. `master` 开出新分支，不区分功能分支或补丁分支。
+2. 新分支开发完成后，或者需要讨论的时候，就向 `master` 发起一个 `Pull Request`。
 3. 项目内人一起评审和讨论你的代码。对话过程中，你还可以不断提交代码。
-4. `Pull Request` 通过，合并进 master，原分支就被删除。
+4. `Pull Request` 通过，合并进 `master`，原分支就被删除。
 
 可以看出 Github Flow 是 Git Flow 的简化版本，但是加上了一些合作关节的把控。
 
-## 我的 Git Work Flow
+# 我的 Git Work Flow
 
 我通常希望团队中的开发流程类似 Git Flow，但更为详细，大致为：
 
-### 一、Git 分支部分
+## 一、Git 分支部分
 
-#### master
+### master
 
 长期分支，每个 `commit` 对一个 `tag`（一个发布版本）
 
 ![master](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-06.png-w375)
 
-#### develop
+### develop
 
 长期分支，日常开发汇总（开发版的代码）。
 
@@ -101,19 +103,19 @@ categories:
 
 ![develop](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-07.png-w375)
 
-#### `release`
+### `release`
 
 短期分支，feature 开发完成后从 `develop` 拉出的分支，用于测试阶段，期间添加的 `commit` 基本都是 bug fix，开发结束后同时和并进 `develop` 和 `master`，`master` 打上发布 tag。
 
 ![release](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-08.png-w375)
 
-#### `hotfix`
+### `hotfix`
 
 短期分支，正式发布以后，进行 bug 修补
 
-### 二、Git 操作部分
+## 二、Git 操作部分
 
-#### commit 规范
+### commit 规范
 
 1. `commit message` 言简意赅，不要写无用信息。不要出现 『update』，『Bug Fix』，这样让别人不能领其意的描述
 2. 添加一个新的 `Pod` 库或 `pod update` 后，单独提交一个 `commit`，统一 `commit message` 为『pod add xxx』或 『pod update』
@@ -121,7 +123,7 @@ categories:
 
 ![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-09.png)
 
-#### rebase
+### rebase
 
 **绝对不要出现反向拉取代码**的情况，即文章开头第一张、第二张图片中的情况——看到 `develop` 有更新，就将 `develop` 的代码拉取 merge 进自己的分支。
 
@@ -142,9 +144,9 @@ categories:
 
 这样你既可以得到一个好看的 `Network`，又可以及时控制冲突。不过在多人开发中你需要多多关注 `develop` 的情况，及时 `rebase`，避免长时间不更新代码突然 `rebase` 到最新后发现了大量冲突。当然，控制和分配比较好的项目本身也很少产生冲突。
 
-# GitLab 管理规范
+## 三、GitLab 管理规范
 
-## issue
+### issue
 
 日常 Github 玩的转的同学都知道 `issue` 可以做很多事，比如：意见管理、Bug 管理、任务管理，可以只做一种功能，也能通过不同的 Label 同时使用所有的功能。
 
@@ -165,13 +167,13 @@ categories:
 
 GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样写，在 `Pull Request` 通过审核时，相应的 issue 会自动被关闭。
 
-## Milestones
+### Milestones
 
 `Milestones` 即里程碑，`issue` 在建立的时候可以选择 `Milestones`，如果合理的使用了 `Milestones`，在 Milestones 页面，就可以得到一个清晰的项目进度。
 
 ![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-12.png)
 
-## Pull Request
+### Pull Request
 
 所有的合并都需要提 `Pull Request`，包括自己的分支合并到自己的分支，可以更好的帮助大家养成 Code Review 的好习惯。
 
@@ -183,7 +185,7 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 ![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-14.png)
 
-## Code Review
+### Code Review
 
 `Code Review` 是一个很值得说的点。很多时候大家会以为 `Code Review` 是一定要读懂别人的代码，然后进行分析、审核。其实 `Code Review` 更多的是扮演了团队内经验传递的作用。
 
@@ -214,6 +216,11 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 当然也有人认为新加 `commit` 可以更清晰的看到提交者的新变动，也更符合 `Github Flow`。关于这里，就没有什么强制了，更喜欢什么就什么。
 
+# 总结
+
+最后，希望大家都收获一个清爽如风的 Network。
+
+![示例3](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-04.png-w375)
 
 ----
 
@@ -223,6 +230,6 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[小鱼](http://weibo.com/coderfish/)
 
 
