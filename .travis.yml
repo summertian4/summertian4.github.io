@@ -4,8 +4,8 @@ node_js: stable
 install:
   - npm install
   - npm install hexo-cli -g  
-  - npm install hexo --save 
-  - npm install hexo-server --save
+  - npm install -- save-dev hexo-util
+  - npm install hexo-deployer-git --save
 #before_script:
  # - npm install -g gulp
 script:
