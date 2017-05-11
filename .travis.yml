@@ -6,6 +6,7 @@ install:
   - npm install hexo-cli -g  
   - npm install -- save-dev hexo-util
   - npm install hexo-deployer-git --save
+  - npm install hexo-generator-feed --save
 #before_script:
  # - npm install -g gulp
 script:
