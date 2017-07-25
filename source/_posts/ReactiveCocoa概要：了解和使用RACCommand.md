@@ -28,7 +28,7 @@ categories:
 
 `RACCommand`是ReactiveCocoa最精华的部分之一，它可以让你在开发中节约大量的时间并让你的iOS或者OS X app有更强的鲁棒性。
 
-我见过不少刚接触ReactiveCocoa（后文将简写为RAC），还不能完全理解`RACCommand`是如何工作又不知何时应该使用`RACCommand`的同学。所以我认为这个小介绍将会市场实用，可以给他们带来一些启发。官方文档并没有给出多少如何使用RACCommand的Examples，但是[RACCommand头文件的介绍还是很不错的](https://github.com/ReactiveCocoa/ReactiveCocoa/blob/master/ReactiveCocoa/Objective-C/RACCommand.h)，不过这对刚开始用RAC的同学来说还是太难理解了。
+我见过不少刚接触ReactiveCocoa（后文将简写为RAC），还不能完全理解`RACCommand`是如何工作又不知何时应该使用`RACCommand`的同学。所以我认为这个小介绍将会很实用，可以给他们带来一些启发。官方文档并没有给出多少如何使用RACCommand的Examples，但是[RACCommand头文件的介绍还是很不错的](https://github.com/ReactiveCocoa/ReactiveCocoa/blob/master/ReactiveCocoa/Objective-C/RACCommand.h)，不过这对刚开始用RAC的同学来说还是太难理解了。
 
 `RACCommand`类是用于表示一些操作的执行。通常，是由于UI上的一些事件触发了`RACCommand`的执行。比如当用户按了一个按钮，如果对应`RACCommand`实例可以被执行，就会执行相应的操作。这使得它很容易和UI进行绑定，同时可以保证当`RACCommand`处于`not enabled`时`RACCommand`实例的操作不会被执行。当Command可以执行时，常做的方式是把allowsconcuuent的属性设置为NO，这可以保证Command已经执行完成后不会被重复执行。Command执行的结果是一个RACSignal，因此你可以调用`next:`、`completed:`、或者`error:`。后面将会展示具体使用方式。
 
@@ -165,7 +165,7 @@ Command通过一个`enabledSignal`参数来初始化。这个Signal可以指示C
 }];
 ```
 
-在我们的用例中按钮为我们调用Command的执行（所以我们不需要手动调用`-execute:`），所以在Command执行时，为了及时更新UI，我们需要监听Command的另一个属性。我们有几种让人迷惑的地方，`RACCommand`的`executionSignals`属性是一个每当Commands开发执行时就发送`next: `的Signal。问题在于Signal由Command创建，所以Signal中还有一层Signal。每次Command开始执行的时候， 我们会在ViewModel中通过`mapSubscribeCommandStateToStatusMessage`方法里面获取到一个信号。同时在这个信号里面返回了一个字符串：
+在我们的用例中按钮为我们调用Command的执行（所以我们不需要手动调用`-execute:`），所以在Command执行时，为了及时更新UI，我们需要监听Command的另一个属性。有几个让人迷惑的地方，`RACCommand`的`executionSignals`属性是一个每当Commands开始执行时就发送`next: `的Signal。问题在于Signal由Command创建，所以Signal中还有一层Signal。每次Command开始执行的时候， 我们会在ViewModel中通过`mapSubscribeCommandStateToStatusMessage`方法里面获取到一个信号。同时在这个信号里面返回了一个字符串：
 
 ```objc
 RACSignal *startedMessageSource = [self.subscribeCommand.executionSignals map:^id(RACSignal *subscribeSignal) {
@@ -209,7 +209,7 @@ RACSignal *failedMessageSource = [[self.subscribeCommand.errors subscribeOn:[RAC
 }];
 ```
 
-如果我们有三个带有状态消息的Signal，我们可以将他们合并陈搞一个信号并绑定到ViewModel的一个`statusMessage`属性 (`statusMessage`绑定ViewController的statusLabel.text)。
+如果我们有三个带有状态消息的Signal，我们可以将他们合并成一个信号并绑定到ViewModel的一个`statusMessage`属性 (`statusMessage`绑定ViewController的statusLabel.text)。
 
 ```objc
 RAC(self, statusMessage) = [RACSignal merge:@[startedMessageSource, completedMessageSource, failedMessageSource]];
