@@ -26,6 +26,8 @@ __weak __typeof__(self) weakSelf = self;
 
 一般，由于重复写的次数过多，就加到了 `snippets` 快捷代码块，以下是我的：
 
+<!-- More -->
+
 ![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-01.png)
 
 ![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-02.png)
