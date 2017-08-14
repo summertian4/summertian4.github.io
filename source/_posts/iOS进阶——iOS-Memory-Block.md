@@ -3,6 +3,7 @@ date: 2017-02-08 15:33:40
 tags:
 	- iOS
 	- iOS进阶
+	- 内存与引用
 categories:
 	- iOS
 	- iOS进阶
@@ -871,5 +872,5 @@ int main(int argc, const char * argv[]) {
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[小鱼](http://weibo.com/coderfish/)
 
