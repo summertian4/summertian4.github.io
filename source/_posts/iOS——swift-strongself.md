@@ -116,6 +116,10 @@ DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 
 **Swift 和 Objective-C 大不同，但是 iOS 内存管理仍然是 iOS 内存管理，ARC 仍然是 ARC，所以不管语法怎么变，关于内存和引用依旧还是原来的样子，`strongSelf` 也好，循环引用也好，千万别忘了去注意。**
 
+# 代码
+
+代码都在[这里](https://github.com/summertian4/iOS-Swift/tree/master/StrongSelf)
+
 # Other
  
 如果以下这幅图中的三个问题，你不能清晰的答出答案和其理由，建议你去读一读 Objective-C 关于内存管理的源码哟。这里是我的两篇博文，希望能帮到你：
