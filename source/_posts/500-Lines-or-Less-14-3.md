@@ -1,5 +1,5 @@
 ---
-title: 500-Lines-or-Less-14-3
+title: 【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第三部分】
 date: 2017-11-22 15:27:19
 tags:
 	- 译文
@@ -13,8 +13,8 @@ categories:
 
 ----
 
-### [上一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](500-Lines-or-Less-14-2)
-### 译者注：休息结束，我们继续
+> [上一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](http://zhoulingyu.com/2017/10/31/500-Lines-or-Less-14-2/)
+> 译者注：休息结束，我们继续
 
 # 实例优化
 

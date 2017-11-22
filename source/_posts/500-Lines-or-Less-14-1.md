@@ -234,7 +234,7 @@ class Class(Base):
 -----
 
 ### 译者著：文章有点长，怕大家看着感觉太干，分成了的三篇文章，大家休息一下，继续吧。
-### [下一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](500-Lines-or-Less-14-2)
+### [下一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](http://zhoulingyu.com/2017/10/31/500-Lines-or-Less-14-2/)
 
 
 ----
