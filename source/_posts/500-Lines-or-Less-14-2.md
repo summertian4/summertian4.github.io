@@ -1,5 +1,5 @@
 ---
-title: 【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第而部分】
+title: 【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】
 date: 2017-10-31 12:14:15
 tags:
 	- 译文
@@ -13,8 +13,8 @@ categories:
 
 ----
 
-### [上一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第一部分】》](500-Lines-or-Less-14-1)
-### 译者注：休息结束，我们继续
+> [上一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第一部分】》](http://zhoulingyu.com/2017/10/08/500-Lines-or-Less-14-1/)
+> 译者注：休息结束，我们继续
 
 ----
 
@@ -342,7 +342,7 @@ def test_get():
 -----
 
 ### 译者著：文章有点长，怕大家看着感觉太干，分成了的三篇文章，大家休息一下，继续吧。
-### [下一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第三部分】》](500-Lines-or-Less-14-3)
+### [下一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第三部分】》](http://zhoulingyu.com/2017/11/22/500-Lines-or-Less-14-3/)
 
 
 ----
