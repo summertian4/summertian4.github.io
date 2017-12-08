@@ -56,7 +56,7 @@ categories:
 
 这一块的工作，不仅仅可以抽出 OC 代码，也同时可以抽出 Swift 的代码。我们将 OC 部分的代码新建了库为 `LPDBOCFoundationGarbage`，Swift 部分的代码新建库为 `LPDBPublicModule`。
 
-## 2.1 `LPDBOCFoundationGarbage`
+## 2.1 LPDBOCFoundationGarbage
 
 先说 `LPDBOCFoundationGarbage`，叫这个名字显然不仅仅会放入上面所提到的文件。`LPDBOCFoundationGarbage` 还会**大量放入长期不跟随业务变动的 OC 代码**。这是因为，在实践中，我们发现总是『理想很美好』，虽然大家都抱有把旧代码整理一遍的愿望，但是实际上，我们项目的旧代码已经到了剪不断理还乱的地步，所以期望一边整理、一边分离的想法基本是不可靠的。这时候就要借用 [MM](https://github.com/mmoaay) 大佬给我们传授的一句话『让恶心的代码恶心到一起』，`LPDBOCFoundationGarbage` 正是为此而创建。
 
@@ -72,7 +72,7 @@ categories:
 
 > 关于前缀说两句。我们所有抽出的库都带有前缀 `LPDB`，但是针对 Swift 库和 OC 库稍有区分的是，OC 库内的文件也都带有前缀，而 Swift 库是去掉了前缀，这也符合两种语言的规范。
 
-## 2.2 `LPDBPublicModule`
+## 2.2 LPDBPublicModule
 
 `LPDBPublicModule` 情况很简单，主要是新业务迭代时候产生的一些复用性高的代码，但是这显然和 OC 那个垃圾桶库不一样，要干净整洁的多。主要存放的是：
 
@@ -81,7 +81,7 @@ categories:
 
 > [Lotusoot](https://github.com/Vegetarians/Lotusoot) 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 将会有另一篇文章。
 
-## 2.3 `LPDBNetwork`
+## 2.3 LPDBNetwork
 
 这块毋庸置疑，不管什么项目都基本有的一块，基本上我们项目中网络相关的旧代码都是 OC 的，唯一比较麻烦的是，我们的网络层，早期人员写的比较粗糙，甚至和 UI 层代码有很多耦合，比如网络请求中和网络请求失败有一些 HUD 显示，转转菊花什么的。所以导致在从主工程抽离的时候有很多恶心的地方。
 
@@ -153,11 +153,11 @@ id delegate = [[UIApplication sharedApplication] delegate];
 
 所以，第二遍处理使用协议替换反射是很有必要的。但实质上，处理的并不是很好。大致如下（我们以 `LPDBLoginModule` 为例）：
 
-### 4.2.1 在 `LPDBLoginModule` 整理用到的服务，归类整理
+### 4.2.1 在 LPDBLoginModule 整理用到的服务，归类整理
 
 如我们的 `LPDBLoginModule` 用到了 AppDelegate 中的一些方法，同事用到了 AuthLogin 相关类中的一些方法
 
-### 4.2.2 在 `LPDBLoginModule` 中建立相应的协议
+### 4.2.2 在 LPDBLoginModule 中建立相应的协议
 
 即建立 `AuthLoginDelegate.h` 和 `AppDelegateProtocol`
 
@@ -297,8 +297,6 @@ class MainLotusoot: NSObject, MainLotus {
 }
 ```
 
-
-
 ### 4.3.3 注册服务
 
 **需要着重说明的是，这一步是可以省略的，通过 Lotusoot 提供的脚本和注解，可以自动为所有的路由进行注册。请移步 [Lotusoot](https://github.com/Vegetarians/Lotusoot)参考『3. 注解与规范』部分。**
@@ -309,7 +307,6 @@ class MainLotusoot: NSObject, MainLotus {
 [LotusootCoordinator registerWithLotusoot:[AppDelegateLotusoot new] lotusName:@"AppDelegateLotus"];
     [LotusootCoordinator registerWithLotusoot:[MainLotusoot new] lotusName:@"MainLotus"];
 ```
-
 
 ### 4.3.3 在其他模块中调用服务
 
@@ -348,7 +345,36 @@ mainModule.authLoginSuccess()
 
 `LPDBPublicModule` 中的 `Lotus` 协议，像一张清单列出了所有模块提供的服务声明，而在各个模块中，直接通过这些公共协议就可以调用想要的服务。很多问题都可以在编译前和编译阶段显示出来（如果模块不提供服务，是不能通过编译的；如果没有一项服务没有声明，是不能通过编译的）。
 
-## 4.4 模块的积木化
+
+## 4.4 语言耦合
+
+我们抽模块中一个重要的目的就是『分割两种语言』，但是实践过程中，会发现，分割语言比分割业务还要难。
+
+一个 Pod 库中只能包含一种语言，但往往，在抽离代码的最后，会发现有无数的**基础 Model 耦合**，如：
+
+```objc
+@interface ShopInfo : LPDBModel
+
+...
+@property (nullable, nonatomic, strong) DeliveryService *workingProduct;
+@property (nullable, nonatomic, strong) DeliveryService *preEffectiveProduct;
+
+@end
+```
+
+```swift
+class DeliveryService: BaseModel {
+    ...
+}
+```
+
+如果需要将 `ShopInfo` 和 `DeliveryService` 抽出到一个模块时，必须要『有舍有得』，在涉及到基础 Model 语言不同时，可以适当的重写，因为 Model 的代码量是极小的，Model 通常也只包含属性声明，作为数据传输的中介，即使更改，产生的不可预支错误的可能性也较低。
+
+如果要抽出的模块主体使用 OC，那么可以将 `DeliveryService` 重新用 OC 编写。
+
+但要注意，要先尽量通过拆分更基础的服务模块，在考虑重新编写文件，保证项目的稳定性。
+
+## 4.5 模块的积木化
 
 模块化的最终目的，不仅仅是去耦，还应当让每个模块像积木一样，随意拼接，最后达到主工程完全没有代码，通过 Pod 集成各个模块，组成完整的功能。而每个模块也应当可以独立测试，独立开发。
 
@@ -368,7 +394,7 @@ mainModule.authLoginSuccess()
 
 在具备以上功能后，`LPDBLoginModule` 就可以快速的集成进其他模块，为其他模块提供独立开发、独立测试的功能。
 
-## 4.5 资源打包
+## 4.6 资源打包
 
 上一小结提到『 `LPDBLoginModule` 要提供登录的 UI 界面』。对于 UI 界面，需要做的是资源打包，在模块拆分中，要非常注意资源分割。
 
