@@ -1,5 +1,5 @@
 ---
-title: iOS 混编 模块化/组件化 的经验总结
+title: iOS 混编 模块化/组件化 经验指北
 date: 2017-11-24 11:03:52
 tags:
 	- iOS模块化
@@ -77,7 +77,7 @@ categories:
 `LPDBPublicModule` 情况很简单，主要是新业务迭代时候产生的一些复用性高的代码，但是这显然和 OC 那个垃圾桶库不一样，要干净整洁的多。主要存放的是：
 
 1. Swift Extension
-2. [Lotusoot](https://github.com/Vegetarians/Lotusoot) 及 其他公开协议
+2. [Lotusoot](https://github.com/Vegetarians/Lotusoot) 及其他公开协议
 
 > [Lotusoot](https://github.com/Vegetarians/Lotusoot) 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 将会有另一篇文章。
 
@@ -211,7 +211,7 @@ extension AuthLoginManager: AuthLoginDelegate {
 }
 ```
 
-### 4.2.4 在 `LPDBLoginModule` 调用服务
+### 4.2.4 在 LPDBLoginModule 调用服务
 
 ```objc
 id delegate = [[UIApplication sharedApplication] delegate];
@@ -250,7 +250,7 @@ if (![authLoginManager conformsToProtocol:@protocol(LPDBAuthLoginDelegate)]) {
 
 Lotusoot 规范的核心思想主要是以下几步，我们同样使用上面的 `LPDBLoginModule 为例`：
 
-### 4.3.1 建立`共用模块——LPDBPublicModule`
+### 4.3.1 建立共用模块——LPDBPublicModule
 
 `LPDBPublicModule`中定义了各个模块可以提供的服务，做成协议，称为 Lotus，一个 Lotus 协议包含了一个模块的所有的能调用的方法的列表。举例如下：
 
@@ -268,7 +268,7 @@ Lotusoot 规范的核心思想主要是以下几步，我们同样使用上面�
 }
 ```
 
-### 4.3.2 各个模块中，实现 `LPDBPublicModule` 中对应的 Lotus 协议
+### 4.3.2 各个模块中，实现 LPDBPublicModule 中对应的 Lotus 协议
 
 实现协议的 Class 称为 Lotusoot。举例如下：
 
