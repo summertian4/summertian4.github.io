@@ -81,7 +81,7 @@ categories:
 1. Swift Extension
 2. [Lotusoot](https://github.com/Vegetarians/Lotusoot) 及其他公开协议
 
-> [Lotusoot](https://github.com/Vegetarians/Lotusoot) 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 将会有另一篇文章。
+> [Lotusoot](https://github.com/Vegetarians/Lotusoot) 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 可以查看[这篇](http://zhoulingyu.com/2017/11/29/iOS-modularized-tool-Lotusoot/)。
 
 ## 2.3 LPDBNetwork
 
