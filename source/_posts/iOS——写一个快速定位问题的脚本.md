@@ -6,16 +6,16 @@ categories:
   - iOS
 ---
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png)
 
 # 你是否见过？
 
 1. 你是否见过测试人员或者自己在 CI 上 install 了一个版本，发现了 BUG 后，突然忘了自己下的是 CI 上的哪一个 commit 的包？
 2. 你是否见过下面这个东西：
 
-![blog_iOS——写一个快速定位问题的脚本-01](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-01.jpg)
+![blog_iOS——写一个快速定位问题的脚本-01](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-01.jpg)
 
-![blog_iOS——写一个快速定位问题的脚本-02](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-02.png)
+![blog_iOS——写一个快速定位问题的脚本-02](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-02.png)
 
 <!-- More -->
 
@@ -41,7 +41,7 @@ categories:
 
 让我们来看一些基本的。这是我们准备好的 `120*120` 的原图：
 
-![blog_iOS——写一个快速定位问题的脚本-03](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-03.png)
+![blog_iOS——写一个快速定位问题的脚本-03](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-03.png)
 
 `cd` 到图片所在的目录，执行以下命令，给图片添加高斯模糊效果：
 
@@ -51,7 +51,7 @@ convert original.png -blur 10x8 blurred.png
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-04](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-04.png)
+![blog_iOS——写一个快速定位问题的脚本-04](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-04.png)
 
 -------
 
@@ -63,7 +63,7 @@ convert blurred.png -crop 120x60+0+60 cropped-blurred.png
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-05](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-05.png)
+![blog_iOS——写一个快速定位问题的脚本-05](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-05.png)
 
 -------
 
@@ -75,7 +75,7 @@ convert -background none -fill white -pointsize 12 -gravity center caption:"zhou
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-06](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-06.png)
+![blog_iOS——写一个快速定位问题的脚本-06](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-06.png)
 
 -------
 
@@ -87,7 +87,7 @@ composite label.png original.png finished-image.png
 
 完成图：
 
-![blog_iOS——写一个快速定位问题的脚本-07](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-07.png)
+![blog_iOS——写一个快速定位问题的脚本-07](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-07.png)
 
 
 OK，我们得到了想要的效果图。
@@ -163,7 +163,7 @@ ImageMagick 可以实现 N 多效果，像油画、噪声、散射、旋涡，�
 
 在工程 `Target` -> `Build Phases` 中新建一个 Run Script，我们可以给它起名 `generate auxiliary icon`，这样稍后容易在 `Report Navigator` 观察。
 
-![blog_iOS——写一个快速定位问题的脚本-08](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-08.png)
+![blog_iOS——写一个快速定位问题的脚本-08](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-08.png)
 
 现在我们可以开始编写我们的脚本 `auxiliary_icon.sh`
 
@@ -237,7 +237,7 @@ fi
 
 在编译后的 `info.plist` 中，可以找到如下结构：
 
-![blog_iOS——写一个快速定位问题的脚本-09](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-09.png)
+![blog_iOS——写一个快速定位问题的脚本-09](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-09.png)
 
 这里记录了所有的 Icon files。查看 plist 的原格式，可以看到原始的 key 是什么。通过 PlistBuddy 和 路径 `CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles` 可以输出 value。
 
@@ -249,7 +249,7 @@ icon_count=`/usr/libexec/PlistBuddy -c "Print CFBundleIcons:CFBundlePrimaryIcon:
 
 要注意的是， `/usr/libexec/PlistBuddy -c "Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "${CONFIGURATION_BUILD_DIR}/${INFOPLIST_PATH}"` 输出结果是这样的：
 
-![blog_iOS——写一个快速定位问题的脚本-10](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-10.png)
+![blog_iOS——写一个快速定位问题的脚本-10](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-10.png)
 
 输出一共是 **五行**，所以获得的结果是 5。
 
@@ -261,7 +261,7 @@ real_icon_index=$((${icon_count} - 2))
 
 刚开始，我也没有注意。可想而知心情如何 =_=。
 
-![blog_iOS——写一个快速定位问题的脚本-11](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-11.JPG)
+![blog_iOS——写一个快速定位问题的脚本-11](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-11.JPG)
 
 5. 根据数量循环，执行调用『生成记号图方法』
 

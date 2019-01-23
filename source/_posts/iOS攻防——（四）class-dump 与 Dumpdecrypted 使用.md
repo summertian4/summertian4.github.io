@@ -35,7 +35,7 @@ class dump 绝对可以满足你的好奇心。你可以通过 class dump ：
 
 下载好后，双击dmg文件，将其中的 class-dump 文件放到/usr/local/sbin 目录下，然后就可以在命令行中使用了。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-01.png)
 
 官方用法指南：
 
@@ -61,7 +61,7 @@ Usage: class-dump [options] <mach-o-file>
         --sdk-mac      specify Mac OS X version (will look in /Developer/SDKs/MacOSX<version>.sdk
         --sdk-root     specify the full SDK root path (or use --sdk-ios/--sdk-mac for a shortcut)
 ```
-        
+
 简单的举例：
 
 ```
@@ -73,11 +73,11 @@ class-dump -H /Applications/Calculator.app -o ~/Desktop/dump/Calculate-dump
 
 执行完成后可以看到指定的保存目录下已经有 dump 出来的头文件了：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-02.png)
 
 打开一个 `.h` 文件可以看到相应内容：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-03.png)
 
 # 2 Dumpdecrypted
 
@@ -85,7 +85,7 @@ class dump 虽然能帮你解析出一个 app 的头文件，但是对于 App St
 
 比如直接去 dump 微信，出来的结果大概是这样：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-04.png)
 
 ## 2.1 Download
 
@@ -188,7 +188,7 @@ class-dump --arch armv7 WeChat.decrypted -H -o /Users/zhoulingyu/Desktop/dump/We
 > 
 现在就可以看到 dump 后是明文的了：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E5%9B%9B%EF%BC%89class%20dump%20%E4%BD%BF%E7%94%A8-05.png)
 
 # 4 Learn More
 
@@ -206,5 +206,5 @@ class-dump --arch armv7 WeChat.decrypted -H -o /Users/zhoulingyu/Desktop/dump/We
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
 

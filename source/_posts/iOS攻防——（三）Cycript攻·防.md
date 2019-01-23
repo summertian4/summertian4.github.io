@@ -1,6 +1,7 @@
 title: iOS攻防——（三）Cycript攻·防
 date: 2016-07-19 14:09:36
 tags:
+
   - iOS
   - iOS攻防
 categories:
@@ -37,13 +38,13 @@ categories:
 ```
 ps aux | grep blackwidow
 ```
-	
+
 print
 
 ```
 mobile 466 6.6 7.0 508416 36204 ?? Ss 11:22AM 0:09.65 /xxxx/blackwidow
 ```
-	
+
 这样知道进程号是466
 	
 ### hock住
@@ -51,7 +52,7 @@ mobile 466 6.6 7.0 508416 36204 ?? Ss 11:22AM 0:09.65 /xxxx/blackwidow
 ```
 cycript -p 466
 ```
-	
+
 如果你看到出现了cy#，说明你可以开始编写Cycript代码了
 	
 ### alert
@@ -64,8 +65,8 @@ var alert = [[UIAlertView alloc] initWithTitle:@"hack you" message:@"hack you" w
 // 弹出来吧
 [alert show];
 ```
-	
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG-w375)
+
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-01.PNG)
 	
 	
 ## 2. 探索一个app
@@ -90,7 +91,7 @@ printMethods(AppDelegate)
 ```
 
 输出结果：
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png)
 
 是不是觉得发生了很可怕的事情？该有的都被打印出来了。
 
@@ -138,7 +139,7 @@ print
 printMethods(MeViewController)
 ```
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-02.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-03.png)
 
 改个标题试试：
 
@@ -147,7 +148,7 @@ printMethods(MeViewController)
 ```
 
 效果如下：
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-04.PNG-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%B8%89%EF%BC%89Cycript%E6%94%BB%C2%B7%E9%98%B2-04.PNG)
 
 试想一下，如果MeViewController中或者LoginViewController中有一个方法叫getUserInfo，那么通过Cycript就可以轻而易举的拿到用户信息。
 
@@ -159,7 +160,6 @@ printMethods(MeViewController)
 知道了Cycript的可怕，在有重要信息藏在代码中的时候，我们也得学会如何放置Cycript修改运行时。
 
 你可以参考[这篇文章](http://www.cocoachina.com/ios/20150511/11801.html)
-
 
 ----
 

@@ -62,12 +62,12 @@ fc:94:b0:c1:e5:b0:98:7c:58:43:99:76:97:ee:9f:b7
 
 就像这样：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-01.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-01.jpg)
 
 
 我们来画个图，用于表示黑白相间的瓷砖房，并每个格子上都编号，一开始的时候，Peter 在房间的中间：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-02.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-02.jpg)
 
 中间的 76 号就是 Peter 最初的位置。我们可以把 Peter 所在的格子表示为：
 
@@ -88,17 +88,17 @@ P = x + 17y
 
 将房间的每个格子做分类，四个角分别为 a、b、c、d，靠着四面墙的分别为 T、R、B、L，其余部分为 M。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-03.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-03.jpg)
 
 对于每一种情况：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-04.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-04.jpg)
 
 解释一下上图，以 a 栏为例，如果下一步像左上移动，但是继续走就撞墙了，所以实际移动为 `不移动`；如果向右上移动，实际移动为 `向右移动`；如果向左下移动，实际移动为 `向下移动`；如果像右下移动，实际移动就是 `向下移动`。
 
 那么 Peter 投掷硬币是怎样体现的？实际上，是做如下统计，每个格子，如果没有被踩过，则不做表示；如果被踩过一次，记录为 `.`；如果被踩了两次，记录为 `o`...具体如下：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-05.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-05.jpg)
 
 比较特别的是 `S` 和 `E`，`S` 和 `E` 分别标记起始和终止位置（所以 76 号格子永远是 S）。
 
@@ -110,7 +110,7 @@ P = x + 17y
 
 将二进制二位一组，按照下表做好走路的顺序：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-06.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-06.jpg)
 
 按照上面的顺序，踩到格子的顺序如下。
 
@@ -118,7 +118,7 @@ P = x + 17y
 
 最后做成统计，填好图，成品就如下。是不是就和我们平常在控制台得到的输出一致？
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-07.jpg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-07.jpg)
 
 # 相关
 

@@ -18,7 +18,7 @@ categories:
 
 
 
-![CFWaterFlowView展示](http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFWaterFlowView-show-02.jpg-w375)
+![CFWaterFlowView展示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_iOS-CFWaterFlowView-show-01.png)
 
 ![瀑布流样式示例](http://www.hong16.net/wp-content/uploads/2015/03/v3.jpg)
 
@@ -156,7 +156,7 @@ typedef enum {
     CFWaterFlowViewMarginTypeRow
 } CFWaterFlowViewMarginType;
 ```
-![CFWaterFlowView展示](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS——教你如何实现瀑布流-01.png-w375)
+![CFWaterFlowView展示](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81-01.png)
 
 
 定义reloadData方法和代理、数据源引用

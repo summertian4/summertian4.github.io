@@ -15,14 +15,14 @@ categories:
 # 简介
 ZLYWaterWave是一个简单好用的iOS水波效果工具，可以让你的APP更加好看有趣
 
-![ZLYWaterWave效果展示](http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_show_01.gif)
+![ZLYWaterWave效果展示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_CFWaterWave_show_01.gif)
 
 # 原理简介
 ZLYWaterWave的原理很简单，我们用Example里的工程做简介。(这里首先要感谢@hy，我敬爱的前辈，最初是从他这里学习的水波效果原理)
 
-![白色图片](http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_pic_white.png-w100)
-![红色图片](http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_pic_red.png-w100)
-![叠加添加遮盖效果](http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_img_03.png-w100)
+![白色图片](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_CFWaterWave_pic_white.png)
+![红色图片](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_CFWaterWave_pic_red.png)
+![叠加添加遮盖效果](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_CFWaterWave_img_03.png)
 
 1. 首先准备两张图片
 2. 将两张图放在重叠的位置
@@ -64,18 +64,13 @@ ZLYWaterWave的原理很简单，我们用Example里的工程做简介。(这里
 # 用例
 1. Exmaple中的示例
 
-![CFWaterWave效果展示](http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_show_01.gif)
+![CFWaterWave效果展示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_CFWaterWave_show_01.gif)
 
-2. 最近做的一个小APP——『番茄』的效果展示（如果有感兴趣的，可以联系我一起合作写哟~，因为这小项目，我想静静的体验一下当设计师的感觉😜）
+2. 最近做的一个小APP——『番茄』的效果展示
 
-![CFWaterWave效果展示](http://7xt4xp.com2.z0.glb.clouddn.com/github_CFWaterWave_show_02.gif)
+![CFWaterWave效果展示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_CFWaterWave_show_02.gif)
 
 
-# 其他
-
-约定好的奉上自拍哈哈
-
-![](http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94CFWaterWave%E6%B0%B4%E6%B3%A2%E6%95%88%E6%9E%9C%E5%B7%A5%E5%85%B7-01.JPG-w375)
 
 ----
 

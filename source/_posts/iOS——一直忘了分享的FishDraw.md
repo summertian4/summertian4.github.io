@@ -17,7 +17,7 @@ iOS-FishDraw是一个简单的画图app。
 
 动图展示:
 
-![FishDraw效果演示](http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-FishDraw-show.gif)
+![FishDraw效果演示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_iOS-FishDraw-show-01.gif)
 
 <!--more-->
 

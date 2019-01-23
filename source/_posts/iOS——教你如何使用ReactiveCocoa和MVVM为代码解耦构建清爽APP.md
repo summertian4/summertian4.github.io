@@ -52,8 +52,8 @@ categories:
 简单的用户名密码验证，要求都在6位数以上即可，不符合要求时禁用登陆按钮。
 ## 3.2 Coding
 ### 界面大概是这样的感觉，简单的拉一个即可：
-![禁用登录](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ReactiveCocoa%E5%92%8CMVVM%E4%B8%BA%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%80%A6%E6%9E%84%E5%BB%BA%E6%B8%85%E7%88%BDAPP-01.PNG-w375)
-![启用登录](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ReactiveCocoa%E5%92%8CMVVM%E4%B8%BA%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%80%A6%E6%9E%84%E5%BB%BA%E6%B8%85%E7%88%BDAPP-01.PNG-w375)
+![禁用登录](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ReactiveCocoa%E5%92%8CMVVM%E4%B8%BA%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%80%A6%E6%9E%84%E5%BB%BA%E6%B8%85%E7%88%BDAPP-01.PNG)
+![启用登录](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ReactiveCocoa%E5%92%8CMVVM%E4%B8%BA%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%80%A6%E6%9E%84%E5%BB%BA%E6%B8%85%E7%88%BDAPP-02.PNG)
 
 ### M层
 抽出简单的User模型，Thin Model，不包含功能型方法：

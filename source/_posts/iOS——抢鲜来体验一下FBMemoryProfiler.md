@@ -56,12 +56,12 @@ categories:
 
 4. 试一试，运行你的APP是不是能看到小方块了
 
-	![初始样式](http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-01.PNG-w375)
-	![展开](http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-02.PNG-w375)
+	![初始样式](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-01.PNG)
+	![展开](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-02.PNG)
 	
 5. 展开后点击Expand，可以看到所有的类，你可以通过`Filter`过滤你想看到的结果，比如你的项目是CF开头，就可以输入CF来过滤
 
-	![](http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-03.JPG-w375)
+	![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-03.JPG)
 	
 6. 还有很多功能，去尝试吧！
 	
@@ -159,7 +159,7 @@ self.memoryProfiler = [[FBMemoryProfiler alloc] initWithPlugins:@[[CacheCleanerP
 
 重新运行项目，点击`Retain Cycles`按钮，是不是能看到控制台有打印了
 
-![](http://7xt4xp.com2.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-04.png-w500)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E6%8A%A2%E9%B2%9C%E6%9D%A5%E4%BD%93%E9%AA%8C%E4%B8%80%E4%B8%8BFBMemoryProfiler-04.png)
 
 # 补充
 FBMemoryProfiler目前只是0.1版本，不能算稳定，我在使用的时候也Crash了好几次。但是谁不相信FaceBook的大神呢~嘿嘿

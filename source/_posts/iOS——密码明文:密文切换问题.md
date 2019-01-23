@@ -12,9 +12,9 @@ categories:
 # 情景描述
 明文/密文切换，就是输入密码的时候可以选择`明文显示`还是`**`这样的显示。
 
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-01.jpg)
 
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-02.jpg)
 
 右侧的按钮可以切换明文、密文模式
 
@@ -28,7 +28,7 @@ categories:
 
 # Q1：光标位置错乱
 一般来说密文的时候*号要比字母更宽，当密文切换成明文的时候光标的位置居然没有变化，出现了这样的情况。
-![嗯 没有用我们自己的app了，写了个demo，样式很简约](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-03.png-w375)
+![嗯 没有用我们自己的app了，写了个demo，样式很简约](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%3A%E5%AF%86%E6%96%87%E5%88%87%E6%8D%A2%E9%97%AE%E9%A2%98-03.png)
 
 这个问题在查了一些资料之后发现可能是苹果自己的BUG，当然，对应方法是有的。我们可以在切换代码前将textfiled的enable设为NO，切换后在设置YES。当然，这回让textfiled退出编辑模式。
 

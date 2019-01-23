@@ -10,7 +10,6 @@ categories:
 
 还有很多不完善的地方，而且只是针对这次项目的，只是给一个参考。
 
-
 ----------
 
 
@@ -19,12 +18,13 @@ categories:
 周凌宇
 
 <br/ >
+
 ## **1 类**
 1.1	遵守大驼峰命名法
 1.2	Controller命名：
 &nbsp;&nbsp;&nbsp;&nbsp;1.1.1	ViewController子类命名规范：XXXController
 
-![ViewController子类命名规范](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3001.png)
+![ViewController子类命名规范](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3001.png)
 
 &nbsp;&nbsp;&nbsp;&nbsp;1.1.2	TableViewController子类命名规范：XXXTableController
 &nbsp;&nbsp;&nbsp;&nbsp;1.1.3	其他Controller命名规范：与ViewController子类命名规范相同
@@ -33,7 +33,7 @@ categories:
 &nbsp;&nbsp;&nbsp;&nbsp;1.1.1	View子类命名规范：XXXView
 &nbsp;&nbsp;&nbsp;&nbsp;1.1.2	View的Xib与相应的类同名
 
-![View的Xib与相应的类同名](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3002.png)
+![View的Xib与相应的类同名](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3002.png)
 
 <br/ >
 
@@ -43,7 +43,7 @@ categories:
 &nbsp;&nbsp;&nbsp;&nbsp;2.2.1	代理写在相应类型的.h文件中，不需要单独建立文件
 &nbsp;&nbsp;&nbsp;&nbsp;2.2.2	命名规范：XXXDelegate，XXX和相应类名一致
 
-![代理命名规范](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3003.png)
+![代理命名规范](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3003.png)
 
 <br/ >
 
@@ -52,7 +52,7 @@ categories:
 3.2	使用超过一次的小段代码应以宏定义的形式来替代，遵循大驼峰命名法
 3.3	常量的命名应当能够表达出它的用途
 
-![宏定义示例](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3004.png)
+![宏定义示例](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3004.png)
 
 <br/ >
 
@@ -61,7 +61,7 @@ categories:
 4.2	枚举写在相应的.h文件中，不需要单独建立文件
 4.3	枚举中的变量以枚举名开头，如：ExamPaperType枚举中包含的变量是ExamPaperTypeExam、ExamPaperTypeCheck、ExamPaperTypeGrade
 
-![枚举命名规范](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3005.png)
+![枚举命名规范](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3005.png)
 
 <br/ >
 
@@ -73,7 +73,7 @@ categories:
 &nbsp;&nbsp;&nbsp;&nbsp;5.3.2	get方法命名规范：`- (NSString *)UUID`
 5.4	init方法：
 &nbsp;&nbsp;&nbsp;&nbsp;5.4.1	必须在`if (self = [super init]) {}` 中做初始化操作
-![init方法](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3006.png)
+![init方法](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3006.png)
 
 <br/ >
 
@@ -83,7 +83,7 @@ categories:
 6.3	NSString类型属性：参数必须为(nonatomic, copy)
 6.4	NSArray/NSMutableArray类型变量：变量名可以使用加后缀s或Array
 
-![NSArray/NSMutableArray类型变量](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3007.png)
+![NSArray/NSMutableArray类型变量](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3007.png)
 
 6.5	NSDictionary/ NSMutableDictionary类型变量：变量名使用后缀Dic
 6.6	控件类型变量命名规范：
@@ -102,7 +102,7 @@ categories:
 &nbsp;&nbsp;&nbsp;&nbsp;7.1.2	枚举注释应详细描述枚举和每一个元素用途
 &nbsp;&nbsp;&nbsp;&nbsp;7.1.3	方法注释应详细描述方法作用、参数意义、返回值意义
 
-![注释](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3008.png)
+![注释](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E5%91%BD%E5%90%8D%E4%B8%8E%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E6%96%87%E6%A1%A3008.png)
 
 7.2	其他使用单行注释
 
@@ -117,7 +117,6 @@ categories:
 ## **9 资源文件规范**
 1.1	资源文件全部放入Supporting Files文件夹下
 1.2	图片资源放入Assets.xcassets。可以建立自己的Folder
-
 
 ----
 

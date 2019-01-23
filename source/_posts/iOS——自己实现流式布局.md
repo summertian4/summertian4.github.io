@@ -90,10 +90,9 @@ categories:
 
 因为将计算布局的代码放在了layoutSubviews方法中，所以适应横竖屏转换，不管是父控件如何变化都能正确设置布局。
 
-![竖屏显示](http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-01.png-w500)
+![竖屏显示](https://raw.githubusercontent.com/summertian4/Images/master/blog/iOS-CFFlowButtonView-01.png)
 
-![横屏显示](http://7xnrog.com1.z0.glb.clouddn.com/iOS-CFFlowButtonView-02.png-h500)
-
+![横屏显示](https://raw.githubusercontent.com/summertian4/Images/master/blog/iOS-CFFlowButtonView-02.png)
 
 ----------
 
@@ -111,12 +110,11 @@ categories:
 
  1. 对于第一点：
  在稍后的版本中将更新为可以放入所有UIView控件，这里改动并不大，控件的共性本身就很大。
- 
+
  2. 对于第二点：
  首先是控件本身确实应该是有宽高之后FlowView再能计算。但是对于UILabel和UIButton两个控件，在稍后的版本将会在其没有设置宽高的时候由FlowView通过计算按钮和标签文字的宽高来自动设置。
- 
- 3. 对于第三点：
 
+ 3. 对于第三点：
 
 ----------
 

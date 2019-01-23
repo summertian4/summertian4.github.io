@@ -45,16 +45,16 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 我们建一个应用，就叫URLSchemeDemo
 
 1. 在storyboard中，给我们的应用加一个按钮，便于展示
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-01.png-w500)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-01.png)
 2. 打开info.plist
 	* 添加一行，key选择 URL types
-	![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-02.png-w500)
+	![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-02.png)
 	* 点击左边箭头打开列表，可以看到 Item 0。打开Item 0，可以看到 URL Identifier，这是你自定义的 URL scheme 的名字。如果想保证唯一性，可以使用翻转域名比如 com.taobao.ios.yourApp
-	![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-03.png-w500)
+	![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-03.png)
 	* 给 Item 0 再新增一行，从下拉列表中选择 URL Schemes。你会发现这是一个Array，这是因为允许应用定义多个 URL schemes
-	![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-04.png-w500)
+	![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-04.png)
 	* 打开URL schemes并点击里面的Item 0。在value中定义你的 URL scheme 的名字。比如你的APP名
-	![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-05.png-w500)
+	![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-05.png)
 3. 在AppDelegate.m中要处理接收到的URL Scheme
 
 ```objc
@@ -68,12 +68,12 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 
 4. 运行项目，当app安装到设备上时，URL Scheme将会自动注册
 5. 打开Safari在地址栏输入URLSchemeDemo://（你刚刚在URL schemes中定义的Scheme）
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-06.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-06.png)
 6. 回车调整转，Safari会提示你『在URLSchemeDemo中打开连接吗？』
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-07.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-07.png)
 7. 点击确认，你会发现跳转到了你的应用中，并且后台也打印了相应的处理内容
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-08.png-w375)
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-09.png-w500)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-08.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-09.png)
 
 ### 使用另一个应用访问应用
 上面编写了如何从浏览器通过URL Scheme跳转应用，下面将展示如何从另一个应用跳转到本应用
@@ -81,7 +81,7 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 再建一个项目，就叫URLSchemeDemoTest
 
 1. 在storyboard中拉一个按钮
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-10.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-10.png)
 2. 给按钮添加事件
 
 ```objc
@@ -170,7 +170,7 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 
 ### 运行
 1. 打开URLSchemeDemoTest应用，点击按钮，就可以直接跳转到URLSchemeDemo的SecondViewController了
-![](http://7xnrog.com1.z0.glb.clouddn.com/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-11.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-11.png)
 
 # 源代码
 如果想要源代码，小鱼已经上传了一份，可以在[这里](http://download.csdn.net/detail/u010127917/9387848)下载
