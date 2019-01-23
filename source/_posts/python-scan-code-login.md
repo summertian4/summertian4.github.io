@@ -23,7 +23,7 @@ Sparrow 的操作一般都是在网页上操作，而手机客户端往往是用
 
 ## 大致的 Use Case
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_python-scan-code-login-03.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-03.png)
 
 ##设计思路
 
@@ -58,7 +58,7 @@ class QuickLoginRecord(models.Model, Dictable):
 
 通过 Django 生成的对应数据库为：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_python-scan-code-login-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-01.png)
 
 什么时候生成验证码，那当然是生成二维码的时候，所以，这个 URL 不是给移动端请求的，而是给前端来请求的，前端在已登录的情况下，访问该 URL 可以直接传递 user 信息，后端通过拿到 user 信息，生成一条 QuickLoginRecord 记录。
 
@@ -70,7 +70,7 @@ frontend/account/request_quick_login
 
 那么整个流程就是（省略了细节处理）：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_python-scan-code-login-04.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-04.png)
 
 ## 后端代码
 
@@ -213,7 +213,7 @@ class QuickLoginRecordDao:
 
 前端的效果是这样的：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_python-scan-code-login-02.gif)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-02.gif)
 
 在已登录的状态下，点击右上角的『客户端扫码登录』按钮，弹出二维码。
 

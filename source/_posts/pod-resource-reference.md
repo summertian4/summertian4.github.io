@@ -61,7 +61,7 @@ spec.resources = ['Images/*.png', 'Sounds/*']
 
 我们熟知平常用的 @2x @3x 图片是为了缩小用户最终下载时包的大小，通常我们会将图片放在 `.xcassets` 文件中管理，新建的项目也默认创建：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-01.pnghttps://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-01.png)
 
 
 使用 `.xcassets` 不仅可以方便在 Xcode 查看和拖入图片，同时 `.xcassets` 最终会打包生成为
@@ -76,7 +76,7 @@ spec.resources = ['Images/*.png', 'Sounds/*']
 # 3. 实际验证
 
 > 不关注的可以直接跳到下面『结论』
- 
+
 官文中推荐了 `resource_bundles` 其理由主要是『可以解决同名冲突』和『Xcode为 bundle 提供的一些优化』。
 
 我知道很多人看过 [这篇](http://blog.xianqu.org/2015/08/pod-resources/) 文章，里面提到 resource_bundles 不能使用 .xcassets。
@@ -92,17 +92,17 @@ spec.resources = ['Images/*.png', 'Sounds/*']
 
 写两个 Demo Pod，同时创建好对应的 Example 测试工程。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-02.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-02.png)
 
 对两个 Pod 分别使用不同的方式指定资源。
 
 第一个 Demo Pod：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-04.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-04.png)
 
 第二个 Demo Pod：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-03.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-03.png)
 
 分别用了 `resource_bundles` 和 `resources` 两种方式引用。
 
@@ -112,17 +112,17 @@ spec.resources = ['Images/*.png', 'Sounds/*']
 
 `pod install` 并编译 Example 工程后，我们可以打开最后生成的 Product 文件下的内容：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-06.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-06.png)
 
 可以看到只有 一些 `.a` 文件，`.a` 文件是二进制文件。初次之外只有 `SubModule-Example.app`，打开包内容，可以看到只有一个 `Assets.car`。
 
 这说明，使用 `resources` 之后只会简单的将资源文件 copy 到目标工程（Example 工程），最后和目标工程的图片文件以及其他同样使用 `resources` 的 Pod 的图片文件，统一一起打包为了一个 `Assets.car`。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-07.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-07.png)
 
 再为 Pod 写一个 VC 来实验读取图片：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-08.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-08.png)
 
 读取图片的方式和平常使用的方式不同，要先获取 Bundle：
 
@@ -134,28 +134,28 @@ UIImage *image = [UIImage imageNamed:@"some-image"
 
 在 Example 的 `ViewController` 写一下跳转 `SubModule/SMViewController`：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-09.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-09.png)
 
 运行之后，看一下，能正常访问图片：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-10.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-10.png)
 
 
 ### 3.1.2 使用 `resource_bundles`
 
 `pod install` 并编译 Example 工程后，同样找到 Product 文件下的内容：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-11.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-11.png)
 
 可以看到最终生成了一个 `SubModule_Use_Bundle.bundle`，打开看内部：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-12.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-12.png)
 
 发现包含了一个 `Assets.car`
 
 再为 Pod 写一个 VC 来实验读取图片：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-13.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-13.png)
 
 由于还需要带上 .bundle 文件的路径，获取的方式又不同：
 
@@ -171,13 +171,13 @@ UIImage *image = [UIImage imageNamed:@"some-image"
 
 在 Example 的 `ViewController` 写一下跳转 `SubModule/SMViewController`：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-14.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-14.png)
 
 运行之后，看一下，也能正常访问图片：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-15.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-15.png)
 
-	
+
 ### 3.1.3 resources 和 resource_bundles 对于 .xcassets 的支持
 
 从 3.1 和 3.2 可以看出 resources 和 resource_bundles 都可以很好的支持 .xcassets 的引用。
@@ -198,13 +198,13 @@ UIImage *image = [UIImage imageNamed:@"some-image"
 
 给 Example 文件添加一个同样叫 `some-image` 的图片：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-16.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-16.png)
 
 OK，现在的情况是 Example 工程自己有一个 `some-image` 图片资源，SubModule 这个 Pod 库也有一个 `some-image` 图片资源。
 
 还是之前的显示图片的代码，再运行一下：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_pod-resource-reference-17.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_pod-resource-reference-17.png)
 
 可以看到，图片显然是用错了，显示了 Example 工程自己的 `some-image`
 
@@ -248,5 +248,5 @@ So，一般来说使用 `resource_bundles` 会更好，不过关于硬编码，�
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
 

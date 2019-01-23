@@ -29,7 +29,7 @@ categories:
 
 <!-- More -->
 
-![ARC 管理内存](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-01.png)
+![ARC 管理内存](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-01.png)
 
 ARC 的内存管理规则可以简述为：
 
@@ -111,7 +111,7 @@ alloc 类方法用 struct obj_layout 中的 `retained` 整数来保存引用计�
 
 一个对象的表示便如下图：
 
-![GNU 中的对象存储空间](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-02.png)
+![GNU 中的对象存储空间](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-02.png)
 
 ### 4.2 GNU - retain
 
@@ -254,7 +254,7 @@ key 为 hash(对象的地址) value 为 引用计数。
 
 下图是 Apple 和 GNU 的实现对比：
 
-![Apple 和 GNU 内存管理的实现对比](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-03.png)
+![Apple 和 GNU 内存管理的实现对比](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-03.png)
 
 ## 5 autorelease 和 autorelaesepool
 
@@ -346,7 +346,7 @@ thread 指针指向当前线程。
 next 指针指向下一个 add 进来的 autorelease 的对象即将存放的位置。
 一个 Page 的空间被占满时，会新建一个 AutoreleasePoolPage 对象，连接链表。
 
-![AutoreleasePoolPage](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-04.png)
+![AutoreleasePoolPage](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-04.png)
 
 ## 6 __unsafe_unretained
 
@@ -409,7 +409,7 @@ id __unsafe_unretained obj1 = nil;
 
 花几分钟时间看下面三个小题目，写下你的答案。
 
-![Block 的三道测试题](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-05.png)
+![Block 的三道测试题](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-05.png)
 
 这个三个小题目，我在整理此片博文之前给了三位朋友去解答，最后的结果，除了一位朋友 3 题全部正确，其他两个朋友均只答中 1 题。
 
@@ -448,7 +448,7 @@ int main(int argc, const char * argv[]) {
 
 用 clang 转换：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-06.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-06.png)
 
 以上是转换后的代码，不要方，一段一段看。
 
@@ -568,7 +568,7 @@ int main(int argc, const char * argv[]) {
 
 clang 转换之后：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-07.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-07.png)
 
 和 2.1 节中的转换代码对比，可以发现多了一些代码。
 
@@ -662,7 +662,7 @@ int main(int argc, const char * argv[]) {
 
 clang 转换之后：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-08.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-08.png)
 
 跟 2.2 对比，似乎又加了非常代码。发现多了两个结构体。
 
@@ -707,7 +707,7 @@ __Block_byref_val_0 val = {(void*)0,
 
 这里就可以看出其精髓，val = 1，实际上更改的是 `__Block_byref_val_0` 结构体实例 val 中的 `__forwarding` 指针（也就是本身）指向的 `val` 变量。
 
-![__Block_byref_val_0 实例示意图](http://7xt4xp.com1.z0.glb.clouddn.com/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-12.png)
+![__Block_byref_val_0 实例示意图](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-12.png)
 
 而对 `val` 访问也是如此。你可以理解为通过取地址改变变量的值，这和 C 语言中取地址改变变量类似。
 
@@ -734,11 +734,11 @@ Block 有三种类型，分别是：
 
 对不同存储域的 Block copy 时，影响如下：
 
-![对不同存储域的 Block copy 影响](http://7xt4xp.com1.z0.glb.clouddn.com/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-09.png)
+![对不同存储域的 Block copy 影响](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-09.png)
 
 copy 时，对访问到的 __block 类型对象影响如下：
 
-![Block copy 时对 __block 对象的影响](http://7xt4xp.com1.z0.glb.clouddn.com/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-10.png)
+![Block copy 时对 __block 对象的影响](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-10.png)
 
 > 此时可以看出 `__forwarding` 的巨大作用——无论 Block 此时在堆中还是在栈中，由于 `__forwarding` 指向局部变量转换成的结构体实例的真是地址，所以都能确保正确的访问。
 
@@ -748,7 +748,7 @@ copy 时，对访问到的 __block 类型对象影响如下：
 2. 在 __block 变量被多个 Block 使用时，在任何一个 Block 从栈复制到堆时， __block 变量也会被复制到堆，并被该 Block 持有。但由于 `__forwarding` 指针的存在，无论 __block 变量和 Block 在不在同一个存储域，都可以正确的访问 __block 变量。
 3. 如果堆上的 Block 被废弃，那么它所使用的 __block 变量也会被释放。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-11.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-11.png)
 
 前面说到编译器会帮助完成一些 Block 的 copy，也有手动 copy Block。那么 Block 被复制到堆上的情况有（此段摘自于『Objective-C高级编程 iOS与OS X多线程和内存管理』）：
 
@@ -842,7 +842,7 @@ int main(int argc, const char * argv[]) {
 
 我们再来看看最初的几个小题目：
 
-![Block 的三道测试题](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86&Block-05.png)
+![Block 的三道测试题](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-05.png)
 
 1.  第一题：
 
@@ -872,5 +872,5 @@ int main(int argc, const char * argv[]) {
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
 

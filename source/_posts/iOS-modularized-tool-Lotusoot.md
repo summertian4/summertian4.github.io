@@ -17,7 +17,7 @@ categories:
 最初 [Lotusoot](https://github.com/Vegetarians/Lotusoot) 简称为『混编路由』，但是随后反而曲解了它的功能，其真正的定位是『模块化工具和规范』。
 
  [Lotusoot](https://github.com/Vegetarians/Lotusoot) 可以做到：
- 
+
  1. 模块间、模块内服务调用
  2. Swift、OC、或者两者混编项目均可使用
  3. 短链注册、路由调用
@@ -126,7 +126,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 通过 Lotusoot 搭建的工程如下图所示：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-modularized-tool-Lotusoot-003.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-003.png)
 
 所有模块只需要依赖 PublicModule，通过 PublicMoudle 下的 Lotusoot 即可调用其他模块的服务。实例代码如下：
 
@@ -194,7 +194,7 @@ ServiceManager().register("HistoryService", toService:HistoryService.self)
 
 > [R.swift](https://github.com/mac-cain13/R.swift) 的提供的功能是，可以让使用的 iOSer 可以像开发 Android 的一样调用图片、字符串、音频等等资源文件。在 Project 中插入 Run Script，这个脚本可以在编译阶段扫描整个工程，列算所有的资源文件，最后生成一个 `R.generated.swift` 文件，就像这个样子：
 > 
-> ![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-modularized-tool-Lotusoot-001.png)
+> ![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-001.png)
 > 
 > 使用的时候就可以：
 > 
@@ -203,13 +203,13 @@ ServiceManager().register("HistoryService", toService:HistoryService.self)
 
 **同样 Lotusoot 通过一个 python 脚本，在『Compile Source』之前扫描工程目录下的文件，找出 Lotusoot 和 Lotus 对应关系，并生成一个 `Lotusoot.plist` 文件**：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-modularized-tool-Lotusoot-004.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-004.png)
 
 如何识别 Lotus？
 
 目前，Lotusoot 使用了很 Low 的方式，在注解中表明了模块的 `命名空间-@NameSpace`、`Lotusoot-@Lotusoot`、`Lotus-@Lotus`，脚本就可以识别。举例如下：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-modularized-tool-Lotusoot-002.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-002.png)
 
 所以，`didFinishLaunchingWithOptions` 只需要一句，即可自动注册路由。
 
@@ -257,7 +257,6 @@ Lotusoot 的缺点是显而易见的，虽然通过脚本可以在编译阶段�
 
 非常欢迎一起讨论（卖萌~~）
 
-
 ----
 
 有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
@@ -266,5 +265,5 @@ Lotusoot 的缺点是显而易见的，虽然通过脚本可以在编译阶段�
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[小鱼](http://weibo.com/coderfish/)
 

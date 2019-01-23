@@ -28,9 +28,9 @@ __weak __typeof__(self) weakSelf = self;
 
 <!-- More -->
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_swift-strongself-01.png)
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-02.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_swift-strongself-02.png)
 
 当然，如果用了 RAC，你可以写成如下代码：
 
@@ -106,11 +106,11 @@ DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 }
 ```
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-05.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_swift-strongself-05.png)
 
 当然，你可以加到 `snippets`，这样就可以快速插入代码了：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-04.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_swift-strongself-04.png)
 
 # 总结
 
@@ -121,15 +121,15 @@ DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 代码都在[这里](https://github.com/summertian4/iOS-Swift/tree/master/StrongSelf)
 
 # Other
- 
+
 如果以下这幅图中的三个问题，你不能清晰的答出答案和其理由，建议你去读一读 Objective-C 关于内存管理的源码哟。这里是我的两篇博文，希望能帮到你：
- 
+
 1. [iOS进阶——iOS（Objective-C） 内存管理&Block](http://zhoulingyu.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/)
 2. [iOS进阶——iOS（Objective-C）内存管理·二](http://zhoulingyu.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/)
 
 以下是三个问题：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_swift-strongself-03.jpeg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_swift-strongself-03.jpeg)
 
 ----
 

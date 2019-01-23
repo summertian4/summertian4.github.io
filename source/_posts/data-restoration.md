@@ -143,7 +143,7 @@ inode 是 linux 系统下文件或者文件夹的标识。通过 `ls –id` 就�
 
 得到结果：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_data-restoration-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-01.png)
 
 重点盘红圈内，看到 `root` 的 inode 是 131073，继续查询 `/dev` 的信息：
 
@@ -151,7 +151,7 @@ inode 是 linux 系统下文件或者文件夹的标识。通过 `ls –id` 就�
 # extundelete /dev/vda1 --inode 131073
 ```
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_data-restoration-02.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-02.png)
 
 看到 `/Sparrow`  是 262194，继续查询 `/dev` 的信息：
 
@@ -161,7 +161,7 @@ inode 是 linux 系统下文件或者文件夹的标识。通过 `ls –id` 就�
 
 最终找到了删除信息：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_data-restoration-03.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-03.png)
 
 可以看到 db.sqlite3 被标识为 `Deleted`。
 

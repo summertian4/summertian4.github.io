@@ -75,13 +75,13 @@ categories:
 
 最终的数据库表展示：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-01.png)
 
 type 字段表示的是『该条记录是 Request 还是 Response』，几个 length 分别记录了流量的各个细节，包括：总字节数、Line 字节数、Header 字节数、Body 字节数。
 
 最后的界面展示类似于：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-02.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-02.png)
 
 # 三、分析现有资料
 
@@ -97,7 +97,7 @@ NetworkEye 是 GodEye 的一部分，可以单独拆出来使用的网络监控�
 2. 通过 expectedContentLength 记录是不准确的（后面将会说到）
 3. 仅仅记录了总和，这对我们来说是无意义的，不能分析出哪条 API 流量使用多
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-03.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-03.png)
 
 
 
@@ -141,13 +141,13 @@ NetworkEye 是 GodEye 的一部分，可以单独拆出来使用的网络监控�
 
 为了更好的让大家了解 HTTP 流量计算的一些关键信息，首先要了解 HTTP 报文的组成。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-04.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-04.png)
 
 再来随便抓个包具体看看：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-05.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-05.png)
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-06.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-06.png)
 
 ## iOS 下的网络监控
 
@@ -326,7 +326,7 @@ typedef CFHTTPMessageRef (*DMURLResponseGetHTTPResponse)(CFURLRef response);
 
 首先 API 文档中对 `expectedContentLength` 也有介绍是不准确的：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_ios-network-traffic-07.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ios-network-traffic-07.png)
 
 其次，HTTP 1.1 标准里也有介绍 `Content-Length` 字段不一定是每个 Response 都带有的，最重要的是，**`Content-Length` 只是表示 Body 部分的大小**。
 

@@ -49,7 +49,7 @@ SideTable 结构体重定了几个非常重要的变量。
 
 以上定义的是几个重要偏移量。引用计数 retainCount 是保存在一个无符号整形中，也就是有 8 个字节。其结构可以用下图表示：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_Advanced-iOS-Study-objc-Memory-2-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-01.png)
 
 1. `SIDE_TABLE_WEAKLY_REFERENCED (1UL<<0)`（表示对象所在内存的第 1 位），标识该对象是否有过 weak 对象；
 2. `SIDE_TABLE_DEALLOCATING (1UL<<1) `（表示对象所在内存的第 2 位），标识该对象是否正在 dealloc（析构）。
@@ -326,7 +326,7 @@ else 代码块中调用了 ` id obj = class_createInstance(cls, 0);`。查看内
 
 再看 FAST_ALLOC 定义，观察下图：
 
-![FAST_ALLOC](http://7xt4xp.com1.z0.glb.clouddn.com/blog_Advanced-iOS-Study-objc-Memory-2-02.png)
+![FAST_ALLOC](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-02.png)
 
 发现，`#elif 1` 直接拦截了下面的 define，所以 `#if FAST_ALLOC` 不起作用（这里我也不是很确定，哪位大神指点一下）。所以，`canAllocFast()` 返回 false，`fastpath(cls->canAllocFast())` 判断为假。
 

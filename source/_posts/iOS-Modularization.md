@@ -21,7 +21,7 @@ categories:
 
 先公布七个月成果，下图是我们最终的项目结构：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-03.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-03.png)
 
 对于我们混编的情况，在五个月前大家就展开了讨论。
 
@@ -48,7 +48,7 @@ categories:
 
 平常我们看到一些大型库，或者一些公司介绍自己产品架构时候都是什么样的？是不是下层有 OpenGL ES 和 Core Graphics 才有上层 Core Animation，再到 UIKit。下层决定上层，只有把复用率高的部分抽出才能逐步构建上层业务。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-01.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-01.png)
 
 所以首先我们做的就是抽工具类和 Extension，诸如：
 
@@ -70,7 +70,7 @@ categories:
 
 最后我们的一级列表看起来就像这样：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-04.png-w375)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-04.png)
 
 > 关于前缀说两句。我们所有抽出的库都带有前缀 `LPDB`，但是针对 Swift 库和 OC 库稍有区分的是，OC 库内的文件也都带有前缀，而 Swift 库是去掉了前缀，这也符合两种语言的规范。
 
@@ -117,7 +117,7 @@ categories:
 
 抽取代码第一遍使用反射的原因主要是，通常你在递归某个文件的依赖的时候，会递归出非常多的东西（尤其是我们的蜜汁旧代码），往往就是 **A->B->C->D->F**，中间有各种依赖，甚至到最后一层的时候还引用了 Swift 的类。直到最后你看 `#import` 就想吐。给个图感受一下：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-05.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-05.png)
 
 为什么没有办法一步到位，通过协议解决耦合？
 
@@ -152,7 +152,7 @@ id delegate = [[UIApplication sharedApplication] delegate];
 > 这里要向 [casa](https://casatwy.com/) 大神非常非常郑重的道歉，上面一段，原来在第一版的时候是预留修改的片段，本想再读一遍大神 [《 [iOS应用架构谈 组件化方案]》](https://casatwy.com/iOS-Modulization.html) 仔细理解以后再次修改这块，本来是悄咪咪的发了文章，没想到被推送出去了，有引导大家曲解大神的愿意。非常非常抱歉！现在已经修改。
 > 下面在贴上大佬自己对 URL 的见解：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-09.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-09.png)
 
 
 那个时候听了 casa 大神的说法觉得『哎？有道理』，但是在后期的实践中，我觉得就我个人的代码习惯，是希望尽可能的将问题暴露在编译阶段，能让它抛出 error 就抛出 error，纵使使用字符串可以定义常量，但由于大家不是独立负责项目，在其他人看到你的方法参数时，比如：`+ (void)callService:(NSString *)sUrl` 或者 `+ (void)openURL:(NSString *)url` ，对方发现你的参数是 NSStrring，很有可能直接出现硬编码字符串而不去查阅常量列表，这是习惯性编码很容易出现的问题。但我对 casa 『URL 没有 target-action 表征明显』是非常仍可的，所以 Lotusoot 的重点只在于解耦的服务调用，URL 只是为了更好的为 H5 页面提供外部调用服务，在工程内部大可使用更加简洁的方式。
@@ -243,7 +243,7 @@ if (![authLoginManager conformsToProtocol:@protocol(LPDBAuthLoginDelegate)]) {
 
 经过这些改造之后，模块间的状态如图所示：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-06.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-06.png)
 
 但是，可以很明显感受到，这次的改变并不彻底：
 
@@ -350,7 +350,7 @@ mainModule.authLoginSuccess()
 
 到此为止，就比较完整的解决了模块间耦合。清爽的风格用一张图表示就是这样（这是我在做 Lotusoot 解说时候用的一张配图）：
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-07.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-07.png)
 
 `LPDBPublicModule` 中的 `Lotus` 协议，像一张清单列出了所有模块提供的服务声明，而在各个模块中，直接通过这些公共协议就可以调用想要的服务。很多问题都可以在编译前和编译阶段显示出来（如果模块不提供服务，是不能通过编译的；如果没有一项服务没有声明，是不能通过编译的）。
 
@@ -425,7 +425,7 @@ s.resources 	 = ["Source/**/*.xib", "Source/Res/*.xcassets"]
 
 > 注意图片资源，如果想保留 @2x、@3x，是可以按照 xcassets 的格式直接 copy 过来的。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_iOS-Modularization-08.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-08.png)
 
 
 # 5 结尾
