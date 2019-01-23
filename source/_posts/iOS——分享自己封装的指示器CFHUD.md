@@ -15,7 +15,7 @@ categories:
 # 简介
 CFBlurHUD是基于UIVisualEffectView实现的指示器，拥有虚化模糊效果。
 
-![CFBlurHUD效果演示](http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFBlurHUD-show.gif)
+![CFBlurHUD效果演示](https://github.com/summertian4/Images/blob/master/blog/github_iOS-CFBlurHUD-show.gif?raw=true)
 
 <!--more-->
 

@@ -23,11 +23,11 @@ categories:
 
 先举一个例子，放上几张 Network 的图形截图。为了你的工程不变成下面这个样子，请善待 Git 的使用：
 
-![示例1](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-01.png-w375)
+![示例1](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-01.png)
 
-![示例2](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-02.png-w375)
+![示例2](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-02.png)
 
-![示例3](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-03.png-w375)
+![示例3](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-03.png)
 
 这样一个乱糟糟的 Git，你们能忍我不能忍。
 
@@ -48,11 +48,11 @@ categories:
 
 **对于问题 4**，是最最最常见的问题，看看自己的项目，里面有多少个连续的 `Commit Message` 是『bug fix』、『update』、『pod add』、『修复』等等这样完全看不出啥内容的描述。敢问这样写的同学，你们的项目 Owner 看到 `Network` 时候是不是心里充满了 WTF？`Commit Message` 应当简短干练的描述这个 `commit` 做了什么。
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-17.jpeg)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-17.jpeg)
 
 下面再看一个正面的示例，无比清爽的 Network：
 
-![示例3](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-04.png-w375)
+![示例3](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-04.png)
 
 关于我的 Work Flow，我们从基本的 Git 开发流接着介绍。
 
@@ -74,7 +74,7 @@ categories:
 
 在开发中 Git 往往搭配持续交付平台，Github 也好，GitLab 也好，都提供了完备的持续交付管理功能。配合这些就有了 [Github Flow](https://guides.github.com/introduction/flow/index.html)
 
-![Github Flow](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-05.png)
+![Github Flow](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-05.png)
 
 大致意思为：
 
@@ -95,7 +95,7 @@ categories:
 
 长期分支，每个 `commit` 对一个 `tag`（一个发布版本）
 
-![master](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-06.png-w375)
+![master](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-06.png)
 
 ### develop
 
@@ -103,13 +103,13 @@ categories:
 
 开发一个新的 feature 直接新在 `develop` 新开一个临时的 `feature` 分支，开发完成向 `develop` 提 `Pull Request``Pull Request`。
 
-![develop](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-07.png-w375)
+![develop](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-07.png)
 
 ### `release`
 
 短期分支，feature 开发完成后从 `develop` 拉出的分支，用于测试阶段，期间添加的 `commit` 基本都是 bug fix，开发结束后同时和并进 `develop` 和 `master`，`master` 打上发布 tag。
 
-![release](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-08.png-w375)
+![release](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-08.png)
 
 ### `hotfix`
 
@@ -123,7 +123,7 @@ categories:
 2. 添加一个新的 `Pod` 库或 `pod update` 后，单独提交一个 `commit`，统一 `commit message` 为『pod add xxx』或 『pod update』
 2. `commit` 之间保持独立，不要有修改同一个文件的情况。比如一个 `Pull Request` 中 commit1 在 FileA 中改了一个变量名， commit2 改回了变量名。原因是：**审核代码时，审核人通常会逐个 `commit`查看，而不是直接看 `Changes`（可以直接忽略掉 pod update 这样的 `commit` 不看）**
 
-![](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-09.png)
+![](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-09.png)
 
 ### rebase
 
@@ -140,7 +140,7 @@ categories:
 
 `rebase` 用中文直译就是 `变基`。上张图帮助大家理解：
 
-![rebase](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-10.png)
+![rebase](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-10.png)
 
 `rebase` 在进行时，需要选择一个 `commit` 点，将当前分支从根基整个移到指定 `commit` 点，名副其实——`变基`。
 
@@ -160,7 +160,7 @@ categories:
 
 关于 Label，我通常会分为：`optimizing`、`bug fix`、`feature`
 
-![issue 管理任务](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-11.png)
+![issue 管理任务](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-11.png)
 
 一个任务完成时，通常会提 `Pull Request`，如果该 `Pull Request` 中完成了所有的任务，`Pull Request` 的 Title 应当类似以下格式：
 
@@ -173,7 +173,7 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 `Milestones` 即里程碑，`issue` 在建立的时候可以选择 `Milestones`，如果合理的使用了 `Milestones`，在 Milestones 页面，就可以得到一个清晰的项目进度。
 
-![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-12.png)
+![Milestones 页面](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-12.png)
 
 ### Pull Request
 
@@ -181,11 +181,11 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 `Pull Request` 的标题应该简介的介绍该次合并所做的事。更详细的内容应当在 `Description` 中逐条列出。如有相关文档链接也应列出。
 
-![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-13.png)
+![Milestones 页面](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-13.png)
 
 注意选择合适的 `Milestone` 和 `Labels`。选择一位 Assignee 来审核，如果觉得该 `Pull Request` 内容过多，或有需要大家共同讨论的地方，再 `Pull Request` 提交后，在 `Discussion` 区域 `@` 其他人，所有人都会及时收到邮件。
 
-![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-14.png)
+![Milestones 页面](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-14.png)
 
 ### Code Review
 
@@ -204,7 +204,7 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 在发现错误时，应当及时的添加 `comment`。
 
-![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-15.png)
+![Milestones 页面](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-15.png)
 
 当审核人全部审核完毕，添加完所有的 `comment` 之后需要在 `Discussion` 区域 `@提交人 review done`，通知提交人。
 
@@ -212,7 +212,7 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 需要着重说明的是：提交人的**所有修改，不允许新提交 `commit`**，应当在本地修改完成后，`ammend` 追加到最后 `commit`。
 
-![Milestones 页面](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-16.png)
+![Milestones 页面](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-16.png)
 
 但是这一点，只是我一直使用的方式，原因同样是遵循『`commit` 之间保持独立』，如果提交新的 `commit` 导致两个 `commit` 修改了同一个文件。
 
@@ -222,7 +222,7 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 最后，希望大家都收获一个清爽如风的 Network。
 
-![示例3](http://7xt4xp.com1.z0.glb.clouddn.com/blog_work-flow-04.png-w375)
+![示例3](https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_work-flow-04.png)
 
 ----
 
@@ -232,6 +232,6 @@ GitLab 和 Github 都能识别 `close #{issue id}`，如果在 Title 中这样�
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[小鱼](http://weibo.com/coderfish/)
 
 

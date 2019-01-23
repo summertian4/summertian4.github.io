@@ -14,7 +14,7 @@ github地址：https://github.com/summertian4/iOS-CFSecurityCodeButton
 
 # 简介
 CFSecurityCodeButton是一个简约的验证码按钮。
-![CFSecurityCodeButton演示](http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFSecurityCodeButton-show.gif)
+![CFSecurityCodeButton演示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_iOS-CFSecurityCodeButton-show.gif)
 
 <!--more-->
 
@@ -68,7 +68,7 @@ CFSecurityCodeButton是一个简约的验证码按钮。
 
 4. 自动调节文字颜色
 	CFSecurityCodeButton会根据自身的颜色调节文字颜色，当颜色过深时文字将会变成白色，当颜色过浅时文字颜色将会变成黑色
-	![CFSecurityCodeButton演示](http://7xnrog.com1.z0.glb.clouddn.com/github_iOS-CFSecurityCodeButton-03.png)
+	![CFSecurityCodeButton演示](https://raw.githubusercontent.com/summertian4/Images/master/blog/github_iOS-CFSecurityCodeButton-02.png)
 
 5. 代理
 	提供了两个代理方法监控按钮
