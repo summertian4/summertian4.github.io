@@ -279,5 +279,5 @@ iOS 代码就不展示了，就是扫码访问二维码里的 URL，再加上一
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 

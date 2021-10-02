@@ -238,5 +238,5 @@ BOOL commandIsExecuting = [[command.executing first] boolValue];
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[LottyLotty小鱼](http://weibo.com/coderfish/)
 

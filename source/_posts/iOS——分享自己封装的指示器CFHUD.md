@@ -78,5 +78,5 @@ CFBlurHUD是基于UIVisualEffectView实现的指示器，拥有虚化模糊效�
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 

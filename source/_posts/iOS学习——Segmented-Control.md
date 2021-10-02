@@ -106,7 +106,7 @@ cond(no)->s2->r2->e
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.name = @"周凌宇";
+    self.name = @"Lotty小鱼";
 }
 
 - (void)didReceiveMemoryWarning
@@ -152,6 +152,6 @@ cond(no)->s2->r2->e
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
 

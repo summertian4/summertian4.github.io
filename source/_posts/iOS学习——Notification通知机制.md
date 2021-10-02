@@ -32,8 +32,8 @@ iOS的事件机制一共三种分别是
 //  main.m
 //  day34_通知
 //
-//  Created by 周凌宇 on 15/9/3.
-//  Copyright (c) 2015年 周凌宇. All rights reserved.
+//  Created by Lotty小鱼 on 15/9/3.
+//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -79,8 +79,8 @@ int main(int argc, const char * argv[]) {
 //  NotificationSender.h
 //  day34_通知
 //
-//  Created by 周凌宇 on 15/9/3.
-//  Copyright (c) 2015年 周凌宇. All rights reserved.
+//  Created by Lotty小鱼 on 15/9/3.
+//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -104,8 +104,8 @@ int main(int argc, const char * argv[]) {
 //  NotificationSender.m
 //  day34_通知
 //
-//  Created by 周凌宇 on 15/9/3.
-//  Copyright (c) 2015年 周凌宇. All rights reserved.
+//  Created by Lotty小鱼 on 15/9/3.
+//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
 //
 
 #import "NotificationSender.h"
@@ -121,8 +121,8 @@ int main(int argc, const char * argv[]) {
 //  NotificationListener.h
 //  day34_通知
 //
-//  Created by 周凌宇 on 15/9/3.
-//  Copyright (c) 2015年 周凌宇. All rights reserved.
+//  Created by Lotty小鱼 on 15/9/3.
+//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -151,8 +151,8 @@ int main(int argc, const char * argv[]) {
 //  NotificationListener.m
 //  day34_通知
 //
-//  Created by 周凌宇 on 15/9/3.
-//  Copyright (c) 2015年 周凌宇. All rights reserved.
+//  Created by Lotty小鱼 on 15/9/3.
+//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
 //
 
 #import "NotificationListener.h"
@@ -188,6 +188,6 @@ int main(int argc, const char * argv[]) {
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
 

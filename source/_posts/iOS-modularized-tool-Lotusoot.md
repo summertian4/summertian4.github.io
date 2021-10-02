@@ -265,5 +265,5 @@ Lotusoot 的缺点是显而易见的，虽然通过脚本可以在编译阶段�
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 

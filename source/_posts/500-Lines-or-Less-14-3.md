@@ -154,5 +154,5 @@ maps 优化另一个有意思的点是，虽然这里只优化内存使用，但
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[LottyLotty小鱼](http://weibo.com/coderfish/)
 

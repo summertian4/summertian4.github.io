@@ -65,5 +65,5 @@ IOC或者说“依赖注入”的思想虽然由spring提出，但是在Struts2�
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 

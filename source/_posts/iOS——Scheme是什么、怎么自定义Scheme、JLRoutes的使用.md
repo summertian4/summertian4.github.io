@@ -123,8 +123,8 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 //  AppDelegate.m
 //  URLSchemeDemo
 //
-//  Created by 周凌宇 on 16/1/3.
-//  Copyright © 2016年 周凌宇. All rights reserved.
+//  Created by Lotty小鱼 on 16/1/3.
+//  Copyright © 2016年 Lotty小鱼. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -188,6 +188,6 @@ JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
 

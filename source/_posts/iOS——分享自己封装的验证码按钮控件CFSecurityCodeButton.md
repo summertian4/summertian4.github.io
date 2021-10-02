@@ -101,6 +101,6 @@ CFSecurityCodeButton是一个简约的验证码按钮。
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
 

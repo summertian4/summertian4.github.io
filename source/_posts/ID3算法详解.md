@@ -75,7 +75,7 @@ import org.dom4j.io.XMLWriter;
  * 统计了14天的气象数据(outlook天气状况，temperature温度，humidity湿度，windy风力)，并已知这些天气是否打球(play)
  * 如果给出新一天的气象指标数据:sunny,cool,high,TRUE，判断一下会不会去打球。<br/ >
  * 
- * @author 周凌宇 <br/ >
+ * @author Lotty小鱼 <br/ >
  * 
  */
 public class ID3 {
@@ -380,6 +380,6 @@ public class ID3 {
 
 希望大家一起进步。
 
-我的微博：[小鱼周凌宇](http://weibo.com/coderfish/)
+我的微博：[LottyLotty小鱼](http://weibo.com/coderfish/)
 
 

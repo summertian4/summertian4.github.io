@@ -23,5 +23,5 @@ Java程序员出身的博主，刚开始也傻傻的以为iOS中的方法前面+
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 

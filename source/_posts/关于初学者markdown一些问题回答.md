@@ -117,6 +117,6 @@ li&gt;&lt;ul&gt;
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
 

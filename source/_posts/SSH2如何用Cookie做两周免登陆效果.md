@@ -152,7 +152,7 @@ import com.webstore.dao.IUserDao;
 import com.webstore.imp.UserImp;
 
 /**
- * 作者：周凌宇 时间：2014-7-4 描述：Cookie过滤器
+ * 作者：Lotty小鱼 时间：2014-7-4 描述：Cookie过滤器
  */
 public class CookieFilter implements Filter {
 
@@ -224,6 +224,6 @@ public class CookieFilter implements Filter {
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
 

@@ -95,5 +95,5 @@ Container-Managed Transaction，就是由Container（容器）负责管理的Tra
 
 希望大家一起进步。
 
-我的微博：[小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
 
