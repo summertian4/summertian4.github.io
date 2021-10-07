@@ -441,16 +441,16 @@ reloadData中我们需要：
 
 希望你能够喜欢本套框架以及博主这个萌萌哒大四女程序员^_^
 
-如果有什么修改建议，可以发送邮件到coderfish@163.com，也欢迎到我的[博客](http://zhoulingyu.com)
+如果有什么修改建议，可以发送邮件到lotty.lingyu@gmail.com，也欢迎到我的[博客](http://lottyzhou.com)
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 
 

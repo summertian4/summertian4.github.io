@@ -27,8 +27,8 @@ Object-C中并没有JAVA中的类变量，博主在刚开始时，又是给@prop
 //  Person.h
 //  test_command
 //
-//  Created by Lotty小鱼 on 15/8/11.
-//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
+//  Created by Lotty周小鱼 on 15/8/11.
+//  Copyright (c) 2015年 Lotty周小鱼. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -48,8 +48,8 @@ Object-C中并没有JAVA中的类变量，博主在刚开始时，又是给@prop
 //  Person.m
 //  test_command
 //
-//  Created by Lotty小鱼 on 15/8/11.
-//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
+//  Created by Lotty周小鱼 on 15/8/11.
+//  Copyright (c) 2015年 Lotty周小鱼. All rights reserved.
 //
 
 #import "Person.h"
@@ -75,8 +75,8 @@ static NSString *_planetName;
 //  main.m
 //  test_command
 //
-//  Created by Lotty小鱼 on 15/8/11.
-//  Copyright (c) 2015年 Lotty小鱼. All rights reserved.
+//  Created by Lotty周小鱼 on 15/8/11.
+//  Copyright (c) 2015年 Lotty周小鱼. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -95,11 +95,11 @@ int main(int argc, const char * argv[]) {
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 

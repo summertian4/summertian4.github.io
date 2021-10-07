@@ -81,7 +81,7 @@ categories:
 1. Swift Extension
 2. [Lotusoot](https://github.com/Vegetarians/Lotusoot) 及其他公开协议
 
-> [Lotusoot](https://github.com/Vegetarians/Lotusoot) 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 可以查看[这篇](http://zhoulingyu.com/2017/11/29/iOS-modularized-tool-Lotusoot/)。
+> [Lotusoot](https://github.com/Vegetarians/Lotusoot) 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 可以查看[这篇](http://lottyzhou.com/2017/11/29/iOS-modularized-tool-Lotusoot/)。
 
 ## 2.3 LPDBNetwork
 
@@ -434,11 +434,11 @@ s.resources 	 = ["Source/**/*.xib", "Source/Res/*.xcassets"]
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[LottyLotty小鱼](http://weibo.com/coderfish/)
+我的微博：[LottyLotty周小鱼](http://weibo.com/coderfish/)
 

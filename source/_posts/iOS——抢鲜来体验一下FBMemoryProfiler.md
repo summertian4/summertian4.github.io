@@ -168,11 +168,11 @@ FBMemoryProfiler目前只是0.1版本，不能算稳定，我在使用的时候�
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 

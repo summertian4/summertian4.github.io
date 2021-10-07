@@ -124,8 +124,8 @@ DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 
 如果以下这幅图中的三个问题，你不能清晰的答出答案和其理由，建议你去读一读 Objective-C 关于内存管理的源码哟。这里是我的两篇博文，希望能帮到你：
 
-1. [iOS进阶——iOS（Objective-C） 内存管理&Block](http://zhoulingyu.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/)
-2. [iOS进阶——iOS（Objective-C）内存管理·二](http://zhoulingyu.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/)
+1. [iOS进阶——iOS（Objective-C） 内存管理&Block](http://lottyzhou.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/)
+2. [iOS进阶——iOS（Objective-C）内存管理·二](http://lottyzhou.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/)
 
 以下是三个问题：
 
@@ -133,11 +133,11 @@ DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 

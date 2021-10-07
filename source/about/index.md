@@ -15,9 +15,9 @@ date: 2017-04-04 18:05:12
 
 ## 联系方式
 
-> * 邮箱：<coderfish@163.com>
-> * 博客：[http://zhoulingyu.com](http://zhoulingyu.com)
+> * 邮箱：<lotty.lingyu@gmail.com>
+> * 博客：[http://lottyzhou.com](http://lottyzhou.com)
 > * github：[https://github.com/summertian4](https://github.com/summertian4)
-> * 微博：[Lotty小鱼](http://weibo.com/coderfish/)
+> * 微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 
 

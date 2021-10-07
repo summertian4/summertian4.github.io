@@ -12,7 +12,7 @@ categories:
 
 # 开篇
 
-上一篇[《iOS 混编 模块化/组件化 经验指北》](http://zhoulingyu.com/2017/11/24/iOS-Modularization/)中介绍到的 [Lotusoot](https://github.com/Vegetarians/Lotusoot) ，将在本篇中做一个更为详细的介绍。
+上一篇[《iOS 混编 模块化/组件化 经验指北》](http://lottyzhou.com/2017/11/24/iOS-Modularization/)中介绍到的 [Lotusoot](https://github.com/Vegetarians/Lotusoot) ，将在本篇中做一个更为详细的介绍。
 
 最初 [Lotusoot](https://github.com/Vegetarians/Lotusoot) 简称为『混编路由』，但是随后反而曲解了它的功能，其真正的定位是『模块化工具和规范』。
 
@@ -259,11 +259,11 @@ Lotusoot 的缺点是显而易见的，虽然通过脚本可以在编译阶段�
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 

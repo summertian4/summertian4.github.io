@@ -234,18 +234,18 @@ class Class(Base):
 -----
 
 ### 译者著：文章有点长，怕大家看着感觉太干，分成了的三篇文章，大家休息一下，继续吧。
-### [下一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](http://zhoulingyu.com/2017/10/31/500-Lines-or-Less-14-2/)
+### [下一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](http://lottyzhou.com/2017/10/31/500-Lines-or-Less-14-2/)
 
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 
 
 

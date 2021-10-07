@@ -13,7 +13,7 @@ categories:
 
 ----
 
-> [上一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](http://zhoulingyu.com/2017/10/31/500-Lines-or-Less-14-2/)
+> [上一篇：《【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第二部分】》](http://lottyzhou.com/2017/10/31/500-Lines-or-Less-14-2/)
 > 译者注：休息结束，我们继续
 
 # 实例优化
@@ -148,11 +148,11 @@ maps 优化另一个有意思的点是，虽然这里只优化内存使用，但
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[LottyLotty小鱼](http://weibo.com/coderfish/)
+我的微博：[LottyLotty周小鱼](http://weibo.com/coderfish/)
 

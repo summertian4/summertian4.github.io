@@ -23,7 +23,7 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 
 有了这些URL Scheme你可以像网页跳转一样通过URL来传递参数、信息。
 
-比如常见的分享功能，从其他应用点击微信分享，会自动跳转到微信APP的朋友圈发表动态页面，并填好相应的动态内容。你可以想象一下其URL Scheme可能是这样的：weixin://dl/moments?content="今天在学习URL Scheme"&src="zhoulingyu.com"（我只是举个例子）
+比如常见的分享功能，从其他应用点击微信分享，会自动跳转到微信APP的朋友圈发表动态页面，并填好相应的动态内容。你可以想象一下其URL Scheme可能是这样的：weixin://dl/moments?content="今天在学习URL Scheme"&src="lottyzhou.com"（我只是举个例子）
 
 有一点需要注意的是，和Web开发不同，iOS中并不是所有的页面或者操作都有URL Schemes，这完全是由你主导的的，如果你需要，你就可以自己定义一些，并去解析。
 
@@ -123,8 +123,8 @@ iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后�
 //  AppDelegate.m
 //  URLSchemeDemo
 //
-//  Created by Lotty小鱼 on 16/1/3.
-//  Copyright © 2016年 Lotty小鱼. All rights reserved.
+//  Created by Lotty周小鱼 on 16/1/3.
+//  Copyright © 2016年 Lotty周小鱼. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -182,12 +182,12 @@ JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 
 

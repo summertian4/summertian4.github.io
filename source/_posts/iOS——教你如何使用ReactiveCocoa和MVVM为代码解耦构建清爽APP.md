@@ -254,16 +254,16 @@ RAC(self.btLogin, enabled) = [self.viewModel validSignal];
 
 # 补充
 小鱼最近在换工作哟~各路的朋友有推荐的请务必介绍我哟~
-简历在[这里](http://zhoulingyu.com/about/)
+简历在[这里](http://lottyzhou.com/about/)
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 
 

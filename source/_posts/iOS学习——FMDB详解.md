@@ -34,7 +34,7 @@ pod install
 ```
 等待安装完就好了
 
-如果不会使用CocoaPods，可以参考我的这篇博文：[iOS学习——CocoaPods的使用](http://zhoulingyu.com/2015/10/27/iOS学习——CocoaPods的使用/)
+如果不会使用CocoaPods，可以参考我的这篇博文：[iOS学习——CocoaPods的使用](http://lottyzhou.com/2015/10/27/iOS学习——CocoaPods的使用/)
 
 ## 2. 传统拖文件安装
 在github上下载FMDB，把这些文件直接拖入你的项目就可以用了
@@ -211,11 +211,11 @@ BOOL res = [db sql];
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 

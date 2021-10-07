@@ -9,7 +9,7 @@ categories:
 	- iOS进阶
 ---
 
-在写 『[iOS（Objective-C） 内存管理&Block](http://zhoulingyu.com/2017/02/08/iOS进阶——iOS-Memory-Block/)』 一文时，我并没有发现 NSObject 的代码已经被开源了，所以分析的主要是 GNUStep 的源码，对 Apple 的部分只是通过猜测。
+在写 『[iOS（Objective-C） 内存管理&Block](http://lottyzhou.com/2017/02/08/iOS进阶——iOS-Memory-Block/)』 一文时，我并没有发现 NSObject 的代码已经被开源了，所以分析的主要是 GNUStep 的源码，对 Apple 的部分只是通过猜测。
 
 实质上，NSObject 的实现内容已经开源在 [objc4-706](https://opensource.apple.com/tarballs/objc4/) 中。于是我便开始学习 objc4 中的内容。
 
@@ -546,12 +546,12 @@ objc_object::sidetable_clearDeallocating()
 
 ----
 
-有什么问题都可以在博文后面留言，或者微博上私信我，或者邮件我 <coderfish@163.com>。
+有什么问题都可以在博文后面留言，或者微博上私信我。
 
 博主是 iOS 妹子一枚。
 
 希望大家一起进步。
 
-我的微博：[Lotty小鱼](http://weibo.com/coderfish/)
+我的微博：[Lotty周小鱼](http://weibo.com/coderfish/)
 
 
