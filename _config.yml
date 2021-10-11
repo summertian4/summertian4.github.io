@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Lotty周小鱼のCODE_HOME
-subtitle: 技术宅 iOS开发 JAVA开发 萌妹子
-description: 技术宅 iOS开发 JAVA开发 萌妹子
-author: Lotty周小鱼
-email: lotty.lingyu@gmail.com
+title:
+subtitle:
+description:
+author:
+email: lotty.xiaoyu@gmail.com
 language: zh-Hans
 timezone:
 
@@ -69,5 +69,5 @@ theme: next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/summertian4/summertian4.github.io
+  repository: git@github.com:summertian4/summertian4.github.io.git
   branch: master
