@@ -1,109 +1,32 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-3248765765901727",
-          enable_page_level_ads: true
-        });
-      </script>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lottyzhou.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="iOS,iOS进阶,内存与引用," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="第一篇 iOS 内存管理1 似乎每个人在学习 iOS 过程中都考虑过的问题 alloc retain release delloc 做了什么？ autoreleasepool 是怎样实现的？ __unsafe_unretained 是什么？ Block 是怎样实现的 什么时候会引起循环引用，什么时候不会引起循环引用？  所以我将在本篇博文中详细的从 ARC 解释到 iOS 的内存管理，以及 Blo">
+  <meta name="description" content="第一篇 iOS 内存管理1 似乎每个人在学习 iOS 过程中都考虑过的问题 alloc retain release delloc 做了什么？ autoreleasepool 是怎样实现的？ __unsafe_unretained 是什么？ Block 是怎样实现的 什么时候会引起循环引用，什么时候不会引起循环引用？  所以我将在本篇博文中详细的从 ARC 解释到 iOS 的内存管理，以及 Blo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS进阶——iOS（Objective-C） 内存管理&amp;Block">
 <meta property="og:url" content="http://lottyzhou.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/index.html">
 <meta property="og:site_name">
 <meta property="og:description" content="第一篇 iOS 内存管理1 似乎每个人在学习 iOS 过程中都考虑过的问题 alloc retain release delloc 做了什么？ autoreleasepool 是怎样实现的？ __unsafe_unretained 是什么？ Block 是怎样实现的 什么时候会引起循环引用，什么时候不会引起循环引用？  所以我将在本篇博文中详细的从 ARC 解释到 iOS 的内存管理，以及 Blo">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-01.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-02.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-03.png">
@@ -125,43 +48,20 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%26Block-01.png">
 
+<link rel="canonical" href="http://lottyzhou.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://lottyzhou.com/2017/02/08/iOS进阶——iOS-Memory-Block/"/>
-
-
-
-
-
-  <title> iOS进阶——iOS（Objective-C） 内存管理&Block |  </title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+  <title>iOS进阶——iOS（Objective-C） 内存管理&Block | </title>
   
 
 
@@ -169,247 +69,158 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-right page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title"></span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title"></h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/index.html" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS进阶——iOS（Objective-C） 内存管理&Block
-              
-            
-          </h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          iOS进阶——iOS（Objective-C） 内存管理&Block
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-08T15:33:40+08:00">
-                2017-02-08
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/iOS%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-02-08 15:33:40" itemprop="dateCreated datePublished" datetime="2017-02-08T15:33:40+08:00">2017-02-08</time>
             </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                <a href="/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/02/08/iOS进阶——iOS-Memory-Block/" itemprop="commentCount"></span>
-                </a>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-11 17:40:59" itemprop="dateModified" datetime="2021-10-11T17:40:59+08:00">2021-10-11</time>
               </span>
-            
-          
-
-          
-          
-
-          
-
-          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/iOS%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">iOS进阶</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
+
     
-
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h1 id="第一篇-iOS-内存管理"><a href="#第一篇-iOS-内存管理" class="headerlink" title="第一篇 iOS 内存管理"></a>第一篇 iOS 内存管理</h1><h2 id="1-似乎每个人在学习-iOS-过程中都考虑过的问题"><a href="#1-似乎每个人在学习-iOS-过程中都考虑过的问题" class="headerlink" title="1 似乎每个人在学习 iOS 过程中都考虑过的问题"></a>1 似乎每个人在学习 iOS 过程中都考虑过的问题</h2><ol>
@@ -679,433 +490,207 @@
 <p>希望大家一起进步。</p>
 <p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">LottyLotty周小鱼</a></p>
 
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/iOS/" rel="tag"># iOS</a>
+              <a href="/tags/iOS%E8%BF%9B%E9%98%B6/" rel="tag"># iOS进阶</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%BC%95%E7%94%A8/" rel="tag"># 内存与引用</a>
+          </div>
+
         
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
-    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/02/07/%E6%89%BE%E5%9B%9E%E4%B8%A2%E5%A4%B1%E7%9A%84-Github-%E8%A1%80%E6%B3%AA%E5%8F%B2%EF%BC%88%E8%B0%A8%E6%85%8E%E4%BF%9D%E7%AE%A1-2FA-%E9%AA%8C%E8%AF%81%EF%BC%89/" rel="prev" title="找回丢失的 Github（谨慎保管 2FA 验证）">
+      <i class="fa fa-chevron-left"></i> 找回丢失的 Github（谨慎保管 2FA 验证）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/02/15/Advanced-iOS-Study-objc-Memory-2/" rel="next" title="iOS进阶——iOS（Objective-C）内存管理·二">
+      iOS进阶——iOS（Objective-C）内存管理·二 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AF%87-iOS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">第一篇 iOS 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BC%BC%E4%B9%8E%E6%AF%8F%E4%B8%AA%E4%BA%BA%E5%9C%A8%E5%AD%A6%E4%B9%A0-iOS-%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%83%BD%E8%80%83%E8%99%91%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">1 似乎每个人在学习 iOS 过程中都考虑过的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BB%8E-ARC-%E8%AF%B4%E8%B5%B7"><span class="nav-number">1.2.</span> <span class="nav-text">2 从 ARC 说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93"><span class="nav-number">1.3.</span> <span class="nav-text">3 你需要知道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-alloc-retain-release-dealloc-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">4 alloc retain release dealloc 的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GNU-alloc"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 GNU - alloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-GNU-retain"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 GNU - retain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-GNU-release"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 GNU - release</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-GNU-dealloc"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 GNU - dealloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-Apple-%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 Apple 实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-autorelease-%E5%92%8C-autorelaesepool"><span class="nav-number">1.5.</span> <span class="nav-text">5 autorelease 和 autorelaesepool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-unsafe-unretained"><span class="nav-number">1.6.</span> <span class="nav-text">6 __unsafe_unretained</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AF%87-Block"><span class="nav-number">2.</span> <span class="nav-text">第二篇 Block</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Block-%E4%BD%BF%E7%94%A8%E7%9A%84%E7%AE%80%E5%8D%95%E8%A7%84%E5%88%99"><span class="nav-number">2.1.</span> <span class="nav-text">1 Block 使用的简单规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Block-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">2 Block 的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Block-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0%E5%89%96%E6%9E%90"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 Block 基本实现剖析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Block-%E6%88%AA%E8%8E%B7%E5%A4%96%E9%83%A8%E5%8F%98%E9%87%8F%E7%9E%AC%E9%97%B4%E5%80%BC%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%89%96%E6%9E%90"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 Block 截获外部变量瞬间值的实现剖析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-block-%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BF%E9%97%AE%E5%AE%9E%E7%8E%B0%E5%89%96%E6%9E%90"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 __block 变量的访问实现剖析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Block-%E7%9A%84%E5%AD%98%E5%82%A8%E5%9F%9F"><span class="nav-number">2.3.</span> <span class="nav-text">3 Block 的存储域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Block-%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">4 Block 循环引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%87%8D%E5%AE%A1%E9%97%AE%E9%A2%98"><span class="nav-number">2.5.</span> <span class="nav-text">5 重审问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">3.</span> <span class="nav-text">Other</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Author"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Author</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
 </div>
 
 
-      
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
     </div>
-
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.imallen.wang" title="http://blog.imallen.wang" rel="noopener" target="_blank">王龙海の博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mafei.me" title="http://mafei.me" rel="noopener" target="_blank">马飞の博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" rel="noopener" target="_blank">Afluyの博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://hyyy.me" title="http://hyyy.me" rel="noopener" target="_blank">yuanの博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.6ag.cn" title="https://blog.6ag.cn" rel="noopener" target="_blank">六阿哥の博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.eyrefree.org/" title="https://www.eyrefree.org/" rel="noopener" target="_blank">EyreFreeの博客</a>
+        </li>
+    </ul>
   </div>
 
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
-            <a href="/tags/iOS%E8%BF%9B%E9%98%B6/" rel="tag"># iOS进阶</a>
-          
-            <a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%BC%95%E7%94%A8/" rel="tag"># 内存与引用</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/02/07/%E6%89%BE%E5%9B%9E%E4%B8%A2%E5%A4%B1%E7%9A%84-Github-%E8%A1%80%E6%B3%AA%E5%8F%B2%EF%BC%88%E8%B0%A8%E6%85%8E%E4%BF%9D%E7%AE%A1-2FA-%E9%AA%8C%E8%AF%81%EF%BC%89/" rel="next" title="找回丢失的 Github（谨慎保管 2FA 验证）">
-                <i class="fa fa-chevron-left"></i> 找回丢失的 Github（谨慎保管 2FA 验证）
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/15/Advanced-iOS-Study-objc-Memory-2/" rel="prev" title="iOS进阶——iOS（Objective-C）内存管理·二">
-                iOS进阶——iOS（Objective-C）内存管理·二 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
       </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">71</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AF%87-iOS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">第一篇 iOS 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BC%BC%E4%B9%8E%E6%AF%8F%E4%B8%AA%E4%BA%BA%E5%9C%A8%E5%AD%A6%E4%B9%A0-iOS-%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%83%BD%E8%80%83%E8%99%91%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">1 似乎每个人在学习 iOS 过程中都考虑过的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BB%8E-ARC-%E8%AF%B4%E8%B5%B7"><span class="nav-number">1.2.</span> <span class="nav-text">2 从 ARC 说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93"><span class="nav-number">1.3.</span> <span class="nav-text">3 你需要知道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-alloc-retain-release-dealloc-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">4 alloc retain release dealloc 的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GNU-alloc"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 GNU - alloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-GNU-retain"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 GNU - retain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-GNU-release"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 GNU - release</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-GNU-dealloc"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 GNU - dealloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-Apple-%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5 Apple 实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-autorelease-%E5%92%8C-autorelaesepool"><span class="nav-number">1.5.</span> <span class="nav-text">5 autorelease 和 autorelaesepool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-unsafe-unretained"><span class="nav-number">1.6.</span> <span class="nav-text">6 __unsafe_unretained</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AF%87-Block"><span class="nav-number">2.</span> <span class="nav-text">第二篇 Block</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Block-%E4%BD%BF%E7%94%A8%E7%9A%84%E7%AE%80%E5%8D%95%E8%A7%84%E5%88%99"><span class="nav-number">2.1.</span> <span class="nav-text">1 Block 使用的简单规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Block-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.</span> <span class="nav-text">2 Block 的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Block-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0%E5%89%96%E6%9E%90"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 Block 基本实现剖析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Block-%E6%88%AA%E8%8E%B7%E5%A4%96%E9%83%A8%E5%8F%98%E9%87%8F%E7%9E%AC%E9%97%B4%E5%80%BC%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%89%96%E6%9E%90"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 Block 截获外部变量瞬间值的实现剖析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-block-%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BF%E9%97%AE%E5%AE%9E%E7%8E%B0%E5%89%96%E6%9E%90"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 __block 变量的访问实现剖析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Block-%E7%9A%84%E5%AD%98%E5%82%A8%E5%9F%9F"><span class="nav-number">2.3.</span> <span class="nav-text">3 Block 的存储域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Block-%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">4 Block 循环引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E9%87%8D%E5%AE%A1%E9%97%AE%E9%A2%98"><span class="nav-number">2.5.</span> <span class="nav-text">5 重审问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">3.</span> <span class="nav-text">Other</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">苏ICP备19008876号 </a>
+  </div>
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder"></span>
+  <span class="author" itemprop="copyrightHolder">Author</span>
 </div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
         
 
-        
+
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://lottyzhou.com/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/';
-          this.page.identifier = '2017/02/08/iOS进阶——iOS-Memory-Block/';
-          this.page.title = 'iOS进阶——iOS（Objective-C） 内存管理&Block';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://zhoulingyu.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1117,15 +702,14 @@
 
 
 
-  
 
 
 
 
 
-  
 
-  
+
+
 
   
 
