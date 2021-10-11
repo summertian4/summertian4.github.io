@@ -1,10 +1,8 @@
 language: node_js
+
 node_js: node
+
 cache:
-  directories:
-    - node_modules
+  npm: true
 
 install: npm install
-
-before_script:
-  - npm install -g gulp

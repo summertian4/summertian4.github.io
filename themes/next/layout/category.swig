@@ -1,23 +1,31 @@
 {% extends '_layout.swig' %}
-{% import '_macro/post-collapse.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+{% import '_macro/post-collapse.swig' as post_template with context %}
+{% import '_macro/sidebar.swig' as sidebar_template with context %}
 
-{% block title %} {{ __('title.category') }}: {{ page.category }} | {{ config.title }} {% endblock %}
+{% block title %}{{ __('title.category') }}: {{ page.category }} | {{ title }}{% endblock %}
+
+{% block class %}category{% endblock %}
 
 {% block content %}
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        {{ page.category }}
-        <small>{{  __('title.category')  }}</small>
-      </h2>
-    </div>
+  {######################}
+  {### CATEGORY BLOCK ###}
+  {######################}
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">
+          {{- page.category }}
+          <small>{{ __('title.category') }}</small>
+        </h2>
+      </div>
 
-    {% for post in page.posts %}
-      {{ post_template.render(post) }}
-    {% endfor %}
-  </section>
+      {{ post_template.render(page.posts) }}
+    </div>
+  </div>
+  {##########################}
+  {### END CATEGORY BLOCK ###}
+  {##########################}
 
   {% include '_partials/pagination.swig' %}
 
