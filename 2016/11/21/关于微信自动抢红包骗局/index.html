@@ -1,0 +1,869 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="事出起因前几天，大学同学发给我一个链接，里面是一个微信抢红包插件的介绍。大致的样子在文末给出。大致是买他们的插件可以通过他们的平台绑定微信号，设定自动抢红包并且设定抢红包的延迟（比如 100 ms）什么的。 之前我在研究 iOS 攻防的时候研究过微信的红包插件。但是从原理上来说，是通过动态链接库为微信插入了自己加入的代码（在收到红包类型信息时，调用拆开红包方法）再通过重签名进行打包。从道德上，也是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于微信自动抢红包骗局">
+<meta property="og:url" content="http://lottyzhou.com/2016/11/21/%E5%85%B3%E4%BA%8E%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%8A%A2%E7%BA%A2%E5%8C%85%E9%AA%97%E5%B1%80/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="事出起因前几天，大学同学发给我一个链接，里面是一个微信抢红包插件的介绍。大致的样子在文末给出。大致是买他们的插件可以通过他们的平台绑定微信号，设定自动抢红包并且设定抢红包的延迟（比如 100 ms）什么的。 之前我在研究 iOS 攻防的时候研究过微信的红包插件。但是从原理上来说，是通过动态链接库为微信插入了自己加入的代码（在收到红包类型信息时，调用拆开红包方法）再通过重签名进行打包。从道德上，也是">
+<meta property="og:locale">
+<meta property="og:image" content="http://static2.ivwen.com/users/6206370/c88810a066354895a60fb3bdea77190e.jpg-mobile">
+<meta property="og:image" content="http://static2.ivwen.com/users/6206370/2cf8d283f6eb4deaa0a2be90dc3e500c.jpg-mobile">
+<meta property="og:image" content="http://static2.ivwen.com/users/6206370/b0e3afc444c94b879bf6f08d0219444c.jpg-mobile">
+<meta property="og:image" content="http://static2.ivwen.com/users/6206370/f0260abf60c740b89763ca0245354536.jpg-mobile">
+<meta property="article:published_time" content="2016-11-21T09:16:03.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.402Z">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://static2.ivwen.com/users/6206370/c88810a066354895a60fb3bdea77190e.jpg-mobile">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2016/11/21/关于微信自动抢红包骗局/"/>
+
+
+
+
+
+  <title> 关于微信自动抢红包骗局 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2016/11/21/%E5%85%B3%E4%BA%8E%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%8A%A2%E7%BA%A2%E5%8C%85%E9%AA%97%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于微信自动抢红包骗局
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-21T17:16:03+08:00">
+                2016-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/11/21/%E5%85%B3%E4%BA%8E%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%8A%A2%E7%BA%A2%E5%8C%85%E9%AA%97%E5%B1%80/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/11/21/关于微信自动抢红包骗局/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="事出起因"><a href="#事出起因" class="headerlink" title="事出起因"></a>事出起因</h1><p>前几天，大学同学发给我一个<a target="_blank" rel="noopener" href="https://a.meipian.cn/8kbmkn5">链接</a>，里面是一个微信抢红包插件的介绍。大致的样子在文末给出。大致是买他们的插件可以通过他们的平台绑定微信号，设定自动抢红包并且设定抢红包的延迟（比如 100 ms）什么的。</p>
+<p>之前我在研究 iOS 攻防的时候研究过微信的红包插件。但是从原理上来说，是通过动态链接库为微信插入了自己加入的代码（在收到红包类型信息时，调用拆开红包方法）再通过重签名进行打包。从道德上，也是为了研究 iOS 的攻防的一些知识。当我收到同学的链接时，第一个反应是，居然有人卖这个，简直不合情理。</p>
+<span id="more"></span>
+<h1 id="微信自动抢红包的原理"><a href="#微信自动抢红包的原理" class="headerlink" title="微信自动抢红包的原理"></a>微信自动抢红包的原理</h1><p>仔细观看了<a target="_blank" rel="noopener" href="https://a.meipian.cn/8kbmkn5">链接</a>文章内的介绍，感觉非常的不可思议， 大家也可以在文末或者链接中查看。文章中介绍到，在他们的平台注册一个账号，让后再填写微信号码和从他们客服那里买来的激活码，就会成功注册并返回给你一张二维码，只要你扫描了二维码就可以自动抢红包了。并且是 24 小时关机状态都可以抢红包。</p>
+<p>在一开始，我觉得非常不可意思。首先，我们之前接触到的红包插件，实质上是对微信 app 代码的改变。如果是通过第三方平台可以实现抢红包的话，首先：</p>
+<ol>
+<li>拥有抢红包的 api</li>
+<li>拿到用户的登陆状态。</li>
+</ol>
+<p>不仅如此，及时这两点都能做到，还必须要能拦截到红包消息，但是微信的 IM 协议应该是 HTTP 的协议扩展，建立的是长连接。在应用处于前台时，通过 HTTP 扩展协议获取信息，在后台时，通过苹果 APNS 协议获取信息。到底是怎么样做到信息拦截的呢。</p>
+<p>在和同事又仔细查阅一番后，<a target="_blank" rel="noopener" href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles">赵鲜华</a>同学首先发现了问题的关键所在。就是下图：</p>
+<p><img src="http://static2.ivwen.com/users/6206370/c88810a066354895a60fb3bdea77190e.jpg-mobile" alt=""></p>
+<p>这张图片给出的二维码，在鲜华同学扫描过后发现是电脑登陆微信时，微信给出的『手机扫一扫登陆二维码』。并且图片中也指出需要『用微信识别二维码登陆即可』。</p>
+<p>那么现在真相显而易见。<strong>实质上，是通过他人登陆你的微信，然后在 PC 端做一些手脚，实现自动抢红包。</strong></p>
+<p>这种自动抢红包的实现方案，<strong>不仅会让你的红包消息泄露，也会让你的所有聊天信息全部被暴露</strong>。毕竟你是在他人电脑上直接登陆了微信。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>根据我大学同学的描述，这种红包插件在淘宝上售出，有人评价『用几次就不能用了』。说到底，也许对方根本不是想赚你的插件钱，也许就是想获取他人的隐私信息。</p>
+<p>所以对于这种骗局，本人表示不能容忍，特写词文章分享，希望大家不要上当受骗。</p>
+<p>如果想研究 iOS 的攻防，希望你也只用于研究学习。</p>
+<h1 id="相关图片"><a href="#相关图片" class="headerlink" title="相关图片"></a>相关图片</h1><p><img src="http://static2.ivwen.com/users/6206370/2cf8d283f6eb4deaa0a2be90dc3e500c.jpg-mobile" alt=""></p>
+<p><img src="http://static2.ivwen.com/users/6206370/b0e3afc444c94b879bf6f08d0219444c.jpg-mobile" alt=""></p>
+<p><img src="http://static2.ivwen.com/users/6206370/f0260abf60c740b89763ca0245354536.jpg-mobile" alt=""></p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/17/iOS%E2%80%94%E2%80%94%E6%94%B9%E5%8F%98%E7%9B%B8%E5%86%8C%E8%AE%BF%E9%97%AE%E8%AE%B8%E5%8F%AF%E6%97%B6-crash-%E9%97%AE%E9%A2%98/" rel="next" title="iOS——改变相册访问许可时的 crash">
+                <i class="fa fa-chevron-left"></i> iOS——改变相册访问许可时的 crash
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/03/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2017/" rel="prev" title="一周阅读列表-2017">
+                一周阅读列表-2017 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%87%BA%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">事出起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%8A%A2%E7%BA%A2%E5%8C%85%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">微信自动抢红包的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87"><span class="nav-number">4.</span> <span class="nav-text">相关图片</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2016/11/21/%E5%85%B3%E4%BA%8E%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%8A%A2%E7%BA%A2%E5%8C%85%E9%AA%97%E5%B1%80/';
+          this.page.identifier = '2016/11/21/关于微信自动抢红包骗局/';
+          this.page.title = '关于微信自动抢红包骗局';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

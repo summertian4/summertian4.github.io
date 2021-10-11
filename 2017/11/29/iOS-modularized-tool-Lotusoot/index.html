@@ -1,0 +1,949 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,iOS模块化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="开篇上一篇《iOS 混编 模块化&#x2F;组件化 经验指北》中介绍到的 Lotusoot ，将在本篇中做一个更为详细的介绍。 最初 Lotusoot 简称为『混编路由』，但是随后反而曲解了它的功能，其真正的定位是『模块化工具和规范』。  Lotusoot 可以做到：  模块间、模块内服务调用 Swift、OC、或者两者混编项目均可使用 短链注册、路由调用 脚本自动注册服务&#x2F;路由表   注：这里的模块化，也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 灵活的 模块化&#x2F;组件化 工具与规范 Lotusoot 解说">
+<meta property="og:url" content="http://lottyzhou.com/2017/11/29/iOS-modularized-tool-Lotusoot/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="开篇上一篇《iOS 混编 模块化&#x2F;组件化 经验指北》中介绍到的 Lotusoot ，将在本篇中做一个更为详细的介绍。 最初 Lotusoot 简称为『混编路由』，但是随后反而曲解了它的功能，其真正的定位是『模块化工具和规范』。  Lotusoot 可以做到：  模块间、模块内服务调用 Swift、OC、或者两者混编项目均可使用 短链注册、路由调用 脚本自动注册服务&#x2F;路由表   注：这里的模块化，也">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-003.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-001.png">
+<meta property="og:image" content="https://github.com/mac-cain13/R.swift/raw/master/Documentation/Images/DemoUseImage.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-004.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-002.png">
+<meta property="article:published_time" content="2017-11-29T02:40:41.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.393Z">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="iOS模块化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-003.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/11/29/iOS-modularized-tool-Lotusoot/"/>
+
+
+
+
+
+  <title> iOS 灵活的 模块化/组件化 工具与规范 Lotusoot 解说 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/11/29/iOS-modularized-tool-Lotusoot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS 灵活的 模块化/组件化 工具与规范 Lotusoot 解说
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T10:40:41+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/iOS%E6%A8%A1%E5%9D%97%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS模块化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/29/iOS-modularized-tool-Lotusoot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/29/iOS-modularized-tool-Lotusoot/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h1><p>上一篇<a href="http://lottyzhou.com/2017/11/24/iOS-Modularization/">《iOS 混编 模块化/组件化 经验指北》</a>中介绍到的 <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> ，将在本篇中做一个更为详细的介绍。</p>
+<p>最初 <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> 简称为『混编路由』，但是随后反而曲解了它的功能，其真正的定位是『模块化工具和规范』。</p>
+<p> <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> 可以做到：</p>
+<ol>
+<li>模块间、模块内服务调用</li>
+<li>Swift、OC、或者两者混编项目均可使用</li>
+<li>短链注册、路由调用</li>
+<li>脚本自动注册服务/路由表</li>
+</ol>
+<blockquote>
+<p>注：这里的模块化，也就是大家说的『组件化』，不是在主工程用文件夹分模块，而是指将独立模块抽调成 CocoaPods 库、或者其他形式的库文件，成为一个独立工程。<br>下文中的模块就代表一个 CocoaPods 库</p>
+</blockquote>
+<span id="more"></span>
+<h1 id="模块化解耦——路由-or-服务调用？"><a href="#模块化解耦——路由-or-服务调用？" class="headerlink" title="模块化解耦——路由 or 服务调用？"></a>模块化解耦——路由 or 服务调用？</h1><p>关于模块化，大多数人的第一反应是制作路由、注册短链、调用短链，通过这样的方式来去耦，来实现模块间的页面跳转、服务调用。类似 <a target="_blank" rel="noopener" href="https://github.com/meili/MGJRouter">MGJRouter</a> 一类的库就是基于这样的思想。</p>
+<p>但我也非常认可 <a target="_blank" rel="noopener" href="https://casatwy.com/">casa</a> 在反驳使用 URL 作为模块化核心的理由。即：『短链的实质还是通过 URL 来调用服务或者打开页面，反而不如字符串直接，反而增加了 URL 本身的维护成本』。</p>
+<p>所以，我们应当回归模块化的本质。我们模块化的最初的目的往往是为了：</p>
+<ol>
+<li>代码拆分，将<strong>关联性强的基础服务代码</strong>或者<strong>业务代码</strong>抽调在一起，单独封版，独立开发</li>
+<li>防止主工程越来越大，变得臃肿</li>
+</ol>
+<p>相对应的，模块化需要的功能是：</p>
+<ol>
+<li>提供多个库之间的服务调用</li>
+<li>保持库与库之间的独立、非强依赖</li>
+</ol>
+<p>所以，总的来说，模块化的重点还是如何<strong>去除多个模块之间的耦合，让每个模块在不强依赖的情况下可以调用其他模块的服务</strong>。</p>
+<p><strong>URL 短链、甚至是路由、都不是模块化重点之处。</strong>路由只要你想，都可以通过服务注册实现。</p>
+<blockquote>
+<p>注：『不强依赖』指的是，模块A 调用 模块B 不需要在 Pod 依赖中写出对 B 的依赖，或者简单的认为，模块A 的代码中不出现 <code>import B</code>。</p>
+</blockquote>
+<h1 id="公共模块和依赖关系"><a href="#公共模块和依赖关系" class="headerlink" title="公共模块和依赖关系"></a>公共模块和依赖关系</h1><p>Lotusoot 是这样解耦的：</p>
+<h2 id="1-Lotus"><a href="#1-Lotus" class="headerlink" title="1. Lotus"></a>1. Lotus</h2><p>创建一个 PublicModule，其中存放各个模块的 Lotus，Lotus 其实就是协议，定义了每个模块可以提供的服务（即可以调用的方法），举例如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">protocol</span> <span class="title">AccountLotus</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">login</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>, <span class="params">complete</span>: (<span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">register</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>, <span class="params">complete</span>: (<span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">email</span>(<span class="params">username</span>: <span class="type">String</span>)</span> -&gt; <span class="type">String</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">showLoginVC</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-Lotusoot"><a href="#2-Lotusoot" class="headerlink" title="2. Lotusoot"></a>2. Lotusoot</h2><p>在各个模块中，实现 PublicModule 中对应的 Lotus，即具体的服务类，称为 Lotusoot。<br>Lotusoot 中具体实现了服务的逻辑，并在 <strong>注解</strong> 中表明了模块的 <code>命名空间-@NameSpace</code>、<code>Lotusoot-@Lotusoot</code>、<code>Lotus-@Lotus</code>。举例如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @NameSpace(TestAccountModule)</span></span><br><span class="line"><span class="comment">// @Lotusoot(AccountLotusoot)</span></span><br><span class="line"><span class="comment">// @Lotus(AccountLotus)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AccountLotusoot</span>: <span class="title">NSObject</span>, <span class="title">AccountLotus</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">email</span>(<span class="params">username</span>: <span class="type">String</span>)</span> -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">OtherService</span>.email(username: <span class="string">&quot;zhoulingyu&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">login</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>, <span class="params">complete</span>: (<span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</span> &#123;</span><br><span class="line">        <span class="type">LoginService</span>.login(username: username, password: password, complete: complete)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">register</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>, <span class="params">complete</span>: (<span class="type">Error</span>?) -&gt; <span class="type">Void</span>)</span> &#123;</span><br><span class="line">        <span class="type">RegisterService</span>.register(username: username, password: password, complete: complete)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">showLoginVC</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 可以用你们喜欢的非耦合方式处理跳转</span></span><br><span class="line">        <span class="comment">// 或者传入 rootvc</span></span><br><span class="line">        <span class="comment">// 更好的方式是自己的非耦合 UI 跳转处理模块</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;show login view controller&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注解是非必须的，注解是为了 <code>Lotusoot.py</code> 可以扫描 Lotusoot 自动注册，后面一节将会说到。如果你不想使用自动注册，也可以选择手动注册。</p>
+<blockquote>
+<p>注：这里做一点解释，『协议-服务类』即『Lotus-Lotusoot』的命名由来纯属卖个萌，因为，协议是暴露外部的，所以叫莲花，而具体实现的服务类自然就是莲藕（Loutsoot）了。</p>
+</blockquote>
+<h2 id="3-自动注册-or-手动注册"><a href="#3-自动注册-or-手动注册" class="headerlink" title="3. 自动注册 or 手动注册"></a>3. 自动注册 or 手动注册</h2><p>如果使用了注解，可以自动注册所有服务，只需要：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span>(<span class="keyword">_</span> <span class="params">application</span>: <span class="type">UIApplication</span>, <span class="params">didFinishLaunchingWithOptions</span> <span class="params">launchOptions</span>: [<span class="params">UIApplicationLaunchOptionsKey</span>: <span class="keyword">Any</span>]<span class="operator">?</span>)</span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="type">LotusootCoordinator</span>.registerAll()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果先手动注册，如下所示：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[LotusootCoordinator registerWithLotusoot:[AppDelegateLotusoot new] lotusName:<span class="string">@&quot;AppDelegateLotus&quot;</span>];</span><br><span class="line">    [LotusootCoordinator registerWithLotusoot:[MainLotusoot new] lotusName:<span class="string">@&quot;MainLotus&quot;</span>];</span><br></pre></td></tr></table></figure>
+<p>不过手动注册就是去了使用 Lotusoot 的意义了，所以在无法满足条件时再使用手动注册（比如目前 0.0.2 版本的 Lotusoot，主工程如果有多 Target，是无法动态获取 Target 名，导致无法正确获取命名空间，反射到类，当然除工程，各个模块由于使用 CocoaPos 不存在这个问题。下一个版本 Lotusoot 将会重点解决这个问题）</p>
+<h2 id="4-关系图"><a href="#4-关系图" class="headerlink" title="4. 关系图"></a>4. 关系图</h2><p>通过 Lotusoot 搭建的工程如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-003.png" alt=""></p>
+<p>所有模块只需要依赖 PublicModule，通过 PublicMoudle 下的 Lotusoot 即可调用其他模块的服务。实例代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> loginLotus <span class="operator">=</span> s(<span class="type">LoginLotus</span>.<span class="keyword">self</span>) </span><br><span class="line"><span class="keyword">let</span> loginModule: <span class="type">LoginLotus</span> <span class="operator">=</span> <span class="type">LotusootCoordinator</span>.lotusoot(lotus: loginLotus) <span class="keyword">as!</span> <span class="type">LoginLotus</span></span><br><span class="line">loginModule.login(username: <span class="string">&quot;test&quot;</span>, password: <span class="string">&quot;test&quot;</span>, complete:<span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<p>OC 中使用：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span>&lt;LoginLotus&gt; loginModule = [LotusootCoordinator lotusootWithLotus:<span class="string">@&quot;LoginLotus&quot;</span>];</span><br><span class="line">[loginModule login:<span class="string">@&quot;test&quot;</span> password:<span class="string">@&quot;test&quot;</span> complete:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<h1 id="Lotusoot-是如何实现自动注册服务的？在什么时机？"><a href="#Lotusoot-是如何实现自动注册服务的？在什么时机？" class="headerlink" title="Lotusoot 是如何实现自动注册服务的？在什么时机？"></a>Lotusoot 是如何实现自动注册服务的？在什么时机？</h1><p>这个问题也是在编写 Lotusoot 最初重点考虑的问题。原因是 Swift 没有 <code>+(void)load</code>。</p>
+<p>大概是每个用 Swift 开发模块路由和解耦工具的人都纠结过的问题。</p>
+<h2 id="1-OC-中常见的解决方案"><a href="#1-OC-中常见的解决方案" class="headerlink" title="1. OC 中常见的解决方案"></a>1. OC 中常见的解决方案</h2><p>先说说通常 OC 的路由或者解耦，都是在 <code>+(void)load</code> 注册类服务的，大致的做法类似于：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)load &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        [[Router shared] map:<span class="string">@&quot;LoginViewController&quot;</span> toController:[<span class="keyword">self</span> <span class="keyword">class</span>]];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)load &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        [[ServiceManager shared] <span class="keyword">register</span>:<span class="string">@&quot;LoginService&quot;</span> toService:[<span class="keyword">self</span> <span class="keyword">class</span>]];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，即使是在每个模块内，也可以正常注册自己的服务。而主工程和其他模块调用只需要通过字符串调用即可。</p>
+<h2 id="2-Swift-中的痛点"><a href="#2-Swift-中的痛点" class="headerlink" title="2. Swift 中的痛点"></a>2. Swift 中的痛点</h2><p>由于 Swift 是没有 <code>+(void)load</code> 的，也没有其他可靠的方法可以替代，那么势必需要在主工程中加入注册路由这一步骤，通常可以放在 <code>didFinishLaunchingWithOptions</code>，因为主模块可以调到所有模块的类。那么随之而来的问题就是，你可能会出现这样常常的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ServiceManager</span>().register(<span class="string">&quot;LoginService&quot;</span>, toService:<span class="type">LoginService</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="type">ServiceManager</span>().register(<span class="string">&quot;UserCenterService&quot;</span>, toService:<span class="type">UserCenterService</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="type">ServiceManager</span>().register(<span class="string">&quot;HistoryService&quot;</span>, toService:<span class="type">HistoryService</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="operator">...</span></span><br></pre></td></tr></table></figure>
+<p>可能会有一张长长的列表，而且由于服务都分散在各个模块，但是却集中在主模块，往往难以看到路由表和服务类的关联，表征不够明显、关系不够强烈。</p>
+<h2 id="3-Lotusoot-的解决方案"><a href="#3-Lotusoot-的解决方案" class="headerlink" title="3. Lotusoot 的解决方案"></a>3. Lotusoot 的解决方案</h2><p>有什么更好的办法注册？<a target="_blank" rel="noopener" href="http://www.jianshu.com/u/2d46948e84e3">mmoaay</a> 给了我一个灰常棒的建议，参考 <a target="_blank" rel="noopener" href="https://github.com/mac-cain13/R.swift">R.swift</a> 的做法，通过脚本，来完成自动注册。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/mac-cain13/R.swift">R.swift</a> 的提供的功能是，可以让使用的 iOSer 可以像开发 Android 的一样调用图片、字符串、音频等等资源文件。在 Project 中插入 Run Script，这个脚本可以在编译阶段扫描整个工程，列算所有的资源文件，最后生成一个 <code>R.generated.swift</code> 文件，就像这个样子：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-001.png" alt=""></p>
+<p>使用的时候就可以：</p>
+<p><img src="https://github.com/mac-cain13/R.swift/raw/master/Documentation/Images/DemoUseImage.gif" alt=""></p>
+</blockquote>
+<p><strong>同样 Lotusoot 通过一个 python 脚本，在『Compile Source』之前扫描工程目录下的文件，找出 Lotusoot 和 Lotus 对应关系，并生成一个 <code>Lotusoot.plist</code> 文件</strong>：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-004.png" alt=""></p>
+<p>如何识别 Lotus？</p>
+<p>目前，Lotusoot 使用了很 Low 的方式，在注解中表明了模块的 <code>命名空间-@NameSpace</code>、<code>Lotusoot-@Lotusoot</code>、<code>Lotus-@Lotus</code>，脚本就可以识别。举例如下：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-modularized-tool-Lotusoot-002.png" alt=""></p>
+<p>所以，<code>didFinishLaunchingWithOptions</code> 只需要一句，即可自动注册路由。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LotusootCoordinator</span>.registerAll()</span><br></pre></td></tr></table></figure>
+<p>为什么使用脚本解决？是因为到目前为止，所有的解耦工具或者路由都是通过程序员手动去写代码添加路由，不管是在 <code>+ (void)load</code> 中注册也好，在程序启动后注册也好，都是有程序员手动管理的。使用脚本是希望在编译阶段前，就准备好所有的『协议-服务类』对应关系表，在程序启动后通过这张表自动注册，<strong>实现程序员不手动注册、完全无感</strong>。我觉得这才是真正的解耦工具应当具备的功能。</p>
+<h1 id="Lotusoot-的重大缺点和下一版本目标"><a href="#Lotusoot-的重大缺点和下一版本目标" class="headerlink" title="Lotusoot 的重大缺点和下一版本目标"></a>Lotusoot 的重大缺点和下一版本目标</h1><p>Lotusoot 的缺点是显而易见的，虽然通过脚本可以在编译阶段创建好『协议-服务类』关系表。但 <code>Lotusoot.py</code> 识别『协议-服务类』是通过注解来的，而这里的注解其实就是注释，不能编译检测错误，及时误写错也无法及时检查出问题。如果解决了这一痛点，就可以相对完美的解决了 Swift 的模块化方案。</p>
+<p>目前的思路如下：</p>
+<p>尝试通过全局方法或是其他语法方式实现真正的注解，可以像 Java 中的注解一样，不仅可以作为一种标识，也可以进行编译检查。</p>
+<p>其实 OC 中是可以直接用宏定义做的：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#define <span class="type">Service</span>(_name_) \</span><br><span class="line"><span class="operator">+</span> (void)load &#123; \</span><br><span class="line">    [<span class="keyword">self</span> registerService:_name_]; \</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="meta">@Service</span>(@<span class="string">&quot;LoginService&quot;</span>)</span><br><span class="line"><span class="meta">@implementation</span> <span class="type">LoginService</span></span><br><span class="line"><span class="operator">...</span></span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<p>但 Lotusoot 是提供给 Swift 和 OC 以及混编项目都可以使用的，所以实现方案还需要我继续探索。</p>
+<p>另一种方式可以使用 LLVM 是提供了 @annotation 操作的，如果通过这种方式生成 <code>.plist</code> 的注册列表文件应该会放到编译结束时。</p>
+<p>以上，是以后的一些构思，希望可以完美的解决 Swift 模块化方案。<strong>如果你有什么好的建议，都可以来找我讨论哦~~~</strong></p>
+<h1 id="Demo-和-Github"><a href="#Demo-和-Github" class="headerlink" title="Demo 和 Github"></a>Demo 和 Github</h1><p>如果想更清晰的感受 Lotusoot 带来的模块化改造，请必须下载 <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot/tree/master/Demo">Demo</a> 来看哟。</p>
+<p>总项目的地址在<a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">这里</a>。</p>
+<p>非常欢迎一起讨论（卖萌~~）</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag"># iOS模块化</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/24/iOS-Modularization/" rel="next" title="iOS 混编 模块化/组件化 经验指北">
+                <i class="fa fa-chevron-left"></i> iOS 混编 模块化/组件化 经验指北
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/08/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2018/" rel="prev" title="一周阅读列表-2018">
+                一周阅读列表-2018 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">开篇</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%A3%E8%80%A6%E2%80%94%E2%80%94%E8%B7%AF%E7%94%B1-or-%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">模块化解耦——路由 or 服务调用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E5%85%B1%E6%A8%A1%E5%9D%97%E5%92%8C%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">公共模块和依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Lotus"><span class="nav-number">3.1.</span> <span class="nav-text">1. Lotus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Lotusoot"><span class="nav-number">3.2.</span> <span class="nav-text">2. Lotusoot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C-or-%E6%89%8B%E5%8A%A8%E6%B3%A8%E5%86%8C"><span class="nav-number">3.3.</span> <span class="nav-text">3. 自动注册 or 手动注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="nav-number">3.4.</span> <span class="nav-text">4. 关系图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lotusoot-%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1%E7%9A%84%EF%BC%9F%E5%9C%A8%E4%BB%80%E4%B9%88%E6%97%B6%E6%9C%BA%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">Lotusoot 是如何实现自动注册服务的？在什么时机？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-OC-%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.1.</span> <span class="nav-text">1. OC 中常见的解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Swift-%E4%B8%AD%E7%9A%84%E7%97%9B%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">2. Swift 中的痛点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Lotusoot-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.3.</span> <span class="nav-text">3. Lotusoot 的解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lotusoot-%E7%9A%84%E9%87%8D%E5%A4%A7%E7%BC%BA%E7%82%B9%E5%92%8C%E4%B8%8B%E4%B8%80%E7%89%88%E6%9C%AC%E7%9B%AE%E6%A0%87"><span class="nav-number">5.</span> <span class="nav-text">Lotusoot 的重大缺点和下一版本目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo-%E5%92%8C-Github"><span class="nav-number">6.</span> <span class="nav-text">Demo 和 Github</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/11/29/iOS-modularized-tool-Lotusoot/';
+          this.page.identifier = '2017/11/29/iOS-modularized-tool-Lotusoot/';
+          this.page.title = 'iOS 灵活的 模块化/组件化 工具与规范 Lotusoot 解说';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

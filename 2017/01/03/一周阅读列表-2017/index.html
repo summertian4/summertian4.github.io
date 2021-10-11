@@ -1,0 +1,943 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Other,ReadList," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="2016 年 1 月 1 日 +有关 objc_autoreleasereturnvalue iOS 自动释放池ARC与MRC 黑幕背后的Autorelease Clang 4.0 documentation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一周阅读列表-2017">
+<meta property="og:url" content="http://lottyzhou.com/2017/01/03/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2017/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="2016 年 1 月 1 日 +有关 objc_autoreleasereturnvalue iOS 自动释放池ARC与MRC 黑幕背后的Autorelease Clang 4.0 documentation">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-01-03T07:05:00.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.402Z">
+<meta property="article:tag" content="Other">
+<meta property="article:tag" content="ReadList">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/01/03/一周阅读列表-2017/"/>
+
+
+
+
+
+  <title> 一周阅读列表-2017 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/01/03/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2017/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一周阅读列表-2017
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-03T15:05:00+08:00">
+                2017-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">阅读列表</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/03/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2017/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/01/03/一周阅读列表-2017/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="2016-年-1-月-1-日"><a href="#2016-年-1-月-1-日" class="headerlink" title="2016 年 1 月 1 日 +"></a>2016 年 1 月 1 日 +</h1><p>有关 objc_autoreleasereturnvalue</p>
+<p><del><a target="_blank" rel="noopener" href="http://www.voidcn.com/blog/li15809284891/article/p-6244162.html">iOS 自动释放池ARC与MRC</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://blog.sunnyxx.com/2014/10/15/behind-autorelease/">黑幕背后的Autorelease</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html#arc-runtime-objc-autoreleasereturnvalue">Clang 4.0 documentation</a></del></p>
+<span id="more"></span>
+<p><a target="_blank" rel="noopener" href="http://daily.zhihu.com/story/9121798">如何做一次有效的绩效考核面谈？</a></p>
+<p><del><a target="_blank" rel="noopener" href="https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90">知乎日报 API 分析</a></del></p>
+<p><a target="_blank" rel="noopener" href="http://www.cocoachina.com/swift/20150918/13499.html">Swift 面试题及其答案</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s/JUx98M2U_K55aurFQcQlgw">2016移动开发技术巡礼</a></p>
+<p><a target="_blank" rel="noopener" href="http://web.jobbole.com/89568/">前端精选 20 个优质的加载动画</a></p>
+<p><strong> 有关 iOS10 新特性 </strong></p>
+<p><del>1. <a target="_blank" rel="noopener" href="https://onevcat.com/2016/06/ios-10-sdk/">开发者所需要知道的 iOS 10 SDK 新特性</a></del></p>
+<p><del>2. <a target="_blank" rel="noopener" href="http://blog.fir.im/fir_im_weekly160617/">fir.im Weekly - 从 iOS 10 SDK 新特性说起</a></del></p>
+<p><del>3. <a target="_blank" rel="noopener" href="https://developer.apple.com/ios/">iOS + Apps</a></del></p>
+<p><del>4. <a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/releasenotes/General/WhatsNewIniOS/Articles/iOS10.html">What’s New in iOS10</a></del></p>
+<p><del>5. <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/0cc7aad638d9">兼容iOS 10 资料整理笔记</a></del></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/MoZhouqi/KMNavigationBarTransition">KMNavigationBarTransition</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.apple.com/library/content/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html">Apple Transitioning to ARC Release Notes</a></p>
+<p><del><a target="_blank" rel="noopener" href="http://coolshell.cn/articles/222.html">优秀程序员的十个习惯</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/d75a9a8d13b5?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io">33 个 2017 年必须了解的 iOS 开源库</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://isux.tencent.com/qq-mobile-off-duty.html">QQ手机版 5.0“一键下班”设计小结</a></del></p>
+<h1 id="2016-年-2-月-1-日"><a href="#2016-年-2-月-1-日" class="headerlink" title="2016 年 2 月 1 日 +"></a>2016 年 2 月 1 日 +</h1><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/b3225d7de6bf">浅析UIApplication生命周期的一些delegate方法</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2dbb360886a8">iOS即时通讯，从入门到“放弃”？</a></p>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s/GFt7uqrKw7m3R3KrV43zIQ">Baymax：网易iOS App运行时Crash自动防护实践</a></p>
+<p><a target="_blank" rel="noopener" href="http://casatwy.com/iosying-yong-jia-gou-tan-ben-di-chi-jiu-hua-fang-an-ji-dong-tai-bu-shu.html">iOS应用架构谈 本地持久化方案及动态部署</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.voidcn.com/blog/u012881779/article/p-4112998.html">[IOS]在一个工程管理多个应用</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Draveness/iOS-Source-Code-Analyze/tree/master/contents/objc">iOS-Source-Code-Analyze</a></p>
+<p><a target="_blank" rel="noopener" href="http://colin1994.github.io/2016/10/21/Core-Image-OverView/">Core Image 你需要了解的那些事~</a></p>
+<p><a target="_blank" rel="noopener" href="http://colin1994.github.io/2016/10/21/Core-Image-Custom-Filter/">Core Image 之自定义 Filter~</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.imwcl.com/2017/02/16/iOS动画进阶-手摸手教你写ShineButton动画/">iOS动画进阶 - 手摸手教你写ShineButton动画</a></p>
+<p><a target="_blank" rel="noopener" href="http://yulingtianxia.com/blog/2017/01/16/DIY-a-simple-tow-way-list/">DIY 双向滑动列表</a></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/51d04b7639f1">Block技巧与底层解析</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.cnblogs.com/debmzhang/p/5013540.html">mysql 的密码</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/1559955/host-xxx-xx-xxx-xxx-is-not-allowed-to-connect-to-this-mysql-server">github 远程访问权限</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/74124aee3c8f">2017，我的iOS进阶规划</a></del></p>
+<h1 id="2016-年-3-月-1-日"><a href="#2016-年-3-月-1-日" class="headerlink" title="2016 年 3 月 1 日 +"></a>2016 年 3 月 1 日 +</h1><p><a target="_blank" rel="noopener" href="http://cache.xiaomiquan.com/d6a58b9cee9b67c871ca8c0fb24a62ca4637610269df037c5756ce11f3c7c507/">技术往事：改变世界的TCP/IP协议（珍贵多图、手机慎点）</a></p>
+<p><del><a target="_blank" rel="noopener" href="http://amztion.com/2016/12/03/uiviewcontroller-lifecycle/">UIViewController 相关生命周期总结</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.cocoachina.com/ios/20160113/14896.html">iOS开发 - 事件传递响应链</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://git-scm.com/">git</a></del></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/d7d951a99db8">ReactiveCocoa 中 RACSignal 是如何发送信号的</a></p>
+<p><del><a target="_blank" rel="noopener" href="http://ios.skyfox.org/route.html">iOS 学习路线</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://urouge.github.io/migrate-to-disqus/">多说评论迁移至Disqus</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/">关于 @synchronized，这儿比你想知道的还要多</a></del></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ddbe44064ca4">iOS 常见知识点（三）：Lock</a></p>
+<h1 id="2016-年-4-月-1-日"><a href="#2016-年-4-月-1-日" class="headerlink" title="2016 年 4 月 1 日 +"></a>2016 年 4 月 1 日 +</h1><p><del><a target="_blank" rel="noopener" href="http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Overlaying application version on top of your icon</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://my.oschina.net/leejun2005/blog/202376">bash/shell 解析命令行参数工具：getopts/getopt</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://liam0205.me/2016/07/30/release-your-own-app-in-Homebrew/">在 Homebrew 上发布自己的 App</a></del></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2650995856&amp;idx=1&amp;sn=7c62704384405868ce9f28359c7306ea&amp;chksm=bdbf04c38ac88dd5f967d020546e881ab301f7951458ad7d89bd44679133e7459bf27d6a0253&amp;mpshare=1&amp;scene=1&amp;srcid=0414Rx8W3W2yfoCQqgmTnGFH&amp;key=2a91529dae94444b304cab6ecab61d94479bfd3b891b378a875d1eab3f49c7b444f4c608405217ef464212c23e9c0c3b57b43b1c231f5e0f4c501c63927cbd8812163d7b3748a222f63581ed2d96b078&amp;ascene=0&amp;uin=MjIyOTk0ODU0MQ%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.12.4+build(16E195">左耳朵耗子：拖累开发团队效率的困局与解决之道</a>&amp;version=12020110&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=bavrh4luffwXtPNqc9c46%2Fsos7wDPNF15zzHV8kiC6imiFomM3lu8kQ9H3AY1%2BWJ)</p>
+<p><a target="_blank" rel="noopener" href="http://tech.meituan.com/SharkSDK.html">美团点评移动网络优化实践</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/Jenaral/p/5530383.html?from=groupmessage&amp;isappinstalled=1">静态库与动态库的区别</a></p>
+<p><del><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;mid=2651113202&amp;idx=1&amp;sn=61bdbf35b49168d2373547887286a097&amp;chksm=844c6f2fb33be6399cbc05e679322ffc0ee89268f458f7bf47ab67e5561dd1f82b06849a2c81&amp;mpshare=1&amp;scene=23&amp;srcid=0417YjEuAcWp0SxCLrrxnyBU#rd">基于ReSwift和App Coordinator的iOS架构</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/67a6004f6930">组件化架构漫谈</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://blog.cnbang.net/tech/3080/">iOS 组件化方案探索</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://casatwy.com/iOS-Modulization.html">iOS应用架构谈 组件化方案</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://github.com/meili/MGJRouter">MGJRouter</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="http://mrpeak.cn/blog/module/">iOS组件化方案</a></del></p>
+<p><strong> Swift 编译速度 </strong></p>
+<ol>
+<li><p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/36cc0af43258">Swift build time</a></del></p>
+</li>
+<li><p><del><a target="_blank" rel="noopener" href="http://www.cnblogs.com/YungMing/p/5160346.html">分析Swift项目的编译时间</a></del></p>
+</li>
+<li><p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/9825749efa8b">调整代码, 加速swift编译</a></del></p>
+</li>
+<li><p><del><a target="_blank" rel="noopener" href="http://www.neroblog.com/?p=19">关于Swift编译慢并没什么卵用的解决办法</a></del></p>
+</li>
+<li><p><del><a target="_blank" rel="noopener" href="https://github.com/RobertGummesson/BuildTimeAnalyzer-for-Xcode">BuildTimeAnalyzer-for-Xcode</a></del></p>
+</li>
+</ol>
+<p><del><a target="_blank" rel="noopener" href="http://mobilists.eleme.io/">Eleme Mobilists</a></del></p>
+<p><a target="_blank" rel="noopener" href="https://news.realm.io/cn/news/nate-cook-tryswift-tokyo-unsafe-swift-and-pointer-types/?from=groupmessage&amp;isappinstalled=1">Swift 皇冠上的明珠：不安全的 Swift 和指针类型</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/b8eae0e4de43#">写一个带有“两级缓存”的网络请求库</a></p>
+<p><del><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/965df0f28014">GPUImage详细解析（七）文字水印和动态图像水印</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://www.eyrefree.org/2017/05/01/2017-05-01-GitHub-Badge-Introduction/">GitHub 项目徽章的添加和设置</a></del></p>
+<h1 id="2017-年-5-月-1-日"><a href="#2017-年-5-月-1-日" class="headerlink" title="2017 年 5 月 1 日 +"></a>2017 年 5 月 1 日 +</h1><p><del><a target="_blank" rel="noopener" href="http://www.hudongdong.com/ios/530.html">GPUImage录像的一些备忘</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://juejin.im/post/5905b9058d6d810058d49f0d">优化 Swift 编译速度</a></del></p>
+<p><del><a target="_blank" rel="noopener" href="https://medium.com/@pvzig/building-slack-bots-in-swift-b99e243e444c">Building Slack Bots In Swift</a></del></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/5c3f19c78f25">程序员拿什么来学英语</a></p>
+<p><a target="_blank" rel="noopener" href="http://ios.jobbole.com/93179/">Xcode 自定义模板实践</a></p>
+<p><a target="_blank" rel="noopener" href="http://cjting.me/misc/how-git-generate-diff/">Git是怎样生成diff的：Myers算法</a></p>
+<h1 id="2017-年-7-月-1-日"><a href="#2017-年-7-月-1-日" class="headerlink" title="2017 年 7 月 1 日 +"></a>2017 年 7 月 1 日 +</h1><p><a target="_blank" rel="noopener" href="https://onevcat.com/2017/07/state-based-viewcontroller/">单向数据流动的函数式 View Controller</a></p>
+<p><a target="_blank" rel="noopener" href="http://swifter.tips/random-number/">随机数生成</a></p>
+<h1 id="2017-年-8-月-1-日"><a href="#2017-年-8-月-1-日" class="headerlink" title="2017 年 8 月 1 日 +"></a>2017 年 8 月 1 日 +</h1><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000010600318">SegmentFault 技术周刊 Vol.31 - 码农也要学算法</a></p>
+<p><del><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28488946?utm_medium=social">AI可能真的要代替插画师了</a></del></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/29051908c74b">iOS Crash 捕获及堆栈符号化思路剖析</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Draveness/Analyze/blob/master/contents/CocoaPods/CocoaPods%20%E9%83%BD%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.md">CocoaPods 都做了什么？</a></p>
+<h1 id="2017-年-9-月-1-日"><a href="#2017-年-9-月-1-日" class="headerlink" title="2017 年 9 月 1 日 +"></a>2017 年 9 月 1 日 +</h1><p><del><a target="_blank" rel="noopener" href="http://einverne.github.io/post/2017/04/pyenv.html">使用 pyenv 管理 Python 版本</a></del></p>
+<p><a target="_blank" rel="noopener" href="http://blog.startry.com/2015/10/28/Somthing-about-Podfile-lock/">Podfile.lock背后的那点事</a></p>
+<p><a target="_blank" rel="noopener" href="https://sspai.com/post/32979">从零开始学习 Alfred：基础功能及设置</a></p>
+<h1 id="2017-年-11-月-1-日"><a href="#2017-年-11-月-1-日" class="headerlink" title="2017 年 11 月 1 日 +"></a>2017 年 11 月 1 日 +</h1><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a></p>
+<h1 id="2017-年-12-月-1-日"><a href="#2017-年-12-月-1-日" class="headerlink" title="2017 年 12 月 1 日+"></a>2017 年 12 月 1 日+</h1><p><a target="_blank" rel="noopener" href="http://liuyanwei.jumppo.com/index.html">刘彦玮的技术博客</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Other/" rel="tag"># Other</a>
+          
+            <a href="/tags/ReadList/" rel="tag"># ReadList</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/21/%E5%85%B3%E4%BA%8E%E5%BE%AE%E4%BF%A1%E8%87%AA%E5%8A%A8%E6%8A%A2%E7%BA%A2%E5%8C%85%E9%AA%97%E5%B1%80/" rel="next" title="关于微信自动抢红包骗局">
+                <i class="fa fa-chevron-left"></i> 关于微信自动抢红包骗局
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/16/iOS%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E-Taptic-Engine-%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88/" rel="prev" title="iOS——关于-Taptic-Engine-震动反馈">
+                iOS——关于-Taptic-Engine-震动反馈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-%E5%B9%B4-1-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">1.</span> <span class="nav-text">2016 年 1 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-%E5%B9%B4-2-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">2.</span> <span class="nav-text">2016 年 2 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-%E5%B9%B4-3-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">3.</span> <span class="nav-text">2016 年 3 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-%E5%B9%B4-4-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">4.</span> <span class="nav-text">2016 年 4 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-%E5%B9%B4-5-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">5.</span> <span class="nav-text">2017 年 5 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-%E5%B9%B4-7-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">6.</span> <span class="nav-text">2017 年 7 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-%E5%B9%B4-8-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">7.</span> <span class="nav-text">2017 年 8 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-%E5%B9%B4-9-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">8.</span> <span class="nav-text">2017 年 9 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-%E5%B9%B4-11-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">9.</span> <span class="nav-text">2017 年 11 月 1 日 +</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-%E5%B9%B4-12-%E6%9C%88-1-%E6%97%A5"><span class="nav-number">10.</span> <span class="nav-text">2017 年 12 月 1 日+</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/01/03/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2017/';
+          this.page.identifier = '2017/01/03/一周阅读列表-2017/';
+          this.page.title = '一周阅读列表-2017';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

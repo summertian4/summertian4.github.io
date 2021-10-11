@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="转到移动端开发后居然现在才用到Scheme真是惭愧惭愧。 URL Scheme是什么相信大家都知道URL。 http:&#x2F;&#x2F;www.apple.com就是一个URL。 而:&#x2F;&#x2F;之前的部分就称为Scheme （所以，你看，其实并没有什么难的，在这里多插一句给新人的话：不要看到新东西就觉得难，其实很多时候难的就是在于你看到新事物而不敢去研究） 也就是说http:&#x2F;&#x2F;www.apple.com的Schem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用">
+<meta property="og:url" content="http://lottyzhou.com/2016/01/03/iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88%E3%80%81%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme%E3%80%81JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="转到移动端开发后居然现在才用到Scheme真是惭愧惭愧。 URL Scheme是什么相信大家都知道URL。 http:&#x2F;&#x2F;www.apple.com就是一个URL。 而:&#x2F;&#x2F;之前的部分就称为Scheme （所以，你看，其实并没有什么难的，在这里多插一句给新人的话：不要看到新东西就觉得难，其实很多时候难的就是在于你看到新事物而不敢去研究） 也就是说http:&#x2F;&#x2F;www.apple.com的Schem">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-08.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-09.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-11.png">
+<meta property="article:published_time" content="2016-01-03T06:34:12.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.394Z">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2016/01/03/iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用/"/>
+
+
+
+
+
+  <title> iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2016/01/03/iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88%E3%80%81%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme%E3%80%81JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-03T14:34:12+08:00">
+                2016-01-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/01/03/iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88%E3%80%81%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme%E3%80%81JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/01/03/iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转到移动端开发后居然现在才用到Scheme真是惭愧惭愧。</p>
+<h1 id="URL-Scheme是什么"><a href="#URL-Scheme是什么" class="headerlink" title="URL Scheme是什么"></a>URL Scheme是什么</h1><p>相信大家都知道URL。</p>
+<p><a target="_blank" rel="noopener" href="http://www.apple.com就是一个URL。">http://www.apple.com就是一个URL。</a></p>
+<p>而://之前的部分就称为Scheme</p>
+<p>（所以，你看，其实并没有什么难的，在这里多插一句给新人的话：不要看到新东西就觉得难，其实很多时候难的就是在于你看到新事物而不敢去研究）</p>
+<p>也就是说<a target="_blank" rel="noopener" href="http://www.apple.com的Scheme就是http。">http://www.apple.com的Scheme就是http。</a></p>
+<h1 id="iOS中的URL-Scheme"><a href="#iOS中的URL-Scheme" class="headerlink" title="iOS中的URL Scheme"></a>iOS中的URL Scheme</h1><p>iOS中的Scheme也是一样的，无非是定义应用自己的Scheme，然后定义一些自己的URL解析，就好像YourApp://OneController?username=xxx&amp;userInput=xxx</p>
+<p>有了这些URL Scheme你可以像网页跳转一样通过URL来传递参数、信息。</p>
+<p>比如常见的分享功能，从其他应用点击微信分享，会自动跳转到微信APP的朋友圈发表动态页面，并填好相应的动态内容。你可以想象一下其URL Scheme可能是这样的：weixin://dl/moments?content=”今天在学习URL Scheme”&amp;src=”lottyzhou.com”（我只是举个例子）</p>
+<p>有一点需要注意的是，和Web开发不同，iOS中并不是所有的页面或者操作都有URL Schemes，这完全是由你主导的的，如果你需要，你就可以自己定义一些，并去解析。</p>
+<h1 id="自定义你应用的Scheme"><a href="#自定义你应用的Scheme" class="headerlink" title="自定义你应用的Scheme"></a>自定义你应用的Scheme</h1><span id="more"></span>
+<h2 id="什么时候用到URL-Scheme"><a href="#什么时候用到URL-Scheme" class="headerlink" title="什么时候用到URL Scheme"></a>什么时候用到URL Scheme</h2><p>自定义Scheme是有意义的<br>有以下几种使用场景供你参考：</p>
+<ol>
+<li>从一个页面跳转到另一个页面，你不想写N多行代码来『获取下一个控制器』-&gt;『创建控制器』-&gt;『传递参数』</li>
+<li>从其他应用中跳转到你的应用中特定的位置，并填好相应的参数。比如微博分享的时候，是从另一个页面跳转到微博应用的『发微博』页面，并自动填好了微博的文字内容</li>
+</ol>
+<h2 id="开始写代码吧"><a href="#开始写代码吧" class="headerlink" title="开始写代码吧"></a>开始写代码吧</h2><h3 id="使用浏览器访问应用"><a href="#使用浏览器访问应用" class="headerlink" title="使用浏览器访问应用"></a>使用浏览器访问应用</h3><p>我们建一个应用，就叫URLSchemeDemo</p>
+<ol>
+<li>在storyboard中，给我们的应用加一个按钮，便于展示<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-01.png" alt=""></li>
+<li>打开info.plist<ul>
+<li>添加一行，key选择 URL types<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-02.png" alt=""></li>
+<li>点击左边箭头打开列表，可以看到 Item 0。打开Item 0，可以看到 URL Identifier，这是你自定义的 URL scheme 的名字。如果想保证唯一性，可以使用翻转域名比如 com.taobao.ios.yourApp<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-03.png" alt=""></li>
+<li>给 Item 0 再新增一行，从下拉列表中选择 URL Schemes。你会发现这是一个Array，这是因为允许应用定义多个 URL schemes<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-04.png" alt=""></li>
+<li>打开URL schemes并点击里面的Item 0。在value中定义你的 URL scheme 的名字。比如你的APP名<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-05.png" alt=""></li>
+</ul>
+</li>
+<li>在AppDelegate.m中要处理接收到的URL Scheme</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application openURL:(<span class="built_in">NSURL</span> *)url sourceApplication:(<span class="built_in">NSString</span> *)sourceApplication annotation:(<span class="keyword">id</span>)annotation &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;从哪个app跳转而来 Bundle ID: %@&quot;</span>, sourceApplication);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;URL scheme:%@&quot;</span>, [url scheme]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>运行项目，当app安装到设备上时，URL Scheme将会自动注册</li>
+<li>打开Safari在地址栏输入URLSchemeDemo://（你刚刚在URL schemes中定义的Scheme）<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-06.png" alt=""></li>
+<li>回车调整转，Safari会提示你『在URLSchemeDemo中打开连接吗？』<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-07.png" alt=""></li>
+<li>点击确认，你会发现跳转到了你的应用中，并且后台也打印了相应的处理内容<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-08.png" alt=""><br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-09.png" alt=""></li>
+</ol>
+<h3 id="使用另一个应用访问应用"><a href="#使用另一个应用访问应用" class="headerlink" title="使用另一个应用访问应用"></a>使用另一个应用访问应用</h3><p>上面编写了如何从浏览器通过URL Scheme跳转应用，下面将展示如何从另一个应用跳转到本应用</p>
+<p>再建一个项目，就叫URLSchemeDemoTest</p>
+<ol>
+<li>在storyboard中拉一个按钮<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-10.png" alt=""></li>
+<li>给按钮添加事件</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">IBAction</span>)jump:(<span class="built_in">UIButton</span> *)sender &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *customURL = <span class="string">@&quot;URLSchemeDemo://&quot;</span>;</span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:customURL]];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>运行项目，点击按钮，你会发现同样能跳转到之前的应用</li>
+</ol>
+<h1 id="JLRoutes"><a href="#JLRoutes" class="headerlink" title="JLRoutes"></a>JLRoutes</h1><p>看到这里可能有人问了，我可以在跳转的时候传递一些参数吗？</p>
+<p>当然可以，这些参数你都可以自己添加，但是同样要在<code>- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation</code>中做解析。<br>比如像YourAPP://SecondController?content=”成功解析”这样的URL Scheme，可能自己解析起来非常的费劲</p>
+<p>在这里介绍一个第三方工具<a target="_blank" rel="noopener" href="https://github.com/joeldev/JLRoutes">JLRoutes</a>，可以非常方便的解析自定义URL Scheme</p>
+<h2 id="使用JLRoutes"><a href="#使用JLRoutes" class="headerlink" title="使用JLRoutes"></a>使用JLRoutes</h2><p>比如我们现在就要解析URLSchemeDemo://SecondController，希望使用这个URLScheme直接可以打开URLSchemeDemo应用中的SecondController</p>
+<h3 id="URLSchemeDemo项目"><a href="#URLSchemeDemo项目" class="headerlink" title="URLSchemeDemo项目"></a>URLSchemeDemo项目</h3><ol>
+<li>导入JLRoutes.h、JLRoutes.m</li>
+<li>我在URLSchemeDemo中添加SecondViewController</li>
+<li>给SecondViewController在viewDidLoad中添加以下颜色，以作区分</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    <span class="keyword">self</span>.view.backgroundColor = [<span class="built_in">UIColor</span> greenColor];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>在AppDelegate.m中修改处理方式</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  AppDelegate.m</span></span><br><span class="line"><span class="comment">//  URLSchemeDemo</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Lotty周小鱼 on 16/1/3.</span></span><br><span class="line"><span class="comment">//  Copyright © 2016年 Lotty周小鱼. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#import <span class="meta-string">&quot;AppDelegate.h&quot;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&quot;JLRoutes.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AppDelegate</span> ()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AppDelegate</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    [JLRoutes addRoute:<span class="string">@&quot;/:controller&quot;</span> handler:^<span class="built_in">BOOL</span>(<span class="built_in">NSDictionary</span> *parameters) &#123;</span><br><span class="line">        <span class="built_in">NSString</span> *controller = parameters[<span class="string">@&quot;controller&quot;</span>];</span><br><span class="line">        </span><br><span class="line">        [<span class="keyword">self</span>.window.rootViewController presentViewController:[[<span class="built_in">NSClassFromString</span>(controller) alloc] init] animated:<span class="literal">YES</span> completion:^&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;];</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application openURL:(<span class="built_in">NSURL</span> *)url sourceApplication:(<span class="built_in">NSString</span> *)sourceApplication annotation:(<span class="keyword">id</span>)annotation &#123;</span><br><span class="line">    <span class="keyword">return</span> [JLRoutes routeURL:url];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="URLSchemeDemoTest项目"><a href="#URLSchemeDemoTest项目" class="headerlink" title="URLSchemeDemoTest项目"></a>URLSchemeDemoTest项目</h3><p>当然是改一下我们点击按钮后打开的URL</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">IBAction</span>)jump:(<span class="built_in">UIButton</span> *)sender &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *customURL = <span class="string">@&quot;URLSchemeDemo://SecondViewController&quot;</span>;</span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:customURL]];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
+<li>打开URLSchemeDemoTest应用，点击按钮，就可以直接跳转到URLSchemeDemo的SecondViewController了<br><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88-%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme-JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8-11.png" alt=""></li>
+</ol>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><p>如果想要源代码，小鱼已经上传了一份，可以在<a target="_blank" rel="noopener" href="http://download.csdn.net/detail/u010127917/9387848">这里</a>下载</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>JLRoutes是一个非常好用的工具，除了以上简单的用法外，还可以解析更加复杂的URL Scheme，可以参考官方文档：<a target="_blank" rel="noopener" href="https://github.com/joeldev/JLRoutes">https://github.com/joeldev/JLRoutes</a></p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/01/iOS%E2%80%94%E2%80%94%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%80%91%E5%B8%83%E6%B5%81/" rel="next" title="iOS——教你如何实现瀑布流">
+                <i class="fa fa-chevron-left"></i> iOS——教你如何实现瀑布流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/16/iOS%E2%80%94%E2%80%94%E4%B8%BA%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%BC%95%E5%85%A5%E8%B6%85%E8%BD%BB%E9%87%8F%E7%BA%A7JS%E5%BC%95%E6%93%8EJSPatch/" rel="prev" title="iOS——为你的项目引入超轻量级JS引擎JSPatch">
+                iOS——为你的项目引入超轻量级JS引擎JSPatch <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#URL-Scheme%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">URL Scheme是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS%E4%B8%AD%E7%9A%84URL-Scheme"><span class="nav-number">2.</span> <span class="nav-text">iOS中的URL Scheme</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E5%BA%94%E7%94%A8%E7%9A%84Scheme"><span class="nav-number">3.</span> <span class="nav-text">自定义你应用的Scheme</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%88%B0URL-Scheme"><span class="nav-number">3.1.</span> <span class="nav-text">什么时候用到URL Scheme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%86%99%E4%BB%A3%E7%A0%81%E5%90%A7"><span class="nav-number">3.2.</span> <span class="nav-text">开始写代码吧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8"><span class="nav-number">3.2.1.</span> <span class="nav-text">使用浏览器访问应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E8%AE%BF%E9%97%AE%E5%BA%94%E7%94%A8"><span class="nav-number">3.2.2.</span> <span class="nav-text">使用另一个应用访问应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JLRoutes"><span class="nav-number">4.</span> <span class="nav-text">JLRoutes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8JLRoutes"><span class="nav-number">4.1.</span> <span class="nav-text">使用JLRoutes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URLSchemeDemo%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.1.1.</span> <span class="nav-text">URLSchemeDemo项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLSchemeDemoTest%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.1.2.</span> <span class="nav-text">URLSchemeDemoTest项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">6.</span> <span class="nav-text">补充</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2016/01/03/iOS%E2%80%94%E2%80%94Scheme%E6%98%AF%E4%BB%80%E4%B9%88%E3%80%81%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89Scheme%E3%80%81JLRoutes%E7%9A%84%E4%BD%BF%E7%94%A8/';
+          this.page.identifier = '2016/01/03/iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用/';
+          this.page.title = 'iOS——Scheme是什么、怎么自定义Scheme、JLRoutes的使用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

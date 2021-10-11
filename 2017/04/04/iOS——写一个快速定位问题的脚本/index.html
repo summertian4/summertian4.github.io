@@ -1,0 +1,1018 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="你是否见过？ 你是否见过测试人员或者自己在 CI 上 install 了一个版本，发现了 BUG 后，突然忘了自己下的是 CI 上的哪一个 commit 的包？ 你是否见过下面这个东西：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS——写一个快速定位问题的脚本">
+<meta property="og:url" content="http://lottyzhou.com/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="你是否见过？ 你是否见过测试人员或者自己在 CI 上 install 了一个版本，发现了 BUG 后，突然忘了自己下的是 CI 上的哪一个 commit 的包？ 你是否见过下面这个东西：">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-08.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-09.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-11.JPG">
+<meta property="article:published_time" content="2017-04-04T03:15:38.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.395Z">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/04/04/iOS——写一个快速定位问题的脚本/"/>
+
+
+
+
+
+  <title> iOS——写一个快速定位问题的脚本 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS——写一个快速定位问题的脚本
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T11:15:38+08:00">
+                2017-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/04/iOS——写一个快速定位问题的脚本/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-12.png" alt=""></p>
+<h1 id="你是否见过？"><a href="#你是否见过？" class="headerlink" title="你是否见过？"></a>你是否见过？</h1><ol>
+<li>你是否见过测试人员或者自己在 CI 上 install 了一个版本，发现了 BUG 后，突然忘了自己下的是 CI 上的哪一个 commit 的包？</li>
+<li>你是否见过下面这个东西：</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-01.jpg" alt="blog_iOS——写一个快速定位问题的脚本-01"></p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-02.png" alt="blog_iOS——写一个快速定位问题的脚本-02"></p>
+<span id="more"></span>
+<h1 id="写一个这样一个脚本"><a href="#写一个这样一个脚本" class="headerlink" title="写一个这样一个脚本"></a>写一个这样一个脚本</h1><p>可以写这样一个脚本，它能做到：</p>
+<ol>
+<li>在 Build 的过程中在 App Icon 的表面覆盖上 Build 号、分支名、commit version 的 hash 值</li>
+<li>不影响原本的 App Icon 图标源文件</li>
+<li>区分 <code>Release</code> 和 <code>Debug</code>，只在 <code>Debug</code> 环境下 Build 项目时执行脚本</li>
+</ol>
+<h1 id="Do-it"><a href="#Do-it" class="headerlink" title="Do it"></a>Do it</h1><h2 id="ImageMagick"><a href="#ImageMagick" class="headerlink" title="ImageMagick"></a>ImageMagick</h2><p>做后端的同学们，大多知道 <a target="_blank" rel="noopener" href="http://www.imagemagick.org/script/index.php">ImageMagick</a>。</p>
+<blockquote>
+<p>使用 ImageMagick 可以创建、编辑、合成或转换图片。它可以读和写各种格式的图像（超过 200 种格式）包括 PNG、JPEG、JPEG - 2000、GIF、TIFF、DPX、EXR、WebP、Postscript、PDF、SVG。ImageMagick 可以调整、翻转、镜像、旋转、扭曲、剪切和转换图像、图像色彩调整，适用于各种特殊效果,或绘制文本、线、多边形、椭圆和贝塞尔曲线。</p>
+</blockquote>
+<p>通过 shell command 就可以轻易使用以上功能。</p>
+<hr>
+<p>让我们来看一些基本的。这是我们准备好的 <code>120*120</code> 的原图：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-03.png" alt="blog_iOS——写一个快速定位问题的脚本-03"></p>
+<p><code>cd</code> 到图片所在的目录，执行以下命令，给图片添加高斯模糊效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert original.png -blur 10x8 blurred.png</span><br></pre></td></tr></table></figure>
+<p>完成图：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-04.png" alt="blog_iOS——写一个快速定位问题的脚本-04"></p>
+<hr>
+<p>继续，执行以下命令从 坐标 <code>(0,60)</code> 剪切成 <code>120*60</code> 的图片，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert blurred.png -crop 120x60+0+60 cropped-blurred.png</span><br></pre></td></tr></table></figure>
+<p>完成图：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-05.png" alt="blog_iOS——写一个快速定位问题的脚本-05"></p>
+<hr>
+<p>继续，给图片添加文字水印『zhoulingyu』，参数包括：背景不填充颜色、白色字体、字体大小 12、居中显示文字、文字为『zhoulingyu』：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert -background none -fill white -pointsize 12 -gravity center caption:<span class="string">&quot;zhoulingyu&quot;</span> cropped-blurred.png +swap -composite label.png</span><br></pre></td></tr></table></figure>
+<p>完成图：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-06.png" alt="blog_iOS——写一个快速定位问题的脚本-06"></p>
+<hr>
+<p>继续，将上面得到的剪切好的带水印的 <code>label.png</code> 和 原图 <code>original.png</code> 合成在一起：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composite label.png original.png finished-image.png</span><br></pre></td></tr></table></figure>
+<p>完成图：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-07.png" alt="blog_iOS——写一个快速定位问题的脚本-07"></p>
+<p>OK，我们得到了想要的效果图。</p>
+<h2 id="参数参考"><a href="#参数参考" class="headerlink" title="参数参考"></a>参数参考</h2><p>给出一些 ImageMagic 的常用用法：</p>
+<ol>
+<li>查看图片信息</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">identify original.png </span><br><span class="line">original.png PNG 120x120 120x120+0+0 8-bit sRGB 46c 2.58KB 0.010u 0:00.000</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>格式转换</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert original.png original.jpg </span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>编辑图片大小</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert original.png -resize 200x200 resize-image.png </span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>裁剪</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从坐标 (0,0) 裁剪 100*100 的图像</span></span><br><span class="line">convert original.png -crop 100x100+0+0 crop.png  </span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>旋转</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert original.png -rotate 45 rotate.png </span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>合并图像</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给图片添加水印</span></span><br><span class="line">convert original.png -compose over watermark.png -composite new-image.png  </span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>高斯模糊</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert -blur 80x5 original.jpg blur.png</span><br></pre></td></tr></table></figure>
+<p>-blur radiusxsigma，两个分别是高斯模糊需要的两个参数，具体可以查看 <a target="_blank" rel="noopener" href="https://www.imagemagick.org/script/command-line-options.php#blur">blur 参数使用</a></p>
+<p>ImageMagick 可以实现 N 多效果，像油画、噪声、散射、旋涡，都不在话下。</p>
+<p>除了基本的效果，还有一些比较常用的参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>使用规范</th>
+<th>说明</th>
+<th>用例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-background</td>
+<td>-background color</td>
+<td>设置背景色</td>
+<td>-background white</td>
+</tr>
+<tr>
+<td>-pointsize</td>
+<td>-pointsize value</td>
+<td>设置字体等大小</td>
+<td>-pointsize 12</td>
+</tr>
+<tr>
+<td>-gravity</td>
+<td>-gravity type</td>
+<td>为其他命令附加 gravity，比如设置文字添加位置居中。</td>
+<td>-gravity Center</td>
+</tr>
+<tr>
+<td>-geometry</td>
+<td>-geometry geometry</td>
+<td>设置即将处理图像的坐标位置</td>
+<td>-geometry +0+60 -geometry Center</td>
+</tr>
+</tbody>
+</table>
+<p>当然这些都可以在 <a target="_blank" rel="noopener" href="https://www.imagemagick.org/script/command-line-options.php">官方文档</a> 找到。</p>
+<h2 id="shell-脚本"><a href="#shell-脚本" class="headerlink" title="shell 脚本"></a>shell 脚本</h2><h3 id="1-基本设置"><a href="#1-基本设置" class="headerlink" title="1. 基本设置"></a>1. 基本设置</h3><p>知道 ImageMagic 如何使用，剩下来写脚本就思路清晰多了。</p>
+<p>在工程 <code>Target</code> -&gt; <code>Build Phases</code> 中新建一个 Run Script，我们可以给它起名 <code>generate auxiliary icon</code>，这样稍后容易在 <code>Report Navigator</code> 观察。</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-08.png" alt="blog_iOS——写一个快速定位问题的脚本-08"></p>
+<p>现在我们可以开始编写我们的脚本 <code>auxiliary_icon.sh</code></p>
+<h3 id="2-理思路"><a href="#2-理思路" class="headerlink" title="2. 理思路"></a>2. 理思路</h3><p>写伪代码通常能够帮助我自己更清晰的写代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 1. 判断执行 Build 的机器是否安装了 ImageMagic</span><br><span class="line">//    |- 如果没有安装：提示安装，退出脚本</span><br><span class="line">//    |- 如果安装：继续执行</span><br><span class="line">// 2. 获取 commit 号 hash 值、分支名、build 号，并将其拼接成一个字符串</span><br><span class="line">// 3. 判断编译环境</span><br><span class="line">//    |- 如果是 Release 环境：提示当前是 Release 环境，退出脚本</span><br><span class="line">//    |- 如果是非 Release 环境：继续执行</span><br><span class="line">// 4. 获取 Plist 中 CFBundleIconFiles 的数量</span><br><span class="line">// 5. 根据数量循环，执行调用『生成记号图方法』</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 『生成记号图方法』 </span><br><span class="line">// function generateIcon() &#123;</span><br><span class="line">// 1. 模糊图片</span><br><span class="line">// 2. 截取图片下半部分</span><br><span class="line">// 3. 添加 commit+brach+build 组成的字符串在截取图片上</span><br><span class="line">// 4. 合成截取图片和原图</span><br><span class="line">// 5. 清除多余图片</span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure>
+<p>伪代码写好了，开始编写正式代码：</p>
+<ol>
+<li>判断执行 Build 的机器是否安装了 ImageMagic</li>
+</ol>
+<p>which 一下就知道</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">convertPath=`<span class="built_in">which</span> convert`</span><br><span class="line"><span class="comment"># 判断 convertPath 文件是否存在</span></span><br><span class="line"><span class="keyword">if</span> [ ! -f <span class="variable">$&#123;convertPath&#125;</span>]; <span class="keyword">then</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;==============</span></span><br><span class="line"><span class="string">WARNING: 你需要先安装 ImageMagick！！！！:</span></span><br><span class="line"><span class="string">brew install imagemagick</span></span><br><span class="line"><span class="string">==============&quot;</span></span><br><span class="line"><span class="built_in">exit</span> 0;</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>获取 commit 号 hash 值、分支名、build 号，并将其拼接成一个字符串</li>
+</ol>
+<p>PlistBuddy 可以用于读取 Plist 文件，通过描述路径就可以找到你想知道的 Key 对应的 Value。<br><code>$&#123;INFOPLIST_FILE&#125;</code> 是 xcodebuild 提供的变量（具体可以参考 <a target="_blank" rel="noopener" href="http://help.apple.com/xcode/mac/8.0/#/itcaec37c2a6">Build settings reference</a>）提供了编译后 <code>info.plist</code> 的路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">commit=`git rev-parse --short HEAD`</span><br><span class="line">branch=`git rev-parse --abbrev-ref HEAD`</span><br><span class="line">buildNumber=`/usr/libexec/PlistBuddy -c <span class="string">&quot;Print CFBundleVersion&quot;</span> <span class="string">&quot;<span class="variable">$&#123;INFOPLIST_FILE&#125;</span>&quot;</span>`</span><br><span class="line">caption=<span class="string">&quot;<span class="variable">$&#123;buildNumber&#125;</span> \n<span class="variable">$&#123;branch&#125;</span>\n<span class="variable">$&#123;commit&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>判断编译环境</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Release 不执行</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Configuration: <span class="variable">$CONFIGURATION</span>&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;CONFIGURATION&#125;</span> = <span class="string">&quot;Release&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line"><span class="built_in">exit</span> 0;</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>获取 Plist 中 CFBundleIconFiles 的数量</li>
+</ol>
+<p>在编译后的 <code>info.plist</code> 中，可以找到如下结构：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-09.png" alt="blog_iOS——写一个快速定位问题的脚本-09"></p>
+<p>这里记录了所有的 Icon files。查看 plist 的原格式，可以看到原始的 key 是什么。通过 PlistBuddy 和 路径 <code>CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles</code> 可以输出 value。</p>
+<p><code>| wc -l</code> 可以统计输出行数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">icon_count=`/usr/libexec/PlistBuddy -c <span class="string">&quot;Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles&quot;</span> <span class="string">&quot;<span class="variable">$&#123;CONFIGURATION_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span> | wc -l`</span><br></pre></td></tr></table></figure>
+<p>要注意的是， <code>/usr/libexec/PlistBuddy -c &quot;Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles&quot; &quot;$&#123;CONFIGURATION_BUILD_DIR&#125;/$&#123;INFOPLIST_PATH&#125;&quot;</code> 输出结果是这样的：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-10.png" alt="blog_iOS——写一个快速定位问题的脚本-10"></p>
+<p>输出一共是 <strong>五行</strong>，所以获得的结果是 5。</p>
+<p>那么真实的 CFBundleIconFiles count 其实是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">real_icon_index=$((<span class="variable">$&#123;icon_count&#125;</span> - <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>刚开始，我也没有注意。可想而知心情如何 =_=。</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC-11.JPG" alt="blog_iOS——写一个快速定位问题的脚本-11"></p>
+<ol start="5">
+<li>根据数量循环，执行调用『生成记号图方法』</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ((i=0; i&lt;<span class="variable">$real_icon_index</span>; i++)); <span class="keyword">do</span></span><br><span class="line"><span class="comment"># 找到 icon 名</span></span><br><span class="line">icon=`/usr/libexec/PlistBuddy -c <span class="string">&quot;Print CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles:<span class="variable">$i</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;CONFIGURATION_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用 generateIcon 方法，传入 icon 名</span></span><br><span class="line">generateIcon <span class="string">&quot;<span class="variable">$&#123;icon&#125;</span>@2x.png&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>generateIcon 方法</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">generateIcon</span></span>() &#123;</span><br><span class="line">    originalImg=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$&#123;CONFIGURATION_BUILD_DIR&#125;</span>/<span class="variable">$&#123;UNLOCALIZED_RESOURCES_FOLDER_PATH&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 验证存在性</span></span><br><span class="line">    <span class="keyword">if</span> [[ ! -f <span class="variable">$&#123;originalImg&#125;</span> || -z <span class="variable">$&#123;originalImg&#125;</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">return</span>;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进入编译后的工程目录</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$&#123;CONFIGURATION_BUILD_DIR&#125;</span>/<span class="variable">$&#123;UNLOCALIZED_RESOURCES_FOLDER_PATH&#125;</span>/&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加高斯模糊</span></span><br><span class="line">    convert <span class="variable">$&#123;originalImg&#125;</span> -blur 10x8 blur-original.png</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 截取下部分</span></span><br><span class="line">    width=`identify -format %w <span class="variable">$&#123;originalImg&#125;</span>`</span><br><span class="line">    height=`identify -format %h <span class="variable">$&#123;originalImg&#125;</span>`</span><br><span class="line">    height_0=`expr <span class="variable">$&#123;height&#125;</span> / 2`</span><br><span class="line">    height_1=$((<span class="variable">$&#123;height&#125;</span> - <span class="variable">$&#123;height_0&#125;</span>))</span><br><span class="line">    convert blur-original.png -crop <span class="variable">$&#123;width&#125;</span>x<span class="variable">$&#123;height_0&#125;</span>+0+<span class="variable">$&#123;height_1&#125;</span> crop-blur-original.png</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加字</span></span><br><span class="line">    point_size=$(((<span class="number">8</span> * <span class="variable">$height</span>) / <span class="number">58</span>))</span><br><span class="line"></span><br><span class="line">    convert -background none -fill white -pointsize <span class="variable">$&#123;point_size&#125;</span> -gravity center caption:<span class="string">&quot;<span class="variable">$&#123;caption&#125;</span>&quot;</span> crop-blur-original.png +swap -composite label.png</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 合成</span></span><br><span class="line">    composite -geometry +0+<span class="variable">$&#123;height_0&#125;</span> label.png <span class="variable">$&#123;originalImg&#125;</span> <span class="variable">$&#123;originalImg&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 清除文件</span></span><br><span class="line">    rm blur-original.png</span><br><span class="line">    rm crop-blur-original.png</span><br><span class="line">    rm label.png</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="代码清单"><a href="#代码清单" class="headerlink" title="代码清单"></a>代码清单</h1><p>最终的代码清单放在了 Github 上：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/summertian4/ZLYWatermarkIcon">ZLYWatermarkIcon</a></p>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.imagemagick.org/script/convert.php">Command-line Tools:Convert</a><br><a target="_blank" rel="noopener" href="http://blog.topspeedsnail.com/archives/7783">使用ImageMagick添加图片水印－Linux</a><br><a target="_blank" rel="noopener" href="https://github.com/krzysztofzablocki/IconOverlaying">krzysztofzablocki/IconOverlaying</a><br><a target="_blank" rel="noopener" href="http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Overlaying application version on top of your icon</a><br><a target="_blank" rel="noopener" href="http://www.charry.org/docs/linux/ImageMagick/ImageMagick.html">我的ImageMagick使用心得</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2012/11/gaussian_blur.html">高斯模糊的算法</a><br><a target="_blank" rel="noopener" href="http://help.apple.com/xcode/mac/8.0/#/itcaec37c2a6">Build settings reference</a><br><a target="_blank" rel="noopener" href="https://github.com/qinjx/30min_guides/blob/master/shell.md">Shell脚本编程30分钟入门</a></p>
+</blockquote>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/27/ssh-keygen-%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84-randomart-image-%E6%98%AF%E4%BB%80%E4%B9%88/" rel="next" title="ssh-keygen 中生成的 randomart image 是什么">
+                <i class="fa fa-chevron-left"></i> ssh-keygen 中生成的 randomart image 是什么
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/08/Git-Work-Flow/" rel="prev" title="简介我的 Git Work Flow">
+                简介我的 Git Work Flow <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%A0%E6%98%AF%E5%90%A6%E8%A7%81%E8%BF%87%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">你是否见过？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E8%BF%99%E6%A0%B7%E4%B8%80%E4%B8%AA%E8%84%9A%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">写一个这样一个脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Do-it"><span class="nav-number">3.</span> <span class="nav-text">Do it</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageMagick"><span class="nav-number">3.1.</span> <span class="nav-text">ImageMagick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8F%82%E8%80%83"><span class="nav-number">3.2.</span> <span class="nav-text">参数参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell-%E8%84%9A%E6%9C%AC"><span class="nav-number">3.3.</span> <span class="nav-text">shell 脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.3.1.</span> <span class="nav-text">1. 基本设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%90%86%E6%80%9D%E8%B7%AF"><span class="nav-number">3.3.2.</span> <span class="nav-text">2. 理思路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%B8%85%E5%8D%95"><span class="nav-number">4.</span> <span class="nav-text">代码清单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/';
+          this.page.identifier = '2017/04/04/iOS——写一个快速定位问题的脚本/';
+          this.page.title = 'iOS——写一个快速定位问题的脚本';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

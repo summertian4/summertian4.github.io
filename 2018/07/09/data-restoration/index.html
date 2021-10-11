@@ -1,0 +1,922 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="后端,linux,数据库," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="记一次删库到数据恢复熟悉的朋友可能知道，进入架构组后，今年一直在为团队做各种开发辅助工具，其中包括一个服务器。 最近这个服务器也上线有三月多了，也不断收集了很多数据，包括用户的各种行为操作、API 调用数据等等。 在最近的一次升级中，我调整了源码的目录结构，脑子一抽删除了数据库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次删库到数据恢复">
+<meta property="og:url" content="http://lottyzhou.com/2018/07/09/data-restoration/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="记一次删库到数据恢复熟悉的朋友可能知道，进入架构组后，今年一直在为团队做各种开发辅助工具，其中包括一个服务器。 最近这个服务器也上线有三月多了，也不断收集了很多数据，包括用户的各种行为操作、API 调用数据等等。 在最近的一次升级中，我调整了源码的目录结构，脑子一抽删除了数据库。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-03.png">
+<meta property="article:published_time" content="2018-07-09T07:17:11.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.393Z">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2018/07/09/data-restoration/"/>
+
+
+
+
+
+  <title> 记一次删库到数据恢复 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2018/07/09/data-restoration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                记一次删库到数据恢复
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-09T15:17:11+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/09/data-restoration/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/09/data-restoration/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="记一次删库到数据恢复"><a href="#记一次删库到数据恢复" class="headerlink" title="记一次删库到数据恢复"></a>记一次删库到数据恢复</h1><p>熟悉的朋友可能知道，进入架构组后，今年一直在为团队做各种开发辅助工具，其中包括一个服务器。</p>
+<p>最近这个服务器也上线有三月多了，也不断收集了很多数据，包括用户的各种行为操作、API 调用数据等等。</p>
+<p>在最近的一次升级中，我调整了源码的目录结构，脑子一抽删除了数据库。</p>
+<span id="more"></span>
+<p>于是就开始为期一天的数据恢复过程，最后的结果是很悲剧，好在影响不大，可以放到后面讲。</p>
+<h2 id="文件找回"><a href="#文件找回" class="headerlink" title="文件找回"></a>文件找回</h2><p>需要说明的是，因为是小微服务，采用的是最简单的 SQLite 数据库。SQLite 区分其他的数据库的明显地方是，它只提供最基本的数据服务，但并不启用端口监听，可以简单的认为这就是个文件，如果删除了，就和普通文件从系统中消失是一样的。所以通常如果使用 SQLite 保存数据需要自行定期备份。</p>
+<p>所以这次的博文虽然叫『删库』，但实际上可以简单的理解成<strong>文件找回</strong>。</p>
+<h2 id="rm-rf"><a href="#rm-rf" class="headerlink" title="rm -rf"></a>rm -rf</h2><p>我在误删时，是使用 rm -rf 命令，这当然是个耳熟能详的恶名远扬的命令（以至于我当时请教后端大佬的时候，后端大佬的反应是『哦，你也终于删一次库啦』）</p>
+<p>rm 是 linux 系统的用于『删除文件或目录』的命令</p>
+<p><code>-f</code> 标识表示 force，即：</p>
+<blockquote>
+<p>在除去有写保护的文件前不提示。</p>
+</blockquote>
+<p><code>-r</code> 标识表示：</p>
+<blockquote>
+<p>当 File 参数为目录时允许循环的删除目录及其内容</p>
+</blockquote>
+<p><strong>FYI</strong>: <a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/ssw_aix_71/com.ibm.aix.cmds4/rm.htm">更多参考</a></p>
+<h2 id="extundelete-与磁盘存储"><a href="#extundelete-与磁盘存储" class="headerlink" title="extundelete 与磁盘存储"></a>extundelete 与磁盘存储</h2><p><a target="_blank" rel="noopener" href="http://extundelete.sourceforge.net/">extundelete</a> 是 linux 系统下一个有力的数据恢复工具。extundelete使用存储在分区日志中的信息来尝试恢复已从分区中删除的文件。</p>
+<p>我们稍微复习一下计算机基础知识：</p>
+<h3 id="硬盘"><a href="#硬盘" class="headerlink" title="硬盘"></a>硬盘</h3><p>硬盘是一种采用磁介质的数据存储设备，数据『物理意义上的』存储在若干个磁盘片上。在磁盘片的每一面上，以转动轴为轴心、以一定的磁密度为间隔的若干个同心圆就被划分成磁道（track），每个磁道又被划分为若干个扇区（sector）。</p>
+<h3 id="主引导扇区和分区表"><a href="#主引导扇区和分区表" class="headerlink" title="主引导扇区和分区表"></a>主引导扇区和分区表</h3><p>硬盘的0磁道0柱面1扇区是主引导扇区位，包括硬盘主引导记录MBR（Main Boot Record）和<strong>分区表</strong>DPT（Disk Partition Table）。<strong>操作系统通过分区表把硬盘划分为若干个分区，然后再在每个分区里面创建文件系统，写入数据文件。</strong></p>
+<h3 id="分区日志"><a href="#分区日志" class="headerlink" title="分区日志"></a>分区日志</h3><p>分区日志系统是一个文件系统，用于修复由于计算机关闭不当而导致的任何不一致。这种关闭通常是由于电源中断或软件问题造成的。即记录了分区的数据读写操作。</p>
+<p>通过这些日志，可以知道分区中的历史操作。</p>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>具体的数据存储原理内容比较多，这里不做赘述。为了便于理解，我在此理解为：</p>
+<blockquote>
+<p>操作系统中的文件在硬盘的表现形式是在硬盘一片数据区域记录二进制信息，并由操作系统的一个指针指向该物理地址<br>而操作系统级别的『删除文件』，即删除这个『指针』<br>原来的物理地址内没有『指针』指向后，相当于被释放，当操作系统需要时，可以被复写上新的数据。</p>
+</blockquote>
+<p>由此观得，extundelete 通过查阅分区日志，找到被删除的指针，告诉用户，可以尝试恢复哪些数据。</p>
+<p>但由于操作系统随时可以复写空余磁盘，所以如果要恢复的物理地址已经被改写，数据将无法找回。</p>
+<h3 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h3><p>为了脱敏，我使用我自己的服务器，具体记录一下文件恢复的过程。</p>
+<h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
+<li>CentOS 7.4 64位</li>
+<li>文件目录: /root/Sparrow/db.sqlite3</li>
+</ul>
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> rm -rf db.sqlite3</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装-extundelete"><a href="#安装-extundelete" class="headerlink" title="安装 extundelete"></a>安装 extundelete</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> yum install extundelete -y</span></span><br></pre></td></tr></table></figure>
+<h4 id="挂载磁盘"><a href="#挂载磁盘" class="headerlink" title="挂载磁盘"></a>挂载磁盘</h4><p>首先我们去查询这个文件或上级文件夹所处的磁盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> df /root/Sparrow/</span></span><br><span class="line">文件系统          1K-块    已用     可用 已用% 挂载点</span><br><span class="line">/dev/vda1      41151808 2614640 36423736    7% /</span><br></pre></td></tr></table></figure>
+<p>找到后首要的是挂载磁盘，<strong>挂载后磁盘将不会被继续写入，保护现场</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /dev/vda1</span><br></pre></td></tr></table></figure>
+<p><code>/dev/vda1</code> 就是文件所在的磁盘。</p>
+<p>不挂载也是可以的，这样会导致磁盘可能会被其他的进程写入数据，从而抹掉原来的数据，所以我最后没有找回文件就是因为没有及时挂载。</p>
+<h4 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h4><p>inode 是 linux 系统下文件或者文件夹的标识。通过 <code>ls –id</code> 就可以看到。</p>
+<p>读取根目录的 inode 值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ls -id /</span></span><br><span class="line">2 /</span><br></pre></td></tr></table></figure>
+<p>现在我们知道磁盘根目录的 inode 是 2。</p>
+<h4 id="extundelete-查询可恢复的数据信息"><a href="#extundelete-查询可恢复的数据信息" class="headerlink" title="extundelete 查询可恢复的数据信息"></a>extundelete 查询可恢复的数据信息</h4><p>先查询磁盘根目录下的可恢复信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> extundelete /dev/vda1 --inode 2</span></span><br></pre></td></tr></table></figure>
+<p>执行时，如果没有挂载磁盘，会提示。</p>
+<p>得到结果：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-01.png" alt=""></p>
+<p>重点盘红圈内，看到 <code>root</code> 的 inode 是 131073，继续查询 <code>/dev</code> 的信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> extundelete /dev/vda1 --inode 131073</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-02.png" alt=""></p>
+<p>看到 <code>/Sparrow</code>  是 262194，继续查询 <code>/dev</code> 的信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> extundelete /dev/vda1 --inode 262194</span></span><br></pre></td></tr></table></figure>
+<p>最终找到了删除信息：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_data-restoration-03.png" alt=""></p>
+<p>可以看到 db.sqlite3 被标识为 <code>Deleted</code>。</p>
+<h4 id="extundelete-恢复数据"><a href="#extundelete-恢复数据" class="headerlink" title="extundelete 恢复数据"></a>extundelete 恢复数据</h4><p>执行 –restore-directory 恢复指定目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> extundelete /dev/vda1 --restore-directory /root/Sparrow/db.sqlite3</span></span><br></pre></td></tr></table></figure>
+<p>或执行 –restore-all 恢复所有可恢复的数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> extundelete /dev/vda1 --restore-all</span></span><br></pre></td></tr></table></figure>
+<p>执行结束后，会在当前路径下，生成一个 <code>RECOVERED_FILES</code> 文件夹，里面有所有被恢复的文件。</p>
+<p>如果磁盘已经被读写，无法恢复，会提示类似信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Loading filesystem metadata ... 320 groups loaded.</span><br><span class="line">Loading journal descriptors ... 27896 descriptors loaded.</span><br><span class="line">Searching for recoverable inodes in directory /root/Sparrow/db.sqlite3 ...</span><br><span class="line">120 recoverable inodes found.</span><br><span class="line">Looking through the directory structure for deleted files ...</span><br><span class="line">120 recoverable inodes still lost.</span><br><span class="line">No files were undeleted.</span><br></pre></td></tr></table></figure>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这一次的『删库』事件，给我了一个很好的教训。服务器的数据一定要及时备份或做好容灾，防止丢失。同时，这次也借此机会进行学习了文件恢复。</p>
+<p>当然，希望大家都不会出现我这样的悲剧 😂。</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/ios-network-traffic/" rel="next" title="iOS 流量监控分析">
+                <i class="fa fa-chevron-left"></i> iOS 流量监控分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/20/ios-invisible-watermark/" rel="prev" title="iOS——隐形水印的实现和『颜色加深』算法">
+                iOS——隐形水印的实现和『颜色加深』算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%88%A0%E5%BA%93%E5%88%B0%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D"><span class="nav-number">1.</span> <span class="nav-text">记一次删库到数据恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%89%BE%E5%9B%9E"><span class="nav-number">1.1.</span> <span class="nav-text">文件找回</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rm-rf"><span class="nav-number">1.2.</span> <span class="nav-text">rm -rf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extundelete-%E4%B8%8E%E7%A3%81%E7%9B%98%E5%AD%98%E5%82%A8"><span class="nav-number">1.3.</span> <span class="nav-text">extundelete 与磁盘存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E7%9B%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%BC%95%E5%AF%BC%E6%89%87%E5%8C%BA%E5%92%8C%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">主引导扇区和分区表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E6%97%A5%E5%BF%97"><span class="nav-number">1.3.3.</span> <span class="nav-text">分区日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-number">1.3.4.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEMO"><span class="nav-number">1.3.5.</span> <span class="nav-text">DEMO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.5.2.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-extundelete"><span class="nav-number">1.3.5.3.</span> <span class="nav-text">安装 extundelete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E7%A3%81%E7%9B%98"><span class="nav-number">1.3.5.4.</span> <span class="nav-text">挂载磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inode"><span class="nav-number">1.3.5.5.</span> <span class="nav-text">inode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extundelete-%E6%9F%A5%E8%AF%A2%E5%8F%AF%E6%81%A2%E5%A4%8D%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.5.6.</span> <span class="nav-text">extundelete 查询可恢复的数据信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extundelete-%E6%81%A2%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.5.7.</span> <span class="nav-text">extundelete 恢复数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">1.4.</span> <span class="nav-text">后记</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2018/07/09/data-restoration/';
+          this.page.identifier = '2018/07/09/data-restoration/';
+          this.page.title = '记一次删库到数据恢复';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

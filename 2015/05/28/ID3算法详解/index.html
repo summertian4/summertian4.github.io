@@ -1,0 +1,851 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="bigData," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这学期hadoop的作业是实现ID3算法，在网上找到了一篇非常好的资料，但是代码没有详细介绍。研究一番之后写出了自己ID3算法的普通实现和线程模拟分布式实现。 先附上原文地址：http:&#x2F;&#x2F;www.cnblogs.com&#x2F;zhangchaoyang&#x2F;articles&#x2F;2196631.html博主写的非常好，基本上简单易懂的描述了ID3算法的原理。 问题统计了14天的气象数据(指标包括outlook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ID3算法详解">
+<meta property="og:url" content="http://lottyzhou.com/2015/05/28/ID3%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="这学期hadoop的作业是实现ID3算法，在网上找到了一篇非常好的资料，但是代码没有详细介绍。研究一番之后写出了自己ID3算法的普通实现和线程模拟分布式实现。 先附上原文地址：http:&#x2F;&#x2F;www.cnblogs.com&#x2F;zhangchaoyang&#x2F;articles&#x2F;2196631.html博主写的非常好，基本上简单易懂的描述了ID3算法的原理。 问题统计了14天的气象数据(指标包括outlook">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-05-28T08:40:00.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.391Z">
+<meta property="article:tag" content="bigData">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2015/05/28/ID3算法详解/"/>
+
+
+
+
+
+  <title> ID3算法详解 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2015/05/28/ID3%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ID3算法详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-28T16:40:00+08:00">
+                2015-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/05/28/ID3%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/05/28/ID3算法详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这学期hadoop的作业是实现ID3算法，在网上找到了一篇非常好的资料，但是代码没有详细介绍。研究一番之后写出了自己ID3算法的普通实现和线程模拟分布式实现。</p>
+<p>先附上原文地址：<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangchaoyang/articles/2196631.html">http://www.cnblogs.com/zhangchaoyang/articles/2196631.html</a><br>博主写的非常好，基本上简单易懂的描述了ID3算法的原理。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>统计了14天的气象数据(指标包括outlook，temperature，humidity，windy)，并已知这些天气是否打球(play)。如果给出新一天的气象指标数据:sunny,cool,high,TRUE，判断一下会不会去打球。</p>
+<h2 id="ID3原理"><a href="#ID3原理" class="headerlink" title="ID3原理"></a>ID3原理</h2><p>直接看博客链接，非常详细<a target="_blank" rel="noopener" href="http://www.cnblogs.com/zhangchaoyang/articles/2196631.html">http://www.cnblogs.com/zhangchaoyang/articles/2196631.html</a></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>别忘了放入输入文件，按我的程序保存在指定位置，保存名为weather.arff</p>
+<span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@relation weather.symbolic</span><br><span class="line"> </span><br><span class="line">@attribute outlook &#123;sunny, overcast, rainy&#125;</span><br><span class="line">@attribute temperature &#123;hot, mild, cool&#125;</span><br><span class="line">@attribute humidity &#123;high, normal&#125;</span><br><span class="line">@attribute windy &#123;TRUE, FALSE&#125;</span><br><span class="line">@attribute play &#123;yes, no&#125;</span><br><span class="line"> </span><br><span class="line">@data</span><br><span class="line">sunny,hot,high,FALSE,no</span><br><span class="line">sunny,hot,high,TRUE,no</span><br><span class="line">overcast,hot,high,FALSE,yes</span><br><span class="line">rainy,mild,high,FALSE,yes</span><br><span class="line">rainy,cool,normal,FALSE,yes</span><br><span class="line">rainy,cool,normal,TRUE,no</span><br><span class="line">overcast,cool,normal,TRUE,yes</span><br><span class="line">sunny,mild,high,FALSE,no</span><br><span class="line">sunny,cool,normal,FALSE,yes</span><br><span class="line">rainy,mild,normal,FALSE,yes</span><br><span class="line">sunny,mild,normal,TRUE,yes</span><br><span class="line">overcast,mild,high,TRUE,yes</span><br><span class="line">overcast,hot,normal,FALSE,yes</span><br><span class="line">rainy,mild,high,TRUE,no</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br></pre></td><td class="code"><pre><span class="line">package com.coderfish.id3;</span><br><span class="line"></span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileReader;</span><br><span class="line">import java.io.FileWriter;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.LinkedList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.regex.Matcher;</span><br><span class="line">import java.util.regex.Pattern;</span><br><span class="line"></span><br><span class="line">import org.dom4j.Document;</span><br><span class="line">import org.dom4j.DocumentHelper;</span><br><span class="line">import org.dom4j.Element;</span><br><span class="line">import org.dom4j.io.OutputFormat;</span><br><span class="line">import org.dom4j.io.XMLWriter;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * date:2015年6月15日&lt;br/ &gt;</span><br><span class="line"> * description:</span><br><span class="line"> * 统计了14天的气象数据(outlook天气状况，temperature温度，humidity湿度，windy风力)，并已知这些天气是否打球(play)</span><br><span class="line"> * 如果给出新一天的气象指标数据:sunny,cool,high,TRUE，判断一下会不会去打球。&lt;br/ &gt;</span><br><span class="line"> * </span><br><span class="line"> * @author Lotty周小鱼 &lt;br/ &gt;</span><br><span class="line"> * </span><br><span class="line"> */</span><br><span class="line">public class ID3 &#123;</span><br><span class="line">	/**</span><br><span class="line">	 * 存储属性的名称</span><br><span class="line">	 */</span><br><span class="line">	private ArrayList&lt;String&gt; attribute = new ArrayList&lt;String&gt;();</span><br><span class="line">	/**</span><br><span class="line">	 * 存储每个属性的取值</span><br><span class="line">	 */</span><br><span class="line">	private ArrayList&lt;ArrayList&lt;String&gt;&gt; attributeValue = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span><br><span class="line">	/**</span><br><span class="line">	 * 原始数据</span><br><span class="line">	 */</span><br><span class="line">	private ArrayList&lt;String[]&gt; data = new ArrayList&lt;String[]&gt;();</span><br><span class="line">	/**</span><br><span class="line">	 * 决策变量在属性集中的索引</span><br><span class="line">	 */</span><br><span class="line">	int decisionIndex;</span><br><span class="line">	/**</span><br><span class="line">	 * ARFF格式</span><br><span class="line">	 */</span><br><span class="line">	public static final String patternString = &quot;@attribute(.*)[&#123;](.*?)[&#125;]&quot;;</span><br><span class="line">	/**</span><br><span class="line">	 * XML文件对象</span><br><span class="line">	 */</span><br><span class="line">	Document xmldoc;</span><br><span class="line">	/**</span><br><span class="line">	 * 根节点</span><br><span class="line">	 */</span><br><span class="line">	Element root;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 构造方法&lt;br/ &gt;</span><br><span class="line">	 * 新建xml&lt;br/ &gt;</span><br><span class="line">	 * &lt;root&gt;&lt;br/ &gt;</span><br><span class="line">	 * &lt;DecisionTree value=&quot;null&quot;&gt;&lt;br/ &gt;</span><br><span class="line">	 * &lt;/DecisionTree&gt;&lt;br/ &gt;</span><br><span class="line">	 * &lt;/root&gt;</span><br><span class="line">	 */</span><br><span class="line">	public ID3() &#123;</span><br><span class="line">		xmldoc = DocumentHelper.createDocument();</span><br><span class="line">		root = xmldoc.addElement(&quot;root&quot;);</span><br><span class="line">		root.addElement(&quot;DecisionTree&quot;).addAttribute(&quot;value&quot;, &quot;null&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		ID3 inst = new ID3();</span><br><span class="line">		inst.readARFF(new File(&quot;f:\\id3temp\\weather.arff&quot;));</span><br><span class="line">		inst.setDec(&quot;play&quot;);</span><br><span class="line">		// conditionList存放条件个数</span><br><span class="line">		LinkedList&lt;Integer&gt; conditionNumList = new LinkedList&lt;Integer&gt;();</span><br><span class="line">		for (int i = 0; i &lt; inst.attribute.size(); i++) &#123;</span><br><span class="line">			// 如果i！=决策变量索引（实际5）</span><br><span class="line">			if (i != inst.decisionIndex)</span><br><span class="line">				conditionNumList.add(i);</span><br><span class="line">		&#125;</span><br><span class="line">		// dataList存放data的个数</span><br><span class="line">		ArrayList&lt;Integer&gt; dataNumList = new ArrayList&lt;Integer&gt;();</span><br><span class="line">		for (int i = 0; i &lt; inst.data.size(); i++) &#123;</span><br><span class="line">			dataNumList.add(i);</span><br><span class="line">		&#125;</span><br><span class="line">		inst.buildDT(&quot;DecisionTree&quot;, &quot;null&quot;, dataNumList, conditionNumList);</span><br><span class="line">		inst.writeXML(&quot;f:\\id3temp\\dt.xml&quot;);</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 读取arff文件，给attribute、attributevalue、data赋值</span><br><span class="line">	 * </span><br><span class="line">	 * @param file</span><br><span class="line">	 *            要读取的文件</span><br><span class="line">	 */</span><br><span class="line">	public void readARFF(File file) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			FileReader fr = new FileReader(file);</span><br><span class="line">			BufferedReader br = new BufferedReader(fr);</span><br><span class="line">			String line;</span><br><span class="line">			// 设置arff模式</span><br><span class="line">			Pattern pattern = Pattern.compile(patternString);</span><br><span class="line">			// 读取数据</span><br><span class="line">			while ((line = br.readLine()) != null) &#123;</span><br><span class="line">				// 判断合规</span><br><span class="line">				Matcher matcher = pattern.matcher(line);</span><br><span class="line">				// 尝试查找与该模式匹配的输入序列的下一个子序列</span><br><span class="line">				if (matcher.find()) &#123;</span><br><span class="line">					// 返回匹配到的子字符串</span><br><span class="line">					attribute.add(matcher.group(1).trim());</span><br><span class="line">					String[] values = matcher.group(2).split(&quot;,&quot;);</span><br><span class="line">					ArrayList&lt;String&gt; al = new ArrayList&lt;String&gt;(values.length);</span><br><span class="line">					for (String value : values) &#123;</span><br><span class="line">						al.add(value.trim());</span><br><span class="line">					&#125;</span><br><span class="line">					// 存入attributevalue对象中</span><br><span class="line">					attributeValue.add(al);</span><br><span class="line">				&#125;</span><br><span class="line">				// 判断开头</span><br><span class="line">				else if (line.startsWith(&quot;@data&quot;)) &#123;</span><br><span class="line">					while ((line = br.readLine()) != null) &#123;</span><br><span class="line">						if (line == &quot;&quot;)</span><br><span class="line">							continue;</span><br><span class="line">						String[] row = line.split(&quot;,&quot;);</span><br><span class="line">						data.add(row);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					continue;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			br.close();</span><br><span class="line">		&#125; catch (IOException e1) &#123;</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 设置决策变量索引</span><br><span class="line">	 * </span><br><span class="line">	 * @param n</span><br><span class="line">	 */</span><br><span class="line">	public void setDec(int n) &#123;</span><br><span class="line">		if (n &lt; 0 || n &gt;= attribute.size()) &#123;</span><br><span class="line">			System.err.println(&quot;决策变量指定错误。&quot;);</span><br><span class="line">			System.exit(2);</span><br><span class="line">		&#125;</span><br><span class="line">		decisionIndex = n;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 设置决策变量</span><br><span class="line">	 * </span><br><span class="line">	 * @param name</span><br><span class="line">	 */</span><br><span class="line">	public void setDec(String name) &#123;</span><br><span class="line">		// 获取下标</span><br><span class="line">		int n = attribute.indexOf(name);</span><br><span class="line">		setDec(n);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 计算熵</span><br><span class="line">	 * </span><br><span class="line">	 * @param arr</span><br><span class="line">	 *            yes or no个数</span><br><span class="line">	 * @return 熵</span><br><span class="line">	 */</span><br><span class="line">	public double getEntropy(int[] arr) &#123;</span><br><span class="line">		double entropy = 0.0;</span><br><span class="line">		int sum = 0;</span><br><span class="line">		for (int i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">			entropy -= arr[i] * Math.log(arr[i] + Double.MIN_VALUE)</span><br><span class="line">					/ Math.log(2);</span><br><span class="line">			sum += arr[i];</span><br><span class="line">		&#125;</span><br><span class="line">		// log(N)/log(2)</span><br><span class="line">		entropy += sum * Math.log(sum + Double.MIN_VALUE) / Math.log(2);</span><br><span class="line">		entropy /= sum;</span><br><span class="line">		return entropy;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 判断节点值是否全部相同</span><br><span class="line">	 * </span><br><span class="line">	 * @param subset</span><br><span class="line">	 *            给定子集</span><br><span class="line">	 * @return 全部相同返回true，有不相同返回false</span><br><span class="line">	 */</span><br><span class="line">	public boolean infoPure(ArrayList&lt;Integer&gt; subset) &#123;</span><br><span class="line">		// yes or no</span><br><span class="line">		String value = data.get(subset.get(0))[decisionIndex];</span><br><span class="line">		for (int i = 1; i &lt; subset.size(); i++) &#123;</span><br><span class="line">			String next = data.get(subset.get(i))[decisionIndex];</span><br><span class="line">			// 如果该结点值和第一个节点值不同</span><br><span class="line">			if (!value.equals(next))</span><br><span class="line">				return false;</span><br><span class="line">		&#125;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 给定原始数据的子集(subset中存储行号),当以第index个属性为节点时计算它的信息熵</span><br><span class="line">	 * </span><br><span class="line">	 * @param subset</span><br><span class="line">	 *            给定子集</span><br><span class="line">	 * @param index</span><br><span class="line">	 *            属性下标</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	public double calNodeEntropy(ArrayList&lt;Integer&gt; subset, int index) &#123;</span><br><span class="line">		int sum = subset.size();</span><br><span class="line">		double entropy = 0.0;</span><br><span class="line">		// 长度为属性个数 存放每种可能的决策情况</span><br><span class="line">		int[][] info = new int[attributeValue.get(index).size()][];</span><br><span class="line">		for (int i = 0; i &lt; info.length; i++)</span><br><span class="line">			// 决策个数</span><br><span class="line">			info[i] = new int[attributeValue.get(decisionIndex).size()];</span><br><span class="line">		// 长度为属性个数</span><br><span class="line">		int[] count = new int[attributeValue.get(index).size()];</span><br><span class="line">		for (int i = 0; i &lt; sum; i++) &#123;</span><br><span class="line">			// 子集遍历下标</span><br><span class="line">			int n = subset.get(i);</span><br><span class="line">			String nodeValue = data.get(n)[index];</span><br><span class="line">			int nodeIndex = attributeValue.get(index).indexOf(nodeValue);</span><br><span class="line">			count[nodeIndex]++;</span><br><span class="line">			// 决策结果</span><br><span class="line">			String decValue = data.get(n)[decisionIndex];</span><br><span class="line">			int decIndex = attributeValue.get(decisionIndex).indexOf(decValue);</span><br><span class="line">			info[nodeIndex][decIndex]++;</span><br><span class="line">		&#125;</span><br><span class="line">		for (int i = 0; i &lt; info.length; i++) &#123;</span><br><span class="line">			// 加权求值</span><br><span class="line">			entropy += getEntropy(info[i]) * count[i] / sum;</span><br><span class="line">		&#125;</span><br><span class="line">		return entropy;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 构建决策树 第一次给定值为&quot;DecisionTree&quot;, &quot;null&quot;, al, ll</span><br><span class="line">	 * </span><br><span class="line">	 * @param name</span><br><span class="line">	 *            节点名称</span><br><span class="line">	 * @param value</span><br><span class="line">	 *            节点值</span><br><span class="line">	 * @param subset</span><br><span class="line">	 *            子集</span><br><span class="line">	 * @param conditionList</span><br><span class="line">	 */</span><br><span class="line">	public void buildDT(String name, String value,</span><br><span class="line">			ArrayList&lt;Integer&gt; dataNumList, LinkedList&lt;Integer&gt; conditionNumList) &#123;</span><br><span class="line">		Element ele = null;</span><br><span class="line">		// 从任意位置的节点上选择名称为 name 的节点。</span><br><span class="line">		List&lt;Element&gt; list = root.selectNodes(&quot;//&quot; + name);</span><br><span class="line">		Iterator&lt;Element&gt; iter = list.iterator();</span><br><span class="line">		while (iter.hasNext()) &#123;</span><br><span class="line">			ele = iter.next();</span><br><span class="line">			// 节点匹配value跳出循环</span><br><span class="line">			if (ele.attributeValue(&quot;value&quot;).equals(value))</span><br><span class="line">				break;</span><br><span class="line">		&#125;</span><br><span class="line">		// 如果子决策全部相同 直接放入决策 跳出递归</span><br><span class="line">		if (infoPure(dataNumList)) &#123;</span><br><span class="line">			ele.setText(data.get(dataNumList.get(0))[decisionIndex]);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		int minIndex = -1;</span><br><span class="line">		double minEntropy = Double.MAX_VALUE;</span><br><span class="line">		for (int i = 0; i &lt; conditionNumList.size(); i++) &#123;</span><br><span class="line">			if (i == decisionIndex)</span><br><span class="line">				continue;</span><br><span class="line">			// 给定子集计算熵</span><br><span class="line">			double entropy = calNodeEntropy(dataNumList,</span><br><span class="line">					conditionNumList.get(i));</span><br><span class="line">			if (entropy &lt; minEntropy) &#123;</span><br><span class="line">				minIndex = conditionNumList.get(i);</span><br><span class="line">				minEntropy = entropy;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// 找出最小熵的节点属性名（作为要加入节点名）</span><br><span class="line">		String nodeName = attribute.get(minIndex);</span><br><span class="line">		conditionNumList.remove(new Integer(minIndex));</span><br><span class="line">		// 拿出对应属性的所有值</span><br><span class="line">		ArrayList&lt;String&gt; attvalues = attributeValue.get(minIndex);</span><br><span class="line">		for (String val : attvalues) &#123;</span><br><span class="line">			ele.addElement(nodeName).addAttribute(&quot;value&quot;, val);</span><br><span class="line">			ArrayList&lt;Integer&gt; al = new ArrayList&lt;Integer&gt;();</span><br><span class="line">			for (int i = 0; i &lt; dataNumList.size(); i++) &#123;</span><br><span class="line">				// 找出开头为val的数据行</span><br><span class="line">				if (data.get(dataNumList.get(i))[minIndex].equals(val)) &#123;</span><br><span class="line">					al.add(dataNumList.get(i));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			buildDT(nodeName, val, al, conditionNumList);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * xml输出</span><br><span class="line">	 * </span><br><span class="line">	 * @param filename</span><br><span class="line">	 */</span><br><span class="line">	public void writeXML(String filename) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			File file = new File(filename);</span><br><span class="line">			if (!file.exists())</span><br><span class="line">				file.createNewFile();</span><br><span class="line">			FileWriter fw = new FileWriter(file);</span><br><span class="line">			OutputFormat format = OutputFormat.createPrettyPrint(); // 美化格式</span><br><span class="line">			XMLWriter output = new XMLWriter(fw, format);</span><br><span class="line">			output.write(xmldoc);</span><br><span class="line">			output.close();</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			System.out.println(e.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">LottyLotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bigData/" rel="tag"># bigData</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/28/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%97%B6%E4%BB%A3%E5%85%A5%E9%97%A8%3C%E4%BA%8C%3E%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95%E5%92%8C%E6%8A%80%E6%9C%AF%20%E7%90%86%E8%AE%BA%E7%AF%87/" rel="next" title="大数据时代入门<二>——数据挖掘方法和技术 理论篇">
+                <i class="fa fa-chevron-left"></i> 大数据时代入门<二>——数据挖掘方法和技术 理论篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/20/iOS%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Segmented-Control/" rel="prev" title="iOS学习——Segmented Control">
+                iOS学习——Segmented Control <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ID3%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">ID3原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2015/05/28/ID3%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/';
+          this.page.identifier = '2015/05/28/ID3算法详解/';
+          this.page.title = 'ID3算法详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

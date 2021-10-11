@@ -1,0 +1,973 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="What has Happened？上周，leader 拿着 iPhone 7 打开了网易新闻，问我：『你看，你这里的下拉刷新是短震动，我们的手机数周遥控电视的时候只有长震动，产品那边问能不能用短震动』。 然后博主就去查看了一下关于短震动的方式，整个过程可以描述为——『资料真少！』。 不过最后通过一下午的搜集，最终还是总结整理出来了这份文档，也补充了自己对 iPhone 6s 之后对 Taptic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS——关于-Taptic-Engine-震动反馈">
+<meta property="og:url" content="http://lottyzhou.com/2017/01/16/iOS%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E-Taptic-Engine-%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="What has Happened？上周，leader 拿着 iPhone 7 打开了网易新闻，问我：『你看，你这里的下拉刷新是短震动，我们的手机数周遥控电视的时候只有长震动，产品那边问能不能用短震动』。 然后博主就去查看了一下关于短震动的方式，整个过程可以描述为——『资料真少！』。 不过最后通过一下午的搜集，最终还是总结整理出来了这份文档，也补充了自己对 iPhone 6s 之后对 Taptic">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-01-16T02:30:17.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.395Z">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/01/16/iOS——关于-Taptic-Engine-震动反馈/"/>
+
+
+
+
+
+  <title> iOS——关于-Taptic-Engine-震动反馈 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/01/16/iOS%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E-Taptic-Engine-%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS——关于-Taptic-Engine-震动反馈
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-16T10:30:17+08:00">
+                2017-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/16/iOS%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E-Taptic-Engine-%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/01/16/iOS——关于-Taptic-Engine-震动反馈/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="What-has-Happened？"><a href="#What-has-Happened？" class="headerlink" title="What has Happened？"></a>What has Happened？</h1><p>上周，leader 拿着 iPhone 7 打开了网易新闻，问我：『你看，你这里的下拉刷新是<code>短震动</code>，我们的手机数周遥控电视的时候只有<code>长震动</code>，产品那边问能不能用短震动』。</p>
+<p>然后博主就去查看了一下关于短震动的方式，整个过程可以描述为——『资料真少！』。</p>
+<p>不过最后通过一下午的搜集，最终还是总结整理出来了这份文档，也补充了自己对 iPhone 6s 之后对 Taptic Engine 的了解。</p>
+<span id="more"></span>
+<h1 id="Taptic-Engine"><a href="#Taptic-Engine" class="headerlink" title="Taptic Engine"></a>Taptic Engine</h1><p>先了解一个概念——Taptic Engine</p>
+<p>Taptic Engine 是苹果产品上推出的全新震动模块，该元件最早出现在 Apple Watch 中。iPhone 6s 和 iPhone 6s Plus 中，也同样内置了Taptic Engine，在设计上有所升级。</p>
+<p>Taptic Engine 振动模块为 Apple Watch 以及 iPhone 6s、iPhone 7 提供了 Force Touch 以及 3D Touch，不同的屏幕操作，可以感受到不同的振动触觉效果，带来更好的用户体验。</p>
+<h1 id="短震方法一-AudioServicesPlaySystemSound"><a href="#短震方法一-AudioServicesPlaySystemSound" class="headerlink" title="短震方法一 AudioServicesPlaySystemSound"></a>短震方法一 AudioServicesPlaySystemSound</h1><p>常用调用：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);</span><br></pre></td></tr></table></figure>
+<p>以上代码在各个型号手机中反应为长震</p>
+<p>API 系统版本支持：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);</span><br></pre></td></tr></table></figure>
+<p>APPLE 公开的 <code>SystemSoundID</code> 有：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CF_ENUM</span>(SystemSoundID)</span><br><span class="line">&#123;</span><br><span class="line">    kSystemSoundID_UserPreferredAlert   = <span class="number">0x00001000</span>,</span><br><span class="line">    kSystemSoundID_FlashScreen          = <span class="number">0x00000FFE</span>,</span><br><span class="line">        <span class="comment">// this has been renamed to be consistent</span></span><br><span class="line">    kUserPreferredAlert     = kSystemSoundID_UserPreferredAlert</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">CF_ENUM</span>(SystemSoundID)</span><br><span class="line">&#123;</span><br><span class="line">    kSystemSoundID_Vibrate              = <span class="number">0x00000FFF</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>以上类型 <em><strong>没有短震动</strong></em> 。</p>
+<p>但通过以下代码，可以得到更多类型的震动：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通短震，3D Touch 中 Peek 震动反馈</span></span><br><span class="line">AudioServicesPlaySystemSound(<span class="number">1519</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通短震，3D Touch 中 Pop 震动反馈</span></span><br><span class="line">AudioServicesPlaySystemSound(<span class="number">1520</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 连续三次短震</span></span><br><span class="line">AudioServicesPlaySystemSound(<span class="number">1521</span>);</span><br></pre></td></tr></table></figure>
+<p>但以上 ID 均未在 Apple 的 Documents 中描述。显然，<em><strong>这是调用了一些私有一些属性 </strong></em> 。</p>
+<p>关于是否调用了私有 API，也有一些讨论，可以查看<a target="_blank" rel="noopener" href="https://forums.developer.apple.com/thread/45628">这里</a>。</p>
+<h1 id="短震方法二-获取-tapticEngine"><a href="#短震方法二-获取-tapticEngine" class="headerlink" title="短震方法二 获取 _tapticEngine"></a>短震方法二 获取 _tapticEngine</h1><p>这种方法是从<a target="_blank" rel="noopener" href="https://unifiedsense.com/development/using-taptic-engine-on-ios.html">这里</a>搜集到的。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> tapticEngine = [[<span class="built_in">UIDevice</span> currentDevice] performSelector: <span class="built_in">NSSelectorFromString</span>(<span class="string">@&quot;_tapticEngine&quot;</span>)</span><br><span class="line">                                                     withObject:<span class="literal">nil</span>];</span><br><span class="line">[tapticEngine performSelector: <span class="built_in">NSSelectorFromString</span>(<span class="string">@&quot;actuateFeedback:&quot;</span>)</span><br><span class="line">                       withObject:@(<span class="number">0</span>)];</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> tapticEngine = [[<span class="built_in">UIDevice</span> currentDevice] performSelector: <span class="built_in">NSSelectorFromString</span>(<span class="string">@&quot;_tapticEngine&quot;</span>)</span><br><span class="line">                                                     withObject:<span class="literal">nil</span>];</span><br><span class="line"></span><br><span class="line">SEL selector = <span class="built_in">NSSelectorFromString</span>(<span class="string">@&quot;actuateFeedback:&quot;</span>);</span><br><span class="line">int32_t arg = <span class="number">1001</span>;</span><br><span class="line">    </span><br><span class="line"><span class="built_in">NSInvocation</span> *inv = [<span class="built_in">NSInvocation</span> invocationWithMethodSignature:[tapticEngine methodSignatureForSelector:selector]];</span><br><span class="line">[inv setTarget:tapticEngine];</span><br><span class="line">[inv setSelector:selector];</span><br><span class="line">[inv setArgument:&amp;arg atIndex:<span class="number">2</span>];</span><br><span class="line">[inv invoke];</span><br></pre></td></tr></table></figure>
+<p>显然， <em><strong>这是调用了私有 API</strong></em> 。</p>
+<p>这些方法，在实际测试的时候发现，在 iPhone 7 上调用没有震动反馈，在 iPhone 6S Plus 上调用有震动反馈，在 iPhone 6 上调用 无反馈。</p>
+<h1 id="短震方法三-UIImpactFeedbackGenerator"><a href="#短震方法三-UIImpactFeedbackGenerator" class="headerlink" title="短震方法三 UIImpactFeedbackGenerator"></a>短震方法三 UIImpactFeedbackGenerator</h1><p>iOS10 引入了一种新的、产生触觉反馈的方式， <em><strong>帮助用户认识到不同的震动反馈有不同的含义</strong></em> 。这个功能的核心就是由 <code>UIFeedbackGenerator</code> 提供。Apple 对于 <code>UIImpactFeedbackGenerator</code> 有一篇<a target="_blank" rel="noopener" href="https://developer.apple.com/reference/uikit/uifeedbackgenerator#2555399">介绍文档</a>。</p>
+<p>UIFeedbackGenerator 可以帮助你实现 haptic feedback。它的要求是：</p>
+<ol>
+<li>支持 Taptic Engine 机型 (iPhone 7 以及 iPhone 7 Plus).</li>
+<li>app 需要在前台运行</li>
+<li>系统 Haptics setting 需要开启</li>
+</ol>
+<p>Apple 曾表示公开了 Taptic Engine 的 API，但是鲜有文档。在搜罗了各种资料后，可以认为 <code>UIImpactFeedbackGenerator</code> 即 Taptic Engine 的 公开 API。</p>
+<p>它的调用方式是：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIImpactFeedbackGenerator</span> *generator = [[<span class="built_in">UIImpactFeedbackGenerator</span> alloc] initWithStyle: <span class="built_in">UIImpactFeedbackStyleLight</span>];</span><br><span class="line">[generator prepare];</span><br><span class="line">[generator impactOccurred];</span><br></pre></td></tr></table></figure>
+<h1 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h1><p>观察 <code>UIImpactFeedbackGenerator</code> 你会发现它继承于 <code>UIFeedbackGenerator</code>。除了 <code>UIImpactFeedbackGenerator</code> 还有三种 FeedbackGenerator：</p>
+<ol>
+<li>UIImpactFeedbackGenerator</li>
+<li>UISelectionFeedbackGenerator</li>
+<li>UINotificationFeedbackGenerator</li>
+</ol>
+<p>详情可参考 Apple 的 <a target="_blank" rel="noopener" href="https://developer.apple.com/reference/uikit/uifeedbackgenerator?language=objc">这篇 Reference</a> 。</p>
+<p>对于震动反馈的应用，Apple 也给出了示例场景：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">IBAction</span>)gestureHandler:(<span class="built_in">UIPanGestureRecognizer</span> *)sender &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">switch</span> (sender.state) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateBegan</span>:</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Instantiate a new generator.</span></span><br><span class="line">            <span class="keyword">self</span>.feedbackGenerator = [[<span class="built_in">UISelectionFeedbackGenerator</span> alloc] init];</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Prepare the generator when the gesture begins.</span></span><br><span class="line">            [<span class="keyword">self</span>.feedbackGenerator prepare];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateChanged</span>:</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Check to see if the selection has changed...</span></span><br><span class="line">            <span class="keyword">if</span> ([<span class="keyword">self</span> myCustomHasSelectionChangedMethodWithTranslation:[sender translationInView: <span class="keyword">self</span>.view]]) &#123;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// Trigger selection feedback.</span></span><br><span class="line">                [<span class="keyword">self</span>.feedbackGenerator selectionChanged];</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// Keep the generator in a prepared state.</span></span><br><span class="line">                [<span class="keyword">self</span>.feedbackGenerator prepare];</span><br><span class="line">    </span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateCancelled</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateEnded</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateFailed</span>:</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Release the current generator.</span></span><br><span class="line">            <span class="keyword">self</span>.feedbackGenerator = <span class="literal">nil</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// Do nothing.</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="三种方法在测试机上不同的反馈结果"><a href="#三种方法在测试机上不同的反馈结果" class="headerlink" title="三种方法在测试机上不同的反馈结果"></a>三种方法在测试机上不同的反馈结果</h1><table>
+<thead>
+<tr>
+<th>AudioServicesPlaySystemSound</th>
+<th>1519</th>
+<th>1520</th>
+<th>1521</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone 7（iOS 10）</td>
+<td>peek 触感</td>
+<td>pop 触感</td>
+<td>三次连续短振</td>
+</tr>
+<tr>
+<td>iPhone 6s Puls（iOS 9）</td>
+<td>peek 触感</td>
+<td>pop 触感</td>
+<td>三次连续短振</td>
+</tr>
+<tr>
+<td>iPhone 6（iOS 10）</td>
+<td>无振动</td>
+<td>无振动</td>
+<td>无振动</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>获取 _tapticEngine</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone 7（iOS 10）</td>
+<td>无振动</td>
+</tr>
+<tr>
+<td>iPhone 6s Puls（iOS 9）</td>
+<td>长振</td>
+</tr>
+<tr>
+<td>iPhone 6（iOS 10）</td>
+<td>无振动</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>UIImpactFeedbackGenerator</th>
+<th>.Light</th>
+<th>.Medium</th>
+<th>.Heavy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone 7（iOS 10）</td>
+<td>微弱短振</td>
+<td>中等短振</td>
+<td>明显短振</td>
+</tr>
+<tr>
+<td>iPhone 6s Puls（iOS 9）</td>
+<td>长振</td>
+<td>长振</td>
+<td>长振</td>
+</tr>
+<tr>
+<td>iPhone 6（iOS 10）</td>
+<td>无振动</td>
+<td>无振动</td>
+<td>无振动</td>
+</tr>
+</tbody>
+</table>
+<p>总结一下，希望同样的代码能在更多的机型上实现短振，建议使用 AudioServicesPlaySystemSound(1519)。不过可能会涉及到调用私有 API。安全起见，可以使用 <code>UIImpactFeedbackGenerator</code>。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>测试代码在<a target="_blank" rel="noopener" href="https://github.com/summertian4/iOS-ObjectiveC/tree/master/iPhoneShakeDemo">这里</a>。</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/03/%E4%B8%80%E5%91%A8%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8-2017/" rel="next" title="一周阅读列表-2017">
+                <i class="fa fa-chevron-left"></i> 一周阅读列表-2017
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/07/%E6%89%BE%E5%9B%9E%E4%B8%A2%E5%A4%B1%E7%9A%84-Github-%E8%A1%80%E6%B3%AA%E5%8F%B2%EF%BC%88%E8%B0%A8%E6%85%8E%E4%BF%9D%E7%AE%A1-2FA-%E9%AA%8C%E8%AF%81%EF%BC%89/" rel="prev" title="找回丢失的 Github（谨慎保管 2FA 验证）">
+                找回丢失的 Github（谨慎保管 2FA 验证） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-has-Happened%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">What has Happened？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Taptic-Engine"><span class="nav-number">2.</span> <span class="nav-text">Taptic Engine</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E9%9C%87%E6%96%B9%E6%B3%95%E4%B8%80-AudioServicesPlaySystemSound"><span class="nav-number">3.</span> <span class="nav-text">短震方法一 AudioServicesPlaySystemSound</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E9%9C%87%E6%96%B9%E6%B3%95%E4%BA%8C-%E8%8E%B7%E5%8F%96-tapticEngine"><span class="nav-number">4.</span> <span class="nav-text">短震方法二 获取 _tapticEngine</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E9%9C%87%E6%96%B9%E6%B3%95%E4%B8%89-UIImpactFeedbackGenerator"><span class="nav-number">5.</span> <span class="nav-text">短震方法三 UIImpactFeedbackGenerator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Others"><span class="nav-number">6.</span> <span class="nav-text">Others</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%9C%A8%E6%B5%8B%E8%AF%95%E6%9C%BA%E4%B8%8A%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%8D%E9%A6%88%E7%BB%93%E6%9E%9C"><span class="nav-number">7.</span> <span class="nav-text">三种方法在测试机上不同的反馈结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">8.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/01/16/iOS%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E-Taptic-Engine-%E9%9C%87%E5%8A%A8%E5%8F%8D%E9%A6%88/';
+          this.page.identifier = '2017/01/16/iOS——关于-Taptic-Engine-震动反馈/';
+          this.page.title = 'iOS——关于-Taptic-Engine-震动反馈';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

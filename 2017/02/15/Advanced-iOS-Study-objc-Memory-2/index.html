@@ -1,0 +1,983 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,iOS进阶,内存与引用," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在写 『iOS（Objective-C） 内存管理&amp;Block』 一文时，我并没有发现 NSObject 的代码已经被开源了，所以分析的主要是 GNUStep 的源码，对 Apple 的部分只是通过猜测。 实质上，NSObject 的实现内容已经开源在 objc4-706 中。于是我便开始学习 objc4 中的内容。 下面就和大家扒一扒 Apple 的 NSObject 内存管理的一些内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS进阶——iOS（Objective-C）内存管理·二">
+<meta property="og:url" content="http://lottyzhou.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="在写 『iOS（Objective-C） 内存管理&amp;Block』 一文时，我并没有发现 NSObject 的代码已经被开源了，所以分析的主要是 GNUStep 的源码，对 Apple 的部分只是通过猜测。 实质上，NSObject 的实现内容已经开源在 objc4-706 中。于是我便开始学习 objc4 中的内容。 下面就和大家扒一扒 Apple 的 NSObject 内存管理的一些内容">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-02.png">
+<meta property="article:published_time" content="2017-02-15T03:59:33.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.391Z">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="iOS进阶">
+<meta property="article:tag" content="内存与引用">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/"/>
+
+
+
+
+
+  <title> iOS进阶——iOS（Objective-C）内存管理·二 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS进阶——iOS（Objective-C）内存管理·二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-15T11:59:33+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/iOS%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/15/Advanced-iOS-Study-objc-Memory-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/02/15/Advanced-iOS-Study-objc-Memory-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在写 『<a href="http://lottyzhou.com/2017/02/08/iOS进阶——iOS-Memory-Block/">iOS（Objective-C） 内存管理&amp;Block</a>』 一文时，我并没有发现 NSObject 的代码已经被开源了，所以分析的主要是 GNUStep 的源码，对 Apple 的部分只是通过猜测。</p>
+<p>实质上，NSObject 的实现内容已经开源在 <a target="_blank" rel="noopener" href="https://opensource.apple.com/tarballs/objc4/">objc4-706</a> 中。于是我便开始学习 objc4 中的内容。</p>
+<p>下面就和大家扒一扒 Apple 的 NSObject 内存管理的一些内容。</p>
+<h1 id="SideTable"><a href="#SideTable" class="headerlink" title="SideTable"></a>SideTable</h1><p>找到 NSObject.mm，首先来一些非常重要的信息，以便后面的理解。</p>
+<p><strong>objc4-706 NSObject.mm SideTable:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> SideTable &#123;</span><br><span class="line">    <span class="comment">// 保证原子操作的自旋锁</span></span><br><span class="line">    spinlock_t slock;</span><br><span class="line">    <span class="comment">// 引用计数的 hash 表</span></span><br><span class="line">    RefcountMap refcnts;</span><br><span class="line">    <span class="comment">// weak 引用全局 hash 表</span></span><br><span class="line">    weak_table_t weak_table;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>SideTable 结构体重定了几个非常重要的变量。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The order of these bits is important.</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIDE_TABLE_WEAKLY_REFERENCED (1UL&lt;&lt;0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIDE_TABLE_DEALLOCATING      (1UL&lt;&lt;1)  <span class="comment">// MSB-ward of weak bit</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIDE_TABLE_RC_ONE            (1UL&lt;&lt;2)  <span class="comment">// MSB-ward of deallocating bit</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIDE_TABLE_RC_PINNED         (1UL&lt;&lt;(WORD_BITS-1))</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIDE_TABLE_RC_SHIFT 2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIDE_TABLE_FLAG_MASK (SIDE_TABLE_RC_ONE-1)</span></span><br></pre></td></tr></table></figure>
+<p>以上定义的是几个重要偏移量。引用计数 retainCount 是保存在一个无符号整形中，也就是有 8 个字节。其结构可以用下图表示：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-01.png" alt=""></p>
+<ol>
+<li><code>SIDE_TABLE_WEAKLY_REFERENCED (1UL&lt;&lt;0)</code>（表示对象所在内存的第 1 位），标识该对象是否有过 weak 对象；</li>
+<li><code>SIDE_TABLE_DEALLOCATING (1UL&lt;&lt;1)</code>（表示对象所在内存的第 2 位），标识该对象是否正在 dealloc（析构）。</li>
+<li><code>SIDE_TABLE_RC_ONE (1UL&lt;&lt;2)</code> （表示对象所在内存的第 3 位），存放引用计数数值（其实第三位之后都用来存放引用计数数值）。</li>
+</ol>
+<h1 id="retainCount"><a href="#retainCount" class="headerlink" title="retainCount"></a>retainCount</h1><p>找到 retainCount 的实现，一层一层向下看。</p>
+<p><strong>objc4 NSObject.mm retainCount:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSUInteger</span>)retainCount &#123;</span><br><span class="line">    <span class="keyword">return</span> ((<span class="keyword">id</span>)<span class="keyword">self</span>)-&gt;rootRetainCount();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 objc-object.h rootRetainCount:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> uintptr_t </span><br><span class="line">objc_object::rootRetainCount()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isTaggedPointer()) <span class="keyword">return</span> (uintptr_t)<span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> sidetable_retainCount();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 NSObject.mm sidetable_retainCount:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">uintptr_t</span><br><span class="line">objc_object::sidetable_retainCount()</span><br><span class="line">&#123;</span><br><span class="line">    SideTable&amp; table = SideTables()[<span class="keyword">this</span>];</span><br><span class="line"></span><br><span class="line">    size_t refcnt_result = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    table.lock();</span><br><span class="line">    RefcountMap::iterator it = table.refcnts.find(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">if</span> (it != table.refcnts.end()) &#123;</span><br><span class="line">        <span class="comment">// this is valid for SIDE_TABLE_RC_PINNED too</span></span><br><span class="line">        refcnt_result += it-&gt;second &gt;&gt; SIDE_TABLE_RC_SHIFT;</span><br><span class="line">    &#125;</span><br><span class="line">    table.unlock();</span><br><span class="line">    <span class="keyword">return</span> refcnt_result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>it-&gt;second 指向的就是存放引用计数相关的那个 8 位的无符号整型。</p>
+<p>上面介绍过 Sidetable 中的几个重要偏移量，通过位移 SIDE_TABLE_RC_SHIFT 可以获取真实的引用计数。</p>
+<p>所以，<code>sidetable_retainCount()</code> 中的主要内容就是遍历引用计数表，查找对象获取引用计数 +1 并将结果返回。</p>
+<h1 id="retain"><a href="#retain" class="headerlink" title="retain"></a>retain</h1><p>找到 retain 的实现。</p>
+<p><strong>objc4 NSObject.mm retain:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)<span class="keyword">retain</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ((<span class="keyword">id</span>)<span class="keyword">self</span>)-&gt;rootRetain();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 objc-objc.h rootRetain:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Base retain implementation, ignoring overrides.</span></span><br><span class="line"><span class="comment">// This does not check isa.fast_rr; if there is an RR override then </span></span><br><span class="line"><span class="comment">// it was already called and it chose to call [super retain].</span></span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">id</span> </span><br><span class="line">objc_object::rootRetain()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isTaggedPointer()) <span class="keyword">return</span> (<span class="keyword">id</span>)<span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> sidetable_retain();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 NSObject.mm sidetable_retain:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span></span><br><span class="line">objc_object::sidetable_retain()</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> SUPPORT_NONPOINTER_ISA</span></span><br><span class="line">    assert(!isa.nonpointer);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    SideTable&amp; table = SideTables()[<span class="keyword">this</span>];</span><br><span class="line">    </span><br><span class="line">    table.lock();</span><br><span class="line">    size_t&amp; refcntStorage = table.refcnts[<span class="keyword">this</span>];</span><br><span class="line">    <span class="keyword">if</span> (! (refcntStorage &amp; SIDE_TABLE_RC_PINNED)) &#123;</span><br><span class="line">        refcntStorage += SIDE_TABLE_RC_ONE;</span><br><span class="line">    &#125;</span><br><span class="line">    table.unlock();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">id</span>)<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>refcntStorage += SIDE_TABLE_RC_ONE</code> 让人费解，实际是怎么回事呢？我们通过距离说明：</p>
+<p>如果 obj 的引用计数数值为 1（二进制 00000100，因为第一位，第二位用来标识其他内容），现在如果进行 retain，需要对引用计数数值增加 1，那么需要由 00000100 =&gt; 00001000。所以实际上，从整型的角度，是 <code>retainCount + 4</code>，而不是我们理解的 +1。</p>
+<p>SIDE_TABLE_RC_ONE 定义是的 1UL&lt;&lt;2，也就是4，所以这里 <code>refcntStorage += SIDE_TABLE_RC_ONE;</code>。</p>
+<h1 id="release"><a href="#release" class="headerlink" title="release"></a>release</h1><p><strong>objc4-706 NSObject.mm release:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">oneway</span> <span class="keyword">void</span>)release &#123;</span><br><span class="line">    ((<span class="keyword">id</span>)<span class="keyword">self</span>)-&gt;rootRelease();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4-706 objc-object.h rootRelease:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="keyword">bool</span> </span><br><span class="line">objc_object::rootRelease()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isTaggedPointer()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> sidetable_release(<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4-706 NSObject.mm sidetable_release:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// rdar://20206767</span></span><br><span class="line"><span class="comment">// return uintptr_t instead of bool so that the various raw-isa </span></span><br><span class="line"><span class="comment">// -release paths all return zero in eax</span></span><br><span class="line">uintptr_t</span><br><span class="line">objc_object::sidetable_release(<span class="keyword">bool</span> performDealloc)</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> SUPPORT_NONPOINTER_ISA</span></span><br><span class="line">    assert(!isa.nonpointer);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    SideTable&amp; table = SideTables()[<span class="keyword">this</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> do_dealloc = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    table.lock();</span><br><span class="line">    RefcountMap::iterator it = table.refcnts.find(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">if</span> (it == table.refcnts.end()) &#123;</span><br><span class="line">        do_dealloc = <span class="literal">true</span>;</span><br><span class="line">        table.refcnts[<span class="keyword">this</span>] = SIDE_TABLE_DEALLOCATING;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (it-&gt;second &lt; SIDE_TABLE_DEALLOCATING) &#123;</span><br><span class="line">        <span class="comment">// SIDE_TABLE_WEAKLY_REFERENCED may be set. Don&#x27;t change it.</span></span><br><span class="line">        do_dealloc = <span class="literal">true</span>;</span><br><span class="line">        it-&gt;second |= SIDE_TABLE_DEALLOCATING;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (! (it-&gt;second &amp; SIDE_TABLE_RC_PINNED)) &#123;</span><br><span class="line">        it-&gt;second -= SIDE_TABLE_RC_ONE;</span><br><span class="line">    &#125;</span><br><span class="line">    table.unlock();</span><br><span class="line">    <span class="keyword">if</span> (do_dealloc  &amp;&amp;  performDealloc) &#123;</span><br><span class="line">        ((<span class="keyword">void</span>(*)(objc_object *, SEL))objc_msgSend)(<span class="keyword">this</span>, SEL_dealloc);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> do_dealloc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看后面几个判断。</p>
+<ol>
+<li>如果对象记录在引用计数表的最后一个：<code>do_dealloc</code> 设置为 true，引用计数数值设置为 SIDE_TABLE_DEALLOCATING（二进制 00000010）。</li>
+<li>如果 8 位的引用计数小于 SIDE_TABLE_DEALLOCATING（二进制 00000010），也就如果是 00000001 或 00000000：<code>do_dealloc</code> 设置为 true，并添加 deallocating 标识位。（但至于有什么用不太理解，希望哪位大神指点一下）。</li>
+<li>如果已经 <code>8 位引用计数 &amp; SIDE_TABLE_RC_PINNED</code> ，即对象不在 deallocating，且没有被弱引用，且 8 位没有溢出：8 位引用计数减少 4，即真实引用计数数值 -1。</li>
+<li>最后，如果 <code>do_dealloc</code> 和 <code>performDealloc</code>（传入时就已经为 true）都为 ture，执行 SEL_dealloc 释放对象。</li>
+<li>方法返回 do_dealloc。</li>
+</ol>
+<hr>
+<p>如果你只想知道 ARC 引用计数相关，那么只需要看上面的代码就可以了。alloc 和 dealloc 主要是对对象的一些内存分配。</p>
+<hr>
+<h1 id="alloc"><a href="#alloc" class="headerlink" title="alloc"></a>alloc</h1><p>查看 alloc 相关代码。</p>
+<p><strong>objc4-706 NSObject.mm alloc:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">id</span>)alloc &#123;</span><br><span class="line">    <span class="keyword">return</span> _objc_rootAlloc(<span class="keyword">self</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4-706 NSObject.mm _objc_rootAlloc:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span></span><br><span class="line">_objc_rootAlloc(Class cls)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> callAlloc(cls, <span class="literal">false</span><span class="comment">/*checkNil*/</span>, <span class="literal">true</span><span class="comment">/*allocWithZone*/</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4-706 NSObject.mm callAlloc:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Call [cls alloc] or [cls allocWithZone:nil], with appropriate </span></span><br><span class="line"><span class="comment">// shortcutting optimizations.</span></span><br><span class="line"><span class="keyword">static</span> ALWAYS_INLINE <span class="keyword">id</span></span><br><span class="line">callAlloc(Class cls, <span class="keyword">bool</span> checkNil, <span class="keyword">bool</span> allocWithZone=<span class="literal">false</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (slowpath(checkNil &amp;&amp; !cls)) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> __OBJC2__</span></span><br><span class="line">    <span class="keyword">if</span> (fastpath(!cls-&gt;ISA()-&gt;hasCustomAWZ())) &#123;</span><br><span class="line">        <span class="comment">// No alloc/allocWithZone implementation. Go straight to the allocator.</span></span><br><span class="line">        <span class="comment">// fixme store hasCustomAWZ in the non-meta class and </span></span><br><span class="line">        <span class="comment">// add it to canAllocFast&#x27;s summary</span></span><br><span class="line">        <span class="keyword">if</span> (fastpath(cls-&gt;canAllocFast())) &#123;</span><br><span class="line">            <span class="comment">// No ctors, raw isa, etc. Go straight to the metal.</span></span><br><span class="line">            <span class="keyword">bool</span> dtor = cls-&gt;hasCxxDtor();</span><br><span class="line">            <span class="keyword">id</span> obj = (<span class="keyword">id</span>)calloc(<span class="number">1</span>, cls-&gt;bits.fastInstanceSize());</span><br><span class="line">            <span class="keyword">if</span> (slowpath(!obj)) <span class="keyword">return</span> callBadAllocHandler(cls);</span><br><span class="line">            obj-&gt;initInstanceIsa(cls, dtor);</span><br><span class="line">            <span class="keyword">return</span> obj;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Has ctor or raw isa or something. Use the slower path.</span></span><br><span class="line">            <span class="keyword">id</span> obj = class_createInstance(cls, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (slowpath(!obj)) <span class="keyword">return</span> callBadAllocHandler(cls);</span><br><span class="line">            <span class="keyword">return</span> obj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// No shortcuts available.</span></span><br><span class="line">    <span class="keyword">if</span> (allocWithZone) <span class="keyword">return</span> [cls allocWithZone:<span class="literal">nil</span>];</span><br><span class="line">    <span class="keyword">return</span> [cls alloc];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进入方法后先进行 <code>if (slowpath(checkNil &amp;&amp; !cls)) return nil;</code> 判断。</p>
+<p><strong>objc4-706 objc-os.h slowpath:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fastpath(x) (__builtin_expect(bool(x), 1))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> slowpath(x) (__builtin_expect(bool(x), 0))</span></span><br></pre></td></tr></table></figure>
+<p><code>__builtin_expect(exp, n)</code> 方法表示 exp 很有可能为 0，返回值为 exp。你可以将 <code>fastpath(x)</code> 理解成真值判断，<code>slowpath(x)</code> 理解成假值判断。</p>
+<p>所以，根据传入值，<code>checkNil</code> 为 false，<code>checkNil &amp;&amp; !cls</code> 也为 false。那么这里不会返回 nil。继续向下阅读。</p>
+<p>其后是一个 Objective-C 2.0 的条件编译指令。当然我们现在用的都属于 Objctive-C 2.0，会执行其中代码。首先进行一个判断 <code>if (fastpath(!cls-&gt;ISA()-&gt;hasCustomAWZ()))... else ...</code>，这是判断一个类是否有自定义的 <code>+allocWithZone</code> 实现。</p>
+<p>如果没有自定义的 <code>+allocWithZone</code> 实现。进行下一步，又是一个判断：<code>if (fastpath(cls-&gt;canAllocFast()))... else ...</code>，这里只有对象不存在、没有 isa 等情况才会为真值。所以之间看 else 内容。</p>
+<p>else 代码块中调用了 <code>id obj = class_createInstance(cls, 0);</code>。查看内容时注意查看 <code>objc-runtime-new.h</code> 中的内容而不是 <code>objc-runtime-old.mm</code> 中的内容（你可以注意到 <code>objc-runtime-new.h</code> 顶部的 Coptyright 是 Copyright (c) 2005-2007 Apple Inc.  All Rights Reserved.）</p>
+<p>在 <code>objc-runtime-new.mm</code> 中 <code>canAllocFast()</code> 定义如下：</p>
+<p><strong>objc4-706 objc-runtime-new.h canAllocFast:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> FAST_ALLOC</span></span><br><span class="line">    <span class="keyword">bool</span> canAllocFast() &#123;</span><br><span class="line">        <span class="keyword">return</span> bits &amp; FAST_ALLOC;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="keyword">bool</span> canAllocFast() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>再看 FAST_ALLOC 定义，观察下图：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_Advanced-iOS-Study-objc-Memory-2-02.png" alt="FAST_ALLOC"></p>
+<p>发现，<code>#elif 1</code> 直接拦截了下面的 define，所以 <code>#if FAST_ALLOC</code> 不起作用（这里我也不是很确定，哪位大神指点一下）。所以，<code>canAllocFast()</code> 返回 false，<code>fastpath(cls-&gt;canAllocFast())</code> 判断为假。</p>
+<p>执行</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Has ctor or raw isa or something. Use the slower path.</span></span><br><span class="line"><span class="keyword">id</span> obj = class_createInstance(cls, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (slowpath(!obj)) <span class="keyword">return</span> callBadAllocHandler(cls);</span><br><span class="line"><span class="keyword">return</span> obj;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 objc-runtime-new.mm class_createInstance:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> </span><br><span class="line">class_createInstance(Class cls, size_t extraBytes)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _class_createInstanceFromZone(cls, extraBytes, <span class="literal">nil</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 objc-runtime-new.mm _class_createInstanceFromZone:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> </span><br><span class="line">_class_createInstanceFromZone(Class cls, size_t extraBytes, <span class="keyword">void</span> *zone)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">void</span> *bytes;</span><br><span class="line">    size_t size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Can&#x27;t create something for nothing</span></span><br><span class="line">    <span class="keyword">if</span> (!cls) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Allocate and initialize</span></span><br><span class="line">    size = cls-&gt;alignedInstanceSize() + extraBytes;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// CF requires all objects be at least 16 bytes.</span></span><br><span class="line">    <span class="keyword">if</span> (size &lt; <span class="number">16</span>) size = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (zone) &#123;</span><br><span class="line">        bytes = malloc_zone_calloc((malloc_zone_t *)zone, <span class="number">1</span>, size);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        bytes = calloc(<span class="number">1</span>, size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> objc_constructInstance(cls, bytes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>传入的 <code>extraBytes</code> 为0，<code>zone</code> 为 nil，那么主要执行的语句是 <code>bytes = calloc(1, size);</code> 和 <code>return objc_constructInstance(cls, bytes);</code>。bytes 是对象所需内存空间。</p>
+<blockquote>
+<p><strong>FYI:</strong><br><code>calloc(size_t __count, size_t __size)</code> 是 C 语言中的方法，用来在内存的动态存储区中分配 n 个长度为size的连续空间，函数返回一个指向分配起始地址的指针。如果分配不成功，返回NULL。</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">objc_constructInstance(Class cls, <span class="keyword">void</span> *bytes) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!cls  ||  !bytes) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">id</span> obj = (<span class="keyword">id</span>)bytes;</span><br><span class="line"></span><br><span class="line">    obj-&gt;initIsa(cls);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cls-&gt;hasCxxCtor()) &#123;</span><br><span class="line">        <span class="keyword">return</span> object_cxxConstructFromClass(obj, cls);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>objc_constructInstance</code> 方法中，将 <code>bytes</code>（指向分对象的指针）定义为 <code>obj</code>，并将 <code>obj</code> 的 isa 赋值为传入的 cls。最后返回 obj。</p>
+<blockquote>
+<p><strong>FYI:</strong><br>hasCxxCtor() 是判断当前 class 或者 superclass 是否有 .cxx_construct 构造方法的实现。<br>hasCxxDtor() 是判断判断当前 class 或者 superclass 是否有 .cxx_destruct 析构方法的实现。<br>参考：<a target="_blank" rel="noopener" href="http://ios.jobbole.com/90310/">Objc 对象的今生今世</a></p>
+</blockquote>
+<h1 id="dealloc"><a href="#dealloc" class="headerlink" title="dealloc"></a>dealloc</h1><p>找到 dealloc 的实现。</p>
+<p><strong>objc4 NSObject.mm dealloc:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)dealloc &#123;</span><br><span class="line">    _objc_rootDealloc(<span class="keyword">self</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 NSObject.mm _objc_rootDealloc:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">_objc_rootDealloc(<span class="keyword">id</span> obj)</span><br><span class="line">&#123;</span><br><span class="line">    assert(obj);</span><br><span class="line"></span><br><span class="line">    obj-&gt;rootDealloc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 NSObject.mm _objc_rootDealloc:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="keyword">void</span></span><br><span class="line">objc_object::rootDealloc()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isTaggedPointer()) <span class="keyword">return</span>;</span><br><span class="line">    object_dispose((<span class="keyword">id</span>)<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>FYI:</strong><br><a target="_blank" rel="noopener" href="http://blog.devtang.com/2014/05/30/understand-tagged-pointer/">深入理解Tagged Pointer</a></p>
+</blockquote>
+<p><strong>objc4 objc-runtime-new.mm object_dispose:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> </span><br><span class="line">object_dispose(<span class="keyword">id</span> obj)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!obj) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">    objc_destructInstance(obj);    </span><br><span class="line">    free(obj);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 objc-runtime-new.mm objc_destructInstance:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/***********************************************************************</span></span><br><span class="line"><span class="comment">* objc_destructInstance</span></span><br><span class="line"><span class="comment">* Destroys an instance without freeing memory. </span></span><br><span class="line"><span class="comment">* Calls C++ destructors.</span></span><br><span class="line"><span class="comment">* Calls ARC ivar cleanup.</span></span><br><span class="line"><span class="comment">* Removes associative references.</span></span><br><span class="line"><span class="comment">* Returns `obj`. Does nothing if `obj` is nil.</span></span><br><span class="line"><span class="comment">**********************************************************************/</span></span><br><span class="line"><span class="keyword">void</span> *objc_destructInstance(<span class="keyword">id</span> obj) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj) &#123;</span><br><span class="line">        <span class="comment">// Read all of the flags at once for performance.</span></span><br><span class="line">        <span class="keyword">bool</span> cxx = obj-&gt;hasCxxDtor();</span><br><span class="line">        <span class="keyword">bool</span> assoc = obj-&gt;hasAssociatedObjects();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// This order is important.</span></span><br><span class="line">        <span class="keyword">if</span> (cxx) object_cxxDestruct(obj);</span><br><span class="line">        <span class="keyword">if</span> (assoc) _object_remove_assocations(obj);</span><br><span class="line">        obj-&gt;clearDeallocating();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>objc4 objc-object.h clearDeallocating:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="keyword">void</span> </span><br><span class="line">objc_object::clearDeallocating()</span><br><span class="line">&#123;</span><br><span class="line">    sidetable_clearDeallocating();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>objc4 NSObject.mm sidetable_clearDeallocating:</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> </span><br><span class="line">objc_object::sidetable_clearDeallocating()</span><br><span class="line">&#123;</span><br><span class="line">    SideTable&amp; table = SideTables()[<span class="keyword">this</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// clear any weak table items</span></span><br><span class="line">    <span class="comment">// clear extra retain count and deallocating bit</span></span><br><span class="line">    <span class="comment">// (fixme warn or abort if extra retain count == 0 ?)</span></span><br><span class="line">    table.lock();</span><br><span class="line">    RefcountMap::iterator it = table.refcnts.find(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">if</span> (it != table.refcnts.end()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (it-&gt;second &amp; SIDE_TABLE_WEAKLY_REFERENCED) &#123;</span><br><span class="line">            weak_clear_no_lock(&amp;table.weak_table, (<span class="keyword">id</span>)<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        table.refcnts.erase(it);</span><br><span class="line">    &#125;</span><br><span class="line">    table.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，<code>objc_destructInstance(obj);</code> 中进行了销毁实例但不释放内存，调用了 C++ 的析构函数（如果对象有），处理先关的对象（如果有），最后调用 <code>obj-&gt;clearDeallocating();</code> 清除 weak 引用、清除多余的 retain count。<code>objc_destructInstance(obj);</code> 之后是 <code>free(obj);</code> 释放 obj 占用的内存空间。</p>
+<p>#Other</p>
+<p>（在写这边文章的时候，我怎么感觉我最大的感触是，C++ 不懂。。）</p>
+<p>写本篇博文时参考的所有资料：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://blog.tracyone.com/2015/06/14/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAARC-%E4%B8%8A/">Tracy Wang-深入浅出ARC(上)</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ff8a7c458c96">原来我非不快乐-我们的对象会经历什么</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.desgard.com/weak/">desgard-weak 弱引用的实现方式</a></p>
+<p><a target="_blank" rel="noopener" href="http://ios.jobbole.com/90310/">Objc 对象的今生今世</a></p>
+<p><a target="_blank" rel="noopener" href="http://yulingtianxia.com/blog/2015/12/06/The-Principle-of-Refenrence-Counting/">玉令天下-Objective-C 引用计数原理</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/9d649ce6d0b8">一缕殇流化隐半边冰霜-神经病院Objective-C Runtime入院第一天——isa和Class</a></p>
+<p><a target="_blank" rel="noopener" href="http://sindrilin.com/runtime/2016/12/23/闲聊内存管理">sindrilin-闲聊内存管理</a></p>
+</blockquote>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS%E8%BF%9B%E9%98%B6/" rel="tag"># iOS进阶</a>
+          
+            <a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%BC%95%E7%94%A8/" rel="tag"># 内存与引用</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/08/iOS%E8%BF%9B%E9%98%B6%E2%80%94%E2%80%94iOS-Memory-Block/" rel="next" title="iOS进阶——iOS（Objective-C） 内存管理&Block">
+                <i class="fa fa-chevron-left"></i> iOS进阶——iOS（Objective-C） 内存管理&Block
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/27/ssh-keygen-%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84-randomart-image-%E6%98%AF%E4%BB%80%E4%B9%88/" rel="prev" title="ssh-keygen 中生成的 randomart image 是什么">
+                ssh-keygen 中生成的 randomart image 是什么 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SideTable"><span class="nav-number">1.</span> <span class="nav-text">SideTable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#retainCount"><span class="nav-number">2.</span> <span class="nav-text">retainCount</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#retain"><span class="nav-number">3.</span> <span class="nav-text">retain</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#release"><span class="nav-number">4.</span> <span class="nav-text">release</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#alloc"><span class="nav-number">5.</span> <span class="nav-text">alloc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dealloc"><span class="nav-number">6.</span> <span class="nav-text">dealloc</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/02/15/Advanced-iOS-Study-objc-Memory-2/';
+          this.page.identifier = '2017/02/15/Advanced-iOS-Study-objc-Memory-2/';
+          this.page.title = 'iOS进阶——iOS（Objective-C）内存管理·二';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

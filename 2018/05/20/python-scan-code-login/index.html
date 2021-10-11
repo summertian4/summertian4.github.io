@@ -1,0 +1,910 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,Django," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Python——奇怪的扫码登录最近在做 Sparrow（还在内测的一个敲好用 Mock 系统😁）的时候遇到了一个需求。Sparrow 服务器是使用 Django 2.0 编写的产品，所以本文所有的代码背景均为 Django 2.0 环境和 Python 3.6.3 语言，整体是 Vue + Django + SQLite。 Sparrow 的操作一般都是在网页上操作，而手机客户端往往是用来同步一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python——奇怪的扫码登录">
+<meta property="og:url" content="http://lottyzhou.com/2018/05/20/python-scan-code-login/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="Python——奇怪的扫码登录最近在做 Sparrow（还在内测的一个敲好用 Mock 系统😁）的时候遇到了一个需求。Sparrow 服务器是使用 Django 2.0 编写的产品，所以本文所有的代码背景均为 Django 2.0 环境和 Python 3.6.3 语言，整体是 Vue + Django + SQLite。 Sparrow 的操作一般都是在网页上操作，而手机客户端往往是用来同步一">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-02.gif">
+<meta property="article:published_time" content="2018-05-20T05:50:46.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.401Z">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-03.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2018/05/20/python-scan-code-login/"/>
+
+
+
+
+
+  <title> Python——奇怪的扫码登录 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2018/05/20/python-scan-code-login/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python——奇怪的扫码登录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T13:50:46+08:00">
+                2018-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/20/python-scan-code-login/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/20/python-scan-code-login/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python——奇怪的扫码登录"><a href="#Python——奇怪的扫码登录" class="headerlink" title="Python——奇怪的扫码登录"></a>Python——奇怪的扫码登录</h1><p>最近在做 Sparrow（还在内测的一个敲好用 Mock 系统😁）的时候遇到了一个需求。Sparrow 服务器是使用 Django 2.0 编写的产品，所以<strong>本文所有的代码背景均为 Django 2.0 环境和 Python 3.6.3 语言，整体是 Vue + Django + SQLite。</strong></p>
+<p>Sparrow 的操作一般都是在网页上操作，而手机客户端往往是用来同步一些简单数据的。那么这里遇到一个和平常 APP 不同的使用场景。</p>
+<p>一般来说，一个产品的操作大多是在手机上，那么 PC 客户端和网页版就可以通过已经登录的移动端 APP 扫码登录。</p>
+<p>而现在的情况是，Sparrow 的使用大多在网页版，那么，我需要的就是，让移动 APP 用户在网页版已经登录的情况下免去输入用户名、密码的登录操作，让移动 APP 用户扫描网页二维码，完成移动 APP 的登录。</p>
+<span id="more"></span>
+<h2 id="大致的-Use-Case"><a href="#大致的-Use-Case" class="headerlink" title="大致的 Use Case"></a>大致的 Use Case</h2><p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-03.png" alt=""></p>
+<p>##设计思路</p>
+<h3 id="扫码登录-URL"><a href="#扫码登录-URL" class="headerlink" title="扫码登录 URL"></a>扫码登录 URL</h3><p>首先能想到的是，服务器要提供给移动 APP 可以访问的 URL（展现成二维码给 APP 扫描），这个 URL 需要包括</p>
+<ol>
+<li>user 的唯一标志符</li>
+<li>验证码</li>
+</ol>
+<p>那么其 URL 的大致模样就是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frontend/account/quick_login?user_id=&lt;user_id&gt;&amp;verification_code=&lt;verification_code&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h3><p>验证码是从哪里来的？</p>
+<p>原因是这样的，如果扫码登录的 URL 永久有效，显然是不合理的，这意味着只要得到了这个 URL，任何人都可以通过这个 URL 随时登录该用户的账号，所以需要有验证码。</p>
+<p>同时，<strong>验证码需要附带生成时间</strong>，以此来达<strong>到验证码一分钟有效</strong>的 Feature。为此，设计一个外键为 user 的 Model：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuickLoginRecord</span>(<span class="params">models.Model, Dictable</span>):</span></span><br><span class="line">    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=<span class="literal">True</span>)</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="literal">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now=<span class="literal">True</span>)</span><br><span class="line">    verification_code = models.CharField(max_length=<span class="number">32</span>, null=<span class="literal">True</span>, default=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>通过 Django 生成的对应数据库为：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-01.png" alt=""></p>
+<p>什么时候生成验证码，那当然是生成二维码的时候，所以，这个 URL 不是给移动端请求的，而是给前端来请求的，前端在已登录的情况下，访问该 URL 可以直接传递 user 信息，后端通过拿到 user 信息，生成一条 QuickLoginRecord 记录。</p>
+<p>前端访问并拿到验证码的 URL 的大致模样是：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frontend/account/request_quick_login</span><br></pre></td></tr></table></figure>
+<p>那么整个流程就是（省略了细节处理）：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-04.png" alt=""></p>
+<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><h3 id="url-py"><a href="#url-py" class="headerlink" title="url.py"></a>url.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">	// ···</span><br><span class="line">	path(<span class="string">&#x27;frontend/account/quick_login&#x27;</span>, AccountAction.quick_login),</span><br><span class="line">    path(<span class="string">&#x27;frontend/account/request_quick_login&#x27;</span>, AccountAction.request_quick_login),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="models-py"><a href="#models-py" class="headerlink" title="models.py"></a>models.py</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuickLoginRecord</span>(<span class="params">models.Model, Dictable</span>):</span></span><br><span class="line">    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=<span class="literal">True</span>)</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="literal">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now=<span class="literal">True</span>)</span><br><span class="line">    verification_code = models.CharField(max_length=<span class="number">32</span>, null=<span class="literal">True</span>, default=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="account-action-py"><a href="#account-action-py" class="headerlink" title="account_action.py"></a>account_action.py</h3><p>这里代码不想看的话，大概描述一下过程：</p>
+<h4 id="def-request-quick-login-request-HttpRequest"><a href="#def-request-quick-login-request-HttpRequest" class="headerlink" title="def request_quick_login(request: HttpRequest)"></a>def request_quick_login(request: HttpRequest)</h4><ol>
+<li>规定 HTTPMethod 必须为 GET 访问</li>
+<li>获取 request 中的 user_id 参数</li>
+<li>通过 user_id 查询 QuickLoginRecord 记录</li>
+<li>如果未查询到结果，新建一个 QuickLoginRecord 记录，设置 user 关联、verification_code（create_time 和 update_time 在 QuickLoginRecordDao 中自动设置）</li>
+<li>如果查询到结果，更新 verification_code 字段（ update_time 在 QuickLoginRecordDao 中自动设置）</li>
+<li>返回 Success</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@track(<span class="params">AccountRequestQuickLogin</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_quick_login</span>(<span class="params">request: HttpRequest</span>):</span></span><br><span class="line">    <span class="keyword">if</span> request.method != CommonData.Method.GET.value:</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(Response.methodInvalidResponse().toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br><span class="line">    user = request.user</span><br><span class="line">    r = QuickLoginRecordDao.get_record_with_user_id(user.<span class="built_in">id</span>)</span><br><span class="line">    <span class="keyword">if</span> r <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        r.verification_code = <span class="built_in">str</span>(uuid.uuid1())</span><br><span class="line">        QuickLoginRecordDao.update_record(r)</span><br><span class="line">        response = Response(Success, <span class="string">&#x27;Success&#x27;</span>, &#123;<span class="string">&#x27;verification_code&#x27;</span>: r.verification_code&#125;)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(response.toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        record = QuickLoginRecord()</span><br><span class="line">        record.user = user</span><br><span class="line">        record.verification_code = <span class="built_in">str</span>(uuid.uuid1())</span><br><span class="line">        QuickLoginRecordDao.add_record(record)</span><br><span class="line">        response = Response(Success, <span class="string">&#x27;Success&#x27;</span>, &#123;<span class="string">&#x27;verification_code&#x27;</span>: record.verification_code&#125;)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(response.toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="def-quick-login-request-HttpRequest"><a href="#def-quick-login-request-HttpRequest" class="headerlink" title="def quick_login(request: HttpRequest):"></a>def quick_login(request: HttpRequest):</h4><ol>
+<li>规定 HTTPMethod 必须为 GET 访问</li>
+<li>拿到 reqeust 中的 user_id</li>
+<li>拿到 reqeust 中的 verification_code</li>
+<li>通过 verification_code 获取 QuickLoginRecord 记录</li>
+<li>如果记录不存在则表示验证码不存在或过期</li>
+<li>如果存在，比较 update_time 字段，判断是否已经超过 60 秒</li>
+<li>超过 60 秒返回『验证码过期』</li>
+<li>未超过 60 秒，让用户登录</li>
+<li>返回 Success</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@track(<span class="params">AccountQuickLogin</span>)</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">quick_login</span>(<span class="params">request: HttpRequest</span>):</span></span><br><span class="line">       <span class="keyword">if</span> request.method != CommonData.Method.GET.value:</span><br><span class="line">           <span class="keyword">return</span> HttpResponse(Response.methodInvalidResponse().toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br><span class="line">       user_id = request.GET.get(<span class="string">&#x27;user_id&#x27;</span>)</span><br><span class="line">       verification_code = request.GET.get(<span class="string">&#x27;verification_code&#x27;</span>)</span><br><span class="line"></span><br><span class="line">       record = QuickLoginRecordDao.get_record_with_verification_code(verification_code)</span><br><span class="line">       <span class="keyword">if</span> record <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">           response = Response(QuickLoginFailed, <span class="string">&#x27;验证码不存在或已过期&#x27;</span>, &#123;&#125;)</span><br><span class="line">           <span class="keyword">return</span> HttpResponse(response.toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br><span class="line"></span><br><span class="line">       now = datetime.now(timezone.utc)</span><br><span class="line">       offset = (now - record.update_time).seconds</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> offset &gt; <span class="number">60</span>:</span><br><span class="line">           response = Response(QuickLoginFailed, <span class="string">&#x27;验证码已过期&#x27;</span>, &#123;&#125;)</span><br><span class="line">           <span class="keyword">return</span> HttpResponse(response.toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br><span class="line"></span><br><span class="line">       user = AccountDao.get_user_with_id(user_id)</span><br><span class="line">       <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">           response = Response(QuickLoginFailed, <span class="string">&#x27;用户不存在&#x27;</span>, &#123;&#125;)</span><br><span class="line">           <span class="keyword">return</span> HttpResponse(response.toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br><span class="line">       user.backend = <span class="string">&#x27;django.contrib.auth.backends.ModelBackend&#x27;</span></span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&#x27;用户 &#x27;</span> + user.username + <span class="string">&#x27; 尝试登录&#x27;</span>)</span><br><span class="line">       auth.login(request, user)</span><br><span class="line">       accountInfo = User.objects.get(<span class="built_in">id</span>=user.<span class="built_in">id</span>)</span><br><span class="line">       response = Response(Success, <span class="string">&#x27;Success&#x27;</span>, &#123;<span class="string">&#x27;id&#x27;</span>: accountInfo.<span class="built_in">id</span>,</span><br><span class="line">                                                <span class="string">&#x27;username&#x27;</span>: accountInfo.username,</span><br><span class="line">                                                <span class="string">&#x27;email&#x27;</span>: accountInfo.email&#125;)</span><br><span class="line">       <span class="keyword">return</span> HttpResponse(response.toJson(), content_type=<span class="string">&#x27;application/json&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="quick-login-record-dao-py"><a href="#quick-login-record-dao-py" class="headerlink" title="quick_login_record_dao.py"></a>quick_login_record_dao.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuickLoginRecordDao</span>:</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_record</span>(<span class="params">record</span>):</span></span><br><span class="line">        record.save()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_record_with_user_id</span>(<span class="params">user_id</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            record = QuickLoginRecord.objects.get(user_id=user_id)</span><br><span class="line">            <span class="keyword">return</span> record</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_record</span>(<span class="params">record</span>):</span></span><br><span class="line">        result = QuickLoginRecord.objects.<span class="built_in">filter</span>(<span class="built_in">id</span>=record.<span class="built_in">id</span>).update(</span><br><span class="line">            verification_code=record.verification_code,</span><br><span class="line">            update_time=datetime.datetime.now())</span><br><span class="line">        <span class="keyword">if</span> result &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_record_with_verification_code</span>(<span class="params">code</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            record = QuickLoginRecord.objects.get(verification_code=code)</span><br><span class="line">            <span class="keyword">return</span> record</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<h2 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h2><p>前端的效果是这样的：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_python-scan-code-login-02.gif" alt=""></p>
+<p>在已登录的状态下，点击右上角的『客户端扫码登录』按钮，弹出二维码。</p>
+<p>动效、模态窗什么的就不过多展示代码了，只关注主流程的代码：</p>
+<h3 id="导航栏按钮"><a href="#导航栏按钮" class="headerlink" title="导航栏按钮"></a>导航栏按钮</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;account.status&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button is-primary&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;openModalImage&quot;</span>&gt;</span>客户端扫码登录		<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="openModalImage-函数"><a href="#openModalImage-函数" class="headerlink" title="openModalImage 函数"></a>openModalImage 函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">openModalImage () &#123;</span><br><span class="line">  <span class="keyword">const</span> imageModal = openImageModal()</span><br><span class="line">  imageModal.loading = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">var</span> baseUrl = <span class="built_in">window</span>.location.protocol + <span class="string">&#x27;//&#x27;</span> + <span class="built_in">window</span>.location.host</span><br><span class="line">  request(<span class="string">&#x27;/frontend/account/request_quick_login&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;get&#x27;</span></span><br><span class="line">  &#125;).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> verificationCode = response.data.verification_code</span><br><span class="line">    <span class="keyword">var</span> url = baseUrl + <span class="string">&#x27;/frontend/account/quick_login&#x27;</span> + <span class="string">&#x27;?&#x27;</span> +</span><br><span class="line">      <span class="string">&#x27;verification_code=&#x27;</span> + verificationCode + <span class="string">&#x27;&amp;&#x27;</span> +</span><br><span class="line">    <span class="string">&#x27;user_id=&#x27;</span> + <span class="built_in">this</span>.accountInfo.id</span><br><span class="line"></span><br><span class="line">    QRCode.toDataURL(url)</span><br><span class="line">      .then(<span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">        imageModal.imgUrl = url</span><br><span class="line">        imageModal.loading = <span class="literal">false</span></span><br><span class="line">        imageModal.$children[<span class="number">0</span>].active()</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;).catch(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    notification.toast(&#123;</span><br><span class="line">      <span class="attr">message</span>: response.message,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;danger&#x27;</span>,</span><br><span class="line">      <span class="attr">duration</span>: <span class="number">2000</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="iOS代码"><a href="#iOS代码" class="headerlink" title="iOS代码"></a>iOS代码</h2><p>iOS 代码就不展示了，就是扫码访问二维码里的 URL，再加上一些非法 URL 的判断即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>过完整个流程后，可以感觉到，类似于支付宝的扫码支付。给出一个定时刷新的二维码，供给客户端进行扫码登录。</p>
+<p>当然，还有可以完善的地方，比如前段在打开了二维码模态窗时，每 60 秒进行一次定时刷新。</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/02/pod-resource-reference/" rel="next" title="关于 Pod 库的资源引用 resource_bundles or resources">
+                <i class="fa fa-chevron-left"></i> 关于 Pod 库的资源引用 resource_bundles or resources
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/ios-network-traffic/" rel="prev" title="iOS 流量监控分析">
+                iOS 流量监控分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python%E2%80%94%E2%80%94%E5%A5%87%E6%80%AA%E7%9A%84%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">Python——奇怪的扫码登录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E7%9A%84-Use-Case"><span class="nav-number">1.1.</span> <span class="nav-text">大致的 Use Case</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95-URL"><span class="nav-number">1.1.1.</span> <span class="nav-text">扫码登录 URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">验证码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">后端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url-py"><span class="nav-number">1.2.1.</span> <span class="nav-text">url.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#models-py"><span class="nav-number">1.2.2.</span> <span class="nav-text">models.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#account-action-py"><span class="nav-number">1.2.3.</span> <span class="nav-text">account_action.py</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#def-request-quick-login-request-HttpRequest"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">def request_quick_login(request: HttpRequest)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#def-quick-login-request-HttpRequest"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">def quick_login(request: HttpRequest):</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#quick-login-record-dao-py"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">quick_login_record_dao.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">前端代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E8%88%AA%E6%A0%8F%E6%8C%89%E9%92%AE"><span class="nav-number">1.3.1.</span> <span class="nav-text">导航栏按钮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#openModalImage-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">openModalImage 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">iOS代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2018/05/20/python-scan-code-login/';
+          this.page.identifier = '2018/05/20/python-scan-code-login/';
+          this.page.title = 'Python——奇怪的扫码登录';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

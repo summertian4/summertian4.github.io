@@ -1,0 +1,919 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="冷知识,Other," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="randomart image 出现在哪里通常我们在生成 SSH Key 的时候会用到 ssh-keygen 命令，在生成结束后，会输出类似如下的内容，这个 randomart image 是什么呢？ 123456789101112The key&amp;#x27;s randomart image is:+--[ RSA 2048]----+|       o&#x3D;.       ||    o  o++E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssh-keygen 中生成的 randomart image 是什么">
+<meta property="og:url" content="http://lottyzhou.com/2017/03/27/ssh-keygen-%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84-randomart-image-%E6%98%AF%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="randomart image 出现在哪里通常我们在生成 SSH Key 的时候会用到 ssh-keygen 命令，在生成结束后，会输出类似如下的内容，这个 randomart image 是什么呢？ 123456789101112The key&amp;#x27;s randomart image is:+--[ RSA 2048]----+|       o&#x3D;.       ||    o  o++E">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-01.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-02.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-03.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-04.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-05.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-06.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-07.jpg">
+<meta property="article:published_time" content="2017-03-27T09:23:40.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.401Z">
+<meta property="article:tag" content="冷知识">
+<meta property="article:tag" content="Other">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-01.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/03/27/ssh-keygen-中生成的-randomart-image-是什么/"/>
+
+
+
+
+
+  <title> ssh-keygen 中生成的 randomart image 是什么 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/03/27/ssh-keygen-%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84-randomart-image-%E6%98%AF%E4%BB%80%E4%B9%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ssh-keygen 中生成的 randomart image 是什么
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T17:23:40+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%B7%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">冷知识</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%B7%E7%9F%A5%E8%AF%86/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/27/ssh-keygen-%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84-randomart-image-%E6%98%AF%E4%BB%80%E4%B9%88/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/03/27/ssh-keygen-中生成的-randomart-image-是什么/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="randomart-image-出现在哪里"><a href="#randomart-image-出现在哪里" class="headerlink" title="randomart image 出现在哪里"></a>randomart image 出现在哪里</h1><p>通常我们在生成 SSH Key 的时候会用到 <code>ssh-keygen</code> 命令，在生成结束后，会输出类似如下的内容，这个 randomart image 是什么呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|       o=.       |</span><br><span class="line">|    o  o++E      |</span><br><span class="line">|   + . Ooo.      |</span><br><span class="line">|    + O B..      |</span><br><span class="line">|     = *S.       |</span><br><span class="line">|      o          |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">+-----------------+</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h1 id="为什么会有-randomart-image"><a href="#为什么会有-randomart-image" class="headerlink" title="为什么会有 randomart image"></a>为什么会有 randomart image</h1><p>相比超长字符串，人们更容易接受图形。让我们对比两幅图片的差异比对比两个超长字符串也要容易的多。这就是为什么现在大家使用二维码，而不是复制粘贴 URL 的原因。</p>
+<p>Randomart image 通过将 Key 转换成有规律的图片，让人可以更加容易的、快速的对比 Key 的异同。</p>
+<h1 id="趣闻"><a href="#趣闻" class="headerlink" title="趣闻"></a>趣闻</h1><p>在<a target="_blank" rel="noopener" href="http://aarontoponce.org/drunken_bishop.pdf">《The drunken bishop: An analysis of the OpenSSH<br>fingerprint visualization algorithm》</a>中，作者通过一段有趣的故事来表达 randomart image 生成的过程：</p>
+<blockquote>
+<p>Peter 主教发现自己在一个封闭的矩形房间内，四面都是墙壁，而地板上又铺满了黑白交替矩形的瓷砖。Peter 主教突然开始头疼——大概应为之前喝了太多的酒——于是开始随意的走动起来。准确的说，他是按照对角走位的方式，就好像国际象棋上的主教一样。当他遇到墙壁的时候，如果他踩着黑瓷砖，就走向白瓷砖，如果踩着白瓷砖就走向黑瓷砖。每次动作之后，他都会在瓷砖上放置一个硬币，记录他踩过这里一次。走了 64 步之后，用完了所有的硬币，Peter 突然醒了过来。多么奇怪的梦！</p>
+</blockquote>
+<h1 id="如何生成"><a href="#如何生成" class="headerlink" title="如何生成"></a>如何生成</h1><p>看了上面的故事，来说一说 randomart image 具体是如何生成的。</p>
+<p>我们知道 OpenSSH Key 的指纹是一个 MD5 校验和，同事可以用 16 进制表示出来，类似这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc:94:b0:c1:e5:b0:98:7c:58:43:99:76:97:ee:9f:b7</span><br></pre></td></tr></table></figure>
+<p>当然，也可以用二进制来表示。</p>
+<p>于是按照 Peter 的走路方式，我们定义如下走位：</p>
+<ol>
+<li>“00” 表示向西北（左上）移动</li>
+<li>“01” 表示向东北（右上）移动</li>
+<li>“10” 表示向西南（右下）移动</li>
+<li>“11” 表示向东南（坐下）移动</li>
+</ol>
+<p>就像这样：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-01.jpg" alt=""></p>
+<p>我们来画个图，用于表示黑白相间的瓷砖房，并每个格子上都编号，一开始的时候，Peter 在房间的中间：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-02.jpg" alt=""></p>
+<p>中间的 76 号就是 Peter 最初的位置。我们可以把 Peter 所在的格子表示为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 用坐标系表示</span><br><span class="line">P = x + 17y</span><br></pre></td></tr></table></figure>
+<p>那么，从 76 号向四个方向移动 P 值变化：</p>
+<ol>
+<li>“00” 进入 58 号格子，数值 -18</li>
+<li>“01” 进入 60 号格子，数值 -16</li>
+<li>“10” 进入 92 号格子，数值 +16</li>
+<li>“11” 进入 94 号格子，数值 +18</li>
+</ol>
+<p>对于碰墙的情况，做如下规则：</p>
+<p>将房间的每个格子做分类，四个角分别为 a、b、c、d，靠着四面墙的分别为 T、R、B、L，其余部分为 M。</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-03.jpg" alt=""></p>
+<p>对于每一种情况：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-04.jpg" alt=""></p>
+<p>解释一下上图，以 a 栏为例，如果下一步像左上移动，但是继续走就撞墙了，所以实际移动为 <code>不移动</code>；如果向右上移动，实际移动为 <code>向右移动</code>；如果向左下移动，实际移动为 <code>向下移动</code>；如果像右下移动，实际移动就是 <code>向下移动</code>。</p>
+<p>那么 Peter 投掷硬币是怎样体现的？实际上，是做如下统计，每个格子，如果没有被踩过，则不做表示；如果被踩过一次，记录为 <code>.</code>；如果被踩了两次，记录为 <code>o</code>…具体如下：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-05.jpg" alt=""></p>
+<p>比较特别的是 <code>S</code> 和 <code>E</code>，<code>S</code> 和 <code>E</code> 分别标记起始和终止位置（所以 76 号格子永远是 S）。</p>
+<p>实际操作一下，对于 <code>fc:94:b0:c1:e5:b0:98:7c:58:43:99:76:97:ee:9f:b7</code>，我们将其转换成二进制：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11010100:11010100:11111101:11001010:...:00111011:11100100:10111010:11101001</span><br></pre></td></tr></table></figure>
+<p>将二进制二位一组，按照下表做好走路的顺序：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-06.jpg" alt=""></p>
+<p>按照上面的顺序，踩到格子的顺序如下。</p>
+<p>76, 58, 76, 94, 112, 94, 78, 62, 78, 60, 42, 60, 76, 60, 42, 24, 42, 26, 10, 26, 44, 26, 8, 26, 42, 24, 40, 24, 40, 22, 40, 58, 42, 24, 40, 24, 8, 26, 8, 7, 8, 9, 25, 9, 25, 41, 25, 43, 27, 45, 29, 13, 29, 45, 63, 79, 97, 115, 133, 117, 133, 151, 135, 152, 151</p>
+<p>最后做成统计，填好图，成品就如下。是不是就和我们平常在控制台得到的输出一致？</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_ssh-keygen%20%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84%20randomart%20image%20%E6%98%AF%E4%BB%80%E4%B9%88-07.jpg" alt=""></p>
+<h1 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://superuser.com/questions/22535/what-is-randomart-produced-by-ssh-keygen">What is randomart produced by ssh-keygen?</a><br><a target="_blank" rel="noopener" href="https://pthree.org/2013/05/30/openssh-keys-and-the-drunken-bishop/">OpenSSH Keys and The Drunken Bishop</a><br><a target="_blank" rel="noopener" href="http://aarontoponce.org/drunken_bishop.pdf">The drunken bishop: An analysis of the OpenSSH<br>fingerprint visualization algorithm</a></p>
+</blockquote>
+<p><em>最后一点说明：其主要原理都发表在 <a target="_blank" rel="noopener" href="http://aarontoponce.org/drunken_bishop.pdf">The drunken bishop: An analysis of the OpenSSH<br>fingerprint visualization algorithm</a></em></p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">Lotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%86%B7%E7%9F%A5%E8%AF%86/" rel="tag"># 冷知识</a>
+          
+            <a href="/tags/Other/" rel="tag"># Other</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/15/Advanced-iOS-Study-objc-Memory-2/" rel="next" title="iOS进阶——iOS（Objective-C）内存管理·二">
+                <i class="fa fa-chevron-left"></i> iOS进阶——iOS（Objective-C）内存管理·二
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/04/iOS%E2%80%94%E2%80%94%E5%86%99%E4%B8%80%E4%B8%AA%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%84%9A%E6%9C%AC/" rel="prev" title="iOS——写一个快速定位问题的脚本">
+                iOS——写一个快速定位问题的脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#randomart-image-%E5%87%BA%E7%8E%B0%E5%9C%A8%E5%93%AA%E9%87%8C"><span class="nav-number">1.</span> <span class="nav-text">randomart image 出现在哪里</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89-randomart-image"><span class="nav-number">2.</span> <span class="nav-text">为什么会有 randomart image</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%A3%E9%97%BB"><span class="nav-number">3.</span> <span class="nav-text">趣闻</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">如何生成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3"><span class="nav-number">5.</span> <span class="nav-text">相关</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/03/27/ssh-keygen-%E4%B8%AD%E7%94%9F%E6%88%90%E7%9A%84-randomart-image-%E6%98%AF%E4%BB%80%E4%B9%88/';
+          this.page.identifier = '2017/03/27/ssh-keygen-中生成的-randomart-image-是什么/';
+          this.page.title = 'ssh-keygen 中生成的 randomart image 是什么';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1024 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3248765765901727",
+          enable_page_level_ads: true
+        });
+      </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,iOS模块化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1. 开篇本文的初衷，是为了给正在做混编或者模块化的同学们一个建议和参考。 因为来饿厂以后做的项目是全公司唯一一个 Swift&#x2F;OC 混编的 iOS 项目，所以一路上踩坑无数，现在把一些踩坑的过程和经验总结起来，供大家参考。 相信在浏览本文后，一定会有所收获。 我来的时候项目已经开始 Swift 改造了，慢慢的把项目 Swift 化，新代码都是 Swift 的。 先公布七个月成果，下图是我们最终的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 混编 模块化&#x2F;组件化 经验指北">
+<meta property="og:url" content="http://lottyzhou.com/2017/11/24/iOS-Modularization/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="1. 开篇本文的初衷，是为了给正在做混编或者模块化的同学们一个建议和参考。 因为来饿厂以后做的项目是全公司唯一一个 Swift&#x2F;OC 混编的 iOS 项目，所以一路上踩坑无数，现在把一些踩坑的过程和经验总结起来，供大家参考。 相信在浏览本文后，一定会有所收获。 我来的时候项目已经开始 Swift 改造了，慢慢的把项目 Swift 化，新代码都是 Swift 的。 先公布七个月成果，下图是我们最终的">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-09.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-08.png">
+<meta property="article:published_time" content="2017-11-24T03:03:52.000Z">
+<meta property="article:modified_time" content="2021-10-11T09:40:59.393Z">
+<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="iOS模块化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-03.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lottyzhou.com/2017/11/24/iOS-Modularization/"/>
+
+
+
+
+
+  <title> iOS 混编 模块化/组件化 经验指北 |  </title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title"></span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lottyzhou.com/2017/11/24/iOS-Modularization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS 混编 模块化/组件化 经验指北
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T11:03:52+08:00">
+                2017-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/iOS%E6%A8%A1%E5%9D%97%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS模块化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/24/iOS-Modularization/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/24/iOS-Modularization/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-开篇"><a href="#1-开篇" class="headerlink" title="1. 开篇"></a>1. 开篇</h1><p>本文的初衷，是为了给正在做混编或者模块化的同学们一个建议和参考。</p>
+<p>因为来饿厂以后做的项目是全公司唯一一个 Swift/OC 混编的 iOS 项目，所以一路上踩坑无数，现在把一些踩坑的过程和经验总结起来，供大家参考。</p>
+<p>相信在浏览本文后，一定会有所收获。</p>
+<p>我来的时候项目已经开始 Swift 改造了，慢慢的把项目 Swift 化，新代码都是 Swift 的。</p>
+<p>先公布七个月成果，下图是我们最终的项目结构：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-03.png" alt=""></p>
+<p>对于我们混编的情况，在五个月前大家就展开了讨论。</p>
+<p>给我们的选择有两种：</p>
+<ol>
+<li>慢慢将 OC 代码替换成 Swift</li>
+<li>尽快模块化，分离两种语言代码</li>
+</ol>
+<p>一开始我们是从 <code>选择1</code> 开始做的，但是很快我们就发现，对于我们 74% 都是 OC 代码的项目来说，太痛了，太漫长了，而且期间迭代的过程中还在不断地迭代，不断的耦合。</p>
+<p>所以在经过一番利害分析后我们迅速投入到了 <code>选择2</code> 中。一方面，模块化本身就是越来越臃肿的项目的最终归宿，一方面可以慢慢将两种语言剥离。</p>
+<span id="more"></span>
+<blockquote>
+<p>注：这里的模块化，也就是大家说的『组件化』，不是在主工程用文件夹分模块，而是指将独立模块抽调成 CocoaPods 库、或者其他形式的库文件，成为一个独立工程。</p>
+</blockquote>
+<h1 id="2-模块划分"><a href="#2-模块划分" class="headerlink" title="2. 模块划分"></a>2. 模块划分</h1><p><strong>刀怎么切，是混编模块化最重要的一步</strong>，完全决定了后续工作的难与否。</p>
+<p>不用从业务模块拆分，类似『实时订单模块』、『历史订单模块』、『个人中心』这样直接拆分，保准你后面哭到无法自已。</p>
+<p>正确的做法应该从底层部分开始抽离，首先能想到的应该是『类扩展 Extension』、『工具类』、『网络库』、『DB 管理』（当然这个我们没有用到比较重的 DB）。</p>
+<p>平常我们看到一些大型库，或者一些公司介绍自己产品架构时候都是什么样的？是不是下层有 OpenGL ES 和 Core Graphics 才有上层 Core Animation，再到 UIKit。下层决定上层，只有把复用率高的部分抽出才能逐步构建上层业务。</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-01.png" alt=""></p>
+<p>所以首先我们做的就是抽工具类和 Extension，诸如：</p>
+<ol>
+<li>各类 Constants 文件</li>
+<li><code>NSTimer</code>、<code>NSString</code>、<code>UILabel</code> 等等类的 Extension</li>
+<li><code>RouterHelper</code>、<code>JavascripInterface</code> 等等 Utils 和 Helper</li>
+</ol>
+<p>这一块的工作，不仅仅可以抽出 OC 代码，也同时可以抽出 Swift 的代码。我们将 OC 部分的代码新建了库为 <code>LPDBOCFoundationGarbage</code>，Swift 部分的代码新建库为 <code>LPDBPublicModule</code>。</p>
+<h2 id="2-1-LPDBOCFoundationGarbage"><a href="#2-1-LPDBOCFoundationGarbage" class="headerlink" title="2.1 LPDBOCFoundationGarbage"></a>2.1 LPDBOCFoundationGarbage</h2><p>先说 <code>LPDBOCFoundationGarbage</code>，叫这个名字显然不仅仅会放入上面所提到的文件。<code>LPDBOCFoundationGarbage</code> 还会<strong>大量放入长期不跟随业务变动的 OC 代码</strong>。这是因为，在实践中，我们发现总是『理想很美好』，虽然大家都抱有把旧代码整理一遍的愿望，但是实际上，我们项目的旧代码已经到了剪不断理还乱的地步，所以期望一边整理、一边分离的想法基本是不可靠的。这时候就要借用 <a target="_blank" rel="noopener" href="https://github.com/mmoaay">MM</a> 大佬给我们传授的一句话『让恶心的代码恶心到一起』，<code>LPDBOCFoundationGarbage</code> 正是为此而创建。</p>
+<p><strong>大量放入长期不跟随业务变动的 OC 代码</strong>包括：</p>
+<ol>
+<li>自定义的 Customer View，诸如：Refresh 控件、Loading 控件、红点控件等等</li>
+<li>自定义的小型控制器，诸如：TextField 和其五六个过滤器 PhoneNumValidator、IDCardValidator 等等</li>
+<li>不随业务变动的 Controller，诸如：自定义的 AlertController、自定义的 WebController、自定义的 BaseViewController 等等</li>
+</ol>
+<p>最后我们的一级列表看起来就像这样：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-04.png" alt=""></p>
+<blockquote>
+<p>关于前缀说两句。我们所有抽出的库都带有前缀 <code>LPDB</code>，但是针对 Swift 库和 OC 库稍有区分的是，OC 库内的文件也都带有前缀，而 Swift 库是去掉了前缀，这也符合两种语言的规范。</p>
+</blockquote>
+<h2 id="2-2-LPDBPublicModule"><a href="#2-2-LPDBPublicModule" class="headerlink" title="2.2 LPDBPublicModule"></a>2.2 LPDBPublicModule</h2><p><code>LPDBPublicModule</code> 情况很简单，主要是新业务迭代时候产生的一些复用性高的代码，但是这显然和 OC 那个垃圾桶库不一样，要干净整洁的多。主要存放的是：</p>
+<ol>
+<li>Swift Extension</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> 及其他公开协议</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> 是个由我开发的模块化工具和规范，一开始我叫它『路由』，但是随后发现部门这边因为叫它『路由库』而曲解了它的意思，所以后来我就叫『模块化工具』了。关于 Lotusoot 可以查看<a href="http://lottyzhou.com/2017/11/29/iOS-modularized-tool-Lotusoot/">这篇</a>。</p>
+</blockquote>
+<h2 id="2-3-LPDBNetwork"><a href="#2-3-LPDBNetwork" class="headerlink" title="2.3 LPDBNetwork"></a>2.3 LPDBNetwork</h2><p>这块毋庸置疑，不管什么项目都基本有的一块，基本上我们项目中网络相关的旧代码都是 OC 的，唯一比较麻烦的是，我们的网络层，早期人员写的比较粗糙，甚至和 UI 层代码有很多耦合，比如网络请求中和网络请求失败有一些 HUD 显示，转转菊花什么的。所以导致在从主工程抽离的时候有很多恶心的地方。</p>
+<p><strong>所以对于这种强耦合，最后解决的方式是分成了两遍代码改造，第一遍先通过反射先将 OC 代码抽出，保证代码可用，通过基础测试。第二遍是通过协议来代替原先的反射。第三遍是使用 <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> 彻底规范服务调用。在后面一节『过程中的一些难点总结』中会介绍</strong></p>
+<h2 id="2-4-LPDBUIKit"><a href="#2-4-LPDBUIKit" class="headerlink" title="2.4 LPDBUIKit"></a>2.4 LPDBUIKit</h2><p>这块是 Swift 的 UI 库，一些比较常用到的控件等等。</p>
+<h2 id="2-5-LPDBEnvironment"><a href="#2-5-LPDBEnvironment" class="headerlink" title="2.5 LPDBEnvironment"></a>2.5 LPDBEnvironment</h2><p>这块是用于环境控制的，切换要访问的服务器环境，这块本身可以不抽出的，但是由于有其他基础模块，比如 <code>LPDBNetwork</code> 依赖，而且其中相关代码比较多，环境相关的代码也比较独立，所以单独抽出。</p>
+<h1 id="3-业务模块抽离"><a href="#3-业务模块抽离" class="headerlink" title="3. 业务模块抽离"></a>3. 业务模块抽离</h1><p>到这里为止，比较底层的代码就基本抽出结束了，剩下的就可以较为轻松一些的抽取业务库了。</p>
+<p>抽取业务库的重点在于：</p>
+<ol>
+<li>抽取的业务库不会经常改动，以防止在抽取、重构过程中由于业务需求发生更动</li>
+<li>抽取的业务库可以高度独立，抽取后应当和积木一样，如 <code>LPDBLoginModule</code>，抽取后快速被集成在任何模块，并能保证登录功能，更好的服务其他模块</li>
+</ol>
+<p>我们目前抽出的三个业务模块分别是： <code>LPDBHistoryModule</code>、<code>LPDBUserCenterModule</code>、<code>LPDBLoginModule</code>。</p>
+<h1 id="4-过程中的一些重难点"><a href="#4-过程中的一些重难点" class="headerlink" title="4. 过程中的一些重难点"></a>4. 过程中的一些重难点</h1><p>剩下的就是，来说一下在这个过程中的疑难问题。</p>
+<h2 id="4-1-处理模块耦合代码-反射调用"><a href="#4-1-处理模块耦合代码-反射调用" class="headerlink" title="4.1 处理模块耦合代码-反射调用"></a>4.1 处理模块耦合代码-反射调用</h2><p>抽取代码第一遍使用反射的原因主要是，通常你在递归某个文件的依赖的时候，会递归出非常多的东西（尤其是我们的蜜汁旧代码），往往就是 <strong>A-&gt;B-&gt;C-&gt;D-&gt;F</strong>，中间有各种依赖，甚至到最后一层的时候还引用了 Swift 的类。直到最后你看 <code>#import</code> 就想吐。给个图感受一下：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-05.png" alt=""></p>
+<p>为什么没有办法一步到位，通过协议解决耦合？</p>
+<p>这主要是因为单个 Pod 库开发时使用开发模式是很容易调试的，但是两个 Pod 库同时在不发版本的情况下使用开发模式是比较难处理的（可以参考<a target="_blank" rel="noopener" href="http://www.pluto-y.com/cocoapod-private-pods-and-module-manager/">这篇文章</a>中『使用私有库』一节）。这种情况下，反复操作两个或者两个以上的库是麻烦的，所以优先考虑将代码尽快分离开来，并能通过基本测试，不影响功能。</p>
+<p>所以在这一遍处理结束后，子库中出现了很多 <code>NSClassFromString</code> 等等。</p>
+<p>以 <code>LPDBLoginMoudle</code> 为例：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *className = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%@.`AuthLoginManager&quot;</span>, [<span class="built_in">NSString</span> targetName]];</span><br><span class="line"><span class="keyword">id</span> authLoginManager = <span class="built_in">NSClassFromString</span>(className);</span><br><span class="line"><span class="keyword">if</span> (![authLoginManager conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">authLoginSuccess</span>)]) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">[authLoginManager authLoginSuccess];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> delegate = [[<span class="built_in">UIApplication</span> sharedApplication] delegate];</span><br><span class="line">[delegate jumpToShopListVC:shops];</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-处理模块耦合代码-协议调用"><a href="#4-2-处理模块耦合代码-协议调用" class="headerlink" title="4.2 处理模块耦合代码-协议调用"></a>4.2 处理模块耦合代码-协议调用</h2><p>保持第一遍中充满 <code>NSClassFromString</code>  是不可取的，因为这类代码往往属于硬编码，不能在类名出现改动、或者方法名出现改动的时候及时在编译阶段抛出 error。</p>
+<p>在这里引出一段讨论。</p>
+<p>之前跟大神们讨论组件化（模块化）的具体实践时候，说到了主流的组件化可能都借用了 <code>+ (void)load</code> 方法和 rumtime 操作来注册路由和服务。这时候 <a target="_blank" rel="noopener" href="https://casatwy.com/">casa</a> 大神提出了一种说法『组件化的根本目的是隔离、隔离问题影响域、隔离业务、隔离开发时的依赖。所以让两个本来有关系的人变得没有关系，就需要一个中间人，如果不用 runtime 能省掉不少事，但是用 URL 是一件相对来说比较多余的事，一个包含了 target-action 的字符串就足够了，URL 是字符串的更复杂表征，target-action 的意义体现的更明显。同时 URL 应该仅限于 H5 调度和跨 App 的 URL Scheme 调度』。</p>
+<blockquote>
+<p>这里要向 <a target="_blank" rel="noopener" href="https://casatwy.com/">casa</a> 大神非常非常郑重的道歉，上面一段，原来在第一版的时候是预留修改的片段，本想再读一遍大神 <a target="_blank" rel="noopener" href="https://casatwy.com/iOS-Modulization.html">《 [iOS应用架构谈 组件化方案]》</a> 仔细理解以后再次修改这块，本来是悄咪咪的发了文章，没想到被推送出去了，有引导大家曲解大神的愿意。非常非常抱歉！现在已经修改。<br>下面在贴上大佬自己对 URL 的见解：</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-09.png" alt=""></p>
+<p>那个时候听了 casa 大神的说法觉得『哎？有道理』，但是在后期的实践中，我觉得就我个人的代码习惯，是希望尽可能的将问题暴露在编译阶段，能让它抛出 error 就抛出 error，纵使使用字符串可以定义常量，但由于大家不是独立负责项目，在其他人看到你的方法参数时，比如：<code>+ (void)callService:(NSString *)sUrl</code> 或者 <code>+ (void)openURL:(NSString *)url</code> ，对方发现你的参数是 NSStrring，很有可能直接出现硬编码字符串而不去查阅常量列表，这是习惯性编码很容易出现的问题。但我对 casa 『URL 没有 target-action 表征明显』是非常仍可的，所以 Lotusoot 的重点只在于解耦的服务调用，URL 只是为了更好的为 H5 页面提供外部调用服务，在工程内部大可使用更加简洁的方式。</p>
+<p>最后一点原因是，反射或者通过类/方法字符串字典的方式实在太 OC 了，不管怎么样我们是一个尽量 Swift 化的项目，应该尽量吸取其优点，虽然抽出的 OC 库可以使用反射，那 Swift 库咋办？目前 Swift3 与 4 都没有很好的支持反射。</p>
+<p>所以，第二遍处理使用协议替换反射是很有必要的。但实质上，处理的并不是很好。大致如下（我们以 <code>LPDBLoginModule</code> 为例）：</p>
+<h3 id="4-2-1-在-LPDBLoginModule-整理用到的服务，归类整理"><a href="#4-2-1-在-LPDBLoginModule-整理用到的服务，归类整理" class="headerlink" title="4.2.1 在 LPDBLoginModule 整理用到的服务，归类整理"></a>4.2.1 在 LPDBLoginModule 整理用到的服务，归类整理</h3><p>如我们的 <code>LPDBLoginModule</code> 用到了 AppDelegate 中的一些方法，同事用到了 AuthLogin 相关类中的一些方法</p>
+<h3 id="4-2-2-在-LPDBLoginModule-中建立相应的协议"><a href="#4-2-2-在-LPDBLoginModule-中建立相应的协议" class="headerlink" title="4.2.2 在 LPDBLoginModule 中建立相应的协议"></a>4.2.2 在 LPDBLoginModule 中建立相应的协议</h3><p>即建立 <code>AuthLoginDelegate.h</code> 和 <code>AppDelegateProtocol</code></p>
+<p>大致的代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">AppDelegateProtocol</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)jumpToHomeVC;</span><br><span class="line">- (<span class="keyword">void</span>)jumpToShopListVC:(<span class="built_in">NSArray</span> *)shops;</span><br><span class="line">- (<span class="built_in">CLLocationCoordinate2D</span>)getCoordinate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">AuthLoginDelegate</span> &lt;<span class="title">NSObject</span>&gt;[<span class="title">Pods</span>](<span class="title">media</span>/<span class="title">Pods</span>.)</span></span><br><span class="line">+ (<span class="keyword">void</span>)authLoginSuccess;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-2-3-在主工程中去实现协议"><a href="#4-2-3-在主工程中去实现协议" class="headerlink" title="4.2.3 在主工程中去实现协议"></a>4.2.3 在主工程中去实现协议</h3><p>AppDelegateProtocol 由 AppDelegate 扩展实现：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> LPDBLoginModule;</span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">AppDelegate</span> (<span class="title">Protocol</span>)  &lt;<span class="title">AppDelegateProtocol</span>&gt;</span></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AppDelegate</span> (<span class="title">Protocol</span>)</span></span><br><span class="line">- (<span class="built_in">CLLocationCoordinate2D</span>)getCoordinate &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)jumpToHomeVC &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)jumpToShopListVC:(<span class="built_in">NSArray</span> *)shops &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>AuthLoginDelegate 由 AuthLoginManager(这个 Manager 在主工程中是 swift 编写的) 实现：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">AuthLoginManager</span>: <span class="title">AuthLoginDelegate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">authLoginSuccess</span>()</span> &#123;</span><br><span class="line">        <span class="operator">...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-4-在-LPDBLoginModule-调用服务"><a href="#4-2-4-在-LPDBLoginModule-调用服务" class="headerlink" title="4.2.4 在 LPDBLoginModule 调用服务"></a>4.2.4 在 LPDBLoginModule 调用服务</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span> delegate = [[<span class="built_in">UIApplication</span> sharedApplication] delegate];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (![delegate conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">AppDelegateProtocol</span>)]) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">CLLocationCoordinate2D</span> coordinate = [delegate coordinate];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *className = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%@.AuthLoginManager&quot;</span>, [<span class="built_in">NSString</span> targetName]];</span><br><span class="line"><span class="keyword">id</span> authLoginManager = <span class="built_in">NSClassFromString</span>(className);</span><br><span class="line"><span class="keyword">if</span> (![authLoginManager conformsToProtocol:<span class="class"><span class="keyword">@protocol</span>(<span class="title">LPDBAuthLoginDelegate</span>)]) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">[authLoginManager authLoginSuccess];</span><br><span class="line">[<span class="keyword">self</span> jumpToSelectShopView:shops];</span><br></pre></td></tr></table></figure>
+<p>经过这些改造之后，模块间的状态如图所示：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-06.png" alt=""></p>
+<p>但是，可以很明显感受到，这次的改变并不彻底：</p>
+<ol>
+<li>还是存在大量的 <code>![delegate conformsToProtocol:@protocol(AppDelegateProtocol)]</code> 这样的判断，仅仅是起到了容错，保证不会 crash，但是却不能将问题暴露在编译阶段。</li>
+<li><code>AppDelegateProtocol</code> 明明是一个公共的，多个模块使用的协议，却被定义到了 <code>LPDBLoginModule</code></li>
+<li>概念颠倒，理想状态下，应该是各个子模块提供协议和实现，告知其他模块可以调用该模块哪些功能。而目前是子模块告知其他模块需要调用哪些方法，由其他模块实现。</li>
+</ol>
+<p>那么为了彻底解决问题，我们引入了 <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot —— 组件通信和工具</a>。</p>
+<h2 id="4-3-处理模块耦合代码-Lotusoot"><a href="#4-3-处理模块耦合代码-Lotusoot" class="headerlink" title="4.3 处理模块耦合代码-Lotusoot"></a>4.3 处理模块耦合代码-Lotusoot</h2><p> <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a> 的最初目的就是为了解决模块间的耦合，并且同时支持 OC 和 Swift 使用，也是这几个月中去做的一个比较重要的东西，库本身小巧灵活，包含的东西也很少，但是起到的规范作用却是我非常满意的一点。</p>
+<p>Lotusoot 规范的核心思想主要是以下几步，我们同样使用上面的 <code>LPDBLoginModule 为例</code>：</p>
+<h3 id="4-3-1-建立共用模块——LPDBPublicModule"><a href="#4-3-1-建立共用模块——LPDBPublicModule" class="headerlink" title="4.3.1 建立共用模块——LPDBPublicModule"></a>4.3.1 建立共用模块——LPDBPublicModule</h3><p><code>LPDBPublicModule</code>中定义了各个模块可以提供的服务，做成协议，称为 Lotus，一个 Lotus 协议包含了一个模块的所有的能调用的方法的列表。举例如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@objc</span> <span class="keyword">public</span> <span class="class"><span class="keyword">protocol</span> <span class="title">AppDelegateLotus</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">jumpToHomeVC</span>()</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">jumpToSelectShopVC</span>(<span class="params">shops</span>: [<span class="keyword">Any</span>], <span class="params">isNapos</span>: <span class="type">Bool</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getCoordinate</span>()</span> -&gt; <span class="type">CLLocationCoordinate2D</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@objc</span> <span class="keyword">public</span> <span class="class"><span class="keyword">protocol</span> <span class="title">MainLotus</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">authLoginSuccess</span>()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-2-各个模块中，实现-LPDBPublicModule-中对应的-Lotus-协议"><a href="#4-3-2-各个模块中，实现-LPDBPublicModule-中对应的-Lotus-协议" class="headerlink" title="4.3.2 各个模块中，实现 LPDBPublicModule 中对应的 Lotus 协议"></a>4.3.2 各个模块中，实现 LPDBPublicModule 中对应的 Lotus 协议</h3><p>实现协议的 Class 称为 Lotusoot。举例如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppDelegateLotusoot</span>: <span class="title">NSObject</span>, <span class="title">AppDelegateLotus</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">jumpToHomeVC</span>()</span> &#123;</span><br><span class="line">        <span class="operator">...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">jumpToSelectShopVC</span>(<span class="params">shops</span>: [<span class="keyword">Any</span>], <span class="params">isNapos</span>: <span class="type">Bool</span>)</span> &#123;</span><br><span class="line">        <span class="operator">...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getCoordinate</span>()</span> -&gt; <span class="type">CLLocationCoordinate2D</span> &#123;</span><br><span class="line">        <span class="operator">...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainLotusoot</span>: <span class="title">NSObject</span>, <span class="title">MainLotus</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">authLoginSuccess</span>()</span> &#123;</span><br><span class="line">        <span class="operator">...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-3-注册服务"><a href="#4-3-3-注册服务" class="headerlink" title="4.3.3 注册服务"></a>4.3.3 注册服务</h3><p><strong>需要着重说明的是，这一步是可以省略的，通过 Lotusoot 提供的脚本和注解，可以自动为所有的路由进行注册。请移步 <a target="_blank" rel="noopener" href="https://github.com/Vegetarians/Lotusoot">Lotusoot</a>参考『3. 注解与规范』部分。</strong></p>
+<p><code>didFinishLaunchingWithOptions</code> 中注册服务：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[LotusootCoordinator registerWithLotusoot:[AppDelegateLotusoot new] lotusName:<span class="string">@&quot;AppDelegateLotus&quot;</span>];</span><br><span class="line">    [LotusootCoordinator registerWithLotusoot:[MainLotusoot new] lotusName:<span class="string">@&quot;MainLotus&quot;</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-3-在其他模块中调用服务"><a href="#4-3-3-在其他模块中调用服务" class="headerlink" title="4.3.3 在其他模块中调用服务"></a>4.3.3 在其他模块中调用服务</h3><p>现在只需要 <code>import Lotusoot</code>、<code>import ModulePublic</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">id</span>&lt;MainLotus&gt; mainModule = [LotusootCoordinator lotusootWithLotus:<span class="string">@&quot;MainLotus&quot;</span>];</span><br><span class="line">[mainModule authLoginSuccess];</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果使用字符串 @&quot;AppDelegateLotus&quot; 注册，建议定义在 LPDBPublicModule</span></span><br><span class="line"><span class="comment">// 也可以使用 NSStirngFromClass(AppDelegateLotus.class)</span></span><br><span class="line"><span class="keyword">id</span>&lt;AppDelegateLotus&gt; appDelegateLotus = [LotusootCoordinator lotusootWithLotus:<span class="string">@&quot;AppDelegateLotus&quot;</span>];</span><br><span class="line">[appDelegateLotus goToHomeVC];</span><br></pre></td></tr></table></figure>
+<p>无论 OC 还是 Swift，都可以顺畅调用</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 或者使用类似字符串 &quot;AccountLotus&quot;，但需要你管理好 kAccountLotus，尽量不要硬编码</span></span><br><span class="line"><span class="keyword">let</span> appDelegateLotus <span class="operator">=</span> s(<span class="type">AppDelegateLotus</span>.<span class="keyword">self</span>) </span><br><span class="line"><span class="keyword">let</span> appDelegateLotusoot: <span class="type">AppDelegateLotus</span> <span class="operator">=</span> <span class="type">LotusootCoordinator</span>.lotusoot(lotus: appDelegateLotus) <span class="keyword">as!</span> <span class="type">AppDelegateLotus</span></span><br><span class="line">accountModule.goToHomeVC()</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mainLotus <span class="operator">=</span> s(<span class="type">MainLotus</span>.<span class="keyword">self</span>) </span><br><span class="line"><span class="keyword">let</span> mainModule: <span class="type">MainLotus</span> <span class="operator">=</span> <span class="type">LotusootCoordinator</span>.lotusoot(lotus: mainLotus) <span class="keyword">as!</span> <span class="type">MainLotus</span></span><br><span class="line">mainModule.authLoginSuccess()</span><br></pre></td></tr></table></figure>
+<p>到此为止，就比较完整的解决了模块间耦合。清爽的风格用一张图表示就是这样（这是我在做 Lotusoot 解说时候用的一张配图）：</p>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-07.png" alt=""></p>
+<p><code>LPDBPublicModule</code> 中的 <code>Lotus</code> 协议，像一张清单列出了所有模块提供的服务声明，而在各个模块中，直接通过这些公共协议就可以调用想要的服务。很多问题都可以在编译前和编译阶段显示出来（如果模块不提供服务，是不能通过编译的；如果没有一项服务没有声明，是不能通过编译的）。</p>
+<h2 id="4-4-语言耦合"><a href="#4-4-语言耦合" class="headerlink" title="4.4 语言耦合"></a>4.4 语言耦合</h2><p>我们抽模块中一个重要的目的就是『分割两种语言』，但是实践过程中，会发现，分割语言比分割业务还要难。</p>
+<p>一个 Pod 库中只能包含一种语言，但往往，在抽离代码的最后，会发现有无数的<strong>基础 Model 耦合</strong>，如：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ShopInfo</span> : <span class="title">LPDBModel</span></span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) DeliveryService *workingProduct;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nullable</span>, <span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) DeliveryService *preEffectiveProduct;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeliveryService</span>: <span class="title">BaseModel</span> </span>&#123;</span><br><span class="line">    <span class="operator">...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果需要将 <code>ShopInfo</code> 和 <code>DeliveryService</code> 抽出到一个模块时，必须要『有舍有得』，在涉及到基础 Model 语言不同时，可以适当的重写，因为 Model 的代码量是极小的，Model 通常也只包含属性声明，作为数据传输的中介，即使更改，产生的不可预支错误的可能性也较低。</p>
+<p>如果要抽出的模块主体使用 OC，那么可以将 <code>DeliveryService</code> 重新用 OC 编写。</p>
+<p>但要注意，要先尽量通过拆分更基础的服务模块，在考虑重新编写文件，保证项目的稳定性。</p>
+<h2 id="4-5-模块的积木化"><a href="#4-5-模块的积木化" class="headerlink" title="4.5 模块的积木化"></a>4.5 模块的积木化</h2><p>模块化的最终目的，不仅仅是去耦，还应当让每个模块像积木一样，随意拼接，最后达到主工程完全没有代码，通过 Pod 集成各个模块，组成完整的功能。而每个模块也应当可以独立测试，独立开发。</p>
+<p>还是以 <code>LPDBLoginModule</code> 和 <code>LPDBNetWort</code> 为例。</p>
+<p>登录模块是一个非常特殊的模块，所有的子模块如果想独立测试和开发，一般都需要通过登录验证，比如订单模块，必须要登录后，该业务模块内能才能正确的拉取订单信息。</p>
+<p>由于 <code>LPDBLoginModule</code> 依赖基础库 <code>LPDBNetWort</code>，<code>LPDBNetWort</code> 需要做的有：</p>
+<ol>
+<li>包含 cer 文件，可以正确的提供给其他模块正常的 https 接口访问</li>
+<li>便利的网络服务调用</li>
+</ol>
+<p>而 <code>LPDBLoginModule</code> 至少要做的事有：</p>
+<ol>
+<li>可以正确的保存登录信息，完成登录操作</li>
+<li>提供登录的 UI 界面，可以直接调用 LoginVC</li>
+</ol>
+<p>在具备以上功能后，<code>LPDBLoginModule</code> 就可以快速的集成进其他模块，为其他模块提供独立开发、独立测试的功能。</p>
+<h2 id="4-6-资源打包"><a href="#4-6-资源打包" class="headerlink" title="4.6 资源打包"></a>4.6 资源打包</h2><p>上一小结提到『 <code>LPDBLoginModule</code> 要提供登录的 UI 界面』。对于 UI 界面，需要做的是资源打包，在模块拆分中，要非常注意资源分割。</p>
+<p><em><strong>因为业务模块的划分，不仅仅是是代码抽出，也有资源抽出。</strong></em></p>
+<p>资源库包括但不仅限于：</p>
+<ol>
+<li><code>.xib</code> 文件</li>
+<li>声音资源</li>
+<li>图片资源</li>
+<li>纯文本文件</li>
+<li>视频资源</li>
+</ol>
+<p>所以，所有的资源文件，应当单独创立 <code>Res</code> 文件夹，放入其中，并在 <code>.podspec</code> 中表明资源文件路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.resources 	 = [&quot;Source/**/*.xib&quot;, &quot;Source/Res/*.xcassets&quot;]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意图片资源，如果想保留 @2x、@3x，是可以按照 xcassets 的格式直接 copy 过来的。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/summertian4/Images/master/blog/blog_iOS-Modularization-08.png" alt=""></p>
+<h1 id="5-结尾"><a href="#5-结尾" class="headerlink" title="5 结尾"></a>5 结尾</h1><p>以上是我在混编项目中进行 模块化/ 组件化的经验总结，写成了指导的模式，希望这篇文章能对走同样路的人有所帮助，希望你们会有所收获，么么哒。</p>
+<hr>
+<p>有什么问题都可以在博文后面留言，或者微博上私信我。</p>
+<p>博主是 iOS 妹子一枚。</p>
+<p>希望大家一起进步。</p>
+<p>我的微博：<a target="_blank" rel="noopener" href="http://weibo.com/coderfish/">LottyLotty周小鱼</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/qrcode_wechat.jpg" alt=" wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎订阅我的个人公众号~╮(╯▽╰)╭</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，支持萌妹子，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_wechat.JPG" alt=" WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xt4xp.com1.z0.glb.clouddn.com/blog_pay_alipay.jpg" alt=" Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag"># iOS模块化</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/22/500-Lines-or-Less-14-3/" rel="next" title="【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第三部分】">
+                <i class="fa fa-chevron-left"></i> 【500 Lines or Less】-【翻译练习】-【chapter 14】-【简单对象模型】-【第三部分】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/29/iOS-modularized-tool-Lotusoot/" rel="prev" title="iOS 灵活的 模块化/组件化 工具与规范 Lotusoot 解说">
+                iOS 灵活的 模块化/组件化 工具与规范 Lotusoot 解说 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.imallen.wang" title="王龙海の博客" target="_blank">王龙海の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mafei.me" title="马飞の博客" target="_blank">马飞の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/86344ec5bfe7/latest_articles" title="Afluyの博客" target="_blank">Afluyの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hyyy.me" title="yuanの博客" target="_blank">yuanの博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.6ag.cn" title="六阿哥の博客" target="_blank">六阿哥の博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.eyrefree.org/" title="EyreFreeの博客" target="_blank">EyreFreeの博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%BC%80%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">1. 开篇</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%A8%A1%E5%9D%97%E5%88%92%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">2. 模块划分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-LPDBOCFoundationGarbage"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 LPDBOCFoundationGarbage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-LPDBPublicModule"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 LPDBPublicModule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-LPDBNetwork"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 LPDBNetwork</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-LPDBUIKit"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 LPDBUIKit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-LPDBEnvironment"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 LPDBEnvironment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9D%97%E6%8A%BD%E7%A6%BB"><span class="nav-number">3.</span> <span class="nav-text">3. 业务模块抽离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%87%8D%E9%9A%BE%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">4. 过程中的一些重难点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97%E8%80%A6%E5%90%88%E4%BB%A3%E7%A0%81-%E5%8F%8D%E5%B0%84%E8%B0%83%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 处理模块耦合代码-反射调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97%E8%80%A6%E5%90%88%E4%BB%A3%E7%A0%81-%E5%8D%8F%E8%AE%AE%E8%B0%83%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 处理模块耦合代码-协议调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E5%9C%A8-LPDBLoginModule-%E6%95%B4%E7%90%86%E7%94%A8%E5%88%B0%E7%9A%84%E6%9C%8D%E5%8A%A1%EF%BC%8C%E5%BD%92%E7%B1%BB%E6%95%B4%E7%90%86"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 在 LPDBLoginModule 整理用到的服务，归类整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E5%9C%A8-LPDBLoginModule-%E4%B8%AD%E5%BB%BA%E7%AB%8B%E7%9B%B8%E5%BA%94%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 在 LPDBLoginModule 中建立相应的协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-%E5%9C%A8%E4%B8%BB%E5%B7%A5%E7%A8%8B%E4%B8%AD%E5%8E%BB%E5%AE%9E%E7%8E%B0%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.3.</span> <span class="nav-text">4.2.3 在主工程中去实现协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-%E5%9C%A8-LPDBLoginModule-%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.2.4.</span> <span class="nav-text">4.2.4 在 LPDBLoginModule 调用服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E5%A4%84%E7%90%86%E6%A8%A1%E5%9D%97%E8%80%A6%E5%90%88%E4%BB%A3%E7%A0%81-Lotusoot"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 处理模块耦合代码-Lotusoot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-%E5%BB%BA%E7%AB%8B%E5%85%B1%E7%94%A8%E6%A8%A1%E5%9D%97%E2%80%94%E2%80%94LPDBPublicModule"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1 建立共用模块——LPDBPublicModule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-%E5%90%84%E4%B8%AA%E6%A8%A1%E5%9D%97%E4%B8%AD%EF%BC%8C%E5%AE%9E%E7%8E%B0-LPDBPublicModule-%E4%B8%AD%E5%AF%B9%E5%BA%94%E7%9A%84-Lotus-%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2 各个模块中，实现 LPDBPublicModule 中对应的 Lotus 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.3.3.</span> <span class="nav-text">4.3.3 注册服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-%E5%9C%A8%E5%85%B6%E4%BB%96%E6%A8%A1%E5%9D%97%E4%B8%AD%E8%B0%83%E7%94%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.3.4.</span> <span class="nav-text">4.3.3 在其他模块中调用服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E8%AF%AD%E8%A8%80%E8%80%A6%E5%90%88"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 语言耦合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E6%A8%A1%E5%9D%97%E7%9A%84%E7%A7%AF%E6%9C%A8%E5%8C%96"><span class="nav-number">4.5.</span> <span class="nav-text">4.5 模块的积木化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E8%B5%84%E6%BA%90%E6%89%93%E5%8C%85"><span class="nav-number">4.6.</span> <span class="nav-text">4.6 资源打包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%BB%93%E5%B0%BE"><span class="nav-number">5.</span> <span class="nav-text">5 结尾</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://zhoulingyu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://lottyzhou.com/2017/11/24/iOS-Modularization/';
+          this.page.identifier = '2017/11/24/iOS-Modularization/';
+          this.page.title = 'iOS 混编 模块化/组件化 经验指北';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhoulingyu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
